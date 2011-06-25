@@ -77,11 +77,6 @@ MIDDLEWARE_CLASSES = (
 'django.middleware.common.CommonMiddleware',
 'django.middleware.doc.XViewMiddleware',
 
-'core.middleware.CookieMiddleware',
-'core.middleware.AuthenticationMiddleware',
-'core.middleware.MessageMiddleware',
-'core.middleware.SessionBasedLocaleMiddleware',
-
 'piston.middleware.ConditionalMiddlewareCompatProxy',
 'piston.middleware.CommonMiddlewareCompatProxy',
 
@@ -100,49 +95,10 @@ BASE_PATH + '/files/media/',
 INTERNAL_IPS = ('127.0.0.1')
 
 INSTALLED_APPS = (
-
 #Django stuff
 'django.contrib.contenttypes',
 'django.contrib.sessions',
 'django.contrib.staticfiles',
-
-#Core
-'core.auth.user',
-'core.auth.group',
-'core.auth.company',
-'core.auth.log',
-'core.auth.permission',
-'core',
-
-#Apps
-'app.admin',
-'app.company',
-
-'app.announcements',
-'app.contacts',
-'app.accounts',
-'app.customers',
-'app.projects',
-'app.files',
-'app.dashboard',
-'app.stock',
-'app.hourregistrations',
-'app.suppliers',
-'app.search',
-'app.mail',
-'app.client',
-'app.migratefocus',
-'app.tickets',
-
-'app.orders',
-'app.offers',
-'app.invoices',
-
-#API
-'api',
-'api.contactsapi',
-'api.customersapi',
-'api.hourregistrationsapi',
 
 #Other
 'south',
@@ -155,8 +111,4 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 'django.core.context_processors.i18n',
 'django.core.context_processors.static',
 'django.core.context_processors.debug',
-'core.context_processors.message',
-'core.context_processors.user',
 )
-
-TEST_RUNNER = 'core.tests.FocusTestSuiteRunner'
