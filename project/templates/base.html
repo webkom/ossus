@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title>Dashboard | FNCIT-BACKUP</title>
+
+    <link rel="stylesheet" href="{{STATIC_URL}}css/reset.css" type="text/css" media="screen" title="no title"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/text.css" type="text/css" media="screen" title="no title"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/form.css" type="text/css" media="screen" title="no title"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/buttons.css" type="text/css" media="screen" title="no title"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/grid.css" type="text/css" media="screen" title="no title"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/layout.css" type="text/css" media="screen" title="no title"/>
+
+    <link rel="stylesheet" href="{{STATIC_URL}}css/ui-darkness/jquery-ui-1.8.12.custom.css" type="text/css"
+          media="screen"
+          title="no title"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/plugin/jquery.visualize.css" type="text/css" media="screen"
+          title="no title"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/plugin/facebox.css" type="text/css" media="screen" title="no title"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/plugin/uniform.default.css" type="text/css" media="screen"
+          title="no title"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}css/plugin/dataTables.css" type="text/css" media="screen"
+          title="no title"/>
+
+    <link rel="stylesheet" href="{{STATIC_URL}}css/custom.css" type="text/css" media="screen" title="no title">
+
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="top">
+        <div class="content_pad">
+            <ul class="right">
+                <li><a href="javascript:;" class="top_icon"><span class="ui-icon ui-icon-person"></span>{{ user }}</a>
+                </li>
+                <li><a href="index.html">Logg ut</a></li>
+            </ul>
+        </div>
+        <!-- .content_pad -->
+    </div>
+    <!-- #top -->
+
+    <div id="header">
+
+        <div class="content_pad">
+            <h1>BACKUP</h1>
+            <ul id="nav">
+                <li class="nav_current nav_icon"><a href="/"><span
+                        class="ui-icon ui-icon-home"></span>Oversikt</a></li>
+            </ul>
+        </div>
+        <!-- .content_pad -->
+
+    </div>
+    <!-- #header -->
+
+    <div id="masthead">
+
+        <div class="content_pad">
+            <h1 class="no_breadcrumbs">Oversikt</h1>
+
+            <div id="search">
+
+            </div>
+        </div>
+    </div>
+    <!-- #masthead -->
+
+    <div id="content" class="xgrid">
+
+
+        {% block content %}{% endblock %}
+
+
+    </div>
+    <!-- #content -->
+
+    <div id="footer">
+        <div class="content_pad">
+            <p>&copy; 2011 Copyright FNCIT</p>
+        </div>
+        <!-- .content_pad -->
+    </div>
+    <!-- #footer -->
+
+</div>
+<!-- #wrapper -->
+
+</body>
+
+</html>
