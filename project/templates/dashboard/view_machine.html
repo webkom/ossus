@@ -66,8 +66,8 @@
                 }
 
                 $("#tables_overview").append("<h2>Detaljer</h2>");
-                var thead = createThead(createTr(createLines(["Machine ID","Name"], "th")));
-                var tbody = createTbody(createTr(createLines([data['machine_id'],data['name']], "td")))
+                var thead = createThead(createTr(createLines(["Machine ID","Name","IP"], "th")));
+                var tbody = createTbody(createTr(createLines([data['machine_id'],data['name'], data['ip']], "td")))
 
                 $("#tables_overview").append(createTable(thead + tbody));
 
@@ -81,6 +81,7 @@
                 $("#tables_overview").append(build_backup_table(data['backups']));
             });
         })
+
     </script>
 
     <style>

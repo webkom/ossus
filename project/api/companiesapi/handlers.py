@@ -7,7 +7,7 @@ class CompanyHandler(BaseHandler):
     model = Company
     fields = ("id", "name", ('customers', ('id', 'name', ('locations', (
         'id', 'name', ('machines', (
-            'id', 'name', 'machine_id', 'running_restore','running_backup','is_busy',
+            'id', 'name', 'machine_id', 'ip','running_restore','running_backup','is_busy',
                 ('schedules', ('id', 'name', ('backups', ('id', 'time_started', 'day_folder_path')))))))))))
 
     def read(self, request, id=None):

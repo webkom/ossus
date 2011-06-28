@@ -20,7 +20,7 @@ urlpatterns = patterns('',
 
                        #Machines
                        url(r'machines/$', machine),
-                       url(r'machines/(?P<id>\d+)/$', machine),
+                       url(r'machines/(?P<id>\w+)/$', machine),
 
                        #ScheduleBackups
                        url(r'schedules/$', schedules),
