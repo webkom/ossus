@@ -5,15 +5,15 @@ TEMPLATE_DEBUG = DEBUG
 
 import os
 
-f = open('/home/ubuntu/passwords/db-focus.txt', 'rb')
+f = open('/home/frecar/passwords/db-backup-fncit.txt', 'rb')
 DB_PASSWORD = f.readline().strip()
 f.close()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'focus',
-        'USER': 'focus',
+        'NAME': 'fncit_backup',
+        'USER': 'root',
         'PASSWORD': DB_PASSWORD,
     }
 }
