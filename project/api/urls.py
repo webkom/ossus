@@ -29,5 +29,4 @@ urlpatterns = patterns('',
                        #Backups
                        url(r'backups/$', backups),
                        url(r'backups/(?P<id>\d+)/$', backups),
-                       
                     )

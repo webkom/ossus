@@ -1,6 +1,6 @@
 from settings import *
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 import os
@@ -19,16 +19,6 @@ DATABASES = {
 }
 
 STATIC_URL = '/static/'
-
-SITE_URL = "http://www.focustime.no"
-CLIENT_LOGIN_SITE = "http://www.focustime.no/client/"
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-    }
-}
 
 #EMAIL DEBUG
 EMAIL_USE_TLS = True
