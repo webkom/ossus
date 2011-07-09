@@ -9,6 +9,7 @@ class Company(models.Model):
     def __unicode__(self):
         return "Company: %s" % self.name
 
+
 class Customer(models.Model):
     name = models.CharField(max_length=150)
     company = models.ForeignKey(Company, related_name="customers")
@@ -24,11 +25,12 @@ class Location(models.Model):
     def __unicode__(self):
         return "Location: %s" % self.name
 
+
 class Machine(models.Model):
     name = models.CharField(max_length=150)
     location = models.ForeignKey(Location, related_name="machines")
     machine_id = models.CharField(max_length=150)
-    last_connection_to_client = models.DateTimeField(blank=True)
+    last_connection_to_client = models.DateTimeField(blank=True, null=True)
     ip = models.IPAddressField()
 
     def __unicode__(self):
@@ -73,28 +75,62 @@ class Machine(models.Model):
 
         return next_backup_time
 
-class FolderTask(models.Model):
+storage_types = (
+    ('ftp','FTP'),
+    ('s3', 'Amazon S3')
+)
+
+class Storage(models.Model):
+    type = models.CharField(max_length=10, choices=storage_types)
+
+    host = models.CharField(max_length=150)
+    username = models.CharField(max_length=80)
+    password = models.CharField(max_length=80)
+
+    #FTP folder or S3 bucket
+    folder = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return "Storage: %s %s" % (self.type, self.host)
+
+class FolderBackup(models.Model):
     local_folder_path = models.TextField()
-    schedule_backup = models.ForeignKey('ScheduleBackup', related_name='folder_tasks')
+    schedule_backup = models.ForeignKey('ScheduleBackup', related_name='folder_backups')
+
+    def __unicode__(self):
+        return "%s" % self.schedule_backup
+
+sql_types = (
+    ('mysql','MySQL'),
+    ('mssql', 'MsSQL')
+)
+
+class SQLBackup(models.Model):
+    type = models.CharField(max_length=40, choices=sql_types)
+    schedule_backup = models.ForeignKey('ScheduleBackup', related_name='sql_backups')
+
+    host     = models.CharField(max_length=100)
+    database = models.CharField(max_length=100)
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return "SQLBackup: %s" % self.host
 
 class ScheduleBackup(models.Model):
-
     #Details
     machine = models.ForeignKey(Machine, related_name="schedules")
     name = models.CharField(max_length=150, blank=True)
-    from_date = models.DateTimeField()
 
-    #Used to choose folder to save file
-    current_day_in_loop = models.IntegerField()
-    days_to_keep_backups = models.IntegerField()
+    storage = models.ForeignKey(Storage, related_name="schedules")
+
+    from_date = models.DateTimeField()
     last_run_time = models.DateTimeField()
 
-    #Ftp connection
-    ftp_host = models.CharField(max_length=150)
-    ftp_username = models.CharField(max_length=80)
-    ftp_password = models.CharField(max_length=80)
-    ftp_folder = models.CharField(max_length=255)
-    
+    #Used to choose folder to save file
+    current_version_in_loop = models.IntegerField(blank=True)
+    versions_count = models.IntegerField()
+
     #Every x minute, perfrom backup
     repeat_every_minute = models.IntegerField()
 
@@ -102,21 +138,25 @@ class ScheduleBackup(models.Model):
     running_backup = models.BooleanField(default=False, blank=True)
     running_restore = models.BooleanField(default=False, blank=True)
 
+    active = models.BooleanField(default=True)
+
     def current_day_folder_path(self):
 
+        print
+
         if self.machine.last_connection_to_client.day != datetime.now().day:
-            if self.current_day_in_loop < self.days_to_keep_backups:
-                self.current_day_in_loop +=1
+            if self.current_version_in_loop < self.versions_count:
+                self.current_version_in_loop += 1
             else:
-                self.current_day_in_loop = 1
-                
+                self.current_version_in_loop = 1
+
             self.save()
-            
-        return str(self.machine.machine_id) + "/" + str(self.current_day_in_loop) + "/"
+
+        return str(self.machine.machine_id) + "/" + "schedules/"+ str(self.id) + "/" + str(self.current_version_in_loop) + "/"
 
     def get_last_backup(self):
-        if self.backups.all().count()>0:
-            return self.backups.all()[self.backups.all().count()-1]
+        if self.backups.all().count() > 0:
+            return self.backups.all()[self.backups.all().count() - 1]
         return None
 
     def get_last_backup_time(self):
@@ -127,8 +167,9 @@ class ScheduleBackup(models.Model):
     def get_next_backup_time(self):
         if not self.get_last_backup():
             return self.from_date
-        
-        return self.get_last_backup_time()+timedelta(0,self.repeat_every_minute*60)
+
+        return self.get_last_backup_time() + timedelta(0, self.repeat_every_minute * 60)
+
 
 class Backup(models.Model):
     machine = models.ForeignKey(Machine, related_name="backups")

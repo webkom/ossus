@@ -10,6 +10,7 @@ urlpatterns = patterns(
     '',
         (r'^$', 'app.dashboard.views.overview'),
         (r'^dashboard/', include('app.dashboard.urls')),
+        (r'^accounts/', include('app.accounts.urls')),
         (r'^admin/', include(admin.site.urls)),
         (r'^api/', include('api.urls')),
     )

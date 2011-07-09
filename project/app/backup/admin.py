@@ -1,11 +1,11 @@
-from app.backup.models import Backup, Machine, ScheduleBackup, FolderTask, Company, Customer, Location
+from app.backup.models import Backup, Machine, ScheduleBackup, FolderBackup, Company, Customer, Location, Storage
 from django.contrib import admin
 
 class ScheduleBackupInline(admin.TabularInline):
     model = ScheduleBackup
     
-class FolderTaskInline(admin.TabularInline):
-    model = FolderTask
+class FolderBackupInline(admin.TabularInline):
+    model = FolderBackup
 
 class BackupInline(admin.TabularInline):
     model = Backup
@@ -23,7 +23,7 @@ class ScheduleAdmin(admin.ModelAdmin):
     search_fields = ['folder']
 
     inlines = [
-        FolderTaskInline,
+        FolderBackupInline,
         BackupInline,
         ]
 
@@ -55,8 +55,18 @@ class LocationAdmin(admin.ModelAdmin):
         MachineInline,
         ]
 
+#Backup
+class BackupAdmin(admin.ModelAdmin):
+    model = Backup
+
+#Storage
+class StorageAdmin(admin.ModelAdmin):
+    model = Storage
+
 admin.site.register(Machine, MachineAdmin)
+admin.site.register(Storage, StorageAdmin)
 admin.site.register(ScheduleBackup, ScheduleAdmin)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Location, LocationAdmin)
+admin.site.register(Backup, BackupAdmin)

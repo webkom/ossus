@@ -27,6 +27,7 @@ DO NOT CHANGE ANYTHING BELOW
 """
 
 def run_check(settings):
+
     machine = download_content("http://%s/api/machines/%s" % (settings['server_ip'], settings['machine_id']), settings)
 
     #Check if server busy
@@ -41,21 +42,37 @@ def run_check(settings):
                                                                                    "%Y-%m-%d %H:%M:%S")
             continue
 
-        ftp_connection = ftplib.FTP(schedule['ftp_host'], schedule['ftp_username'], schedule['ftp_password'])
-        ftp_folder = schedule['ftp_folder']+"/"+schedule['current_day_folder_path']
 
+        if schedule['storage']['type'] != "ftp":
+            print "Only FTP is supported at the moment"
+            return
+
+        #FTP-config
+        ftp_connection = ftplib.FTP(schedule['storage']['host'], schedule['storage']['username'], schedule['storage']['password'])
+        ftp_folder = schedule['storage']['folder']+"/"+schedule['current_day_folder_path']
+
+        #Set running_backup status to True
         theurl = "http://%s/api/schedules/%s/" % (settings['server_ip'], schedule['id'])
-
-        schedule_form = {'name': schedule['name'], 'running_backup': True, 'machine_id': schedule['machine_id']}
-
+        schedule_form = {'name': schedule['name'], 'running_backup': True, 'current_version_in_loop': schedule['current_version_in_loop'],'machine_id': schedule['machine_id']}
         set_data(theurl, schedule_form, settings)
-        for command in schedule['folder_tasks']:
+
+        #Performing folder backups
+        for command in schedule['folder_backups']:
             print "Working on schedule %s" % command['local_folder_path']
             save_folder_to_ftp(ftp_connection, ftp_folder, command['local_folder_path'])
 
+        #Set running_backup status to False
         schedule_form['running_backup'] = False
+
+        next_version_number = int(schedule['current_version_in_loop'])+1
+        if next_version_number > int(schedule['versions_count']):
+            next_version_number = 1
+
+        schedule_form['current_version_in_loop'] = next_version_number
+
         set_data(theurl, schedule_form, settings)
 
+        #Create Backup object
         theurl = "http://%s/api/backups/" % settings['server_ip']
         new_backup_dict = {'schedule_id': schedule['id'], 'machine_id': schedule['machine_id'],
                            'time_started': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
@@ -122,10 +139,38 @@ def zip_folder_and_save(folder_to_zip, save_at):
     print "Done zipping folder %s, saved as %s, used %s seconds" % (
         str(folder_to_zip), str(save_at), time.time() - starttime)
 
+def directory_exists_on_ftp_server(ftp, folder):
+    filelist = []
+    ftp.retrlines('LIST',filelist.append)
+
+    for f in filelist:
+        if f.split()[-1] == folder:
+            return True
+    return False
+
+def create_folders_on_ftp_for_upload(ftp, ftp_folder):
+
+    for folder in ftp_folder.split("/"):
+        if folder == "":
+            continue
+
+        if directory_exists_on_ftp_server(ftp, folder):
+            ftp.cwd(folder)
+        else:
+            ftp.mkd(folder)
+            ftp.cwd(folder)
 
 def do_upload(ftp, ftp_folder, file, file_name):
+
+    create_folders_on_ftp_for_upload(ftp, ftp_folder)
+
     f = open(file, "rb")
-    ftp.storbinary("STOR /%s/%s" % (ftp_folder, file_name), f, 1024)
+
+    print ftp_folder
+    print file_name
+
+    ftp.cwd("~/")
+    ftp.storbinary("STOR %s%s" % (ftp_folder, file_name), f, 1024)
     f.close()
 
 
@@ -133,7 +178,6 @@ def do_download(ftp, ftp_folder, file, file_name):
     f = open(file, "wb")
     ftp.retrbinary("RETR /%s/%s" % (ftp_folder, file_name), f.write)
     f.close()
-
 
 def create_file_name(path_to_file):
     ext = os.path.splitext(path_to_file)[1]
@@ -196,7 +240,7 @@ def restore_backup_from_ftp(backup_id, settings):
     if not is_folder("temps/restore_from_backup/"):
         os.makedirs("temps/restore_from_backup/")
 
-    for folder in backup['schedule']['folder_tasks']:
+    for folder in backup['schedule']['folder_backups']:
         folder_to_zip = folder['local_folder_path']
         file_name = create_file_name(folder_to_zip)
         print file_name

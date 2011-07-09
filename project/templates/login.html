@@ -4,40 +4,39 @@
 
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <title>Login | Dashboard Admin</title>
+    <title>Logg inn | FNCIT-BACKUP</title>
 
-    <link rel="stylesheet" href="./css/reset.css" type="text/css" media="screen" title="no title"/>
-    <link rel="stylesheet" href="./css/text.css" type="text/css" media="screen" title="no title"/>
-    <link rel="stylesheet" href="./css/form.css" type="text/css" media="screen" title="no title"/>
-    <link rel="stylesheet" href="./css/buttons.css" type="text/css" media="screen" title="no title"/>
-    <link rel="stylesheet" href="./css/login.css" type="text/css" media="screen" title="no title"/>
+    <link rel="stylesheet" href="/static/css/reset.css" type="text/css" media="screen" title="no title"/>
+    <link rel="stylesheet" href="/static/css/text.css" type="text/css" media="screen" title="no title"/>
+    <link rel="stylesheet" href="/static/css/form.css" type="text/css" media="screen" title="no title"/>
+    <link rel="stylesheet" href="/static/css/buttons.css" type="text/css" media="screen" title="no title"/>
+    <link rel="stylesheet" href="/static/css/login.css" type="text/css" media="screen" title="no title"/>
 
 </head>
 
 <body>
 
 <div id="login">
-    <h1>Dashboard</h1>
 
     <div id="login_panel">
-        <form action="./dashboard.html" method="post" accept-charset="utf-8">
+
+        {{ form.errors }}
+
+        <form action="" method="post" accept-charset="utf-8">
             <div class="login_fields">
                 <div class="field">
-                    <label for="email">Email</label>
-                    <input type="text" name="email" value="" id="email" tabindex="1" placeholder="email@example.com"/>
+                    <input type="text" name="username" value="" id="email" tabindex="1" placeholder="brukernavn"/>
                 </div>
 
                 <div class="field">
-                    <label for="password">Password
-                        <small><a href="javascript:;">Forgot Password?</a></small>
-                    </label>
-                    <input type="password" name="password" value="" id="password" tabindex="2" placeholder="password"/>
+
+                    <input type="password" name="password" value="" id="password" tabindex="2" placeholder="passord"/>
                 </div>
             </div>
             <!-- .login_fields -->
 
             <div class="login_actions">
-                <button type="submit" class="btn btn-orange" tabindex="3">Login</button>
+                <button type="submit" class="btn btn-orange" tabindex="3">Logg inn</button>
             </div>
         </form>
     </div>

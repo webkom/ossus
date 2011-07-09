@@ -6,7 +6,7 @@ from backup_system import run_check
 
 settings = {
     'server_ip': "localhost:8000",
-    'machine_id': "12312423",
+    'machine_id': "734865",
     'username': '',
     'password': '',
     'os': '',
@@ -14,7 +14,6 @@ settings = {
 }
 
 run_check(settings)
-#ftp_connection = ftplib.FTP("europa.inbusiness.no", "queuefu", "monset14")
 
 """
 def delete_fto_folder(folder):

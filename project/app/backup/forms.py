@@ -5,7 +5,7 @@ from app.backup.models import ScheduleBackup, Backup
 class ScheduleBackupForm(ModelForm):
     class Meta:
         model = ScheduleBackup
-        fields = ('name','running_backup','running_restore',)
+        fields = ('name','running_backup','running_restore','current_version_in_loop')
 
 class BackupForm(ModelForm):
     class Meta:

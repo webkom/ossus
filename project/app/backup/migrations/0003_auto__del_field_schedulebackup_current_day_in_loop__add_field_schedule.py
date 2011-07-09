@@ -8,57 +8,20 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'Company'
-        db.create_table('backup_company', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=150)),
-        ))
-        db.send_create_signal('backup', ['Company'])
+        # Deleting field 'ScheduleBackup.current_day_in_loop'
+        db.delete_column('backup_schedulebackup', 'current_day_in_loop')
 
-        # Adding M2M table for field users on 'Company'
-        db.create_table('backup_company_users', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('company', models.ForeignKey(orm['backup.company'], null=False)),
-            ('user', models.ForeignKey(orm['auth.user'], null=False))
-        ))
-        db.create_unique('backup_company_users', ['company_id', 'user_id'])
-
-        # Adding model 'Customer'
-        db.create_table('backup_customer', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=150)),
-            ('company', self.gf('django.db.models.fields.related.ForeignKey')(related_name='customers', to=orm['backup.Company'])),
-        ))
-        db.send_create_signal('backup', ['Customer'])
-
-        # Adding model 'Location'
-        db.create_table('backup_location', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=150)),
-            ('customer', self.gf('django.db.models.fields.related.ForeignKey')(related_name='locations', to=orm['backup.Customer'])),
-        ))
-        db.send_create_signal('backup', ['Location'])
-
-        # Adding field 'Machine.location'
-        db.add_column('backup_machine', 'location', self.gf('django.db.models.fields.related.ForeignKey')(default='', related_name='machines', to=orm['backup.Location']), keep_default=False)
+        # Adding field 'ScheduleBackup.current_version_in_loop'
+        db.add_column('backup_schedulebackup', 'current_version_in_loop', self.gf('django.db.models.fields.IntegerField')(default=1, blank=True), keep_default=False)
 
 
     def backwards(self, orm):
         
-        # Deleting model 'Company'
-        db.delete_table('backup_company')
+        # Adding field 'ScheduleBackup.current_day_in_loop'
+        db.add_column('backup_schedulebackup', 'current_day_in_loop', self.gf('django.db.models.fields.IntegerField')(default=1), keep_default=False)
 
-        # Removing M2M table for field users on 'Company'
-        db.delete_table('backup_company_users')
-
-        # Deleting model 'Customer'
-        db.delete_table('backup_customer')
-
-        # Deleting model 'Location'
-        db.delete_table('backup_location')
-
-        # Deleting field 'Machine.location'
-        db.delete_column('backup_machine', 'location_id')
+        # Deleting field 'ScheduleBackup.current_version_in_loop'
+        db.delete_column('backup_schedulebackup', 'current_version_in_loop')
 
 
     models = {
@@ -93,7 +56,7 @@ class Migration(SchemaMigration):
         },
         'backup.backup': {
             'Meta': {'object_name': 'Backup'},
-            'day_folder_path': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
+            'day_folder_path': ('django.db.models.fields.CharField', [], {'max_length': '150', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'machine': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'backups'", 'to': "orm['backup.Machine']"}),
             'schedule': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'backups'", 'null': 'True', 'to': "orm['backup.ScheduleBackup']"}),
@@ -111,11 +74,11 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '150'})
         },
-        'backup.foldertask': {
-            'Meta': {'object_name': 'FolderTask'},
+        'backup.folderbackup': {
+            'Meta': {'object_name': 'FolderBackup'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'local_folder_path': ('django.db.models.fields.TextField', [], {}),
-            'schedule_backup': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'folder_tasks'", 'to': "orm['backup.ScheduleBackup']"})
+            'schedule_backup': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'folder_backups'", 'to': "orm['backup.ScheduleBackup']"})
         },
         'backup.location': {
             'Meta': {'object_name': 'Location'},
@@ -126,27 +89,45 @@ class Migration(SchemaMigration):
         'backup.machine': {
             'Meta': {'object_name': 'Machine'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_connection_to_client': ('django.db.models.fields.DateTimeField', [], {}),
+            'ip': ('django.db.models.fields.IPAddressField', [], {'max_length': '15'}),
+            'last_connection_to_client': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'location': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'machines'", 'to': "orm['backup.Location']"}),
             'machine_id': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '150'})
         },
         'backup.schedulebackup': {
             'Meta': {'object_name': 'ScheduleBackup'},
-            'current_day_in_loop': ('django.db.models.fields.IntegerField', [], {}),
-            'days_to_keep_backups': ('django.db.models.fields.IntegerField', [], {}),
+            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'current_version_in_loop': ('django.db.models.fields.IntegerField', [], {'blank': 'True'}),
             'from_date': ('django.db.models.fields.DateTimeField', [], {}),
-            'ftp_folder': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'ftp_host': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
-            'ftp_password': ('django.db.models.fields.CharField', [], {'max_length': '80'}),
-            'ftp_username': ('django.db.models.fields.CharField', [], {'max_length': '80'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_run_time': ('django.db.models.fields.DateTimeField', [], {}),
             'machine': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'schedules'", 'to': "orm['backup.Machine']"}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '150', 'blank': 'True'}),
             'repeat_every_minute': ('django.db.models.fields.IntegerField', [], {}),
             'running_backup': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'running_restore': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
+            'running_restore': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'storage': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'schedules'", 'to': "orm['backup.Storage']"}),
+            'versions_count': ('django.db.models.fields.IntegerField', [], {})
+        },
+        'backup.sqlbackup': {
+            'Meta': {'object_name': 'SQLBackup'},
+            'database': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'host': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'password': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'schedule_backup': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'sql_backups'", 'to': "orm['backup.ScheduleBackup']"}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
+            'username': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+        },
+        'backup.storage': {
+            'Meta': {'object_name': 'Storage'},
+            'folder': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'host': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'password': ('django.db.models.fields.CharField', [], {'max_length': '80'}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
+            'username': ('django.db.models.fields.CharField', [], {'max_length': '80'})
         },
         'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
