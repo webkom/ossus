@@ -1,3 +1,476 @@
+[INFO] 2011-07-10 18:10:03.070010 Done downloading folder /Users/fnc/Desktop/backuptest, used 0.347799062729 seconds 
+[INFO] 2011-07-10 18:10:02.704963 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:10:02.443910 Backup initialized 
+[INFO] 2011-07-10 18:09:30.839058 Done downloading folder /Users/fnc/Desktop/backuptest, used 0.500488042831 seconds 
+[INFO] 2011-07-10 18:09:30.320918 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:09:29.966541 Backup initialized 
+[ERROR] 2011-07-10 18:09:07.478658 550 /backup/734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:09:07.453009 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:09:06.210156 Backup initialized 
+[ERROR] 2011-07-10 18:08:03.098858 550 /backup/734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:08:03.069807 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:08:02.748323 Backup initialized 
+[ERROR] 2011-07-10 18:07:33.080645 550 /backup/734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:07:33.050498 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:07:32.786391 Backup initialized 
+[ERROR] 2011-07-10 18:07:06.392140 550 /backup/734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:07:06.368387 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:07:06.041283 Backup initialized 
+[ERROR] 2011-07-10 18:06:30.814306 550 /backup/734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:06:30.788162 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:06:30.483248 Backup initialized 
+[ERROR] 2011-07-10 18:06:15.557353 550 /backup/734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:06:15.273527 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:06:14.778708 Backup initialized 
+[ERROR] 2011-07-10 18:05:42.584180 550 /backup/734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:05:42.560215 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:05:42.312794 Backup initialized 
+[ERROR] 2011-07-10 18:05:24.094092 550 /backup/734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:05:24.052743 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:05:23.737748 Backup initialized 
+[ERROR] 2011-07-10 18:05:18.618983 550 /backup/734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:05:18.570642 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:05:18.271260 Backup initialized 
+[ERROR] 2011-07-10 18:05:10.135532 550 /backup/734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:05:10.112240 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:05:09.813438 Backup initialized 
+[ERROR] 2011-07-10 18:04:54.767710 550 /backup/734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:04:54.740942 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:04:54.473262 Backup initialized 
+[ERROR] 2011-07-10 18:04:47.895580 550 /backup/734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:04:47.870998 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:04:47.615047 Backup initialized 
+[ERROR] 2011-07-10 18:04:22.868485 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:04:22.841396 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:04:22.592114 Backup initialized 
+[ERROR] 2011-07-10 18:04:04.858831 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:04:04.833829 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:04:04.544931 Backup initialized 
+[ERROR] 2011-07-10 18:03:51.199908 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:03:51.176108 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:03:50.915412 Backup initialized 
+[ERROR] 2011-07-10 18:03:41.133492 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:03:41.106577 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:03:40.860172 Backup initialized 
+[ERROR] 2011-07-10 18:03:33.760061 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:03:33.734759 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:03:33.482769 Backup initialized 
+[ERROR] 2011-07-10 18:03:22.578010 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:03:22.551278 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:03:22.249931 Backup initialized 
+[ERROR] 2011-07-10 18:03:14.073432 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:03:14.043387 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:03:13.756758 Backup initialized 
+[ERROR] 2011-07-10 18:02:46.980773 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:02:46.944997 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:02:46.667682 Backup initialized 
+[ERROR] 2011-07-10 18:01:52.620212 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:01:52.591543 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:01:52.341154 Backup initialized 
+[ERROR] 2011-07-10 18:01:07.797919 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:01:07.766395 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:01:07.512712 Backup initialized 
+[ERROR] 2011-07-10 18:00:56.933880 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:00:56.906555 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:00:56.666770 Backup initialized 
+[ERROR] 2011-07-10 18:00:02.027488 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 18:00:01.998434 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 18:00:01.759545 Backup initialized 
+[ERROR] 2011-07-10 17:59:49.150906 550 /backup734865/schedules/1/3//users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 17:59:49.119689 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:59:48.876666 Backup initialized 
+[ERROR] 2011-07-10 17:59:36.589252 550 /backup/users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 17:59:36.563414 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:59:36.290458 Backup initialized 
+[ERROR] 2011-07-10 17:59:26.286607 550 /backup/users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 17:59:26.261309 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:59:26.022629 Backup initialized 
+[ERROR] 2011-07-10 17:59:22.289341 550 /backup/users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 17:59:22.260545 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:59:22.005394 Backup initialized 
+[ERROR] 2011-07-10 17:59:01.747514 550 /backup/users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 17:59:01.721200 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:59:01.431237 Backup initialized 
+[ERROR] 2011-07-10 17:57:37.019773 550 /backup/users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 17:57:36.997369 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:57:36.727159 Backup initialized 
+[ERROR] 2011-07-10 17:57:06.751734 550 /backup/users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 17:57:06.727746 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:57:06.476053 Backup initialized 
+[ERROR] 2011-07-10 17:56:52.318905 550 /backup/users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 17:56:52.290098 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:56:52.013004 Backup initialized 
+[ERROR] 2011-07-10 17:56:46.318373 550 /backup/users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 17:56:46.293345 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:56:45.923947 Backup initialized 
+[ERROR] 2011-07-10 17:53:59.726801 550 /backup/users_fnc_desktop_backuptest.zip: No such file or directory 
+[INFO] 2011-07-10 17:53:59.699049 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:53:59.417125 Backup initialized 
+[ERROR] 2011-07-10 17:51:41.751152 'folder_backups' 
+[INFO] 2011-07-10 17:51:41.264108 Backup initialized 
+[ERROR] 2011-07-10 17:50:58.530014 'ftp_host' 
+[INFO] 2011-07-10 17:50:58.337731 Backup initialized 
+[ERROR] 2011-07-10 17:50:40.560192 'ftp_host' 
+[INFO] 2011-07-10 17:50:40.309550 Backup initialized 
+[ERROR] 2011-07-10 17:50:07.427399 'running_backup' 
+[INFO] 2011-07-10 17:50:07.202005 Backup initialized 
+[ERROR] 2011-07-10 17:44:49.728771 'current_version_in_loop' 
+[INFO] 2011-07-10 17:44:49.554459 Backup initialized 
+[ERROR] 2011-07-10 17:44:43.118098 'schedules' 
+[INFO] 2011-07-10 17:44:42.881969 Backup initialized 
+[ERROR] 2011-07-10 17:44:38.011406 'current_version_in_loop' 
+[INFO] 2011-07-10 17:44:37.800363 Backup initialized 
+[ERROR] 2011-07-10 17:43:54.386779 'current_version_in_loop' 
+[INFO] 2011-07-10 17:43:54.125946 Backup initialized 
+[ERROR] 2011-07-10 17:43:42.338930 'current_version_in_loop' 
+[INFO] 2011-07-10 17:43:42.150205 Backup initialized 
+[ERROR] 2011-07-10 17:43:34.352068 'backup' 
+[INFO] 2011-07-10 17:43:34.176388 Backup initialized 
+[ERROR] 2011-07-10 17:43:33.175907 'backup' 
+[INFO] 2011-07-10 17:43:32.980912 Backup initialized 
+[ERROR] 2011-07-10 17:42:43.702130 'current_version_in_loop' 
+[INFO] 2011-07-10 17:42:43.503929 Backup initialized 
+[ERROR] 2011-07-10 17:42:37.134286 'current_version_in_loop' 
+[INFO] 2011-07-10 17:42:36.939409 Backup initialized 
+[ERROR] 2011-07-10 17:42:22.417145 'current_version_in_loop' 
+[INFO] 2011-07-10 17:42:22.246652 Backup initialized 
+[ERROR] 2011-07-10 17:42:14.945244 'current_version_in_loop' 
+[INFO] 2011-07-10 17:42:14.774554 Backup initialized 
+[ERROR] 2011-07-10 17:42:06.666638 'current_version_in_loop' 
+[INFO] 2011-07-10 17:42:06.469407 Backup initialized 
+[ERROR] 2011-07-10 17:41:59.663610 'current_version_in_loop' 
+[INFO] 2011-07-10 17:41:59.487412 Backup initialized 
+[ERROR] 2011-07-10 17:41:53.326011 'current_version_in_loop' 
+[INFO] 2011-07-10 17:41:53.136860 Backup initialized 
+[ERROR] 2011-07-10 17:40:02.579135 HTTP Error 500: INTERNAL SERVER ERROR 
+[INFO] 2011-07-10 17:39:59.311884 Backup initialized 
+[ERROR] 2011-07-10 17:39:50.913031 HTTP Error 500: INTERNAL SERVER ERROR 
+[INFO] 2011-07-10 17:39:47.388824 Backup initialized 
+[ERROR] 2011-07-10 17:38:41.271542 HTTP Error 500: INTERNAL SERVER ERROR 
+[INFO] 2011-07-10 17:38:38.267946 Backup initialized 
+[ERROR] 2011-07-10 17:38:13.443057 HTTP Error 500: INTERNAL SERVER ERROR 
+[INFO] 2011-07-10 17:38:06.044512 Backup initialized 
+[INFO] 2011-07-10 17:32:10.723000 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.481397867203 seconds 
+[INFO] 2011-07-10 17:32:10.306362 Clean folder for files 
+[INFO] 2011-07-10 17:32:10.222742 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:32:10.203982 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0278520584106 seconds 
+[INFO] 2011-07-10 17:32:10.175888 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:32:10.154523 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:32:09.937336 Backup initialized 
+[INFO] 2011-07-10 17:31:28.439078 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.540583133698 seconds 
+[INFO] 2011-07-10 17:31:27.970811 Clean folder for files 
+[INFO] 2011-07-10 17:31:27.881345 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:31:27.862660 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0285511016846 seconds 
+[INFO] 2011-07-10 17:31:27.834110 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:31:27.816768 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:31:27.599749 Backup initialized 
+[ERROR] 2011-07-10 17:29:42.230135 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:29:42.202114 Clean folder for files 
+[INFO] 2011-07-10 17:29:42.123258 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:29:42.104567 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0245079994202 seconds 
+[INFO] 2011-07-10 17:29:42.080159 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:29:42.059627 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:29:41.801962 Backup initialized 
+[ERROR] 2011-07-10 17:29:15.744434 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:29:15.715304 Clean folder for files 
+[INFO] 2011-07-10 17:29:15.635397 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:29:15.615578 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0279190540314 seconds 
+[INFO] 2011-07-10 17:29:15.587667 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:29:15.571110 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:28:54.439726 Backup initialized 
+[ERROR] 2011-07-10 17:28:12.907214 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:28:12.876518 Clean folder for files 
+[INFO] 2011-07-10 17:28:12.801557 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:28:12.780978 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.02374792099 seconds 
+[INFO] 2011-07-10 17:28:12.757273 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:28:12.743196 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:28:12.527096 Backup initialized 
+[ERROR] 2011-07-10 17:27:05.957761 550 backup/734865/schedules/1/1/: Directory not empty 
+[INFO] 2011-07-10 17:27:05.847759 Clean folder for files 
+[INFO] 2011-07-10 17:27:05.748496 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:27:05.367051 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.350228071213 seconds 
+[INFO] 2011-07-10 17:27:05.003324 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:27:04.590861 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:27:04.141472 Backup initialized 
+[ERROR] 2011-07-10 17:26:22.558226 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:26:22.529202 Clean folder for files 
+[INFO] 2011-07-10 17:26:22.447696 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:26:22.432879 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0420649051666 seconds 
+[INFO] 2011-07-10 17:26:22.390783 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:26:22.370065 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:26:22.103025 Backup initialized 
+[ERROR] 2011-07-10 17:26:20.611767 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:26:20.581204 Clean folder for files 
+[INFO] 2011-07-10 17:26:20.494206 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:26:20.475630 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0298080444336 seconds 
+[INFO] 2011-07-10 17:26:20.444433 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:26:20.425203 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:26:20.204468 Backup initialized 
+[ERROR] 2011-07-10 17:26:08.823479 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:26:08.792077 Clean folder for files 
+[INFO] 2011-07-10 17:26:08.704246 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:26:08.679652 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0335021018982 seconds 
+[INFO] 2011-07-10 17:26:08.646201 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:26:08.623125 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:26:08.356967 Backup initialized 
+[ERROR] 2011-07-10 17:24:31.865868 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:24:31.831354 Clean folder for files 
+[INFO] 2011-07-10 17:24:31.754422 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:24:31.735371 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0280759334564 seconds 
+[INFO] 2011-07-10 17:24:31.707311 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:24:31.688363 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:24:31.286162 Backup initialized 
+[ERROR] 2011-07-10 17:24:17.175622 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:24:17.139913 Clean folder for files 
+[INFO] 2011-07-10 17:24:17.060383 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:24:17.039965 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0280909538269 seconds 
+[INFO] 2011-07-10 17:24:17.011917 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:24:16.994384 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:24:16.723865 Backup initialized 
+[ERROR] 2011-07-10 17:21:58.090424 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:21:58.059807 Clean folder for files 
+[INFO] 2011-07-10 17:21:57.979441 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:21:57.956168 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.028039932251 seconds 
+[INFO] 2011-07-10 17:21:57.928225 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:21:57.908747 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:21:57.703863 Backup initialized 
+[ERROR] 2011-07-10 17:20:15.906299 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:20:15.878228 Clean folder for files 
+[INFO] 2011-07-10 17:20:15.805884 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:20:15.785687 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0259160995483 seconds 
+[INFO] 2011-07-10 17:20:15.759824 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:20:15.742051 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:20:15.542330 Backup initialized 
+[ERROR] 2011-07-10 17:19:51.274518 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:19:51.247272 Clean folder for files 
+[INFO] 2011-07-10 17:19:51.172634 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:19:51.157468 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0231890678406 seconds 
+[INFO] 2011-07-10 17:19:51.134331 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:19:51.120824 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:19:50.922159 Backup initialized 
+[ERROR] 2011-07-10 17:18:44.686766 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:18:44.651280 Clean folder for files 
+[INFO] 2011-07-10 17:18:44.575811 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:18:44.557734 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0264430046082 seconds 
+[INFO] 2011-07-10 17:18:44.531382 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:18:44.512325 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:18:44.262492 Backup initialized 
+[ERROR] 2011-07-10 17:17:02.876436 550 backup/734865/schedules/1/1//backup/734865/schedules/1/1/users_fnc_workspace_ktn.zip: No such file or directory 
+[INFO] 2011-07-10 17:17:02.846026 Clean folder for files 
+[INFO] 2011-07-10 17:17:02.659001 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:17:02.625199 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0279200077057 seconds 
+[INFO] 2011-07-10 17:17:02.597359 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:17:02.581780 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:17:02.360720 Backup initialized 
+[INFO] 2011-07-10 17:16:19.958654 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.465269088745 seconds 
+[INFO] 2011-07-10 17:16:19.549870 Tried to delete folder: backup/734865/schedules/1/5/, but the folder did not exists. 
+[INFO] 2011-07-10 17:16:19.476089 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:16:19.455996 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0248908996582 seconds 
+[INFO] 2011-07-10 17:16:19.431198 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:16:19.415697 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:16:19.191770 Backup initialized 
+[INFO] 2011-07-10 17:15:56.474626 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.485045909882 seconds 
+[INFO] 2011-07-10 17:15:56.045846 Tried to delete folder: backup/734865/schedules/1/4/, but the folder did not exists. 
+[INFO] 2011-07-10 17:15:55.973147 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:15:55.952435 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0286560058594 seconds 
+[INFO] 2011-07-10 17:15:55.923835 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:15:55.904585 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:15:55.669848 Backup initialized 
+[INFO] 2011-07-10 17:15:44.491732 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.411645889282 seconds 
+[INFO] 2011-07-10 17:15:44.130931 Tried to delete folder: backup/734865/schedules/1/3/, but the folder did not exists. 
+[INFO] 2011-07-10 17:15:44.060333 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:15:44.041685 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0288279056549 seconds 
+[INFO] 2011-07-10 17:15:44.012948 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:15:43.996382 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:15:43.751416 Backup initialized 
+[INFO] 2011-07-10 17:15:35.340248 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.398082971573 seconds 
+[INFO] 2011-07-10 17:15:34.993683 Tried to delete folder: backup/734865/schedules/1/2/, but the folder did not exists. 
+[INFO] 2011-07-10 17:15:34.925453 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:15:34.905683 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0290410518646 seconds 
+[INFO] 2011-07-10 17:15:34.876749 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:15:34.858984 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:15:34.519626 Backup initialized 
+[INFO] 2011-07-10 17:15:30.707768 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.360308885574 seconds 
+[INFO] 2011-07-10 17:15:30.356062 Tried to delete folder: backup/734865/schedules/1/1/, but the folder did not exists. 
+[INFO] 2011-07-10 17:15:30.329822 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:15:30.310179 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0309419631958 seconds 
+[INFO] 2011-07-10 17:15:30.279328 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:15:30.260836 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:15:30.022633 Backup initialized 
+[ERROR] 2011-07-10 17:15:13.390562 directory_exists_on_ftp_server() takes exactly 2 arguments (1 given) 
+[INFO] 2011-07-10 17:15:13.230411 Backup initialized 
+[ERROR] 2011-07-10 17:15:05.632178 directory_exists_on_ftp_server() takes exactly 2 arguments (1 given) 
+[INFO] 2011-07-10 17:15:05.438469 Backup initialized 
+[ERROR] 2011-07-10 17:15:01.616098 directory_exists_on_ftp_server() takes exactly 2 arguments (1 given) 
+[INFO] 2011-07-10 17:15:01.457154 Backup initialized 
+[ERROR] 2011-07-10 17:14:50.332605 directory_exists_on_ftp_server() takes exactly 2 arguments (1 given) 
+[INFO] 2011-07-10 17:14:50.100277 Backup initialized 
+[ERROR] 2011-07-10 17:14:47.058765 directory_exists_on_ftp_server() takes exactly 2 arguments (1 given) 
+[INFO] 2011-07-10 17:14:46.895647 Backup initialized 
+[ERROR] 2011-07-10 17:14:38.721371 directory_exists_on_ftp_server() takes exactly 2 arguments (1 given) 
+[INFO] 2011-07-10 17:14:38.560454 Backup initialized 
+[ERROR] 2011-07-10 17:14:28.154024 directory_exists_on_ftp_server() takes exactly 2 arguments (1 given) 
+[INFO] 2011-07-10 17:14:27.992396 Backup initialized 
+[ERROR] 2011-07-10 17:14:13.352032 global name 'ftp_folder' is not defined 
+[INFO] 2011-07-10 17:14:13.149547 Backup initialized 
+[ERROR] 2011-07-10 17:14:07.793912 global name 'ftp_folder' is not defined 
+[INFO] 2011-07-10 17:14:07.618370 Backup initialized 
+[ERROR] 2011-07-10 17:13:49.720901 global name 'ftp_folder' is not defined 
+[INFO] 2011-07-10 17:13:49.549082 Backup initialized 
+[ERROR] 2011-07-10 17:13:43.934329 global name 'ftp_folder' is not defined 
+[INFO] 2011-07-10 17:13:43.776225 Backup initialized 
+[ERROR] 2011-07-10 17:13:41.215758 global name 'ftp_folder' is not defined 
+[INFO] 2011-07-10 17:13:40.875983 Backup initialized 
+[INFO] 2011-07-10 17:09:47.202141 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.367245912552 seconds 
+[INFO] 2011-07-10 17:09:46.843467 Tried to delete folder: backup/734865/schedules/1/5/, but the folder did not exists. 
+[INFO] 2011-07-10 17:09:46.816456 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:09:46.797727 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0261359214783 seconds 
+[INFO] 2011-07-10 17:09:46.771697 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:09:46.752163 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:09:46.558879 Backup initialized 
+[INFO] 2011-07-10 17:09:27.034776 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.318172931671 seconds 
+[INFO] 2011-07-10 17:09:26.725901 Tried to delete folder: backup/734865/schedules/1/4/, but the folder did not exists. 
+[INFO] 2011-07-10 17:09:26.700183 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:09:26.678626 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0270729064941 seconds 
+[INFO] 2011-07-10 17:09:26.651584 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:09:26.627245 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:09:26.411440 Backup initialized 
+[INFO] 2011-07-10 17:09:21.580122 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.346158027649 seconds 
+[INFO] 2011-07-10 17:09:21.242354 Tried to delete folder: backup/734865/schedules/1/3/, but the folder did not exists. 
+[INFO] 2011-07-10 17:09:21.218244 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:09:21.196564 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0285079479218 seconds 
+[INFO] 2011-07-10 17:09:21.168211 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:09:21.145895 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:09:20.700985 Backup initialized 
+[INFO] 2011-07-10 17:08:44.475399 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.362861871719 seconds 
+[INFO] 2011-07-10 17:08:44.121148 Tried to delete folder: backup/734865/schedules/1/2/, but the folder did not exists. 
+[INFO] 2011-07-10 17:08:44.092711 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:08:44.070579 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0358030796051 seconds 
+[INFO] 2011-07-10 17:08:44.034922 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:08:44.017492 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:08:43.821719 Backup initialized 
+[INFO] 2011-07-10 17:07:49.398843 Backup completed 
+[INFO] 2011-07-10 17:07:49.377665 Backup initialized 
+[INFO] 2011-07-10 17:07:07.418214 Backup completed 
+[INFO] 2011-07-10 17:07:07.396548 Backup initialized 
+[INFO] 2011-07-10 17:07:01.333591 Backup completed 
+[INFO] 2011-07-10 17:07:01.311802 Backup initialized 
+[INFO] 2011-07-10 17:05:18.732880 Backup completed 
+[INFO] 2011-07-10 17:05:18.514230 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.378984928131 seconds 
+[INFO] 2011-07-10 17:05:18.144387 Tried to delete folder: backup/734865/schedules/1/1/, but the folder did not exists. 
+[INFO] 2011-07-10 17:05:18.118138 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:05:18.099034 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.028382062912 seconds 
+[INFO] 2011-07-10 17:05:18.070661 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:05:18.053445 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:05:17.414318 Backup initialized 
+[INFO] 2011-07-10 17:02:41.850307 Backup completed 
+[INFO] 2011-07-10 17:02:41.704823 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.36686205864 seconds 
+[INFO] 2011-07-10 17:02:41.347004 Tried to delete folder, but the folder did not exists. 
+[INFO] 2011-07-10 17:02:41.322467 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:02:41.303848 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0291421413422 seconds 
+[INFO] 2011-07-10 17:02:41.274777 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:02:41.259028 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:02:41.064746 Backup initialized 
+[INFO] 2011-07-10 17:01:13.010293 Backup completed 
+[INFO] 2011-07-10 17:01:12.865092 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.405656099319 seconds 
+[INFO] 2011-07-10 17:01:12.470861 Tried to delete folder, but the folder did not exists. 
+[INFO] 2011-07-10 17:01:12.443126 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:01:12.427131 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0235691070557 seconds 
+[INFO] 2011-07-10 17:01:12.403602 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:01:12.388697 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:01:12.214525 Backup initialized 
+[INFO] 2011-07-10 17:01:05.168651 Backup completed 
+[INFO] 2011-07-10 17:01:05.032421 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.397315979004 seconds 
+[INFO] 2011-07-10 17:01:04.643990 Tried to delete folder, but the folder did not exists. 
+[INFO] 2011-07-10 17:01:04.616709 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:01:04.596115 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0282328128815 seconds 
+[INFO] 2011-07-10 17:01:04.567928 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:01:04.549363 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 17:01:04.369996 Backup initialized 
+[INFO] 2011-07-10 16:58:26.067749 Backup completed 
+[INFO] 2011-07-10 16:58:25.930998 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.276381969452 seconds 
+[INFO] 2011-07-10 16:58:25.663635 Tried to delete folder, but the folder did not exists. 
+[INFO] 2011-07-10 16:58:25.637586 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:58:25.620418 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0289809703827 seconds 
+[INFO] 2011-07-10 16:58:25.591453 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:58:25.574127 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:58:25.359202 Backup initialized 
+[INFO] 2011-07-10 16:56:15.106402 Backup completed 
+[INFO] 2011-07-10 16:56:14.971317 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.380403995514 seconds 
+[INFO] 2011-07-10 16:56:14.604728 Tried to delete folder, but the folder did not exists. 
+[INFO] 2011-07-10 16:56:14.574056 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:56:14.557123 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0262961387634 seconds 
+[INFO] 2011-07-10 16:56:14.530856 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:56:14.511434 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:56:14.349822 Backup initialized 
+[INFO] 2011-07-10 16:55:54.338370 Backup completed 
+[INFO] 2011-07-10 16:55:54.209628 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.433058023453 seconds 
+[INFO] 2011-07-10 16:55:53.785624 Tried to delete folder, but the folder did not exists. 
+[INFO] 2011-07-10 16:55:53.758947 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:55:53.741860 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0257239341736 seconds 
+[INFO] 2011-07-10 16:55:53.716184 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:55:53.697595 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:55:53.534940 Backup initialized 
+[INFO] 2011-07-10 16:53:20.579312 Backup completed 
+[ERROR] 2011-07-10 16:53:20.563337 write_log() takes exactly 3 arguments (2 given) 
+[INFO] 2011-07-10 16:53:20.534987 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:53:20.514132 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0290849208832 seconds 
+[INFO] 2011-07-10 16:53:20.485119 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:53:20.464532 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:53:20.304914 Backup initialized 
+[INFO] 2011-07-10 16:53:01.683037 Backup completed 
+[ERROR] 2011-07-10 16:53:01.666783 write_log() takes exactly 3 arguments (2 given) 
+[INFO] 2011-07-10 16:53:01.638335 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:53:01.588165 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0513088703156 seconds 
+[INFO] 2011-07-10 16:53:01.536880 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:53:01.519953 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:53:01.155131 Backup initialized 
+[INFO] 2011-07-10 16:40:58.192711 Backup completed 
+[INFO] 2011-07-10 16:40:57.767624 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.348484039307 seconds 
+[INFO] 2011-07-10 16:40:57.272981 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:40:57.184366 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 1.77196383476 seconds 
+[INFO] 2011-07-10 16:40:55.405106 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:40:55.324680 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:40:53.998281 Backup initialized 
+[INFO] 2011-07-10 16:37:14.052412 Backup completed 
+[INFO] 2011-07-10 16:37:13.888372 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.327089071274 seconds 
+[INFO] 2011-07-10 16:37:13.513354 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:37:13.493474 Done zipping folder /Users/fnc/Desktop/backuptest, saved as tempsusers_fnc_desktop_backuptest.zip, used 0.269024848938 seconds 
+[INFO] 2011-07-10 16:37:13.224906 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:37:13.206203 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 16:37:12.896463 Backup initialized 
+[INFO] 2011-07-10 16:33:55.452271 Backup completed 
+[INFO] 2011-07-10 16:33:55.323191 Done uploading folder /Users/fnc/workspace/hive, used 10.3812680244 seconds 
+[INFO] 2011-07-10 16:33:44.923352 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 16:33:44.859988 Done zipping folder /Users/fnc/workspace/hive, saved as tempsusers_fnc_workspace_hive.zip, used 6.51359891891 seconds 
+[INFO] 2011-07-10 16:33:38.346441 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 16:33:38.239731 Working on schedule /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 16:33:38.143878 Done uploading folder /Users/fnc/workspace/ktn, used 0.195019006729 seconds 
+[INFO] 2011-07-10 16:33:37.930982 Started uploading folder /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 16:33:37.912406 Done zipping folder /Users/fnc/workspace/ktn, saved as tempsusers_fnc_workspace_ktn.zip, used 0.306395053864 seconds 
+[INFO] 2011-07-10 16:33:37.606266 Started zipping folder /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 16:33:37.585643 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 16:33:37.354366 Backup initialized 
+[INFO] 2011-07-10 16:33:16.823151 Backup initialized 
+[INFO] 2011-07-10 14:47:39.896098 Backup completed 
+[INFO] 2011-07-10 14:47:39.755244 Done uploading folder /Users/fnc/workspace/hive, used 7.37649178505 seconds 
+[INFO] 2011-07-10 14:47:32.363657 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 14:47:32.162025 Done zipping folder /Users/fnc/workspace/hive, saved as tempsusers_fnc_workspace_hive.zip, used 7.94711089134 seconds 
+[INFO] 2011-07-10 14:47:24.215029 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 14:47:24.161933 Working on schedule /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 14:47:24.145148 Done uploading folder /Users/fnc/workspace/ktn, used 0.164295911789 seconds 
+[INFO] 2011-07-10 14:47:23.963152 Started uploading folder /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 14:47:23.948023 Done zipping folder /Users/fnc/workspace/ktn, saved as tempsusers_fnc_workspace_ktn.zip, used 0.347993135452 seconds 
+[INFO] 2011-07-10 14:47:23.600364 Started zipping folder /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 14:47:23.557244 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 14:47:23.189342 Backup initialized 
+[INFO] 2011-07-10 14:46:59.895865 Backup initialized 
+[INFO] 2011-07-10 14:46:59.572223 Backup initialized 
+[INFO] 2011-07-10 14:46:59.201022 Backup initialized 
+[INFO] 2011-07-10 14:46:58.740434 Backup initialized 
+[INFO] 2011-07-10 14:46:58.125676 Backup initialized 
+[INFO] 2011-07-10 14:46:57.083257 Backup initialized 
+[INFO] 2011-07-10 14:46:51.953950 Backup initialized 
 [INFO] 2011-07-10 04:25:50.781764 Backup completed 
 [INFO] 2011-07-10 04:25:50.604911 Done uploading folder /Users/fnc/workspace/hive, used 6.4843621254 seconds 
 [INFO] 2011-07-10 04:25:44.099194 Started uploading folder /Users/fnc/workspace/hive 

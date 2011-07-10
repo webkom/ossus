@@ -25,6 +25,24 @@ class Location(models.Model):
     def __unicode__(self):
         return "Location: %s" % self.name
 
+up_time_types = (
+        ('up', 'UP'),
+        ('down', 'DOWN')
+    )
+
+#Meant to be base for both MachinUptime and PINGuptime
+class UptimeLogBase(models.Model):
+    datetime = models.DateTimeField(auto_now=True)
+    type = models.CharField(max_length=5, choices=up_time_types, default="up")
+
+    def fire_warning(self):
+        pass
+
+
+class MachineUptimeLog(UptimeLogBase):
+    machine = models.ForeignKey('Machine', related_name="updatelogs")
+
+machine_timeout_minutes = 10 * 60
 
 class Machine(models.Model):
     name = models.CharField(max_length=150)
@@ -36,9 +54,23 @@ class Machine(models.Model):
     def __unicode__(self):
         return "Machine: %s, machine_id: %s" % (self.name, self.machine_id)
 
+    @staticmethod
+    def create_uptime_logs():
+        for machine in Machine.objects.all():
+            if (datetime.now() - machine.last_connection_to_client).seconds < machine_timeout_minutes:
+                machine.create_uptime_log("up")
+            else:
+                machine.create_uptime_log("down")
+
     def set_last_connection_to_client(self):
         self.last_connection_to_client = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.save()
+
+    def create_uptime_log(self, type):
+        log = MachineUptimeLog()
+        log.type = type
+        log.machine = self
+        log.save()
 
     def running_backup(self):
         for schedule in self.schedules.all():
@@ -76,11 +108,11 @@ class Machine(models.Model):
         return next_backup_time
 
 log_types = (
-    ('info','INFO'),
-    ('error','ERROR'),
-    ('warning','WARNING')
-)
-    
+        ('info', 'INFO'),
+        ('error', 'ERROR'),
+        ('warning', 'WARNING')
+    )
+
 class MachineLog(models.Model):
     machine = models.ForeignKey(Machine, related_name="logs")
     datetime = models.DateTimeField()
@@ -91,9 +123,9 @@ class MachineLog(models.Model):
         return "%s %s %s" % (self.machine, self.datetime, self.text)
 
 storage_types = (
-    ('ftp','FTP'),
-    ('s3', 'Amazon S3')
-)
+        ('ftp', 'FTP'),
+        ('s3', 'Amazon S3')
+    )
 
 class Storage(models.Model):
     type = models.CharField(max_length=10, choices=storage_types)
@@ -108,6 +140,7 @@ class Storage(models.Model):
     def __unicode__(self):
         return "Storage: %s %s" % (self.type, self.host)
 
+
 class FolderBackup(models.Model):
     local_folder_path = models.TextField()
     schedule_backup = models.ForeignKey('ScheduleBackup', related_name='folder_backups')
@@ -116,21 +149,22 @@ class FolderBackup(models.Model):
         return "%s" % self.schedule_backup
 
 sql_types = (
-    ('mysql','MySQL'),
-    ('mssql', 'MsSQL')
-)
+        ('mysql', 'MySQL'),
+        ('mssql', 'MSSQL')
+    )
 
 class SQLBackup(models.Model):
     type = models.CharField(max_length=40, choices=sql_types)
     schedule_backup = models.ForeignKey('ScheduleBackup', related_name='sql_backups')
 
-    host     = models.CharField(max_length=100)
+    host = models.CharField(max_length=100)
     database = models.CharField(max_length=100)
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
 
     def __unicode__(self):
         return "SQLBackup: %s" % self.host
+
 
 class ScheduleBackup(models.Model):
     #Details
@@ -156,7 +190,6 @@ class ScheduleBackup(models.Model):
     active = models.BooleanField(default=True)
 
     def current_day_folder_path(self):
-
         print
 
         if self.machine.last_connection_to_client.day != datetime.now().day:
@@ -167,7 +200,8 @@ class ScheduleBackup(models.Model):
 
             self.save()
 
-        return str(self.machine.machine_id) + "/" + "schedules/"+ str(self.id) + "/" + str(self.current_version_in_loop) + "/"
+        return str(self.machine.machine_id) + "/" + "schedules/" + str(self.id) + "/" + str(
+            self.current_version_in_loop) + "/"
 
     def get_last_backup(self):
         if self.backups.all().count() > 0:

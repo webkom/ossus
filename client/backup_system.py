@@ -148,7 +148,6 @@ def save_at_is_zip_file(path):
 
     return False
 
-
 def zip_folder_and_save(folder_to_zip, save_at, settings):
     if not is_folder(folder_to_zip):
         write_log(settings,"error", "Source folder is not a valid folder, you used: %s" % folder_to_zip)
@@ -182,8 +181,7 @@ def directory_exists_on_ftp_server(ftp, folder):
             return True
     return False
 
-def create_folders_on_ftp_for_upload(ftp, ftp_folder):
-
+def recursive_folder_exists_on_ftp_server(ftp,ftp_folder):
     for folder in ftp_folder.split("/"):
         if folder == "":
             continue
@@ -191,15 +189,55 @@ def create_folders_on_ftp_for_upload(ftp, ftp_folder):
         if directory_exists_on_ftp_server(ftp, folder):
             ftp.cwd(folder)
         else:
+            return False
+
+    ftp.cwd("~/")
+
+    return True
+
+def create_folders_on_ftp_for_upload(ftp, ftp_folder, settings):
+    ftp.cwd("~/")
+
+    for folder in ftp_folder.split("/"):
+        if folder == "":
+            continue
+        if directory_exists_on_ftp_server(ftp, folder):
+            ftp.cwd(folder)
+        else:
             ftp.mkd(folder)
             ftp.cwd(folder)
 
-def do_upload(ftp, ftp_folder, file, file_name):
+    ftp.cwd("~/")
 
-    create_folders_on_ftp_for_upload(ftp, ftp_folder)
+def delete_ftp_folder(ftp_connection, folder, settings):
+    ftp_connection.cwd("~/")
+
+    if not recursive_folder_exists_on_ftp_server(ftp_connection, folder):
+        write_log(settings, "info","Tried to delete folder: %s, but the folder did not exists." % folder)
+        return
+
+    write_log(settings, "info","Clean folder for files")
+
+    for file in ftp_connection.nlst(folder):
+        
+        if file == '.' or file == '..':
+            continue
+
+        if os.path.splitext(str(file))[1]:
+            ftp_connection.delete("%s" % file)
+        else:
+            delete_ftp_folder(ftp_connection, file, settings)
+
+    ftp_connection.rmd(folder)
+
+    ftp_connection.cwd("~/")
+
+def do_upload(ftp, ftp_folder, file, file_name, settings):
+
+    delete_ftp_folder(ftp, ftp_folder, settings)
+    create_folders_on_ftp_for_upload(ftp, ftp_folder, settings)
 
     f = open(file, "rb")
-
     ftp.cwd("~/")
     ftp.storbinary("STOR %s%s" % (ftp_folder, file_name), f, 1024)
     f.close()
@@ -207,7 +245,14 @@ def do_upload(ftp, ftp_folder, file, file_name):
 
 def do_download(ftp, ftp_folder, file, file_name):
     f = open(file, "wb")
-    ftp.retrbinary("RETR /%s/%s" % (ftp_folder, file_name), f.write)
+
+    if file_name[0] == "/":
+        file_name = file_name[1:]
+
+    file_to_download = "%s%s" % (ftp_folder, file_name)
+    print file_to_download
+
+    ftp.retrbinary("RETR %s" % file_to_download, f.write)
     f.close()
 
 def create_file_name(path_to_file):
@@ -235,13 +280,16 @@ def save_folder_to_ftp(ftp, ftp_folder, folder_to_zip, settings):
 
     file_name = create_file_name(folder_to_zip)
 
-    local_file = "temps%s" % file_name
+    if file_name[0] == "/":
+        file_name = file_name[1:]
+
+    local_file = "temps/%s" % file_name
 
     zip_folder_and_save(folder_to_zip, local_file, settings)
 
     write_log(settings,"info", "Started uploading folder %s" % str(folder_to_zip))
     start_time = time.time()
-    do_upload(ftp, ftp_folder, local_file, file_name)
+    do_upload(ftp, ftp_folder, local_file, file_name, settings)
     write_log(settings,"info", "Done uploading folder %s, used %s seconds" % (str(folder_to_zip), time.time() - start_time))
 
 
@@ -254,7 +302,6 @@ def extractAll(zipName, folder_to_zip):
         else:
             z.extract(f, folder_path)
 
-
 def restore_backup_from_ftp(backup_id, settings):
     backup = download_content("http://%s/api/backups/%s" % (settings['server_ip'], backup_id), settings)
 
@@ -266,13 +313,15 @@ def restore_backup_from_ftp(backup_id, settings):
         write_log(settings,"warning","Busy, backup in progress")
         return
 
-    schedule_form = {'running_restore': True}
+    schedule_form = {'running_restore': True, 'current_version_in_loop': backup['schedule']['current_version_in_loop']}
+
     schedule_url = "http://%s/api/schedules/%s" % (settings['server_ip'], str(backup['schedule']['id'])) + "/"
     set_data(schedule_url, schedule_form, settings)
 
-    ftp = ftplib.FTP(backup['schedule']['ftp_host'], backup['schedule']['ftp_username'],
-                     backup['schedule']['ftp_password'])
-    ftp_folder = backup['schedule']['ftp_folder']
+    ftp = ftplib.FTP(backup['schedule']['storage']['host'], backup['schedule']['storage']['username'],
+                     backup['schedule']['storage']['password'])
+
+    ftp_folder = backup['schedule']['storage']['folder']
 
     if not is_folder("temps/restore_from_backup/"):
         os.makedirs("temps/restore_from_backup/")
@@ -285,10 +334,15 @@ def restore_backup_from_ftp(backup_id, settings):
 
         write_log(settings,"info","Started downloading folder %s" % str(folder_to_zip))
         start_time = time.time()
-        do_download(ftp, ftp_folder, local_file, file_name)
+
+        do_download(ftp, ftp_folder+"/"+backup['schedule']['current_day_folder_path'], local_file, file_name)
+
         write_log(settings,"info","Done downloading folder %s, used %s seconds" % (str(folder_to_zip), time.time() - start_time))
 
         temp_file_to_zip = "temps/restore_from_backup/%s/" % str(backup_id) + folder_to_zip[1:]
+
+        print temp_file_to_zip
+
         extractAll(local_file, temp_file_to_zip)
 
         if is_folder(folder_to_zip):
@@ -300,9 +354,8 @@ def restore_backup_from_ftp(backup_id, settings):
     if is_folder("temps/restore_from_backup/"):
         shutil.rmtree("temps/restore_from_backup/")
 
-    schedule_form = {'running_restore': False}
+    schedule_form = {'running_restore': False, 'current_version_in_loop': backup['schedule']['current_version_in_loop']}
     set_data(schedule_url, schedule_form, settings)
-
 
 def set_data(destination_path, data_dict, settings):
     register_openers()

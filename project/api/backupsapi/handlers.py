@@ -5,7 +5,9 @@ from piston.utils import rc
 
 class BackupHandler(BaseHandler):
     model = Backup
-    fields = ('id', 'time_started', 'machine','schedule')
+    fields = ('id', 'time_started', 'machine', ('schedule', (
+        'id', 'current_version_in_loop', 'running_restore', 'current_day_folder_path', 'get_next_backup_time',
+        'versions_count', 'running_backup', 'storage', ('folder_backups', ('id', 'local_folder_path')))))
 
     def read(self, request, id=None):
         all = Backup.objects.all()
@@ -19,18 +21,17 @@ class BackupHandler(BaseHandler):
 
 
     def create(self, request, id=None):
-
         if id:
             instance = Backup.objects.get(id=id)
             machine = instance.machine
             schedulebackup = instance.schedule
         else:
             instance = Backup()
-            machine = Machine.objects.get(id = request.POST['machine_id'])
-            schedulebackup = ScheduleBackup.objects.get(id = request.POST['schedule_id'])
+            machine = Machine.objects.get(id=request.POST['machine_id'])
+            schedulebackup = ScheduleBackup.objects.get(id=request.POST['schedule_id'])
 
         machine.set_last_connection_to_client()
-            
+
         form = BackupForm(request.POST, instance=instance)
         if form.is_valid():
             schedule = form.save(commit=False)
