@@ -9,7 +9,7 @@ class MachineHandler(BaseHandler):
         'id', 'name', 'machine_id', 'storage','current_day_folder_path','current_version_in_loop', 'versions_count','get_next_backup_time','get_last_backup_time', 'running_backup',
         'running_restore', 'from_date', 'get_next_backup_time',
             ('folder_backups', ('id', 'local_folder_path')), ('backups', ('id', 'time_started')))),
-                  ('backups', ('id', 'time_started','day_folder_path')), )
+                  ('backups', ('id', 'time_started','day_folder_path')), ('logs', ('id', 'datetime','type','text')), )
 
     def read(self, request, id=None):
         all = Machine.objects.all()
@@ -27,7 +27,7 @@ class MachineHandler(BaseHandler):
 
 class MachineLogHandler(BaseHandler):
     model = MachineLog
-    fields = ('id', 'machine', 'datetime','text','type',)
+    fields = ('id', ('machine',('id','name')), 'datetime','text','type',)
 
     def read(self, request, id=None):
         all = MachineLog.objects.all()
@@ -40,9 +40,8 @@ class MachineLogHandler(BaseHandler):
             return all
 
     def create(self, request, id=None):
-
         instance = MachineLog()
-        machine = Machine.objects.get(id = request.POST['machine_id'])
+        machine = Machine.objects.get(machine_id = (request.POST['machine_id']))
 
         machine.set_last_connection_to_client()
 
@@ -51,8 +50,7 @@ class MachineLogHandler(BaseHandler):
             log = form.save(commit=False)
             log.machine = machine
             log.save()
-
             return log
-
         else:
+            print form.errors
             return form.errors

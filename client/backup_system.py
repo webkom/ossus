@@ -42,15 +42,14 @@ def write_log(settings,type, text):
     log_file.close()
 
     #Save log to server
-    theurl = "http://%s/api/backups/" % settings['server_ip']
+    theurl = "http://%s/api/machinelogs/" % settings['server_ip']
 
-    machinelog_dict = {'machine_id': schedule['machine_id'],
+    machinelog_dict = {'machine_id': settings['machine_id'],
                        'text':text,
                        'type':type,
                        'datetime': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 
     set_data(theurl, machinelog_dict, settings)
-
 
 def run_check(settings):
 
@@ -85,7 +84,7 @@ def run_check(settings):
         #Performing folder backups
         for command in schedule['folder_backups']:
             write_log(settings,"info","Working on schedule %s" % command['local_folder_path'])
-            save_folder_to_ftp(ftp_connection, ftp_folder, command['local_folder_path'])
+            save_folder_to_ftp(ftp_connection, ftp_folder, command['local_folder_path'], settings)
 
         #Set running_backup status to False
         schedule_form['running_backup'] = False
@@ -150,7 +149,7 @@ def save_at_is_zip_file(path):
     return False
 
 
-def zip_folder_and_save(folder_to_zip, save_at):
+def zip_folder_and_save(folder_to_zip, save_at, settings):
     if not is_folder(folder_to_zip):
         write_log(settings,"error", "Source folder is not a valid folder, you used: %s" % folder_to_zip)
         return
@@ -230,7 +229,7 @@ def create_file_name(path_to_file):
     return file_name[:-1] + ".zip"
 
 
-def save_folder_to_ftp(ftp, ftp_folder, folder_to_zip):
+def save_folder_to_ftp(ftp, ftp_folder, folder_to_zip, settings):
     if not is_folder("temps"):
         os.makedirs("temps")
 
@@ -238,7 +237,7 @@ def save_folder_to_ftp(ftp, ftp_folder, folder_to_zip):
 
     local_file = "temps%s" % file_name
 
-    zip_folder_and_save(folder_to_zip, local_file)
+    zip_folder_and_save(folder_to_zip, local_file, settings)
 
     write_log(settings,"info", "Started uploading folder %s" % str(folder_to_zip))
     start_time = time.time()

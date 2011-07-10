@@ -50,6 +50,21 @@
 
             }
 
+            function build_log_table(data) {
+                var thead = createThead(createTr(createLines(["Dato","Tekst"], "th")));
+                var tbody_content = ""
+
+                $.each(data.reverse(), function(key, log) {
+                    tbody_content += createTr(createLines([log['datetime'], "[" + log['type'].toUpperCase() + "]" + " " + log['text']], "td"))
+                });
+
+                var tbody = createTbody(tbody_content)
+
+                return createTable(thead + tbody)
+
+            }
+
+
             $.getJSON('/api/machines/{{ machine_id }}', function(data) {
                 var items = [];
 
@@ -79,6 +94,10 @@
 
                 $("#tables_overview").append("<h2>Backups</h2>");
                 $("#tables_overview").append(build_backup_table(data['backups']));
+
+                $("#tables_overview").append("<h2>Log</h2>");
+
+                $("#tables_overview").append(build_log_table(data['logs']));
             });
         })
 

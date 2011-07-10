@@ -15,4 +15,4 @@ class BackupForm(ModelForm):
 class MachineLogForm(ModelForm):
     class Meta:
         model = MachineLog
-        fields = ('machine', 'datetime','text','type')
+        fields = ('datetime','text','type')

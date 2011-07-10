@@ -1,3 +1,69 @@
+[INFO] 2011-07-10 04:25:50.781764 Backup completed 
+[INFO] 2011-07-10 04:25:50.604911 Done uploading folder /Users/fnc/workspace/hive, used 6.4843621254 seconds 
+[INFO] 2011-07-10 04:25:44.099194 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 04:25:44.053599 Done zipping folder /Users/fnc/workspace/hive, saved as tempsusers_fnc_workspace_hive.zip, used 2.30222010612 seconds 
+[INFO] 2011-07-10 04:25:41.751348 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 04:25:41.726187 Working on schedule /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 04:25:41.706439 Done uploading folder /Users/fnc/workspace/ktn, used 0.16024184227 seconds 
+[INFO] 2011-07-10 04:25:41.526206 Started uploading folder /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:25:41.503495 Done zipping folder /Users/fnc/workspace/ktn, saved as tempsusers_fnc_workspace_ktn.zip, used 0.0447709560394 seconds 
+[INFO] 2011-07-10 04:25:41.459006 Started zipping folder /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:25:41.445115 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:25:41.285793 Backup initialized 
+[INFO] 2011-07-10 04:22:22.574051 Backup initialized 
+[INFO] 2011-07-10 04:22:22.446652 Done uploading folder /Users/fnc/workspace/hive, used 6.02157306671 seconds 
+[INFO] 2011-07-10 04:22:16.404027 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 04:22:16.353755 Done zipping folder /Users/fnc/workspace/hive, saved as tempsusers_fnc_workspace_hive.zip, used 3.23999714851 seconds 
+[INFO] 2011-07-10 04:22:13.113819 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 04:22:13.091841 Working on schedule /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 04:22:13.075460 Done uploading folder /Users/fnc/workspace/ktn, used 0.143325805664 seconds 
+[INFO] 2011-07-10 04:22:12.917165 Started uploading folder /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:22:12.898831 Done zipping folder /Users/fnc/workspace/ktn, saved as tempsusers_fnc_workspace_ktn.zip, used 0.0669040679932 seconds 
+[INFO] 2011-07-10 04:22:12.832130 Started zipping folder /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:22:12.814046 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:22:12.674878 Backup initialized 
+[INFO] 2011-07-10 04:21:13.439827 Backup initialized 
+[ERROR] 2011-07-10 04:21:13.422730 global name 'settings' is not defined 
+[INFO] 2011-07-10 04:21:13.405895 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:21:13.225586 Backup initialized 
+[INFO] 2011-07-10 04:19:30.166313 Backup initialized 
+[ERROR] 2011-07-10 04:19:30.149972 global name 'settings' is not defined 
+[INFO] 2011-07-10 04:19:30.132294 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:19:29.984009 Backup initialized 
+[INFO] 2011-07-10 04:18:18.270008 Backup initialized 
+[ERROR] 2011-07-10 04:18:18.214655 global name 'settings' is not defined 
+[INFO] 2011-07-10 04:18:18.159852 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:18:17.967406 Backup initialized 
+[INFO] 2011-07-10 04:17:36.120794 Backup initialized 
+[ERROR] 2011-07-10 04:17:36.109042 global name 'settings' is not defined 
+[INFO] 2011-07-10 04:17:36.095354 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:17:35.953604 Backup initialized 
+[INFO] 2011-07-10 04:17:00.046442 Backup initialized 
+[ERROR] 2011-07-10 04:17:00.032914 global name 'settings' is not defined 
+[INFO] 2011-07-10 04:17:00.019333 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:16:59.884271 Backup initialized 
+[INFO] 2011-07-10 04:16:43.848178 Backup initialized 
+[ERROR] 2011-07-10 04:16:43.835417 global name 'settings' is not defined 
+[INFO] 2011-07-10 04:16:43.821429 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:16:43.643400 Backup initialized 
+[INFO] 2011-07-10 04:16:21.774462 Backup initialized 
+[INFO] 2011-07-10 04:15:50.775076 Backup initialized 
+[INFO] 2011-07-10 04:15:15.595192 Backup initialized 
+[INFO] 2011-07-10 04:14:55.291792 Backup initialized 
+[INFO] 2011-07-10 04:14:40.668562 Backup initialized 
+[ERROR] 2011-07-10 04:14:40.667525 global name 'settings' is not defined 
+[INFO] 2011-07-10 04:14:40.666745 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:14:40.546086 Backup initialized 
+[INFO] 2011-07-10 04:14:38.377635 Backup initialized 
+[ERROR] 2011-07-10 04:14:38.376714 global name 'settings' is not defined 
+[INFO] 2011-07-10 04:14:38.375819 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 04:14:38.188392 Backup initialized 
+[INFO] 2011-07-10 04:14:04.603227 Backup initialized 
+[INFO] 2011-07-10 04:13:53.867660 Backup initialized 
+[INFO] 2011-07-10 04:13:51.908884 Backup initialized 
+[INFO] 2011-07-10 04:13:44.417196 Backup initialized 
+[INFO] 2011-07-10 04:13:43.191611 Backup initialized 
+[INFO] 2011-07-10 04:13:19.812962 Backup initialized 
 [INFO] 2011-07-10 03:59:47.548490 Backup complete 
 [INFO] 2011-07-10 03:59:47.443432 Done uploading folder /Users/fnc/workspace/hive, used 6.06220793724 seconds 
 [INFO] 2011-07-10 03:59:41.380916 Started uploading folder /Users/fnc/workspace/hive 

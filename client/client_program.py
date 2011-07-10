@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
-import ftplib
-import os
-from backup_system import restore_backup_from_ftp
-from backup_system import run_check
-from client.backup_system import write_log
+from backup_system import run_check,write_log
 
 settings = {
-    'server_ip': "localhost:8000",
+    'server_ip': "192.168.1.211:8000",
     'machine_id': "734865",
     'username': '',
     'password': '',
@@ -21,5 +17,5 @@ try:
 except Exception, e:
     write_log(settings,"error", str(e))
 
-write_log(settings, "info", "Backup initialized")
+write_log(settings, "info", "Backup completed")
 
