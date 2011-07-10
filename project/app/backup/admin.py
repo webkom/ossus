@@ -1,4 +1,4 @@
-from app.backup.models import Backup, Machine, ScheduleBackup, FolderBackup, Company, Customer, Location, Storage
+from app.backup.models import Backup, Machine, ScheduleBackup, FolderBackup, Company, Customer, Location, Storage, SQLBackup
 from django.contrib import admin
 
 class ScheduleBackupInline(admin.TabularInline):
@@ -6,6 +6,10 @@ class ScheduleBackupInline(admin.TabularInline):
     
 class FolderBackupInline(admin.TabularInline):
     model = FolderBackup
+
+
+class SQLBackupInline(admin.TabularInline):
+    model = SQLBackup
 
 class BackupInline(admin.TabularInline):
     model = Backup
@@ -24,6 +28,7 @@ class ScheduleAdmin(admin.ModelAdmin):
 
     inlines = [
         FolderBackupInline,
+        SQLBackupInline,
         BackupInline,
         ]
 

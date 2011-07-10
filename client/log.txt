@@ -1,3 +1,146 @@
+[INFO] 2011-07-10 22:29:51.141420 Backup of database complete 
+[INFO] 2011-07-10 22:29:51.122129 Done uploading folder sql/db1/, used 0.0112960338593 seconds 
+[INFO] 2011-07-10 22:29:51.087937 Started uploading folder sql/db1/ 
+[INFO] 2011-07-10 22:29:51.064793 Done zipping folder sql/db1/, saved as temps/sql_db1.zip, used 0.028382062912 seconds 
+[INFO] 2011-07-10 22:29:51.035345 Started zipping folder sql/db1/ 
+[INFO] 2011-07-10 22:29:50.946066 Working on database: db1 
+[INFO] 2011-07-10 22:29:50.931752 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.167042016983 seconds 
+[INFO] 2011-07-10 22:29:50.747333 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 22:29:50.726030 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0255479812622 seconds 
+[INFO] 2011-07-10 22:29:50.700265 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 22:29:50.682797 Working on folder: /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 22:29:50.571828 Tried to delete folder: backup/734865/schedules/1/4/, but the folder did not exists. 
+[INFO] 2011-07-10 22:29:50.249641 Backup initialized 
+[INFO] 2011-07-10 22:29:05.370190 Backup of database complete 
+[INFO] 2011-07-10 22:29:05.351720 Done uploading folder sql/db1/, used 0.00918197631836 seconds 
+[INFO] 2011-07-10 22:29:05.322371 Started uploading folder sql/db1/ 
+[INFO] 2011-07-10 22:29:05.304126 Done zipping folder sql/db1/, saved as temps/sql_db1.zip, used 0.0214388370514 seconds 
+[INFO] 2011-07-10 22:29:05.282444 Started zipping folder sql/db1/ 
+[INFO] 2011-07-10 22:29:05.178637 Working on database: db1 
+[INFO] 2011-07-10 22:29:05.155036 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.173008918762 seconds 
+[INFO] 2011-07-10 22:29:04.964446 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 22:29:04.944736 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0326189994812 seconds 
+[INFO] 2011-07-10 22:29:04.912206 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 22:29:04.890198 Working on folder: /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 22:29:04.765211 Clean folder for files 
+[INFO] 2011-07-10 22:29:04.318224 Backup initialized 
+[ERROR] 2011-07-10 22:28:40.751763 'database' 
+[INFO] 2011-07-10 22:28:40.733888 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.161052942276 seconds 
+[INFO] 2011-07-10 22:28:40.557176 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 22:28:40.538723 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0296220779419 seconds 
+[INFO] 2011-07-10 22:28:40.508742 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 22:28:40.488496 Working on folder: /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 22:28:40.363739 Clean folder for files 
+[INFO] 2011-07-10 22:28:39.787354 Backup initialized 
+[INFO] 2011-07-10 22:18:49.252656 Backup of database complete 
+[INFO] 2011-07-10 22:18:49.233639 Done uploading folder sql/db/, used 0.00957608222961 seconds 
+[INFO] 2011-07-10 22:18:49.205773 Started uploading folder sql/db/ 
+[INFO] 2011-07-10 22:18:49.187523 Done zipping folder sql/db/, saved as temps/sql_db.zip, used 0.0203838348389 seconds 
+[INFO] 2011-07-10 22:18:49.166823 Started zipping folder sql/db/ 
+[INFO] 2011-07-10 22:18:49.092645 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.192023992538 seconds 
+[INFO] 2011-07-10 22:18:48.884109 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 22:18:48.863922 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0276989936829 seconds 
+[INFO] 2011-07-10 22:18:48.836267 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 22:18:48.817673 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 22:18:48.693634 Clean folder for files 
+[INFO] 2011-07-10 22:18:48.311368 Backup initialized 
+[INFO] 2011-07-10 21:58:10.469906 Backup of database complete 
+[INFO] 2011-07-10 21:58:10.450636 Done uploading folder temps/sql/, used 0.0147709846497 seconds 
+[INFO] 2011-07-10 21:58:10.418035 Started uploading folder temps/sql/ 
+[INFO] 2011-07-10 21:58:10.399784 Done zipping folder temps/sql/, saved as temps/temps_sql.zip, used 0.0212259292603 seconds 
+[INFO] 2011-07-10 21:58:10.377840 Started zipping folder temps/sql/ 
+[INFO] 2011-07-10 21:58:10.302638 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.184098005295 seconds 
+[INFO] 2011-07-10 21:58:10.103091 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:58:10.084706 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0261011123657 seconds 
+[INFO] 2011-07-10 21:58:10.058474 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:58:10.038543 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:58:09.917949 Clean folder for files 
+[INFO] 2011-07-10 21:58:09.516281 Backup initialized 
+[INFO] 2011-07-10 21:55:53.199479 Backup of database complete 
+[INFO] 2011-07-10 21:55:53.180582 Done uploading folder temps/sql/, used 0.152188062668 seconds 
+[INFO] 2011-07-10 21:55:53.081193 Clean folder for files 
+[INFO] 2011-07-10 21:55:53.009277 Started uploading folder temps/sql/ 
+[INFO] 2011-07-10 21:55:52.992353 Done zipping folder temps/sql/, saved as temps/temps_sql.zip, used 0.0196678638458 seconds 
+[INFO] 2011-07-10 21:55:52.972450 Started zipping folder temps/sql/ 
+[INFO] 2011-07-10 21:55:52.896159 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.323071956635 seconds 
+[INFO] 2011-07-10 21:55:52.630498 Clean folder for files 
+[INFO] 2011-07-10 21:55:52.556381 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:55:52.538828 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0282649993896 seconds 
+[INFO] 2011-07-10 21:55:52.510562 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:55:52.494151 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:55:52.210251 Backup initialized 
+[ERROR] 2011-07-10 21:55:23.470377 [Errno 2] No such file or directory: 'temps/sql/database.txt' 
+[INFO] 2011-07-10 21:55:23.395954 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.411139011383 seconds 
+[INFO] 2011-07-10 21:55:23.046083 Clean folder for files 
+[INFO] 2011-07-10 21:55:22.968185 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:55:22.950358 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0282440185547 seconds 
+[INFO] 2011-07-10 21:55:22.921944 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:55:22.904639 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:55:22.629632 Backup initialized 
+[INFO] 2011-07-10 21:54:40.633801 Backup of database complete 
+[INFO] 2011-07-10 21:54:40.618223 Done uploading folder temps/sql/, used 0.154425859451 seconds 
+[INFO] 2011-07-10 21:54:40.516788 Clean folder for files 
+[INFO] 2011-07-10 21:54:40.444753 Started uploading folder temps/sql/ 
+[INFO] 2011-07-10 21:54:40.427609 Done zipping folder temps/sql/, saved as temps/temps_sql.zip, used 0.0186929702759 seconds 
+[INFO] 2011-07-10 21:54:40.407304 Started zipping folder temps/sql/ 
+[INFO] 2011-07-10 21:54:40.333169 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.315322875977 seconds 
+[INFO] 2011-07-10 21:54:40.069874 Clean folder for files 
+[INFO] 2011-07-10 21:54:40.000276 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:54:39.978443 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.028990983963 seconds 
+[INFO] 2011-07-10 21:54:39.949218 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:54:39.932338 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:54:39.514447 Backup initialized 
+[INFO] 2011-07-10 21:53:44.920149 Backup of database complete 
+[INFO] 2011-07-10 21:53:44.746269 Done uploading folder temps/sql/, used 0.158899068832 seconds 
+[INFO] 2011-07-10 21:53:44.644827 Clean folder for files 
+[INFO] 2011-07-10 21:53:44.570503 Started uploading folder temps/sql/ 
+[INFO] 2011-07-10 21:53:44.550187 Done zipping folder temps/sql/, saved as temps/temps_sql.zip, used 0.0222961902618 seconds 
+[INFO] 2011-07-10 21:53:44.527407 Started zipping folder temps/sql/ 
+[INFO] 2011-07-10 21:53:44.448617 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.306571960449 seconds 
+[INFO] 2011-07-10 21:53:44.194822 Clean folder for files 
+[INFO] 2011-07-10 21:53:44.124738 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:53:44.103346 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0304720401764 seconds 
+[INFO] 2011-07-10 21:53:44.072768 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:53:44.052624 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:53:39.320137 Backup initialized 
+[ERROR] 2011-07-10 21:53:09.484204 [Errno 2] No such file or directory: 'temps/sql/' 
+[INFO] 2011-07-10 21:53:09.409041 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.326493024826 seconds 
+[INFO] 2011-07-10 21:53:09.138540 Clean folder for files 
+[INFO] 2011-07-10 21:53:09.066120 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:53:09.016674 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.029109954834 seconds 
+[INFO] 2011-07-10 21:53:08.987502 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:53:08.970512 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:53:08.557759 Backup initialized 
+[ERROR] 2011-07-10 21:52:19.044960 [Errno 2] No such file or directory: 'temps/sql/' 
+[INFO] 2011-07-10 21:52:18.211607 Done uploading folder /Users/fnc/Desktop/backuptest, used 1.18293690681 seconds 
+[INFO] 2011-07-10 21:52:16.930129 Clean folder for files 
+[INFO] 2011-07-10 21:52:15.865876 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:52:15.155185 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 5.30273985863 seconds 
+[INFO] 2011-07-10 21:52:09.722384 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:52:08.715414 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:52:06.746906 Backup initialized 
+[ERROR] 2011-07-10 21:51:48.210951 [Errno 2] No such file or directory: 'temps/sql/' 
+[INFO] 2011-07-10 21:51:48.134753 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.434892892838 seconds 
+[INFO] 2011-07-10 21:51:47.759484 Clean folder for files 
+[INFO] 2011-07-10 21:51:47.682992 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:51:47.663031 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0273959636688 seconds 
+[INFO] 2011-07-10 21:51:47.635643 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:51:47.620243 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:51:47.293443 Backup initialized 
+[ERROR] 2011-07-10 21:51:32.367477 [Errno 2] No such file or directory: 'temps/sql/' 
+[INFO] 2011-07-10 21:51:32.123004 Done uploading folder /Users/fnc/Desktop/backuptest, used 0.611842870712 seconds 
+[INFO] 2011-07-10 21:51:31.566274 Clean folder for files 
+[INFO] 2011-07-10 21:51:31.493658 Started uploading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:51:31.475013 Done zipping folder /Users/fnc/Desktop/backuptest, saved as temps/users_fnc_desktop_backuptest.zip, used 0.0280258655548 seconds 
+[INFO] 2011-07-10 21:51:31.446958 Started zipping folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:51:31.402376 Working on schedule /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:51:31.091271 Backup initialized 
+[INFO] 2011-07-10 21:51:14.349582 Done downloading folder /Users/fnc/Desktop/backuptest, used 0.270812988281 seconds 
+[INFO] 2011-07-10 21:51:14.059071 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:51:13.632103 Backup initialized 
+[INFO] 2011-07-10 21:50:54.520693 Done downloading folder /Users/fnc/Desktop/backuptest, used 0.330862045288 seconds 
+[INFO] 2011-07-10 21:50:54.168936 Started downloading folder /Users/fnc/Desktop/backuptest 
+[INFO] 2011-07-10 21:50:53.477934 Backup initialized 
 [INFO] 2011-07-10 18:10:03.070010 Done downloading folder /Users/fnc/Desktop/backuptest, used 0.347799062729 seconds 
 [INFO] 2011-07-10 18:10:02.704963 Started downloading folder /Users/fnc/Desktop/backuptest 
 [INFO] 2011-07-10 18:10:02.443910 Backup initialized 

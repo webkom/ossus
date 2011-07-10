@@ -60,6 +60,8 @@ def run_check(settings):
         write_log(settings,"info","Server busy, try again later")
         return
 
+
+    #Backup all folders
     for schedule in machine['schedules']:
         #Check if this schedule should procede, or wait
         if not datetime.now() > datetime.strptime(schedule['get_next_backup_time'], "%Y-%m-%d %H:%M:%S") and not settings['force_action']:
@@ -76,6 +78,10 @@ def run_check(settings):
         ftp_connection = ftplib.FTP(schedule['storage']['host'], schedule['storage']['username'], schedule['storage']['password'])
         ftp_folder = schedule['storage']['folder']+"/"+schedule['current_day_folder_path']
 
+        #Clean up FTP-folder, make ready for new backup
+        delete_ftp_folder(ftp_connection, ftp_folder, settings)
+        create_folders_on_ftp_for_upload(ftp_connection, ftp_folder, settings)
+        
         #Set running_backup status to True
         theurl = "http://%s/api/schedules/%s/" % (settings['server_ip'], schedule['id'])
         schedule_form = {'name': schedule['name'], 'running_backup': True, 'current_version_in_loop': schedule['current_version_in_loop'],'machine_id': schedule['machine_id']}
@@ -83,8 +89,13 @@ def run_check(settings):
 
         #Performing folder backups
         for command in schedule['folder_backups']:
-            write_log(settings,"info","Working on schedule %s" % command['local_folder_path'])
+            write_log(settings,"info","Working on folder: %s" % command['local_folder_path'])
             save_folder_to_ftp(ftp_connection, ftp_folder, command['local_folder_path'], settings)
+
+        #Performing SQL backups
+        for sql_settings in schedule['sql_backups']:
+            write_log(settings,"info","Working on database: %s" % sql_settings['database'])
+            backup_mssql_database(ftp_connection, ftp_folder, sql_settings, settings)
 
         #Set running_backup status to False
         schedule_form['running_backup'] = False
@@ -233,10 +244,6 @@ def delete_ftp_folder(ftp_connection, folder, settings):
     ftp_connection.cwd("~/")
 
 def do_upload(ftp, ftp_folder, file, file_name, settings):
-
-    delete_ftp_folder(ftp, ftp_folder, settings)
-    create_folders_on_ftp_for_upload(ftp, ftp_folder, settings)
-
     f = open(file, "rb")
     ftp.cwd("~/")
     ftp.storbinary("STOR %s%s" % (ftp_folder, file_name), f, 1024)
@@ -250,7 +257,6 @@ def do_download(ftp, ftp_folder, file, file_name):
         file_name = file_name[1:]
 
     file_to_download = "%s%s" % (ftp_folder, file_name)
-    print file_to_download
 
     ftp.retrbinary("RETR %s" % file_to_download, f.write)
     f.close()
@@ -302,6 +308,49 @@ def extractAll(zipName, folder_to_zip):
         else:
             z.extract(f, folder_path)
 
+
+def backup_mssql_database(ftp_connection, ftp_folder, sql_settings, settings):
+
+
+    try:
+        import pyodbc
+
+        host     = sql_settings['host']
+        database = sql_settings['database']
+        username = sql_settings['username']
+        password = sql_settings['password']
+
+        separator = "/"
+        if os.name == "posix":
+            separator = "/"
+        else:
+            separator = '\\'
+
+        database_backup_folder = "sql%s%s%s" % (separator, database, separator)
+        database_backup_file = database_backup_folder+"database.txt"
+
+        os.makedirs(database_backup_folder)
+
+        open(database_backup_file, "w")
+        
+        #cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER=localhost;DATABASE=aeosdb;UID=sa;PWD=Grolle@nedap1')
+        #cnxn.autocommit = True
+        #cur = cnxn.cursor()
+
+        #cur.execute('BACKUP DATABASE ? TO DISK=?', ['aeosdb', r'c:\\aeosdb.bak'])
+
+        #while cur.nextset():
+        #    pass
+
+        save_folder_to_ftp(ftp_connection, ftp_folder, database_backup_folder, settings)
+
+        write_log(settings, "info", "Backup of database complete")
+
+        shutil.rmtree(database_backup_folder)
+        
+    except Exception, e:
+        write_log(settings, "error", "%s" % str(e))
+
 def restore_backup_from_ftp(backup_id, settings):
     backup = download_content("http://%s/api/backups/%s" % (settings['server_ip'], backup_id), settings)
 
@@ -341,7 +390,6 @@ def restore_backup_from_ftp(backup_id, settings):
 
         temp_file_to_zip = "temps/restore_from_backup/%s/" % str(backup_id) + folder_to_zip[1:]
 
-        print temp_file_to_zip
 
         extractAll(local_file, temp_file_to_zip)
 
