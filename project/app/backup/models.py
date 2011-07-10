@@ -75,6 +75,21 @@ class Machine(models.Model):
 
         return next_backup_time
 
+log_types = (
+    ('info','INFO'),
+    ('error','ERROR'),
+    ('warning','WARNING')
+)
+    
+class MachineLog(models.Model):
+    machine = models.ForeignKey(Machine, related_name="logs")
+    datetime = models.DateTimeField()
+    text = models.TextField()
+    type = models.CharField(max_length=10, choices=log_types)
+
+    def __unicode__(self):
+        return "%s %s %s" % (self.machine, self.datetime, self.text)
+
 storage_types = (
     ('ftp','FTP'),
     ('s3', 'Amazon S3')

@@ -1,0 +1,17 @@
+[INFO] 2011-07-10 03:59:47.548490 Backup complete 
+[INFO] 2011-07-10 03:59:47.443432 Done uploading folder /Users/fnc/workspace/hive, used 6.06220793724 seconds 
+[INFO] 2011-07-10 03:59:41.380916 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 03:59:41.344661 Done zipping folder /Users/fnc/workspace/hive, saved as tempsusers_fnc_workspace_hive.zip, used 2.97291612625 seconds 
+[INFO] 2011-07-10 03:59:38.371703 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 03:59:38.369699 Working on schedule /Users/fnc/workspace/hive 
+[INFO] 2011-07-10 03:59:38.369397 Done uploading folder /Users/fnc/workspace/ktn, used 0.143551826477 seconds 
+[INFO] 2011-07-10 03:59:38.225576 Started uploading folder /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 03:59:38.219649 Done zipping folder /Users/fnc/workspace/ktn, saved as tempsusers_fnc_workspace_ktn.zip, used 0.0270209312439 seconds 
+[INFO] 2011-07-10 03:59:38.192831 Started zipping folder /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 03:59:38.192115 Working on schedule /Users/fnc/workspace/ktn 
+[INFO] 2011-07-10 03:59:38.069158 Backup initializing 
+[INFO] 2011-07-10 03:55:49.613024 Backup initializing 
+[INFO] 2011-07-10 03:54:46.600996 Backup complete 
+[ERROR] 2011-07-10 03:54:46.600671 2011-07-10 03:54:46.600499 [Errno 2] No such file or directory: u'tempsc:\\bilder\\.zip' 
+ 
+[INFO] 2011-07-10 03:54:46.205524 Backup initializing 

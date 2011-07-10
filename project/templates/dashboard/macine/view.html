@@ -40,7 +40,7 @@
                 var thead = createThead(createTr(createLines(["Dato","#"], "th")));
                 var tbody_content = ""
 
-                $.each(data, function(key, backup) {
+                $.each(data.reverse(), function(key, backup) {
                     tbody_content += createTr(createLines([backup['time_started'],'restore this backup'], "td"))
                 });
 

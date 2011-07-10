@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.forms import ModelForm
-from app.backup.models import ScheduleBackup, Backup
+from app.backup.models import ScheduleBackup, Backup, MachineLog
 
 class ScheduleBackupForm(ModelForm):
     class Meta:
@@ -11,3 +11,8 @@ class BackupForm(ModelForm):
     class Meta:
         model = Backup
         fields = ('time_started',)
+
+class MachineLogForm(ModelForm):
+    class Meta:
+        model = MachineLog
+        fields = ('machine', 'datetime','text','type')

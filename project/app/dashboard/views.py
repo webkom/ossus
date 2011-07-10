@@ -7,4 +7,4 @@ def overview(request):
 
 @login_required()
 def view_machine(request, machine_id):
-    return render(request, "dashboard/view_machine.html", {'machine_id':machine_id})
+    return render(request, "dashboard/macine/view.html", {'machine_id':machine_id})

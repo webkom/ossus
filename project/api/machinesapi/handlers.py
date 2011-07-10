@@ -1,4 +1,5 @@
-from app.backup.models import Machine
+from app.backup.forms import MachineLogForm
+from app.backup.models import Machine, MachineLog
 from piston.handler import BaseHandler
 from piston.utils import rc
 
@@ -22,3 +23,36 @@ class MachineHandler(BaseHandler):
 
     def create(self, request, id=False):
         pass
+
+
+class MachineLogHandler(BaseHandler):
+    model = MachineLog
+    fields = ('id', 'machine', 'datetime','text','type',)
+
+    def read(self, request, id=None):
+        all = MachineLog.objects.all()
+        if id:
+            try:
+                return all.get(machine_id=id)
+            except MachineLog.DoesNotExist:
+                return rc.NOT_FOUND
+        else:
+            return all
+
+    def create(self, request, id=None):
+
+        instance = MachineLog()
+        machine = Machine.objects.get(id = request.POST['machine_id'])
+
+        machine.set_last_connection_to_client()
+
+        form = MachineLogForm(request.POST, instance=instance)
+        if form.is_valid():
+            log = form.save(commit=False)
+            log.machine = machine
+            log.save()
+
+            return log
+
+        else:
+            return form.errors

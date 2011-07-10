@@ -26,25 +26,51 @@ CYCLES, days, unlimited? Hvis en skal ta vare på flere backups (1, hver mnd fek
 DO NOT CHANGE ANYTHING BELOW
 """
 
+def write_log(settings,type, text):
+
+    if not os.path.exists("log.txt"):
+        open("log.txt","w")
+
+    #read old content
+    log_file = open("log.txt","r")
+    log_file_content = log_file.read()
+
+    #write new content
+    log_file = open("log.txt","w")
+    log_file.write("["+str(type).upper()+"] " + str(datetime.now()) + " %s \n" % text)
+    log_file.write(log_file_content)
+    log_file.close()
+
+    #Save log to server
+    theurl = "http://%s/api/backups/" % settings['server_ip']
+
+    machinelog_dict = {'machine_id': schedule['machine_id'],
+                       'text':text,
+                       'type':type,
+                       'datetime': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+
+    set_data(theurl, machinelog_dict, settings)
+
+
 def run_check(settings):
 
     machine = download_content("http://%s/api/machines/%s" % (settings['server_ip'], settings['machine_id']), settings)
 
     #Check if server busy
     if machine['is_busy'] and not settings['force_action']:
-        print "Server busy, try again later"
+        write_log(settings,"info","Server busy, try again later")
         return
 
     for schedule in machine['schedules']:
         #Check if this schedule should procede, or wait
         if not datetime.now() > datetime.strptime(schedule['get_next_backup_time'], "%Y-%m-%d %H:%M:%S") and not settings['force_action']:
-            print "Waiting, schedule should not run before %s" % datetime.strptime(schedule['get_next_backup_time'],
-                                                                                   "%Y-%m-%d %H:%M:%S")
+            write_log(settings,"info", "Waiting, schedule should not run before %s" % datetime.strptime(schedule['get_next_backup_time'],
+                                                                                   "%Y-%m-%d %H:%M:%S"))
             continue
 
 
         if schedule['storage']['type'] != "ftp":
-            print "Only FTP is supported at the moment"
+            write_log(settings,"error","Only FTP is supported at the moment, aborting.")
             return
 
         #FTP-config
@@ -58,7 +84,7 @@ def run_check(settings):
 
         #Performing folder backups
         for command in schedule['folder_backups']:
-            print "Working on schedule %s" % command['local_folder_path']
+            write_log(settings,"info","Working on schedule %s" % command['local_folder_path'])
             save_folder_to_ftp(ftp_connection, ftp_folder, command['local_folder_path'])
 
         #Set running_backup status to False
@@ -90,12 +116,21 @@ def download_content(theurl, settings):
 
 
 def recursive_zip(zipf, directory, folder=""):
-    for item in os.listdir(directory):
-        if os.path.isfile(os.path.join(directory, item)):
-            zipf.write(os.path.join(directory, item), folder + os.sep + item)
-        elif os.path.isdir(os.path.join(directory, item)):
-            recursive_zip(zipf, os.path.join(directory, item), folder + os.sep + item)
+    log_file = open("log.txt","r")
+    log_file_content = log_file.read()
 
+    log_file = open("log.txt","w")
+    log_file.write(log_file_content)
+
+    for item in os.listdir(directory):
+        try:
+            if os.path.isfile(os.path.join(directory, item)):
+                zipf.write(os.path.join(directory, item), folder + os.sep + item)
+            elif os.path.isdir(os.path.join(directory, item)):
+                recursive_zip(zipf, os.path.join(directory, item), folder + os.sep + item)
+        except Exception, e:
+            log_file.write(str(datetime.now()) + " " + str(e) + "\n")
+    log_file.close()
 
 def is_folder(path_to_folder):
     if not os.path.isdir(path_to_folder):
@@ -117,15 +152,15 @@ def save_at_is_zip_file(path):
 
 def zip_folder_and_save(folder_to_zip, save_at):
     if not is_folder(folder_to_zip):
-        print "ERROR: Source folder is not a valid folder, you used: %s" % folder_to_zip
+        write_log(settings,"error", "Source folder is not a valid folder, you used: %s" % folder_to_zip)
         return
 
     if is_folder(save_at):
-        print "ERROR: You have to specify a file as destination, you used: %s" % save_at
+        write_log(settings,"error", "You have to specify a file as destination, you used: %s" % save_at)
         return
 
     if not save_at_is_zip_file(save_at):
-        print "ERROR: You have to specify a zip-file as destination, you used: %s" % save_at
+        write_log(settings,"error", "ERROR: You have to specify a zip-file as destination, you used: %s" % save_at)
         return
 
     if os.path.exists(str(save_at)):
@@ -133,11 +168,11 @@ def zip_folder_and_save(folder_to_zip, save_at):
 
     starttime = time.time()
     zipf = zipfile.ZipFile(str(save_at), mode="w")
-    print "Started zipping folder %s" % str(folder_to_zip)
+    write_log(settings,"info","Started zipping folder %s" % str(folder_to_zip))
     recursive_zip(zipf, folder_to_zip)
     zipf.close()
-    print "Done zipping folder %s, saved as %s, used %s seconds" % (
-        str(folder_to_zip), str(save_at), time.time() - starttime)
+    write_log(settings,"info","Done zipping folder %s, saved as %s, used %s seconds" % (
+        str(folder_to_zip), str(save_at), time.time() - starttime))
 
 def directory_exists_on_ftp_server(ftp, folder):
     filelist = []
@@ -166,9 +201,6 @@ def do_upload(ftp, ftp_folder, file, file_name):
 
     f = open(file, "rb")
 
-    print ftp_folder
-    print file_name
-
     ftp.cwd("~/")
     ftp.storbinary("STOR %s%s" % (ftp_folder, file_name), f, 1024)
     f.close()
@@ -182,8 +214,14 @@ def do_download(ftp, ftp_folder, file, file_name):
 def create_file_name(path_to_file):
     ext = os.path.splitext(path_to_file)[1]
 
+    separator = "/"
+    if os.name == "posix":
+        separator = "/"
+    else:
+        separator = '\\'
+
     file_name = ""
-    for f in os.path.splitext(path_to_file)[0].split("/"):
+    for f in os.path.splitext(path_to_file)[0].split(separator):
         if f:
             file_name += f.lower() + "_"
 
@@ -198,14 +236,14 @@ def save_folder_to_ftp(ftp, ftp_folder, folder_to_zip):
 
     file_name = create_file_name(folder_to_zip)
 
-    local_file = "temps/%s" % file_name
+    local_file = "temps%s" % file_name
 
     zip_folder_and_save(folder_to_zip, local_file)
 
-    print "Started uploading folder %s" % str(folder_to_zip)
+    write_log(settings,"info", "Started uploading folder %s" % str(folder_to_zip))
     start_time = time.time()
     do_upload(ftp, ftp_folder, local_file, file_name)
-    print "Done uploading folder %s, used %s seconds" % (str(folder_to_zip), time.time() - start_time)
+    write_log(settings,"info", "Done uploading folder %s, used %s seconds" % (str(folder_to_zip), time.time() - start_time))
 
 
 def extractAll(zipName, folder_to_zip):
@@ -222,11 +260,11 @@ def restore_backup_from_ftp(backup_id, settings):
     backup = download_content("http://%s/api/backups/%s" % (settings['server_ip'], backup_id), settings)
 
     if backup['schedule']['running_restore'] and not settings['force_action']:
-        print "Busy, already running restore"
+        write_log(settings,"warning","Busy, already running restore")
         return
 
     if backup['schedule']['running_backup'] and not settings['force_action']:
-        print "Busy, backup in progress"
+        write_log(settings,"warning","Busy, backup in progress")
         return
 
     schedule_form = {'running_restore': True}
@@ -243,14 +281,13 @@ def restore_backup_from_ftp(backup_id, settings):
     for folder in backup['schedule']['folder_backups']:
         folder_to_zip = folder['local_folder_path']
         file_name = create_file_name(folder_to_zip)
-        print file_name
 
         local_file = "temps/restore_from_backup/%s" % file_name
 
-        print "Started downloading folder %s" % str(folder_to_zip)
+        write_log(settings,"info","Started downloading folder %s" % str(folder_to_zip))
         start_time = time.time()
         do_download(ftp, ftp_folder, local_file, file_name)
-        print "Done downloading folder %s, used %s seconds" % (str(folder_to_zip), time.time() - start_time)
+        write_log(settings,"info","Done downloading folder %s, used %s seconds" % (str(folder_to_zip), time.time() - start_time))
 
         temp_file_to_zip = "temps/restore_from_backup/%s/" % str(backup_id) + folder_to_zip[1:]
         extractAll(local_file, temp_file_to_zip)
