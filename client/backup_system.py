@@ -259,7 +259,7 @@ def do_upload(ftp, ftp_folder, file, file_name, settings):
         file_upload_size_written += 1024
         percent = round(100*(float(file_upload_size_written) / float(file_upload_total_size)), 1)
         
-        if not percent % 20 and percent > file_upload_percent:
+        if percent >= file_upload_percent+10:
             write_log(settings, "info", "uploaded " + str(int(percent)) + "% of file: " + str(file_name))
             file_upload_percent = percent
 
