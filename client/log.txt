@@ -1,3 +1,281 @@
+[INFO] 2011-07-11 02:12:35.250293 Done uploading folder /Users/fnc/workspace/hive, used 6.09654688835 seconds 
+[INFO] 2011-07-11 02:12:35.220268 uploaded 100% of file: users_fnc_workspace_hive.zip 
+[INFO] 2011-07-11 02:12:34.015620 uploaded 80% of file: users_fnc_workspace_hive.zip 
+[INFO] 2011-07-11 02:12:32.819613 uploaded 60% of file: users_fnc_workspace_hive.zip 
+[INFO] 2011-07-11 02:12:31.595227 uploaded 40% of file: users_fnc_workspace_hive.zip 
+[INFO] 2011-07-11 02:12:30.359652 uploaded 20% of file: users_fnc_workspace_hive.zip 
+[INFO] 2011-07-11 02:12:29.132274 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:12:29.102409 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 3.11920619011 seconds 
+[INFO] 2011-07-11 02:12:25.983267 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:12:25.957498 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:12:25.806667 Clean folder for files 
+[INFO] 2011-07-11 02:12:25.491320 Backup initialized 
+[ERROR] 2011-07-11 02:12:00.877773 %o format: a number is required, not unicode 
+[INFO] 2011-07-11 02:11:59.660451 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:11:59.616675 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 3.34639406204 seconds 
+[INFO] 2011-07-11 02:11:56.270222 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:11:56.246208 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:11:56.085511 Clean folder for files 
+[INFO] 2011-07-11 02:11:55.795819 Backup initialized 
+[INFO] 2011-07-11 02:11:25.630853 Done uploading folder /Users/fnc/workspace/hive, used 6.23295593262 seconds 
+[INFO] 2011-07-11 02:11:25.600770 uploaded 100% of file 
+[INFO] 2011-07-11 02:11:24.371884 uploaded 80% of file 
+[INFO] 2011-07-11 02:11:23.168223 uploaded 60% of file 
+[INFO] 2011-07-11 02:11:21.921647 uploaded 40% of file 
+[INFO] 2011-07-11 02:11:20.663322 uploaded 20% of file 
+[INFO] 2011-07-11 02:11:19.374116 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:11:19.330326 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 3.1953291893 seconds 
+[INFO] 2011-07-11 02:11:16.134916 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:11:16.108107 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:11:15.943040 Clean folder for files 
+[INFO] 2011-07-11 02:11:15.664571 Backup initialized 
+[INFO] 2011-07-11 02:11:00.804921 Done uploading folder /Users/fnc/workspace/hive, used 6.23546004295 seconds 
+[INFO] 2011-07-11 02:11:00.775264 uploaded 100.0% of file 
+[INFO] 2011-07-11 02:10:59.561332 uploaded 80.0% of file 
+[INFO] 2011-07-11 02:10:58.333862 uploaded 60.0% of file 
+[INFO] 2011-07-11 02:10:57.062512 uploaded 40.0% of file 
+[INFO] 2011-07-11 02:10:55.808852 uploaded 20.0% of file 
+[INFO] 2011-07-11 02:10:54.547049 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:10:54.503266 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 3.15127706528 seconds 
+[INFO] 2011-07-11 02:10:51.352032 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:10:51.326247 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:10:51.163475 Clean folder for files 
+[INFO] 2011-07-11 02:10:50.887678 Backup initialized 
+[INFO] 2011-07-11 02:10:35.635964 Done uploading folder /Users/fnc/workspace/hive, used 6.25980997086 seconds 
+[INFO] 2011-07-11 02:10:35.606003 uploaded 100.0% of file 
+[INFO] 2011-07-11 02:10:34.368888 uploaded 80.0% of file 
+[INFO] 2011-07-11 02:10:33.087812 uploaded 60.0% of file 
+[INFO] 2011-07-11 02:10:31.848956 uploaded 40.0% of file 
+[INFO] 2011-07-11 02:10:30.601797 uploaded 20.0% of file 
+[INFO] 2011-07-11 02:10:29.353344 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:10:29.309747 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 3.17636203766 seconds 
+[INFO] 2011-07-11 02:10:26.133363 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:10:26.103311 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:10:25.941213 Clean folder for files 
+[INFO] 2011-07-11 02:10:25.663521 Backup initialized 
+[INFO] 2011-07-11 02:10:04.695130 Done uploading folder /Users/fnc/workspace/hive, used 6.10083603859 seconds 
+[INFO] 2011-07-11 02:10:04.676229 uploaded 100.0% of file 
+[INFO] 2011-07-11 02:10:03.476776 uploaded 80.0% of file 
+[INFO] 2011-07-11 02:10:02.261467 uploaded 60.0% of file 
+[INFO] 2011-07-11 02:10:01.010845 uploaded 40.0% of file 
+[INFO] 2011-07-11 02:09:59.804032 uploaded 20.0% of file 
+[INFO] 2011-07-11 02:09:58.572214 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:09:58.543991 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 3.42049717903 seconds 
+[INFO] 2011-07-11 02:09:55.123490 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:09:55.094583 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:09:54.923893 Clean folder for files 
+[INFO] 2011-07-11 02:09:54.599463 Backup initialized 
+[INFO] 2011-07-11 02:09:26.033372 Done uploading folder /Users/fnc/workspace/hive, used 7.85355114937 seconds 
+[INFO] 2011-07-11 02:09:26.004379 uploaded100.0% of file 
+[INFO] 2011-07-11 02:09:25.143525 uploaded90.0% of file 
+[INFO] 2011-07-11 02:09:24.192217 uploaded80.0% of file 
+[INFO] 2011-07-11 02:09:23.347305 uploaded70.0% of file 
+[INFO] 2011-07-11 02:09:22.615524 uploaded60.0% of file 
+[INFO] 2011-07-11 02:09:21.936825 uploaded50.0% of file 
+[INFO] 2011-07-11 02:09:21.144537 uploaded40.0% of file 
+[INFO] 2011-07-11 02:09:20.366063 uploaded30.0% of file 
+[INFO] 2011-07-11 02:09:19.623461 uploaded20.0% of file 
+[INFO] 2011-07-11 02:09:18.919142 uploaded10.0% of file 
+[INFO] 2011-07-11 02:09:18.156115 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:09:18.112388 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.86914110184 seconds 
+[INFO] 2011-07-11 02:09:15.243261 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:09:15.214136 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:09:15.066411 Clean folder for files 
+[INFO] 2011-07-11 02:09:14.789988 Backup initialized 
+[ERROR] 2011-07-11 02:08:34.663830 not enough arguments for format string 
+[INFO] 2011-07-11 02:08:33.886002 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:08:33.854010 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.62714791298 seconds 
+[INFO] 2011-07-11 02:08:31.226848 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:08:31.200232 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:08:31.058007 Clean folder for files 
+[INFO] 2011-07-11 02:08:30.694213 Backup initialized 
+[ERROR] 2011-07-11 02:08:19.121832 not enough arguments for format string 
+[INFO] 2011-07-11 02:08:18.185332 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:08:18.152714 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.6163520813 seconds 
+[INFO] 2011-07-11 02:08:15.536524 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:08:15.511573 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:08:15.361046 Clean folder for files 
+[INFO] 2011-07-11 02:08:15.094642 Backup initialized 
+[ERROR] 2011-07-11 02:07:55.413750 not enough arguments for format string 
+[INFO] 2011-07-11 02:07:54.766219 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:07:54.734237 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.79830598831 seconds 
+[INFO] 2011-07-11 02:07:51.936065 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:07:51.910630 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:07:51.751401 Clean folder for files 
+[INFO] 2011-07-11 02:07:51.467347 Backup initialized 
+[INFO] 2011-07-11 02:06:50.756949 Done uploading folder /Users/fnc/workspace/hive, used 7.19769597054 seconds 
+[INFO] 2011-07-11 02:06:43.534904 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:06:43.506279 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.83792304993 seconds 
+[INFO] 2011-07-11 02:06:40.668389 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:06:40.638418 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:06:40.443634 Clean folder for files 
+[INFO] 2011-07-11 02:06:40.135636 Backup initialized 
+[ERROR] 2011-07-11 02:06:35.808799 local variable 'file_upload_percent' referenced before assignment 
+[INFO] 2011-07-11 02:06:35.776649 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:06:35.744805 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 3.14545106888 seconds 
+[INFO] 2011-07-11 02:06:32.599295 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:06:32.572204 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:06:32.406421 Clean folder for files 
+[INFO] 2011-07-11 02:06:32.121530 Backup initialized 
+[INFO] 2011-07-11 02:05:30.307426 Done uploading folder /Users/fnc/workspace/hive, used 6.31954193115 seconds 
+[INFO] 2011-07-11 02:05:23.964186 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:05:23.930834 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.68484592438 seconds 
+[INFO] 2011-07-11 02:05:21.246120 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:05:21.212833 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:05:21.048086 Clean folder for files 
+[INFO] 2011-07-11 02:05:20.783280 Backup initialized 
+[INFO] 2011-07-11 02:05:01.206845 Done uploading folder /Users/fnc/workspace/hive, used 6.77319598198 seconds 
+[INFO] 2011-07-11 02:04:54.410397 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:04:54.378506 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 3.08890604973 seconds 
+[INFO] 2011-07-11 02:04:51.289542 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:04:51.267026 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:04:51.095622 Clean folder for files 
+[INFO] 2011-07-11 02:04:50.785778 Backup initialized 
+[INFO] 2011-07-11 02:04:15.088663 Done uploading folder /Users/fnc/workspace/hive, used 8.12362003326 seconds 
+[INFO] 2011-07-11 02:04:06.939831 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:04:06.899757 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.60009598732 seconds 
+[INFO] 2011-07-11 02:04:04.299654 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:04:04.269261 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:04:04.098349 Clean folder for files 
+[INFO] 2011-07-11 02:04:03.836968 Backup initialized 
+[INFO] 2011-07-11 02:03:55.968035 Done uploading folder /Users/fnc/workspace/hive, used 6.71386408806 seconds 
+[INFO] 2011-07-11 02:03:49.231123 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:49.198381 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.59503817558 seconds 
+[INFO] 2011-07-11 02:03:46.603368 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:46.575321 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:46.328516 Clean folder for files 
+[INFO] 2011-07-11 02:03:46.052185 Backup initialized 
+[INFO] 2011-07-11 02:03:41.296305 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:41.252453 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.53556108475 seconds 
+[INFO] 2011-07-11 02:03:38.716897 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:38.690367 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:38.332342 Clean folder for files 
+[INFO] 2011-07-11 02:03:37.991427 Backup initialized 
+[INFO] 2011-07-11 02:03:33.128792 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:33.097029 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.56581091881 seconds 
+[INFO] 2011-07-11 02:03:30.531190 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:30.504171 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:30.334961 Clean folder for files 
+[INFO] 2011-07-11 02:03:30.073124 Backup initialized 
+[INFO] 2011-07-11 02:03:26.473906 Done uploading folder /Users/fnc/workspace/hive, used 7.16448783875 seconds 
+[INFO] 2011-07-11 02:03:19.286239 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:19.254263 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.59842896461 seconds 
+[INFO] 2011-07-11 02:03:16.655861 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:16.628736 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:16.461650 Clean folder for files 
+[INFO] 2011-07-11 02:03:16.212728 Backup initialized 
+[INFO] 2011-07-11 02:03:07.797844 Done uploading folder /Users/fnc/workspace/hive, used 6.31176710129 seconds 
+[INFO] 2011-07-11 02:03:01.443115 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:03:01.411540 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.58634400368 seconds 
+[INFO] 2011-07-11 02:02:58.825221 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:02:58.795807 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:02:58.624350 Clean folder for files 
+[INFO] 2011-07-11 02:02:58.378683 Backup initialized 
+[INFO] 2011-07-11 02:02:34.447587 Done uploading folder /Users/fnc/workspace/hive, used 7.29255104065 seconds 
+[INFO] 2011-07-11 02:02:27.132089 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:02:27.088471 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.61443400383 seconds 
+[INFO] 2011-07-11 02:02:24.474045 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:02:24.446962 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:02:24.192166 Clean folder for files 
+[INFO] 2011-07-11 02:02:23.947659 Backup initialized 
+[INFO] 2011-07-11 02:02:03.125539 Done uploading folder /Users/fnc/workspace/hive, used 8.2856221199 seconds 
+[INFO] 2011-07-11 02:01:54.815329 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:01:54.781044 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.59136390686 seconds 
+[INFO] 2011-07-11 02:01:52.189756 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:01:52.163155 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:01:52.003432 Clean folder for files 
+[INFO] 2011-07-11 02:01:51.762643 Backup initialized 
+[INFO] 2011-07-11 02:01:39.856224 Done uploading folder /Users/fnc/workspace/hive, used 8.30537414551 seconds 
+[INFO] 2011-07-11 02:01:31.527762 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:01:31.484088 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.60431814194 seconds 
+[INFO] 2011-07-11 02:01:28.879854 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:01:28.852096 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:01:28.690409 Clean folder for files 
+[INFO] 2011-07-11 02:01:28.449602 Backup initialized 
+[INFO] 2011-07-11 02:01:22.303371 Done uploading folder /Users/fnc/workspace/hive, used 6.9446618557 seconds 
+[INFO] 2011-07-11 02:01:15.335339 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:01:15.302783 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.61538100243 seconds 
+[INFO] 2011-07-11 02:01:12.687456 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:01:12.658850 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:01:12.492467 Clean folder for files 
+[INFO] 2011-07-11 02:01:12.264310 Backup initialized 
+[INFO] 2011-07-11 02:00:43.802561 Done uploading folder /Users/fnc/workspace/hive, used 6.86379909515 seconds 
+[INFO] 2011-07-11 02:00:36.911086 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:00:36.882704 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.9035680294 seconds 
+[INFO] 2011-07-11 02:00:33.979325 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:00:33.952318 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:00:33.787683 Clean folder for files 
+[INFO] 2011-07-11 02:00:33.544049 Backup initialized 
+[INFO] 2011-07-11 02:00:23.579395 Done uploading folder /Users/fnc/workspace/hive, used 6.53289604187 seconds 
+[INFO] 2011-07-11 02:00:17.021859 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:00:16.978242 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.5397131443 seconds 
+[INFO] 2011-07-11 02:00:14.438523 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:00:14.410228 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 02:00:14.247809 Clean folder for files 
+[INFO] 2011-07-11 02:00:13.994844 Backup initialized 
+[INFO] 2011-07-11 01:59:50.923016 Done uploading folder /Users/fnc/workspace/hive, used 10.0223519802 seconds 
+[INFO] 2011-07-11 01:59:40.877342 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:59:40.833722 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 3.06240081787 seconds 
+[INFO] 2011-07-11 01:59:37.771370 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:59:37.746415 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:59:37.585401 Clean folder for files 
+[INFO] 2011-07-11 01:59:37.310912 Backup initialized 
+[INFO] 2011-07-11 01:59:09.753050 Done uploading folder /Users/fnc/workspace/hive, used 7.0229511261 seconds 
+[INFO] 2011-07-11 01:59:02.707699 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:59:02.664107 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.56946110725 seconds 
+[INFO] 2011-07-11 01:59:00.094842 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:59:00.068047 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:58:59.834067 Clean folder for files 
+[INFO] 2011-07-11 01:58:59.602995 Backup initialized 
+[INFO] 2011-07-11 01:58:37.054880 Done uploading folder /Users/fnc/workspace/hive, used 8.25118994713 seconds 
+[INFO] 2011-07-11 01:58:28.779888 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:58:28.748129 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.56066608429 seconds 
+[INFO] 2011-07-11 01:58:26.187534 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:58:26.159058 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:58:25.965561 Clean folder for files 
+[INFO] 2011-07-11 01:58:25.550875 Backup initialized 
+[INFO] 2011-07-11 01:58:10.782967 Done uploading folder /Users/fnc/workspace/hive, used 6.6147351265 seconds 
+[INFO] 2011-07-11 01:58:04.145935 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:58:04.115085 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.90904784203 seconds 
+[INFO] 2011-07-11 01:58:01.206121 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:58:01.178424 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:58:00.970828 Clean folder for files 
+[INFO] 2011-07-11 01:58:00.667471 Backup initialized 
+[INFO] 2011-07-11 01:57:23.365436 Done uploading folder /Users/fnc/workspace/hive, used 8.99074292183 seconds 
+[INFO] 2011-07-11 01:57:14.349170 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:57:14.305592 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.71668791771 seconds 
+[INFO] 2011-07-11 01:57:11.588900 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:57:11.560345 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:57:11.408645 Clean folder for files 
+[INFO] 2011-07-11 01:57:11.167977 Backup initialized 
+[ERROR] 2011-07-11 01:56:11.709098 global name 'size_written' is not defined 
+[INFO] 2011-07-11 01:56:11.677442 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:56:11.633577 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.85452795029 seconds 
+[INFO] 2011-07-11 01:56:08.779177 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:56:08.751721 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:56:08.581652 Clean folder for files 
+[INFO] 2011-07-11 01:56:08.168138 Backup initialized 
+[INFO] 2011-07-11 01:55:44.843362 Done uploading folder /Users/fnc/workspace/hive, used 9.58529400826 seconds 
+[INFO] 2011-07-11 01:55:35.232953 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:55:35.201002 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 2.60544919968 seconds 
+[INFO] 2011-07-11 01:55:32.595635 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:55:32.570841 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:55:32.440476 Clean folder for files 
+[INFO] 2011-07-11 01:55:32.218106 Backup initialized 
+[ERROR] 2011-07-11 01:55:06.136198 global name 'size_written' is not defined 
+[INFO] 2011-07-11 01:55:06.105604 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:55:06.061825 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 3.04487299919 seconds 
+[INFO] 2011-07-11 01:55:03.017010 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:55:02.990404 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:55:02.863748 Clean folder for files 
+[INFO] 2011-07-11 01:55:02.669950 Backup initialized 
+[ERROR] 2011-07-11 01:54:11.818497 storbinary() got an unexpected keyword argument 'command' 
+[INFO] 2011-07-11 01:54:11.792922 Started uploading folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:54:11.749368 Done zipping folder /Users/fnc/workspace/hive, saved as temps/users_fnc_workspace_hive.zip, used 10.0327219963 seconds 
+[INFO] 2011-07-11 01:54:01.716868 Started zipping folder /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:54:01.665814 Working on folder: /Users/fnc/workspace/hive 
+[INFO] 2011-07-11 01:54:01.520456 Clean folder for files 
+[INFO] 2011-07-11 01:54:01.169540 Backup initialized 
 [INFO] 2011-07-10 22:29:51.141420 Backup of database complete 
 [INFO] 2011-07-10 22:29:51.122129 Done uploading folder sql/db1/, used 0.0112960338593 seconds 
 [INFO] 2011-07-10 22:29:51.087937 Started uploading folder sql/db1/ 

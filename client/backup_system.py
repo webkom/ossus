@@ -243,10 +243,28 @@ def delete_ftp_folder(ftp_connection, folder, settings):
 
     ftp_connection.cwd("~/")
 
+file_upload_size_written = 0
+file_upload_total_size = 0
+file_upload_percent = 0
+
 def do_upload(ftp, ftp_folder, file, file_name, settings):
     f = open(file, "rb")
     ftp.cwd("~/")
-    ftp.storbinary("STOR %s%s" % (ftp_folder, file_name), f, 1024)
+
+    file_upload_total_size = os.path.getsize(file)
+    file_upload_percent = 0
+
+    def handle_upload_progress(block):
+        global file_upload_size_written, file_upload_percent
+        file_upload_size_written += 1024
+        percent = round(100*(float(file_upload_size_written) / float(file_upload_total_size)), 1)
+        
+        if not percent % 20 and percent > file_upload_percent:
+            write_log(settings, "info", "uploaded " + str(int(percent)) + "% of file: " + str(file_name))
+            file_upload_percent = percent
+
+    ftp.storbinary("STOR %s%s" % (ftp_folder, file_name), f, 1024, handle_upload_progress)
+
     f.close()
 
 
@@ -326,21 +344,23 @@ def backup_mssql_database(ftp_connection, ftp_folder, sql_settings, settings):
         else:
             separator = '\\'
 
-        database_backup_folder = "sql%s%s%s" % (separator, database, separator)
-        database_backup_file = database_backup_folder+"database.txt"
+        database_backup_folder = "c:%ssql%s%s%s" % (separator, separator, database, separator)
+        database_backup_file = database_backup_folder + "%s.bak" % database
+
+        if os.path.isdir(database_backup_folder):
+            shutil.rmtree(database_backup_folder)
 
         os.makedirs(database_backup_folder)
 
-        open(database_backup_file, "w")
-        
-        #cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER=localhost;DATABASE=aeosdb;UID=sa;PWD=Grolle@nedap1')
-        #cnxn.autocommit = True
-        #cur = cnxn.cursor()
+        cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER=%s;DATABASE=%s;UID=%s;PWD=%s' % (host, database, username,password))
+        cnxn.autocommit = True
+        cur = cnxn.cursor()
 
-        #cur.execute('BACKUP DATABASE ? TO DISK=?', ['aeosdb', r'c:\\aeosdb.bak'])
 
-        #while cur.nextset():
-        #    pass
+        cur.execute('BACKUP DATABASE ? TO DISK=?', ['aeosdb', r'%s'%database_backup_file])
+
+        while cur.nextset():
+            pass
 
         save_folder_to_ftp(ftp_connection, ftp_folder, database_backup_folder, settings)
 
@@ -350,6 +370,7 @@ def backup_mssql_database(ftp_connection, ftp_folder, sql_settings, settings):
         
     except Exception, e:
         write_log(settings, "error", "%s" % str(e))
+        
 
 def restore_backup_from_ftp(backup_id, settings):
     backup = download_content("http://%s/api/backups/%s" % (settings['server_ip'], backup_id), settings)
