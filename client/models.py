@@ -116,17 +116,19 @@ class FTPStorage:
         self.folder = folder
         self.schedule = schedule
 
-
-    def upload_folder(self, local_folder, destination_folder):
-        pass
-
+    def upload_file_to_folder(self, local_file_path, file_name, storage_folder):
+        f = open(local_file_path, "rb")
+        self.connection.cwd("~/")
+        self.connection.storbinary("STOR %s%s" % (storage_folder, file_name), f, 1024)
+        self.connection.cwd("~/")
+        f.close()
+                
 class S3Storage:
     def __init__(self, schedule, username, password, folder):
         raise NotImplementedError, "S3 not implemented yet"
 
 class Storage:
     def __init__(self, schedule, storage_dict):
-    
         self.schedule = schedule
         self.type = storage_dict['type']
         self.host = storage_dict['host']
@@ -136,21 +138,9 @@ class Storage:
 
         self.set_correct_backend()
 
-    def upload_folder(self, local_folder, destination_folder):
-        self.backend.upload_folder(local_folder, destination_folder)
+    def upload_file_to_folder(self, local_file_path, file_name, storage_folder):
+        self.backend.upload_file_to_folder(local_file_path, file_name, storage_folder)
 
-    def delete_folder(self, folder):
-        pass
-
-    def check_if_folder_exist(self, folder):
-        pass
-    
-    def create_folder_if_not_exists(self):
-        pass
-
-    def download_folder(self):
-        pass
-    
     def set_correct_backend(self):
         if self.type.upper() == "FTP":
             self.backend = FTPStorage(self.schedule, self.host, self.username, self.password, self.folder)
@@ -160,7 +150,6 @@ class Storage:
             return self.backend
         
         raise Exception, "No backend selected, you have to use FTP or S3"
-
             
 class Schedule:
     def __init__(self, machine, schedule_dict):
@@ -169,7 +158,7 @@ class Schedule:
         self.id = schedule_dict['id']
         self.name = schedule_dict['name']
 
-        self.storage = Storage(self, self, schedule_dict['storage'])
+        self.storage = Storage(self, schedule_dict['storage'])
 
         self.next_backup_time = datetime.strptime(schedule_dict['get_next_backup_time'], "%Y-%m-%d %H:%M:%S")
 
