@@ -1,3 +1,24 @@
+[INFO] 2011-07-13 02:51:28.652496 Backup of focus database complete 
+[INFO] 2011-07-13 02:50:34.565698 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:50:34.479827 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:50:20.330553 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:50:20.246106 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:49:14.765855 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:49:14.673911 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:48:20.801147 Backup of focus database complete 
+[INFO] 2011-07-13 02:47:26.292631 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:47:26.201004 Tried to delete folder ~/backup/1001/schedules/2/5/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:45:17.966754 Backup of focus database complete 
+[INFO] 2011-07-13 02:44:25.639645 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:44:25.542917 Tried to delete folder ~/backup/1001/schedules/2/4/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:42:56.729855 Backup of focus database complete 
+[INFO] 2011-07-13 02:42:04.215581 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:42:04.023362 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:41:26.524956 Backup of fncit_backup database complete 
+[INFO] 2011-07-13 02:41:25.478610 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:41:25.385570 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:41:12.953707 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:41:12.863896 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
 [INFO] 2011-07-13 02:18:18.668595 Backup of fncit_backup database complete 
 [INFO] 2011-07-13 02:18:08.786582 Starting schedule Schedule 2, test 
 [INFO] 2011-07-13 02:18:08.693813 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 

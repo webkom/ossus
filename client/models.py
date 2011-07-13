@@ -21,8 +21,7 @@ machine_logs_api_path = "/api/machinelogs/"
 #Misc
 mysql_dump = "mysqldump5"
 temp_folder = "temps/"
-database_backup_folder = "sql_backups_temps/"
-
+database_backup_folder = "sql_backup/"
 
 def post_data_to_api(post_url, data_dict, username, password):
     register_openers()
@@ -322,7 +321,7 @@ class SQLBackup:
         import subprocess
 
         try:
-            output_dir = database_backup_folder+"/"+self.database
+            output_dir = database_backup_folder+"/"+self.database+"/"
             output_file = "%s.sql" % self.database
             command = mysql_dump + " --host %s " % self.host + "--user " + self.username + " --password=" + self.password + " --add-locks --flush-privileges --add-drop-table --complete-insert --extended-insert --single-transaction --database " + self.database + " > " + output_dir + output_file
             subprocess.call(command, shell=True)
@@ -330,7 +329,7 @@ class SQLBackup:
             self.schedule.machine.log_error(str(e))
             return False
 
-        self.schedule.storage.upload_folder(database_backup_folder, self.schedule.upload_path)
+        self.schedule.storage.upload_folder(output_dir, self.schedule.upload_path)
         self.schedule.machine.log_info("Backup of %s database complete" % self.database)
 
         return True
