@@ -1,3 +1,298 @@
+[INFO] 2011-07-13 02:18:18.668595 Backup of fncit_backup database complete 
+[INFO] 2011-07-13 02:18:08.786582 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:18:08.693813 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:18:07.491830 Backup of fncit_backup database complete 
+[INFO] 2011-07-13 02:17:57.930890 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:17:57.842053 Tried to delete folder ~/backup/1001/schedules/2/6/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:17:55.894508 Backup of fncit_backup database complete 
+[INFO] 2011-07-13 02:17:46.356547 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:17:46.265836 Tried to delete folder ~/backup/1001/schedules/2/5/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:17:40.647280 Backup of fncit_backup database complete 
+[INFO] 2011-07-13 02:17:31.096329 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:17:31.005790 Tried to delete folder ~/backup/1001/schedules/2/4/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:17:20.637779 Backup of fncit_backup database complete 
+[INFO] 2011-07-13 02:17:11.383509 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:17:11.293269 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:16:53.552486 Backup of fncit_backup database complete 
+[INFO] 2011-07-13 02:16:42.630970 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:16:42.539817 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:13:03.368870 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:13:03.257694 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:12:35.980327 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:12:35.847001 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:12:20.118811 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:12:19.872963 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:11:18.805983 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:11:18.606119 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:10:32.807087 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:10:32.658488 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:10:19.590627 Backup of fncit_backup database complete 
+[INFO] 2011-07-13 02:10:08.620948 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:10:08.506166 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:09:52.394643 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:09:52.291164 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:09:48.470861 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:09:48.309230 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:09:42.254930 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:09:42.154725 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:09:36.207189 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:09:35.889937 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:08:42.369691 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:08:42.237252 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:08:32.124151 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:08:31.978924 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:06:55.601185 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:06:55.427684 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:06:36.743616 Backup of fncit_backup database complete 
+[INFO] 2011-07-13 02:06:25.887126 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:06:25.790743 Tried to delete folder ~/backup/1001/schedules/2/0/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:06:11.792542 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:06:11.641654 Tried to delete folder ~/backup/1001/schedules/2/0/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 02:05:30.852917 Backup of fncit_backup database complete 
+[INFO] 2011-07-13 02:05:18.770346 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 02:05:18.677374 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:58:18.695007 Backup of fncit_backup database complete 
+[INFO] 2011-07-13 01:58:07.692157 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 01:58:07.610966 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:57:18.343354 Backup of fncit_backup database complete 
+[INFO] 2011-07-13 01:57:07.288758 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 01:57:07.207174 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:55:52.153288 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 01:55:52.075886 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:20:45.882443 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:20:37.670584 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:20:37.635031 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 01:20:17.753432 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:20:09.033742 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:20:09.001261 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 01:19:41.423131 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:19:41.389407 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 01:19:19.992172 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:19:19.942236 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 01:18:47.651977 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:47.214955 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:46.778304 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:46.341013 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:45.907689 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:45.468784 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:45.034928 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:44.577454 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:44.014973 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:38.199807 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:37.364937 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:31.493854 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:25.907930 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:01.656658 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:18:00.475633 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:16:44.369040 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:16:35.842172 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:16:34.975190 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:16:33.638657 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:14:06.009842 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:14:05.030200 Tried to delete folder ~/HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:13:32.630647 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:13:31.646357 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:13:30.639727 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:13:29.378515 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:12:00.734931 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:09:59.793973 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:09:59.036564 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:09:58.216686 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:09:57.393253 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:09:56.234903 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:09:54.763324 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:09:28.242277 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:09:27.198139 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:09:26.074241 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:09:14.492686 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:09:13.592459 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:09:12.418511 Tried to delete folder HEI/hello from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 01:09:09.589014 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:08:02.859384 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:08:00.508434 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:07:59.491497 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:07:57.592724 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:07:44.944231 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:07:43.532445 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:07:42.462584 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:07:41.385432 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:04:56.361079 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:04:55.098589 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:04:52.828448 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:04:51.955856 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:04:50.814926 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:04:49.606070 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:00:38.470291 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:00:36.816834 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:00:19.879103 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 01:00:18.089658 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:59:44.629954 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:59:10.806962 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:58:53.352347 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:58:48.031785 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:58:39.438556 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:58:38.413667 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:58:37.327325 Deleting folder HEI/hello from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:53:03.598759 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:53:03.516512 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:52:52.511201 Deleting folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:52:52.431027 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:52:43.834152 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:52:43.796007 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:52:13.491327 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:52:13.414325 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:52:12.461013 Deleting folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:52:12.377103 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:52:10.646884 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:52:10.598988 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:52:02.415730 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:52:02.367890 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:50:28.540001 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:50:28.461762 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:50:26.504157 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:50:26.422138 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:49:13.035438 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:49:12.964176 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:48:24.482103 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:48:24.402357 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:48:10.038765 Deleting folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:48:09.956354 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:47:56.366692 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:47:56.303891 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:47:11.294716 Deleting folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:47:11.211371 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:47:00.809328 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:47:00.764910 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:46:54.704330 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:46:54.657086 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:46:32.625401 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:46:32.550518 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:46:21.205820 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:46:21.046874 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:45:56.030840 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:45:55.953307 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:45:34.678569 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:45:34.599194 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:44:36.060839 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:44:35.981537 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:44:34.736975 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:44:34.657052 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:44:25.041051 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:44:24.966328 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:44:00.365975 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:44:00.288073 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:43:21.869004 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:43:21.791353 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:42:10.135479 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:42:09.975663 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:41:43.837526 Deleting folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no 
+[INFO] 2011-07-13 00:41:43.755559 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:41:09.929686 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:41:09.880893 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:40:09.268005 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:40:09.187200 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:39:51.781839 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:39:51.732994 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:39:26.725135 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:39:26.682658 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:39:08.835623 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:39:08.792208 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:38:55.369492 Tried to delete folder backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:38:55.303283 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:36:35.961512 Tried to delete folder 1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-13 00:36:35.925481 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:36:07.751762 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:35:27.402828 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:35:11.794336 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:22:25.923935 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:22:22.290599 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:21:06.254831 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:21:05.275341 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:20:41.972097 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:20:41.149987 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:20:23.823651 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:20:17.880788 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:20:16.873846 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:20:04.081582 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:20:03.068371 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:19:53.518861 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:19:52.409061 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:19:51.568148 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:19:17.832705 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:15:16.131244 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:13:54.787197 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:12:58.535492 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:12:07.480682 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:11:43.388193 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:09:18.411732 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:09:15.785513 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:09:10.919424 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:08:24.429108 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:08:07.552623 Starting schedule Schedule 2, test 
+[INFO] 2011-07-13 00:07:43.008839 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:54:04.605904 Tried to delete folder backup/test/hei/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-12 23:54:04.550552 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:54:03.139424 Deleting folder backup/test/hei/ from ftp storage backup.fncit.no 
+[INFO] 2011-07-12 23:54:03.083975 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:53:56.675889 Tried to delete folder backup/test/untitled folder/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-12 23:53:56.620005 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:53:32.190129 Deleting folder backup/test/untitled folder/ from ftp storage backup.fncit.no 
+[INFO] 2011-07-12 23:53:32.123810 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:51:18.931290 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:51:15.747123 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:51:11.299276 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:51:05.855578 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:51:02.794740 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:50:55.433827 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:50:48.873391 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:50:34.067507 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:50:04.724531 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:49:54.352632 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:49:20.025815 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:49:07.487012 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:48:06.266729 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:47:53.554789 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:47:37.554538 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:47:22.689780 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:46:58.020870 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:46:35.499958 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 23:46:12.121709 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:58:08.243563 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:57:55.350316 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:57:43.749932 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:57:19.381281 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:57:06.578839 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:56:47.921414 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:56:36.902882 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:56:07.780508 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:56:02.847274 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:55:50.249527 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:55:43.765408 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:55:26.987052 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:55:19.498549 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:55:14.070172 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:54:45.620310 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:54:26.267318 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:54:00.315338 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:53:08.021949 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:53:04.973752 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:52:59.288519 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:52:53.672549 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:52:46.080735 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:52:19.070172 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:51:40.926041 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:51:35.215076 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:51:21.917280 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:51:00.960350 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:31:42.030613 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:31:12.461191 Starting schedule Schedule 3, testbackup2 
+[INFO] 2011-07-12 22:31:12.433590 Starting schedule Schedule 1, Generell backup 
+[INFO] 2011-07-12 22:30:58.955455 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:30:47.557772 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:29:41.444664 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:29:16.866862 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:21:23.008724 Starting schedule Schedule 2, test 
+[INFO] 2011-07-12 22:21:13.805542 Starting schedule Schedule 2, test 
 [INFO] 2011-07-12 01:28:57.597969 Starting schedule Schedule test 
 [INFO] 2011-07-12 01:27:41.280599 Starting schedule Schedule 2 
 [INFO] 2011-07-12 01:27:34.132085 Starting schedule Schedule 2 
