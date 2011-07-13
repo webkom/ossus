@@ -291,7 +291,6 @@ class FolderBackup:
     def run(self):
         self.schedule.storage.upload_folder(self.local_folder_path, self.schedule.upload_path)
 
-
 class SQLBackup:
     def __init__(self, schedule, sql_dict):
         self.schedule = schedule
@@ -317,14 +316,15 @@ class SQLBackup:
     def prepare_local_sql_temps_folder_for_this_backup(self):
         if os.path.isdir(database_backup_folder):
             shutil.rmtree(database_backup_folder)
-        os.makedirs(database_backup_folder)
+        os.makedirs(database_backup_folder+"/"+self.database)
 
     def backup_myssql(self):
         import subprocess
 
         try:
+            output_dir = database_backup_folder+"/"+self.database
             output_file = "%s.sql" % self.database
-            command = mysql_dump + " --host %s " % self.host + "--user " + self.username + " --password=" + self.password + " --add-locks --flush-privileges --add-drop-table --complete-insert --extended-insert --single-transaction --database " + self.database + " > " + database_backup_folder + output_file
+            command = mysql_dump + " --host %s " % self.host + "--user " + self.username + " --password=" + self.password + " --add-locks --flush-privileges --add-drop-table --complete-insert --extended-insert --single-transaction --database " + self.database + " > " + output_dir + output_file
             subprocess.call(command, shell=True)
         except Exception, e:
             self.schedule.machine.log_error(str(e))
