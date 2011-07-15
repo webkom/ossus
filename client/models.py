@@ -20,8 +20,8 @@ machine_logs_api_path = "/api/machinelogs/"
 
 #Misc
 mysql_dump = "mysqldump5"
-temp_folder = "temps/"
-database_backup_folder = "sql_backup/"
+temp_folder = "temps" + os.sep
+database_backup_folder = "sql_backup" + os.sep
 
 def post_data_to_api(post_url, data_dict, username, password):
     register_openers()
