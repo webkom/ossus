@@ -131,9 +131,11 @@ class FTPStorage:
         self.schedule = schedule
 
     def upload_file_to_folder(self, local_file_path, file_name, storage_folder):
+        self.connection.cwd("~/")
         f = open(local_file_path, "rb")
         store_path = "~/" + storage_folder + file_name
         self.connection.storbinary("STOR %s" % store_path, f, 1024)
+        self.connection.cwd("~/")
         f.close()
 
     def folder_exists_in_current_directory(self, folder):
@@ -151,8 +153,9 @@ class FTPStorage:
         return False
 
     def folder_path_exists(self, folder):
+
         for folder_part in folder.split("/"):
-            if folder_part == "":
+            if folder_part == "" or folder_part == "~":
                 continue
 
             if self.folder_exists_in_current_directory(folder_part):
@@ -163,16 +166,14 @@ class FTPStorage:
         return True
 
     def create_folder(self, ftp_folder):
-        ftp_folder = "~/" + ftp_folder
 
+        ftp_folder = ftp_folder
         if self.folder_path_exists(ftp_folder):
             return False
 
+        self.connection.cwd("~/")
         for folder in ftp_folder.split("/"):
             if folder == "":
-                continue
-
-            if folder == "~":
                 continue
 
             if self.folder_exists_in_current_directory(folder):
@@ -204,7 +205,6 @@ class FTPStorage:
                 self.delete_folder(folder)
 
         self.connection.rmd(folder)
-
         return True
 
 
@@ -288,8 +288,12 @@ class FolderBackup:
         return "FolderBackup %s " % self.local_folder_path
 
     def run(self):
-        self.schedule.storage.upload_folder(self.local_folder_path, self.schedule.upload_path)
-
+        try:
+            self.schedule.storage.upload_folder(self.local_folder_path, self.schedule.upload_path)
+            self.schedule.machine.log_info("Backup of %s folder complete" % self.local_folder_path)
+        except Exception, e:
+            self.schedule.machine.log_error("Backup of %s folder failed" % self.local_folder_path)
+            
 class SQLBackup:
     def __init__(self, schedule, sql_dict):
         self.schedule = schedule
@@ -325,12 +329,11 @@ class SQLBackup:
             output_file = "%s.sql" % self.database
             command = mysql_dump + " --host %s " % self.host + "--user " + self.username + " --password=" + self.password + " --add-locks --flush-privileges --add-drop-table --complete-insert --extended-insert --single-transaction --database " + self.database + " > " + output_dir + output_file
             subprocess.call(command, shell=True)
+            self.schedule.storage.upload_folder(output_dir, self.schedule.upload_path)
+            self.schedule.machine.log_info("Backup of %s database complete" % self.database)
         except Exception, e:
             self.schedule.machine.log_error(str(e))
             return False
-
-        self.schedule.storage.upload_folder(output_dir, self.schedule.upload_path)
-        self.schedule.machine.log_info("Backup of %s database complete" % self.database)
 
         return True
 
@@ -396,6 +399,9 @@ class Schedule:
             sql_backup.run()
 
         self.increase_counter()
+
+        self.machine.log_info("Schedule %s complete" % self)
+        
 
     def clear_destination_folder_before_run(self):
         self.storage.delete_folder(self.upload_path)

@@ -1,3 +1,188 @@
+[INFO] 2011-07-15 17:51:38.581269 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:51:38.185813 Backup of focus database complete 
+[INFO] 2011-07-15 17:51:37.763748 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:51:35.405075 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:51:34.321879 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:51:26.276954 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:51:12.963950 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:50:51.661468 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:48:07.413182 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:48:00.422582 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:47:50.323117 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:47:36.671465 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:47:17.500112 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:46:19.779987 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:46:19.370857 550 ~/backup/1001/schedules/2/2/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:46:18.932901 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:46:18.530667 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:46:17.337602 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:46:02.121330 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:46:01.732365 550 ~/backup/1001/schedules/2/1/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:46:01.378376 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:46:01.008883 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:45:59.918166 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:45:21.429432 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:45:21.040555 550 ~/backup/1001/schedules/2/5/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:45:20.690215 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:45:20.321522 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:45:19.168220 Tried to delete folder ~/backup/1001/schedules/2/5/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:44:42.073414 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:44:41.676874 550 ~/backup/1001/schedules/2/4/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:44:41.358471 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:44:40.998383 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:44:39.880319 Tried to delete folder ~/backup/1001/schedules/2/4/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:43:59.858904 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:43:59.468738 550 ~/backup/1001/schedules/2/3/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:43:59.170282 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:43:58.856189 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:43:57.239194 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:43:46.143895 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:43:45.740045 550 ~/backup/1001/schedules/2/2/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:43:45.438488 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:43:45.086238 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:43:43.980332 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:43:19.601694 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:43:19.140200 550 ~/backup/1001/schedules/2/1/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:43:18.788586 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:43:18.364273 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:43:17.183122 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:42:43.136386 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:42:42.741261 550 ~/backup/1001/schedules/2/5/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:42:42.438889 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:42:42.071049 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:42:40.965734 Tried to delete folder ~/backup/1001/schedules/2/5/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:42:26.826269 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:42:26.441040 550 ~/backup/1001/schedules/2/4/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:42:26.138660 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:42:25.790830 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:42:24.620549 Tried to delete folder ~/backup/1001/schedules/2/4/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:42:00.551646 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:42:00.162942 550 ~/backup/1001/schedules/2/3/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:41:59.859063 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:41:59.484631 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:41:58.301349 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:41:23.025287 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:41:22.625745 550 ~/backup/1001/schedules/2/2/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:41:22.325414 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:41:22.009392 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:41:20.481369 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:41:12.152892 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:41:11.749868 550 ~/backup/1001/schedules/2/1/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:41:11.385892 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:41:10.679625 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:41:09.282516 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:38:39.644324 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:38:39.243628 550 ~/backup/1001/schedules/2/5/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:38:38.883421 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:38:38.527115 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:38:37.472315 Tried to delete folder ~/backup/1001/schedules/2/5/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:37:08.737080 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:37:08.348057 550 ~/backup/1001/schedules/2/4/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:37:08.058180 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:37:07.763933 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:37:06.708616 Tried to delete folder ~/backup/1001/schedules/2/4/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:36:51.288571 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:36:50.888685 550 ~/backup/1001/schedules/2/3/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:36:50.607557 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:36:50.313445 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:36:49.298260 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:36:38.149032 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:36:37.753605 550 ~/backup/1001/schedules/2/2/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:36:37.467585 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:36:37.173587 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:36:35.519549 Deleting folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no 
+[INFO] 2011-07-15 17:36:13.908014 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:36:13.508448 550 ~/backup/1001/schedules/2/1/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:36:13.216136 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:36:12.931740 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:36:11.157658 Deleting folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no 
+[INFO] 2011-07-15 17:35:48.370041 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:35:47.968436 550 ~/backup/1001/schedules/2/5/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:35:47.688065 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:35:47.308087 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:35:44.695611 Deleting folder ~/backup/1001/schedules/2/5/ from ftp storage backup.fncit.no 
+[INFO] 2011-07-15 17:35:28.917807 Schedule Schedule 2, test complete 
+[ERROR] 2011-07-15 17:35:28.513663 550 ~/backup/1001/schedules/2/4/sql_backup_focus.zip: No such file or directory 
+[ERROR] 2011-07-15 17:35:28.231176 Backup of /Users/fnc/workspace/ktn folder failed 
+[INFO] 2011-07-15 17:35:27.943274 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:35:26.929857 Tried to delete folder ~/backup/1001/schedules/2/4/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:34:46.455154 Deleting folder ~/backup/1001/schedules/2/4/ from ftp storage backup.fncit.no 
+[INFO] 2011-07-15 17:34:32.393528 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:34:31.995403 Backup of focus database complete 
+[INFO] 2011-07-15 17:34:31.686391 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:34:29.270832 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:34:28.314843 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:34:13.780815 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:34:13.389941 Backup of focus database complete 
+[INFO] 2011-07-15 17:34:13.082241 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:34:11.792100 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:34:10.858642 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:33:54.070197 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:33:53.673116 Backup of focus database complete 
+[INFO] 2011-07-15 17:33:53.370426 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:33:50.932973 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:33:49.987885 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:33:16.831262 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:33:16.119338 Backup of focus database complete 
+[INFO] 2011-07-15 17:33:15.810533 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:33:13.467317 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:33:12.492082 Tried to delete folder ~/backup/1001/schedules/2/5/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:32:45.438139 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:32:45.048835 Backup of focus database complete 
+[INFO] 2011-07-15 17:32:44.750169 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:32:42.374888 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:32:41.460796 Tried to delete folder ~/backup/1001/schedules/2/4/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:32:37.350709 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:32:36.954021 Backup of focus database complete 
+[INFO] 2011-07-15 17:32:36.644142 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:32:34.349682 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:32:33.416333 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:31:45.881147 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:31:45.472831 Backup of focus database complete 
+[INFO] 2011-07-15 17:31:45.152763 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:31:42.778207 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:31:41.852807 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:31:34.666858 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:31:34.228185 Backup of focus database complete 
+[INFO] 2011-07-15 17:31:33.917246 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:31:31.542365 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:31:30.620495 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:31:17.158915 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:31:16.771769 Backup of focus database complete 
+[INFO] 2011-07-15 17:31:16.473824 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:31:14.137893 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:31:13.157501 Tried to delete folder ~/backup/1001/schedules/2/5/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:31:07.985618 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:31:07.594384 Backup of focus database complete 
+[INFO] 2011-07-15 17:31:07.290443 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:31:04.888503 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:31:03.978738 Tried to delete folder ~/backup/1001/schedules/2/4/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:31:02.109110 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:31:01.721769 Backup of focus database complete 
+[INFO] 2011-07-15 17:31:01.421853 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:30:59.075399 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:30:58.133533 Tried to delete folder ~/backup/1001/schedules/2/3/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:30:37.431464 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:30:37.016639 Backup of focus database complete 
+[INFO] 2011-07-15 17:30:36.658530 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:30:34.250980 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:30:33.310879 Tried to delete folder ~/backup/1001/schedules/2/2/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:21:56.348587 Schedule Schedule 2, test complete 
+[INFO] 2011-07-15 17:21:55.952856 Backup of focus database complete 
+[INFO] 2011-07-15 17:21:55.656987 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:21:53.339278 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:21:52.410233 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:21:09.966236 Backup of focus database complete 
+[INFO] 2011-07-15 17:21:09.665098 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:21:06.812306 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:21:05.868891 Tried to delete folder ~/backup/1001/schedules/2/5/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:20:26.648036 Backup of focus database complete 
+[INFO] 2011-07-15 17:20:26.342262 Backup of /Users/fnc/workspace/ktn folder complete 
+[INFO] 2011-07-15 17:20:23.906198 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:20:22.986290 Tried to delete folder ~/backup/1001/schedules/2/4/ from ftp storage backup.fncit.no, but the folder does not exist 
+[INFO] 2011-07-15 17:17:13.957655 Backup of focus database complete 
+[INFO] 2011-07-15 17:17:10.802217 Starting schedule Schedule 2, test 
+[INFO] 2011-07-15 17:17:09.800607 Tried to delete folder ~/backup/1001/schedules/2/4/ from ftp storage backup.fncit.no, but the folder does not exist 
 [INFO] 2011-07-13 02:51:28.652496 Backup of focus database complete 
 [INFO] 2011-07-13 02:50:34.565698 Starting schedule Schedule 2, test 
 [INFO] 2011-07-13 02:50:34.479827 Tried to delete folder ~/backup/1001/schedules/2/1/ from ftp storage backup.fncit.no, but the folder does not exist 
