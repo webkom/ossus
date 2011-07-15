@@ -325,7 +325,7 @@ class SQLBackup:
         import subprocess
 
         try:
-            output_dir = database_backup_folder+"/"+self.database+"/"
+            output_dir = database_backup_folder+os.sep+self.database+os.sep
             output_file = "%s.sql" % self.database
             command = mysql_dump + " --host %s " % self.host + "--user " + self.username + " --password=" + self.password + " --add-locks --flush-privileges --add-drop-table --complete-insert --extended-insert --single-transaction --database " + self.database + " > " + output_dir + output_file
             subprocess.call(command, shell=True)
@@ -343,12 +343,14 @@ class SQLBackup:
 
             database_backup_file = database_backup_folder + "%s.bak" % self.database
 
+            output_dir = database_backup_folder+os.sep+self.database+os.sep
+
             cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER=%s;DATABASE=%s;UID=%s;PWD=%s' % (
                 self.host, self.database, self.username, self.password))
             cnxn.autocommit = True
             cur = cnxn.cursor()
 
-            cur.execute('BACKUP DATABASE ? TO DISK=?', [r'%s' % self.database, r'%s' % database_backup_file])
+            cur.execute('BACKUP DATABASE ? TO DISK=?', [r'%s' % output_dir+self.database, r'%s' % database_backup_file])
 
             while cur.nextset():
                 pass
