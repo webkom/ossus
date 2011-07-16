@@ -352,14 +352,12 @@ class SQLBackup:
 
             database_backup_file = database_backup_folder + "%s.bak" % self.database
 
-            output_dir = database_backup_folder+os.sep+self.database+os.sep
-
             cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER=%s;DATABASE=%s;UID=%s;PWD=%s' % (
                 self.host, self.database, self.username, self.password))
             cnxn.autocommit = True
             cur = cnxn.cursor()
 
-            cur.execute('BACKUP DATABASE ? TO DISK=?', [r'%s' % output_dir+self.database, r'%s' % database_backup_file])
+            cur.execute('BACKUP DATABASE ? TO DISK=?', [r'%s' % self.database, r'%s' % database_backup_file])
 
             while cur.nextset():
                 pass
