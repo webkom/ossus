@@ -10,7 +10,7 @@ import os
 import urllib2
 import simplejson
 
-log_file_path = "log.txt"
+log_file_path = "log_backup.txt"
 base_api_path = "http://"
 
 #APIpaths
@@ -96,7 +96,10 @@ class Machine:
         self.username = settings_dict['username']
         self.password = settings_dict['password']
         self.os_system = settings_dict['os_system']
-        self.force_action = settings_dict['force_action']
+        self.force_action = False
+
+        if settings_dict['force_action'] == '1':
+            self.force_action = False
 
         machine_data = self.get_machine_data_from_api()
 

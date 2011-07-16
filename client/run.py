@@ -1,13 +1,17 @@
 from models import Machine
 
-settings_dict = {
-    'server_ip': "backup.fncit.no",
-    'machine_id': "1001",
-    'username': '',
-    'password': '',
-    'os_system': '',
-    'force_action': False,
-    }
+try:
+    f = open("settings.txt", "r")
+except Exception, e:
+    print "ERROR: Finner ikke settings.txt"
+    exit()
+
+settings_dict = {}
+
+for line in f.readlines():
+    key, value = line.split(":")
+
+    settings_dict[key.strip()] = value.strip()
 
 machine = Machine(settings_dict)
 for schedule in machine.schedules:
