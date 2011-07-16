@@ -10,6 +10,7 @@ import os
 import urllib2
 import simplejson
 
+
 log_file_path = "log_backup.txt"
 base_api_path = "http://"
 
@@ -18,10 +19,11 @@ schedule_api_path = "/api/schedules/"
 machines_api_path = "/api/machines/"
 machine_logs_api_path = "/api/machinelogs/"
 
-#Misc
+#Local paths
+BASE_PATH = os.path.dirname(__file__)+os.sep
 mysql_dump = "mysqldump5"
-temp_folder = "temps" + os.sep
-database_backup_folder = "sql_backup" + os.sep
+temp_folder = BASE_PATH + "temps" + os.sep
+database_backup_folder = BASE_PATH + "sql_backup" + os.sep
 
 def post_data_to_api(post_url, data_dict, username, password):
     register_openers()
@@ -246,6 +248,10 @@ class Storage:
 
     def upload_folder(self, folder, save_in_folder):
         filename = self.create_filename_for_folder(folder)
+
+        if not os.path.isdir(temp_folder):
+            os.makedirs(temp_folder)
+        
         zip_to_upload = self.save_folder_as_zip(folder, temp_folder + filename)
         self.upload_file(zip_to_upload.filename, filename, save_in_folder)
         return True
