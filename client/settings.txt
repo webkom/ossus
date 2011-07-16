@@ -1,6 +1,0 @@
-server_ip:backup.fncit.no
-machine_id:1001
-username:
-password:
-os_system:
-force_action:0
