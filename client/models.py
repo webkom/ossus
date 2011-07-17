@@ -5,7 +5,7 @@ import shutil
 import zipfile
 from poster.encode import multipart_encode
 from poster.streaminghttp import register_openers
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import urllib2
 import simplejson
@@ -159,26 +159,37 @@ class FTPStorage:
         self.store_path = "~/" + storage_folder + file_name
         self.file_upload_total_size = os.path.getsize(local_file_path)
 
+        self.time_start = datetime.now()
+
+        def timedelta_milliseconds(td):
+            return td.days*86400000 + td.seconds*1000 + td.microseconds/1000
+
         def handle_upload_progress(block):
             try:
                 self.file_upload_size_written += 1024
                 percent = round(100*(float(self.file_upload_size_written) / float(self.file_upload_total_size)), 1)
 
-                if percent >= self.file_upload_percent+2:
-                    self.schedule.machine.log_info("uploaded " + str(int(percent)) + "% of file: " + str(file_name))
-                    self.file_upload_percent = int(percent)
+                uploaded_size = (round(float(self.file_upload_size_written)/1024/1024, 5))
 
+                time_spent_milleseconds = timedelta_milliseconds(datetime.now()-self.time_start)
+
+                time_spent_seconds =  float(time_spent_milleseconds)/1000
+
+                if percent >= self.file_upload_percent+2:
+                    self.schedule.machine.log_info("uploaded " + str(int(percent)) + "% " + "("+str(uploaded_size) +" MB)" + "of file: " + str(file_name) + ". spent time: " + str(round(time_spent_seconds,2)) + " seconds. speed: " + str(round(float(uploaded_size/(time_spent_seconds/1024)),1)) + " kb/s")
+                    self.file_upload_percent = int(percent)
+                    
             except Exception, e:
                 self.schedule.machine.log_error(str(e))
 
-        self.schedule.machine.log_info("Start upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 3)), storage_folder))
+        self.schedule.machine.log_info("Start upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder))
         self.connection.cwd("~/")
         f = open(local_file_path, "rb")
         self.connection.storbinary("STOR %s" % self.store_path, f, 1024, handle_upload_progress)
         self.connection.cwd("~/")
-        self.schedule.machine.log_info("Done upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 3)), storage_folder))
+        self.schedule.machine.log_info("Done upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder))
         f.close()
-        
+
     def folder_exists_in_current_directory(self, folder):
         filelist = []
         self.connection.retrlines('LIST', filelist.append)
@@ -273,7 +284,7 @@ class Storage:
         return zipf
 
     def create_zip(self, zipf, directory, folder=""):
-        
+
         for item in os.listdir(directory):
             if temp_folder == directory+os.sep:
                 print "skipping %s" % temp_folder
@@ -282,7 +293,7 @@ class Storage:
             if database_backup_folder == directory+os.sep:
                 print "skipping %s" % database_backup_folder
                 continue
-            
+
             try:
                 if os.path.isfile(os.path.join(directory, item)):
                     zipf.write(os.path.join(directory, item), folder + os.sep + item)
@@ -296,7 +307,7 @@ class Storage:
 
         if not os.path.isdir(temp_folder):
             os.makedirs(temp_folder)
-        
+
         zip_to_upload = self.save_folder_as_zip(folder, temp_folder + filename)
         self.upload_file(zip_to_upload.filename, filename, save_in_folder)
         return True
@@ -347,7 +358,7 @@ class FolderBackup:
             self.schedule.machine.log_info("Backup of %s folder complete" % self.local_folder_path)
         except Exception, e:
             self.schedule.machine.log_error("Backup of %s folder failed: %s" % (self.local_folder_path, str(e)))
-            
+
 class SQLBackup:
     def __init__(self, schedule, sql_dict):
         self.schedule = schedule
