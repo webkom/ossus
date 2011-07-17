@@ -240,7 +240,7 @@ class Storage:
         self.set_correct_backend()
 
     def save_folder_as_zip(self, folder_to_zip, save_as):
-        zipf = zipfile.ZipFile(str(save_as), mode="w")
+        zipf = zipfile.ZipFile(str(save_as), mode="w", allowZip64=True)
         self.create_zip(zipf, folder_to_zip)
         zipf.close()
 
