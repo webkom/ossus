@@ -20,7 +20,10 @@ machines_api_path = "/api/machines/"
 machine_logs_api_path = "/api/machinelogs/"
 
 #Local paths
-BASE_PATH = os.path.dirname(__file__)+os.sep
+BASE_PATH = os.path.dirname(__file__)
+if BASE_PATH:
+    BASE_PATH+=os.sep
+
 mysql_dump = "mysqldump5"
 temp_folder = BASE_PATH + "temps" + os.sep
 database_backup_folder = BASE_PATH + "sql_backup" + os.sep
@@ -100,8 +103,8 @@ class Machine:
         self.os_system = settings_dict['os_system']
         self.force_action = False
 
-        if settings_dict['force_action'] == '1':
-            self.force_action = False
+        if int(settings_dict['force_action']) == 1:
+            self.force_action = True
 
         machine_data = self.get_machine_data_from_api()
 
@@ -109,6 +112,14 @@ class Machine:
         self.is_busy = machine_data['is_busy']
 
         self.add_schedules(machine_data['schedules'])
+
+    def run_backup(self):
+        self.log_info("Performing backup")
+
+        for schedule in self.schedules:
+            schedule.run()
+
+        self.log_info("Backup done")
 
     def get_machine_data_from_api(self):
         url = "%s%s%s%s/" % (base_api_path, self.server_ip, machines_api_path, self.machine_id)
@@ -127,7 +138,6 @@ class Machine:
         self.schedules = []
         for schedule in schedules:
             self.schedules.append(Schedule(self, schedule))
-
 
 class FTPStorage:
     def __init__(self, schedule, ip, username, password, folder):
@@ -399,7 +409,7 @@ class Schedule:
             return
 
         self.clear_destination_folder_before_run()
-        self.machine.log_info("Starting schedule %s" % self)
+        self.machine.log_info("Starting schedule %s" % self.name)
 
         for folder_backup in self.folder_backups:
             folder_backup.run()
@@ -408,16 +418,23 @@ class Schedule:
             sql_backup.run()
 
         self.increase_counter()
-
-        self.machine.log_info("Schedule %s complete" % self)
+        self.create_new_backup()
         
+        self.machine.log_info("Schedule %s complete" % self.name)
 
     def clear_destination_folder_before_run(self):
         self.storage.delete_folder(self.upload_path)
         self.storage.create_folder(self.upload_path)
 
     def schedule_should_run(self):
-        return datetime.now() > self.next_backup_time or machine.force_action
+        return datetime.now() > self.next_backup_time or self.machine.force_action
+
+    def create_new_backup(self):
+        theurl = "http://%s/api/backups/" % self.machine.server_ip
+        new_backup_dict = {'schedule_id': self.id, 'machine_id': self.machine.id,
+                           'time_started': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+
+        print post_data_to_api(theurl, new_backup_dict, self.machine.username, self.machine.password)
 
     def add_folder_backups(self, folder_backups):
         self.folder_backups = []
