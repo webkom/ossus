@@ -249,11 +249,11 @@ class Storage:
     def create_zip(self, zipf, directory, folder=""):
         
         for item in os.listdir(directory):
-            if temp_folder == directory+"/":
+            if temp_folder == directory+os.sep:
                 print "skipping %s" % temp_folder
                 continue
 
-            if database_backup_folder == directory+"/":
+            if database_backup_folder == directory+os.sep:
                 print "skipping %s" % database_backup_folder
                 continue
             
