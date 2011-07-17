@@ -160,12 +160,16 @@ class FTPStorage:
         self.file_upload_total_size = os.path.getsize(local_file_path)
 
         def handle_upload_progress(block):
-            self.file_upload_size_written += 1024
-            percent = round(100*(float(self.file_upload_size_written) / float(self.file_upload_total_size)), 1)
+            try:
+                self.file_upload_size_written += 1024
+                percent = round(100*(float(self.file_upload_size_written) / float(self.file_upload_total_size)), 1)
 
-            if percent >= self.file_upload_percent+10:
-                self.schedule.machine.log_info("uploaded " + str(int(percent)) + "% of file: " + str(file_name))
-                self.file_upload_percent = int(percent)
+                if percent >= self.file_upload_percent+10:
+                    self.schedule.machine.log_info("uploaded " + str(int(percent)) + "% of file: " + str(file_name))
+                    self.file_upload_percent = int(percent)
+
+            except Exception, e:
+                self.schedule.machine.log_error(str(e))
 
         self.schedule.machine.log_info("Start upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 3)), storage_folder))
         self.connection.cwd("~/")
