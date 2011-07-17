@@ -434,7 +434,7 @@ class Schedule:
         new_backup_dict = {'schedule_id': self.id, 'machine_id': self.machine.id,
                            'time_started': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 
-        print post_data_to_api(theurl, new_backup_dict, self.machine.username, self.machine.password)
+        post_data_to_api(theurl, new_backup_dict, self.machine.username, self.machine.password)
 
     def add_folder_backups(self, folder_backups):
         self.folder_backups = []
