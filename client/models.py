@@ -54,16 +54,16 @@ class Log:
         self.type = type
         self.text = text
 
-        self.add_line_to_top_of_log()
+        self.add_line_to_log()
         self.save_log_to_server()
 
-    def add_line_to_top_of_log(self):
+    def add_line_to_log(self):
         self.create_log_file_if_not_created()
         old_content = self.read_log()
 
         file = open(self.log_file_path, "w")
-        file.write(self.create_log_message())
         file.write(old_content)
+        file.write(self.create_log_message())
         file.close()
 
     def read_log(self):
@@ -164,7 +164,7 @@ class FTPStorage:
                 self.file_upload_size_written += 1024
                 percent = round(100*(float(self.file_upload_size_written) / float(self.file_upload_total_size)), 1)
 
-                if percent >= self.file_upload_percent+10:
+                if percent >= self.file_upload_percent+2:
                     self.schedule.machine.log_info("uploaded " + str(int(percent)) + "% of file: " + str(file_name))
                     self.file_upload_percent = int(percent)
 
