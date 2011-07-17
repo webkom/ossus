@@ -404,9 +404,13 @@ class Schedule:
         self.next_backup_time = datetime.strptime(schedule_dict['get_next_backup_time'], "%Y-%m-%d %H:%M:%S")
 
     def run(self):
+
         if not self.schedule_should_run():
             self.machine.log_info("Waiting, %s will not run before %s" % (self, str(self.next_backup_time)))
             return
+
+        self.running_backup = True
+        self.save_current_state()
 
         self.clear_destination_folder_before_run()
         self.machine.log_info("Starting schedule %s" % self.name)
@@ -419,7 +423,10 @@ class Schedule:
 
         self.increase_counter()
         self.create_new_backup()
-        
+
+        self.running_backup = False
+        self.save_current_state()
+
         self.machine.log_info("Schedule %s complete" % self.name)
 
     def clear_destination_folder_before_run(self):
@@ -455,6 +462,19 @@ class Schedule:
             'running_backup': self.running_backup,
             'running_restore': self.running_restore,
             'current_version_in_loop': self.find_next_counter(),
+            }
+
+        post_data_to_api(post_url, data_dict, self.machine.username, self.machine.password)
+
+    def save_current_state(self):
+        post_url = "%s%s%s%s/" % (base_api_path, self.machine.server_ip, schedule_api_path, self.id)
+
+        data_dict = {
+            'name': self.name,
+            'machine_id': self.machine.machine_id,
+            'running_backup': self.running_backup,
+            'running_restore': self.running_restore,
+            'current_version_in_loop':self.current_version_in_loop
             }
 
         post_data_to_api(post_url, data_dict, self.machine.username, self.machine.password)
