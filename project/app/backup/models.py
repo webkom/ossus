@@ -144,6 +144,8 @@ class Storage(models.Model):
 class FolderBackup(models.Model):
     local_folder_path = models.TextField()
     schedule_backup = models.ForeignKey('ScheduleBackup', related_name='folder_backups')
+    skip_hidden_folders = models.BooleanField(default=False)
+
 
     def __unicode__(self):
         return "%s" % self.schedule_backup
