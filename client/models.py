@@ -167,13 +167,12 @@ class FTPStorage:
                 self.schedule.machine.log_info("uploaded " + str(int(percent)) + "% of file: " + str(file_name))
                 self.file_upload_percent = int(percent)
 
-        self.schedule.machine.log_info("Start upload folder %s to %s" % (local_file_path, storage_folder))
-
+        self.schedule.machine.log_info("Start upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 3)), storage_folder))
         self.connection.cwd("~/")
         f = open(local_file_path, "rb")
         self.connection.storbinary("STOR %s" % self.store_path, f, 1024, handle_upload_progress)
         self.connection.cwd("~/")
-        self.schedule.machine.log_info("Done upload folder %s to %s" % (local_file_path, storage_folder))
+        self.schedule.machine.log_info("Done upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 3)), storage_folder))
         f.close()
         
     def folder_exists_in_current_directory(self, folder):
