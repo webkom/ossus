@@ -247,7 +247,16 @@ class Storage:
         return zipf
 
     def create_zip(self, zipf, directory, folder=""):
+        
         for item in os.listdir(directory):
+            if temp_folder == directory+"/":
+                print "skipping %s" % temp_folder
+                continue
+
+            if database_backup_folder == directory+"/":
+                print "skipping %s" % database_backup_folder
+                continue
+            
             try:
                 if os.path.isfile(os.path.join(directory, item)):
                     zipf.write(os.path.join(directory, item), folder + os.sep + item)
