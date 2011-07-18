@@ -147,6 +147,9 @@ class Machine:
         for schedule in schedules:
             self.schedules.append(Schedule(self, schedule))
 
+def timedelta_milliseconds(td):
+    return td.days*86400000 + td.seconds*1000 + td.microseconds/1000
+            
 class FTPStorage:
     def __init__(self, schedule, ip, username, password, folder):
         self.connection = ftplib.FTP(ip, username, password)
@@ -163,9 +166,11 @@ class FTPStorage:
         self.file_upload_size_written = 0
         self.file_upload_percent = 0
 
-    def reconnect_and_continue_upload_to_folder(self, local_file_path, file_name, storage_folder, attempts=1):
+    def reconnect_and_continue_upload_to_folder(self, local_file_path, file_name, storage_folder, attempts=2):
 
         print "reconnecting..."
+
+        self.file_upload_size_written = 0
 
         if attempts>20:
             self.schedule.machine.log_info("Have tried to reconnect 20 times, no success... aborting")
@@ -187,20 +192,22 @@ class FTPStorage:
                 self.file_upload_percent = int(percent)
         
         try:
-            print "reconnect"
             #Reconnect
             self.schedule.machine.log_info("Reconnects to %s" % self.ip)
             self.connection = ftplib.FTP(self.ip, self.username, self.password)
-            print self.connection
-            print "connected"
 
+            #Reupload
             self.schedule.machine.log_info("Start re-upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder))
             self.connection.cwd("~/")
             f = open(local_file_path, "rb")
-            print "tries to run REST: %s" % self.store_path
+            
+            #Set FTP to binary-mode
+            self.connection.sendcmd("TYPE i")
+            uploaded_yet = self.connection.size(self.store_path)
+            self.file_upload_size_written = uploaded_yet
 
-
-            self.connection.storbinary("STOR %s" % self.store_path, f, 1024, handle_upload_progress, rest=self.file_upload_size_written)
+            #Upload (reupload from last byte)
+            self.connection.storbinary("STOR %s" % self.store_path, f, 1024, handle_upload_progress, rest=uploaded_yet)
 
             self.connection.cwd("~/")
             self.schedule.machine.log_info("Done re-upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder) + " used " + str(attempts) + " attempts")
@@ -218,13 +225,7 @@ class FTPStorage:
 
         self.store_path = "~/" + storage_folder + file_name
         self.file_upload_total_size = os.path.getsize(local_file_path)
-
         self.time_start = datetime.now()
-
-        return self.reconnect_and_continue_upload_to_folder(local_file_path, file_name, storage_folder)
-
-        def timedelta_milliseconds(td):
-            return td.days*86400000 + td.seconds*1000 + td.microseconds/1000
 
         def handle_upload_progress(block):
             self.file_upload_size_written += 1024
