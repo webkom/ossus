@@ -11,7 +11,6 @@ import os
 import urllib2
 import simplejson
 
-
 log_file_path = "log_backup.txt"
 base_api_path = "http://"
 
@@ -202,15 +201,20 @@ class FTPStorage:
 
             #Set FTP to binary-mode
             self.connection.sendcmd("TYPE i")
+
+            self.schedule.machine.log_info("Finds size of file uploaded so far")
             uploaded_yet = self.connection.size(self.store_path)
+            self.schedule.machine.log_info("%s MB has been uploaded" % (uploaded_yet/1024/1024))
+
             self.file_upload_size_written = uploaded_yet
 
-
+            self.schedule.machine.log_info("Making rest of file as new fil")
             f = open(local_file_path, "rb")
             rest_of_file = open(local_file_path+"test", "w")
             rest_of_file.write(f.read()[uploaded_yet:])
             f.close()
             rest_of_file.close()
+            self.schedule.machine.log_info("Done making rest of file as new fil")
             rest_of_file = open(local_file_path+"test", "rb")
 
             self.schedule.machine.log_info("Create new rest_of_file for upload, remaining size of file for upload is: %s MB" % (os.path.getsize(local_file_path+"test")/1024/1024))
