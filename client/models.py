@@ -6,6 +6,7 @@ import zipfile
 from poster.encode import multipart_encode
 from poster.streaminghttp import register_openers
 from datetime import datetime, timedelta
+import time
 import os
 import urllib2
 import simplejson
@@ -29,23 +30,27 @@ temp_folder = BASE_PATH + "temps" + os.sep
 database_backup_folder = BASE_PATH + "sql_backup" + os.sep
 
 def post_data_to_api(post_url, data_dict, username, password):
-    register_openers()
-    datagen, headers = multipart_encode(data_dict)
-    request = urllib2.Request(post_url, datagen, headers)
-    base64string = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
-    request.add_header("Authorization", "Basic %s" % base64string)
-    return urllib2.urlopen(request).read()
-
+    try:
+        register_openers()
+        datagen, headers = multipart_encode(data_dict)
+        request = urllib2.Request(post_url, datagen, headers)
+        base64string = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
+        request.add_header("Authorization", "Basic %s" % base64string)
+        return urllib2.urlopen(request).read()
+    except Exception, e:
+        print "Can not post data to api. Data: %s" % str(data_dict)
 
 def download_data_from_api(theurl, username, password):
-    passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
-    passman.add_password(None, theurl, username, password)
-    authhandler = urllib2.HTTPBasicAuthHandler(passman)
-    opener = urllib2.build_opener(authhandler)
-    urllib2.install_opener(opener)
-    pagehandle = urllib2.urlopen(theurl)
-    return simplejson.loads(pagehandle.read())
-
+    try:
+        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+        passman.add_password(None, theurl, username, password)
+        authhandler = urllib2.HTTPBasicAuthHandler(passman)
+        opener = urllib2.build_opener(authhandler)
+        urllib2.install_opener(opener)
+        pagehandle = urllib2.urlopen(theurl)
+        return simplejson.loads(pagehandle.read())
+    except Exception, e:
+        print "Can not post download from api. url: %s" % str(theurl)
 
 class Log:
     def __init__(self, machine, type, text):
@@ -106,10 +111,13 @@ class Machine:
         if int(settings_dict['force_action']) == 1:
             self.force_action = True
 
-        machine_data = self.get_machine_data_from_api()
-
-        self.id = machine_data['id']
-        self.is_busy = machine_data['is_busy']
+        try:
+            machine_data = self.get_machine_data_from_api()
+            self.id = machine_data['id']
+            self.is_busy = machine_data['is_busy']
+        except Exception, e:
+            print "Can not connect to server: %s" % str(e)
+            exit()
 
         self.add_schedules(machine_data['schedules'])
 
@@ -145,10 +153,62 @@ class FTPStorage:
         self.folder = folder
         self.schedule = schedule
 
+        self.ip = ip
+        self.username = username
+        self.password = password
+        self.folder = folder
+
         self.file_upload_total_size = 0
         self.file_upload_percent = 0
         self.file_upload_size_written = 0
         self.file_upload_percent = 0
+
+    def reconnect_and_continue_upload_to_folder(self, local_file_path, file_name, storage_folder, attempts=1):
+
+        print "reconnecting..."
+
+        if attempts>20:
+            self.schedule.machine.log_info("Have tried to reconnect 20 times, no success... aborting")
+            return
+
+        self.schedule.machine.log_info("Sleeping for 20 seconds")
+        time.sleep(20)
+
+        def handle_upload_progress(block):
+            self.file_upload_size_written += 1024
+            percent = round(100*(float(self.file_upload_size_written) / float(self.file_upload_total_size)), 1)
+
+            uploaded_size = (round(float(self.file_upload_size_written)/1024/1024, 5))
+            time_spent_milleseconds = timedelta_milliseconds(datetime.now()-self.time_start)
+            time_spent_seconds =  float(time_spent_milleseconds)/1000
+
+            if percent >= self.file_upload_percent+2:
+                self.schedule.machine.log_info("continued uploaded " + str(int(percent)) + "% " + "("+str(uploaded_size) +" MB)" + "of file: " + str(file_name) + ". spent time: " + str(round(time_spent_seconds,2)) + " seconds. speed: " + str(round(float(uploaded_size/(time_spent_seconds/1024)),1)) + " kb/s")
+                self.file_upload_percent = int(percent)
+        
+        try:
+            print "reconnect"
+            #Reconnect
+            self.schedule.machine.log_info("Reconnects to %s" % self.ip)
+            self.connection = ftplib.FTP(self.ip, self.username, self.password)
+            print self.connection
+            print "connected"
+
+            self.schedule.machine.log_info("Start re-upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder))
+            self.connection.cwd("~/")
+            f = open(local_file_path, "rb")
+            print "tries to run REST: %s" % self.store_path
+
+
+            self.connection.storbinary("STOR %s" % self.store_path, f, 1024, handle_upload_progress, rest=self.file_upload_size_written)
+
+            self.connection.cwd("~/")
+            self.schedule.machine.log_info("Done re-upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder) + " used " + str(attempts) + " attempts")
+            f.close()
+
+        except Exception, e:
+            print str(e)
+            return self.reconnect_and_continue_upload_to_folder(local_file_path, file_name, storage_folder, attempts=attempts+1)
 
     def upload_file_to_folder(self, local_file_path, file_name, storage_folder):
         self.file_upload_total_size = 0
@@ -161,40 +221,34 @@ class FTPStorage:
 
         self.time_start = datetime.now()
 
+        return self.reconnect_and_continue_upload_to_folder(local_file_path, file_name, storage_folder)
+
         def timedelta_milliseconds(td):
             return td.days*86400000 + td.seconds*1000 + td.microseconds/1000
 
         def handle_upload_progress(block):
-            try:
-                self.file_upload_size_written += 1024
-                percent = round(100*(float(self.file_upload_size_written) / float(self.file_upload_total_size)), 1)
+            self.file_upload_size_written += 1024
+            percent = round(100*(float(self.file_upload_size_written) / float(self.file_upload_total_size)), 1)
 
-                uploaded_size = (round(float(self.file_upload_size_written)/1024/1024, 5))
+            uploaded_size = (round(float(self.file_upload_size_written)/1024/1024, 5))
+            time_spent_milleseconds = timedelta_milliseconds(datetime.now()-self.time_start)
+            time_spent_seconds =  float(time_spent_milleseconds)/1000
 
-                time_spent_milleseconds = timedelta_milliseconds(datetime.now()-self.time_start)
+            if percent >= self.file_upload_percent+2:
+                self.schedule.machine.log_info("uploaded " + str(int(percent)) + "% " + "("+str(uploaded_size) +" MB)" + "of file: " + str(file_name) + ". spent time: " + str(round(time_spent_seconds,2)) + " seconds. speed: " + str(round(float(uploaded_size/(time_spent_seconds/1024)),1)) + " kb/s")
+                self.file_upload_percent = int(percent)
 
-                time_spent_seconds =  float(time_spent_milleseconds)/1000
-
-                if percent >= self.file_upload_percent+2:
-                    self.schedule.machine.log_info("uploaded " + str(int(percent)) + "% " + "("+str(uploaded_size) +" MB)" + "of file: " + str(file_name) + ". spent time: " + str(round(time_spent_seconds,2)) + " seconds. speed: " + str(round(float(uploaded_size/(time_spent_seconds/1024)),1)) + " kb/s")
-                    self.file_upload_percent = int(percent)
-            except Exception, e:
-                self.schedule.machine.log_error(str(e))
-
-                try:
-                    self.schedule.machine.log_info("Retry upload..")
-                    handle_upload_progress(block)
-                except Exception, e:
-                    self.schedule.machine.log_error(str(e))
-
-                    
-        self.schedule.machine.log_info("Start upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder))
-        self.connection.cwd("~/")
-        f = open(local_file_path, "rb")
-        self.connection.storbinary("STOR %s" % self.store_path, f, 1024, handle_upload_progress)
-        self.connection.cwd("~/")
-        self.schedule.machine.log_info("Done upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder))
-        f.close()
+        try:
+            self.schedule.machine.log_info("Start upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder))
+            self.connection.cwd("~/")
+            f = open(local_file_path, "rb")
+            self.connection.storbinary("STOR %s" % self.store_path, f, 1024, handle_upload_progress)
+            self.connection.cwd("~/")
+            self.schedule.machine.log_info("Done upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder))
+            f.close()
+        except Exception, e:
+            self.schedule.machine.log_error(str(e))
+            return self.reconnect_and_continue_upload_to_folder(local_file_path, file_name, storage_folder)
 
     def folder_exists_in_current_directory(self, folder):
         filelist = []
@@ -360,6 +414,7 @@ class FolderBackup:
 
     def run(self):
         try:
+            self.schedule.machine.log_info("Start backup %s folder, zipping" % self.local_folder_path)
             self.schedule.storage.upload_folder(self.local_folder_path, self.schedule.upload_path)
             self.schedule.machine.log_info("Backup of %s folder complete" % self.local_folder_path)
         except Exception, e:
