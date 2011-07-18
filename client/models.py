@@ -212,7 +212,6 @@ class FTPStorage:
             f = open(local_file_path, "rb")
             rest_of_file = open(local_file_path+"test", "w")
             rest_of_file.write(f.read()[uploaded_yet:])
-            f.close()
             rest_of_file.close()
             self.schedule.machine.log_info("Done making rest of file as new fil")
             rest_of_file = open(local_file_path+"test", "rb")
@@ -221,13 +220,15 @@ class FTPStorage:
             
             #Upload (reupload from last byte)
             self.connection.storbinary("STOR %s" % self.store_path, rest_of_file, 1024, handle_upload_progress, rest=uploaded_yet)
-            rest_of_file.close()
 
             self.connection.cwd("~/")
             self.schedule.machine.log_info("Done re-upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder) + " used " + str(attempts) + " attempts")
 
+            f.close()
+            rest_of_file.close()
+
         except Exception, e:
-            print str(e)
+            self.schedule.machine.log_error(str(e))
             return self.reconnect_and_continue_upload_to_folder(local_file_path, file_name, storage_folder, attempts=attempts+1)
 
     def upload_file_to_folder(self, local_file_path, file_name, storage_folder):
