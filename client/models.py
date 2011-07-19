@@ -121,6 +121,12 @@ class Machine:
         self.add_schedules(machine_data['schedules'])
 
     def run_backup(self):
+
+        if self.is_busy:
+            self.log_info("Server busy (schedule running), waiting.")
+            print "exit, server busy."
+            exit()
+
         self.log_info("Performing backup")
 
         for schedule in self.schedules:
