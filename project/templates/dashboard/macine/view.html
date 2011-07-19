@@ -76,52 +76,71 @@
 
             }
 
-            $.getJSON('/api/machines/{{ machine_id }}', function(data) {
-                var items = [];
+            var log_limit = 10;
+            var backups_limit = 10;
 
-                if (data['running_backup']) {
-                    $("#status_div").append("<img src='/static/images/spinner.gif'> perforimg backup<br><br>");
-                }
+            function set_content() {
+                $.getJSON('/api/machines/{{ machine_id }}', function(data) {
+                    var items = [];
 
-                else if (data['running_backup']) {
-                    $("#status_div").append("<img src='/static/images/spinner.gif'> perforimg restore<br><br>");
-                }
+                    $("#tables_overview").html("");
 
-                else {
-                    $("#status_div").append("<img src='/static/images/ok.gif'> alt ok<br><br>");
-                }
+                    if (data['running_backup']) {
+                        $("#status_div").html("<img src='/static/images/spinner.gif'> perforimg backup<br><br>");
+                    }
 
-                data['backups'].reverse();
-                data['logs'].reverse();
+                    else if (data['running_backup']) {
+                        $("#status_div").html("<img src='/static/images/spinner.gif'> perforimg restore<br><br>");
+                    }
 
-                $("#tables_overview").append("<h2>Detaljer</h2>");
-                var thead = createThead(createTr(createLines(["Machine ID","Name","IP"], "th")));
-                var tbody = createTbody(createTr(createLines([data['machine_id'],data['name'], data['ip']], "td")))
+                    else {
+                        $("#status_div").html("<img src='/static/images/ok.gif'> alt ok<br><br>");
+                    }
 
-                $("#tables_overview").append(createTable(thead + tbody));
+                    data['backups'].reverse();
+                    data['logs'].reverse();
 
-                var thead = createThead(createTr(createLines(["Tidspunkt neste backup","Tidspunkt sist backup", "Tidspunkt sist kontakt med klient"], "th")));
-                var tbody = createTbody(createTr(createLines([data['get_next_backup_time'],data['get_last_backup_time'], data['last_connection_to_client']], "td")))
+                    $("#tables_overview").append("<h2>Detaljer</h2>");
+                    var thead = createThead(createTr(createLines(["Machine ID","Name","IP"], "th")));
+                    var tbody = createTbody(createTr(createLines([data['machine_id'],data['name'], data['ip']], "td")))
 
-                $("#tables_overview").append(createTable(thead + tbody));
+                    $("#tables_overview").append(createTable(thead + tbody));
 
-                $("#tables_overview").append("<h2>Backups</h2>");
-                $("#tables_overview").append("Vis siste <select id='backup_select_limit'><option value='5'>5</option><option value='10'>10</option><option value='100'>100</option><option value='500'>500</option><option value='1000'>1000</option><option value='10000'>10000</option><option value='100000'>100000</option></select>");
-                $("#tables_overview").append("<div id='backup_table_div'>" + build_backup_table(data['backups'], 5, "backup_table") + "</div>");
-                $("#backup_select_limit").live('change', function(e) {
-                    $("#backup_table_div").html("<div id='backup_table_div'>" + build_backup_table(data['backups'], $(this).val(), "backup_table") + "</div>")
-                })
+                    var thead = createThead(createTr(createLines(["Tidspunkt neste backup","Tidspunkt sist backup", "Tidspunkt sist kontakt med klient"], "th")));
+                    var tbody = createTbody(createTr(createLines([data['get_next_backup_time'],data['get_last_backup_time'], data['last_connection_to_client']], "td")))
 
-                
-                $("#tables_overview").append("<h2>Log</h2>");
-                $("#tables_overview").append("Vis siste <select id='log_select_limit'><option value='5'>5</option><option value='10'>10</option><option value='100'>100</option><option value='500'>500</option><option value='1000'>1000</option><option value='10000'>10000</option><option value='100000'>100000</option></select>");
-                $("#tables_overview").append("<div id='log_table_div'>" + build_log_table(data['logs'], 5, "log_table") + "</div>");
-                $("#log_select_limit").live('change', function(e) {
-                    $("#log_table_div").html("<div id='log_table_div'>" + build_log_table(data['logs'], $(this).val(), "log_table") + "</div>")
-                })
+                    $("#tables_overview").append(createTable(thead + tbody));
 
-            });
+                    $("#tables_overview").append("<h2>Backups</h2>");
+                    $("#tables_overview").append("Vis siste <select id='backup_select_limit'><option value='5'>5</option><option value='10'>10</option><option value='100'>100</option><option value='500'>500</option><option value='1000'>1000</option><option value='10000'>10000</option><option value='100000'>100000</option></select>");
+                    $("#tables_overview").append("<div id='backup_table_div'>" + build_backup_table(data['backups'], backups_limit, "backup_table") + "</div>");
+                    $("#backup_select_limit").live('change', function(e) {
+                        backups_limit = $(this).val();
+                        $("#backup_table_div").html("<div id='backup_table_div'>" + build_backup_table(data['backups'], backups_limit, "backup_table") + "</div>")
+                    })
+
+                    $("#tables_overview").append("<h2>Log</h2>");
+                    $("#tables_overview").append("Vis siste <select id='log_select_limit'><option value='5'>5</option><option value='10'>10</option><option value='100'>100</option><option value='500'>500</option><option value='1000'>1000</option><option value='10000'>10000</option><option value='100000'>100000</option></select>");
+                    $("#tables_overview").append("<div id='log_table_div'>" + build_log_table(data['logs'], log_limit, "log_table") + "</div>");
+                    $("#log_select_limit").live('change', function(e) {
+                        log_limit = $(this).val();
+                        $("#log_table_div").html("<div id='log_table_div'>" + build_log_table(data['logs'], log_limit, "log_table") + "</div>")
+                    })
+                });
+
+                setTimeout (set_content, 15000 );
+            }
+
+            set_content();
+            
+            $(".update_button").live('click', function(e) {
+                set_content();
+            })
+
+
         })
+
+
 
     </script>
 
@@ -139,6 +158,8 @@
     </style>
 
     <div id="status_div"></div>
+
+    <span class="update_button">Oppdater</span>
 
     <div class="x12">
         <div id="tables_overview">
