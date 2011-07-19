@@ -256,11 +256,9 @@ class FTPStorage:
             time_spent_seconds =  float(time_spent_milleseconds)/1000
 
             if percent >= self.file_upload_percent+2:
-                self.schedule.machine.log_info("uploaded " + str(int(percent)) + "% " + "("+str(uploaded_size) +" MB)" + "of file: " + str(file_name) + ". spent time: " + str(round(time_spent_seconds,2)) + " seconds. speed: " + str(round(float(uploaded_size/(time_spent_seconds/1024)),1)) + " kb/s")
                 self.file_upload_percent = int(percent)
-
-            self.schedule.machine.log_info("asd %s" % str(uploaded_size))
-
+                self.schedule.machine.log_info("uploaded " + str(int(percent)) + "% " + "("+str(uploaded_size) +" MB)" + "of file: " + str(file_name) + ". spent time: " + str(round(time_spent_seconds,2)) + " seconds. speed: " + str(round(float(uploaded_size/(time_spent_seconds/1024)),1)) + " kb/s")
+                
         try:
             self.schedule.machine.log_info("Start upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder))
             self.connection.cwd("~/")
