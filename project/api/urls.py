@@ -25,6 +25,9 @@ urlpatterns = patterns('',
 
                        #MachineLog
                        url(r'machinelogs/$', machinelog),
+                       url(r'machinelogs/(?P<machine_id>\d+)/$', machinelog),
+                       url(r'machinelogs/(?P<offset>\d+)/(?P<limit>\d+)/$', machinelog),
+                       url(r'machinelogs/(?P<machine_id>\d+)/(?P<offset>\d+)/(?P<limit>\d+)/$', machinelog),
 
                        #ScheduleBackups
                        url(r'schedules/$', schedules),

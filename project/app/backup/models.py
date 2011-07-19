@@ -191,6 +191,9 @@ class ScheduleBackup(models.Model):
 
     active = models.BooleanField(default=True)
 
+    def __unicode__(self):
+       return u"Machine: %s, name: %s" % (self.machine, self.name)
+
     def current_day_folder_path(self):
         print
 
@@ -221,12 +224,14 @@ class ScheduleBackup(models.Model):
 
         return self.get_last_backup_time() + timedelta(0, self.repeat_every_minute * 60)
 
-
 class Backup(models.Model):
     machine = models.ForeignKey(Machine, related_name="backups")
     schedule = models.ForeignKey(ScheduleBackup, null=True, related_name="backups")
     time_started = models.DateTimeField()
     day_folder_path = models.CharField(max_length=150, blank=True)
+
+    def is_recoverable(self):
+       return self.schedule.backups.filter(id__gt = self.id).count() < self.schedule.versions_count
 
     def save(self, *args, **kwargs):
         self.day_folder_path = self.schedule.current_day_folder_path()

@@ -7,8 +7,8 @@
 
         $(function() {
 
-            function createTable(value) {
-                return "<table class='data'>" + value + "</table>"
+            function createTable(value, id) {
+                return "<table class='data' id='" + id + "'>" + value + "</table>"
             }
 
             function createThead(value) {
@@ -36,49 +36,63 @@
                 return string
             }
 
-            function build_backup_table(data) {
-                var thead = createThead(createTr(createLines(["Dato","#"], "th")));
+            function build_backup_table(data, limit, id) {
+                var thead = createThead(createTr(createLines(["Dato","Schedule","#"], "th")));
                 var tbody_content = ""
 
-                $.each(data.reverse(), function(key, backup) {
-                    tbody_content += createTr(createLines([backup['time_started'],'restore this backup'], "td"))
+                var current = 0;
+
+                $.each(data, function(key, backup) {
+                    if (current < limit) {
+                        current += 1;
+
+                        var restore_if_restorable = "";
+                        if (backup['is_recoverable']) {
+                            restore_if_restorable = "Restore this";
+                        }
+
+                        tbody_content += createTr(createLines([backup['time_started'],backup['schedule']['name'],restore_if_restorable], "td"))
+                    }
                 });
 
                 var tbody = createTbody(tbody_content)
-
-                return createTable(thead + tbody)
-
+                return createTable(thead + tbody, id)
             }
 
-            function build_log_table(data) {
+            function build_log_table(data, limit, id) {
                 var thead = createThead(createTr(createLines(["Dato","Tekst"], "th")));
-                var tbody_content = ""
+                var tbody_content = "";
+                var current = 0;
 
-                $.each(data.reverse(), function(key, log) {
-                    tbody_content += createTr(createLines([log['datetime'], "[" + log['type'].toUpperCase() + "]" + " " + log['text']], "td"))
+                $.each(data, function(key, log) {
+                    if (current < limit) {
+                        current += 1;
+                        tbody_content += createTr(createLines([log['datetime'], "[" + log['type'].toUpperCase() + "]" + " " + log['text']], "td"))
+                    }
                 });
 
                 var tbody = createTbody(tbody_content)
-
-                return createTable(thead + tbody)
+                return createTable(thead + tbody, id)
 
             }
-
 
             $.getJSON('/api/machines/{{ machine_id }}', function(data) {
                 var items = [];
 
-                if(data['running_backup']) {
+                if (data['running_backup']) {
                     $("#status_div").append("<img src='/static/images/spinner.gif'> perforimg backup<br><br>");
                 }
 
-                else if(data['running_backup']) {
+                else if (data['running_backup']) {
                     $("#status_div").append("<img src='/static/images/spinner.gif'> perforimg restore<br><br>");
                 }
 
                 else {
                     $("#status_div").append("<img src='/static/images/ok.gif'> alt ok<br><br>");
                 }
+
+                data['backups'].reverse();
+                data['logs'].reverse();
 
                 $("#tables_overview").append("<h2>Detaljer</h2>");
                 var thead = createThead(createTr(createLines(["Machine ID","Name","IP"], "th")));
@@ -91,13 +105,21 @@
 
                 $("#tables_overview").append(createTable(thead + tbody));
 
-
                 $("#tables_overview").append("<h2>Backups</h2>");
-                $("#tables_overview").append(build_backup_table(data['backups']));
+                $("#tables_overview").append("Vis siste <select id='backup_select_limit'><option value='5'>5</option><option value='10'>10</option><option value='100'>100</option><option value='500'>500</option><option value='1000'>1000</option><option value='10000'>10000</option><option value='100000'>100000</option></select>");
+                $("#tables_overview").append("<div id='backup_table_div'>" + build_backup_table(data['backups'], 5, "backup_table") + "</div>");
+                $("#backup_select_limit").live('change', function(e) {
+                    $("#backup_table_div").html("<div id='backup_table_div'>" + build_backup_table(data['backups'], $(this).val(), "backup_table") + "</div>")
+                })
 
+                
                 $("#tables_overview").append("<h2>Log</h2>");
+                $("#tables_overview").append("Vis siste <select id='log_select_limit'><option value='5'>5</option><option value='10'>10</option><option value='100'>100</option><option value='500'>500</option><option value='1000'>1000</option><option value='10000'>10000</option><option value='100000'>100000</option></select>");
+                $("#tables_overview").append("<div id='log_table_div'>" + build_log_table(data['logs'], 5, "log_table") + "</div>");
+                $("#log_select_limit").live('change', function(e) {
+                    $("#log_table_div").html("<div id='log_table_div'>" + build_log_table(data['logs'], $(this).val(), "log_table") + "</div>")
+                })
 
-                $("#tables_overview").append(build_log_table(data['logs']));
             });
         })
 
@@ -105,10 +127,11 @@
 
     <style>
         #status_div {
-            float:right;
+            float: right;
             height: 50px;
-            margin-right:50px;
+            margin-right: 50px;
         }
+
         #status_div img {
             vertical-align: middle;
         }

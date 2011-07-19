@@ -9,10 +9,12 @@ class MachineHandler(BaseHandler):
         'id', 'name', 'machine_id', 'storage','current_day_folder_path','current_version_in_loop', 'versions_count','get_next_backup_time','get_last_backup_time', 'running_backup',
         'running_restore', 'from_date', 'get_next_backup_time',
             ('folder_backups', ('id', 'local_folder_path')), ('sql_backups', ('id', 'type','host','database','username','password')), ('backups', ('id', 'time_started')))),
-                  ('backups', ('id', 'time_started','day_folder_path')), ('logs', ('id', 'datetime','type','text')), )
+                  ('backups', ('id', 'time_started','day_folder_path','is_recoverable',('schedule',('id','name',)))), ('logs', ('id', 'datetime','type','text')), )
 
-    def read(self, request, id=None):
+    def read(self, request, offset=0, limit=None, id=None):
+        
         all = Machine.objects.all()
+
         if id:
             try:
                 return all.get(machine_id=id)
@@ -28,15 +30,19 @@ class MachineLogHandler(BaseHandler):
     model = MachineLog
     fields = ('id', ('machine',('id','name')), 'datetime','text','type',)
 
-    def read(self, request, id=None):
-        all = MachineLog.objects.all()
-        if id:
+    def read(self, request, offset=0, limit=None, machine_id=None):
+        all = MachineLog.objects.all().order_by('-id')
+
+        if machine_id:
             try:
-                return all.get(machine_id=id)
+                all =  all.filter(machine__machine_id=machine_id)
             except MachineLog.DoesNotExist:
                 return rc.NOT_FOUND
-        else:
-            return all
+
+        if limit:
+            all = all[offset:limit]
+
+        return all
 
     def create(self, request, id=None):
         instance = MachineLog()
