@@ -119,12 +119,8 @@ class Machine:
             self.log_info("Server busy (schedule running), waiting.")
             exit()
 
-        self.log_info("Performing backup")
-
         for schedule in self.schedules:
             schedule.run()
-
-        self.log_info("Backup done")
 
     def get_machine_data_from_api(self):
         url = "%s%s%s%s/" % (base_api_path, self.server_ip, machines_api_path, self.machine_id)
@@ -538,10 +534,11 @@ class Schedule:
         for sql_backup in self.sql_backups:
             sql_backup.run()
 
-        self.increase_counter()
         self.create_new_backup()
 
         self.running_backup = False
+        self.current_version_in_loop = self.find_next_counter()
+
         self.save_current_state()
 
         self.machine.log_info("Schedule %s complete" % self.name)
@@ -569,19 +566,6 @@ class Schedule:
         self.sql_backups = []
         for sql_backup in sql_backups:
             self.sql_backups.append(SQLBackup(self, sql_backup))
-
-    def increase_counter(self):
-        post_url = "%s%s%s%s/" % (base_api_path, self.machine.server_ip, schedule_api_path, self.id)
-
-        data_dict = {
-            'name': self.name,
-            'machine_id': self.machine.machine_id,
-            'running_backup': self.running_backup,
-            'running_restore': self.running_restore,
-            'current_version_in_loop': self.find_next_counter(),
-            }
-
-        post_data_to_api(post_url, data_dict, self.machine.username, self.machine.password)
 
     def save_current_state(self):
         post_url = "%s%s%s%s/" % (base_api_path, self.machine.server_ip, schedule_api_path, self.id)
