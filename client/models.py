@@ -29,27 +29,21 @@ temp_folder = BASE_PATH + "temps" + os.sep
 database_backup_folder = BASE_PATH + "sql_backup" + os.sep
 
 def post_data_to_api(post_url, data_dict, username, password):
-    try:
-        register_openers()
-        datagen, headers = multipart_encode(data_dict)
-        request = urllib2.Request(post_url, datagen, headers)
-        base64string = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
-        request.add_header("Authorization", "Basic %s" % base64string)
-        return urllib2.urlopen(request).read()
-    except Exception, e:
-        print "Can not post data to api. Data: %s" % str(data_dict)
+    register_openers()
+    datagen, headers = multipart_encode(data_dict)
+    request = urllib2.Request(post_url, datagen, headers)
+    base64string = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
+    request.add_header("Authorization", "Basic %s" % base64string)
+    return urllib2.urlopen(request).read()
 
 def download_data_from_api(theurl, username, password):
-    try:
-        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
-        passman.add_password(None, theurl, username, password)
-        authhandler = urllib2.HTTPBasicAuthHandler(passman)
-        opener = urllib2.build_opener(authhandler)
-        urllib2.install_opener(opener)
-        pagehandle = urllib2.urlopen(theurl)
-        return simplejson.loads(pagehandle.read())
-    except Exception, e:
-        print "Can not post download from api. url: %s" % str(theurl)
+    passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+    passman.add_password(None, theurl, username, password)
+    authhandler = urllib2.HTTPBasicAuthHandler(passman)
+    opener = urllib2.build_opener(authhandler)
+    urllib2.install_opener(opener)
+    pagehandle = urllib2.urlopen(theurl)
+    return simplejson.loads(pagehandle.read())
 
 class Log:
     def __init__(self, machine, type, text):
@@ -115,7 +109,6 @@ class Machine:
             self.id = machine_data['id']
             self.is_busy = machine_data['is_busy']
         except Exception, e:
-            print "Can not connect to server: %s" % str(e)
             exit()
 
         self.add_schedules(machine_data['schedules'])
@@ -124,7 +117,6 @@ class Machine:
 
         if self.is_busy:
             self.log_info("Server busy (schedule running), waiting.")
-            print "exit, server busy."
             exit()
 
         self.log_info("Performing backup")
@@ -172,8 +164,6 @@ class FTPStorage:
         self.file_upload_percent = 0
 
     def reconnect_and_continue_upload_to_folder(self, local_file_path, file_name, storage_folder, attempts=2):
-
-        print "reconnecting..."
 
         self.file_upload_size_written = 0
 
@@ -369,11 +359,9 @@ class Storage:
 
         for item in os.listdir(directory):
             if temp_folder == directory+os.sep:
-                print "skipping %s" % temp_folder
                 continue
 
             if database_backup_folder == directory+os.sep:
-                print "skipping %s" % database_backup_folder
                 continue
 
             try:
