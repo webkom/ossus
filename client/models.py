@@ -205,13 +205,18 @@ class FTPStorage:
 
             self.schedule.machine.log_info("Making rest of file as new fil")
             f = open(local_file_path, "rb")
-            rest_of_file = open(local_file_path+"test", "w")
-            rest_of_file.write(f.read()[uploaded_yet:])
+            rest_of_data = f.read()[uploaded_yet:]
+            f.close()
+        
+            rest_of_file = open(local_file_path, "w")
+            rest_of_file.write(rest_of_data)
             rest_of_file.close()
-            self.schedule.machine.log_info("Done making rest of file as new fil")
-            rest_of_file = open(local_file_path+"test", "rb")
 
-            self.schedule.machine.log_info("Create new rest_of_file for upload, remaining size of file for upload is: %s MB" % (os.path.getsize(local_file_path+"test")/1024/1024))
+            self.schedule.machine.log_info("Done making rest of file as new fil")
+
+            rest_of_file = open(local_file_path, "rb")
+
+            self.schedule.machine.log_info("Create new rest_of_file for upload, remaining size of file for upload is: %s MB" % (os.path.getsize(local_file_path)/1024/1024))
             
             #Upload (reupload from last byte)
             self.connection.storbinary("STOR %s" % self.store_path, rest_of_file, 1024, handle_upload_progress, rest=uploaded_yet)
@@ -219,7 +224,6 @@ class FTPStorage:
             self.connection.cwd("~/")
             self.schedule.machine.log_info("Done re-upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder) + " used " + str(attempts) + " attempts")
 
-            f.close()
             rest_of_file.close()
 
         except Exception, e:
@@ -253,7 +257,6 @@ class FTPStorage:
             self.connection.cwd("~/")
             f = open(local_file_path, "rb")
             self.connection.storbinary("STOR %s" % self.store_path, f, 1024, handle_upload_progress)
-            self.schedule.machine.log_info("hmmmmmmmmm")
             self.connection.cwd("~/")
             self.schedule.machine.log_info("Done upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder))
             f.close()
