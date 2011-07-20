@@ -11,6 +11,9 @@ import os
 import urllib2
 import simplejson
 
+import socket
+socket.setdefaulttimeout(20.0)
+
 log_file_path = "log_backup.txt"
 base_api_path = "http://"
 
