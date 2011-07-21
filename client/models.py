@@ -185,6 +185,9 @@ class FTPStorage:
                 self.schedule.machine.log_info("continued uploaded " + str(int(percent)) + "% " + "("+str(uploaded_size) +" MB)" + "of file: " + str(file_name) + ". spent time: " + str(round(time_spent_seconds,2)) + " seconds. speed: " + str(round(float(uploaded_size/(time_spent_seconds/1024)),1)) + " kb/s")
                 self.file_upload_percent = int(percent)
 
+            if self.file_upload_size_written >= self.file_upload_total_size:
+                self.connection.abort()
+
         try:
             #Reconnect
             self.schedule.machine.log_info("Reconnects to %s" % self.ip)
@@ -251,6 +254,9 @@ class FTPStorage:
             if percent >= self.file_upload_percent+2:
                 self.file_upload_percent = int(percent)
                 self.schedule.machine.log_info("uploaded " + str(int(percent)) + "% " + "("+str(uploaded_size) +" MB)" + "of file: " + str(file_name) + ". spent time: " + str(round(time_spent_seconds,2)) + " seconds. speed: " + str(round(float(uploaded_size/(time_spent_seconds/1024)),1)) + " kb/s")
+                
+            if self.file_upload_size_written >= self.file_upload_total_size:
+                self.connection.abort()
                 
         try:
             self.schedule.machine.log_info("Start upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder))
