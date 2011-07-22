@@ -1,4 +1,4 @@
-from models import Machine
+from models import Machine,FTPStorage
 import os
 
 BASE_PATH = os.path.dirname(__file__)

@@ -29,7 +29,6 @@ class ScheduleAdmin(admin.ModelAdmin):
     inlines = [
         FolderBackupInline,
         SQLBackupInline,
-        BackupInline,
         ]
 
 #Company
