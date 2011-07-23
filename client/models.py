@@ -362,7 +362,11 @@ class Storage:
 
     def create_zip(self, zipf, directory, folder=""):
 
+
+        directory = directory.encode("utf-8")
+
         for item in os.listdir(directory):
+
 
             if temp_folder == directory + os.sep:
                 continue
