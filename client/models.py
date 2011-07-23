@@ -352,27 +352,33 @@ class Storage:
 
         self.set_correct_backend()
 
-    def save_folder_as_zip(self, dir, save_as):
-        try:
-            zip = zipfile.ZipFile(save_as.encode("utf-8"), 'w', allowZip64=True, compression=zipfile.ZIP_DEFLATED)
 
-            dir = dir.encode("utf-8")
-            root_len = len(os.path.abspath(dir))
-            for root, dirs, files in os.walk(dir):
-                archive_root = os.path.abspath(root)[root_len:]
-                for f in files:
-                    fullpath = os.path.join(root, f)
-                    archive_name = os.path.join(archive_root, f)
+    def save_folder_as_zip(self, folder_to_zip, save_as):
+        zipf = zipfile.ZipFile(str(save_as), mode="w", allowZip64=True)
+        self.create_zip(zipf, folder_to_zip)
+        zipf.close()
 
-                    try:
-                        zip.write(fullpath, archive_name.decode("utf-8"), zipfile.ZIP_DEFLATED)
-                    except Exception, e:
-                        self.schedule.machine.log_error(str(e))
-                    
-            zip.close()
-            return zip
-        except Exception, e:
-            self.schedule.machine.log_error(str(e))
+        return zipf
+
+    def create_zip(self, zipf, directory, folder=""):
+
+        directory = directory.encode("utf-8")
+
+        for item in os.listdir(directory):
+            if temp_folder == directory + os.sep:
+                continue
+
+            if database_backup_folder == directory + os.sep:
+                continue
+
+            try:
+                if os.path.isfile(os.path.join(directory, item)):
+                    zipf.write(os.path.join(directory, item), folder + os.sep + item)
+                elif os.path.isdir(os.path.join(directory, item)):
+                    self.create_zip(zipf, os.path.join(directory, item).decode("utf-8"), folder + os.sep + item)
+            except Exception, e:
+                self.schedule.machine.log_warning(str(e))
+    
 
     def upload_folder(self, folder, save_in_folder):
         filename = self.create_filename_for_folder(folder)
