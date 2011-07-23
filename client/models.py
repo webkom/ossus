@@ -365,7 +365,7 @@ class Storage:
                     fullpath = os.path.join(root, f)
                     archive_name = os.path.join(archive_root, f)
                     print f
-                    zip.write(fullpath, archive_name, zipfile.ZIP_DEFLATED)
+                    zip.write(fullpath, archive_name.encode("utf-8"), zipfile.ZIP_DEFLATED)
             zip.close()
 
             return zip
