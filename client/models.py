@@ -367,6 +367,7 @@ class Storage:
 
         for item in os.listdir(directory):
 
+            item = item.encode("utf-8")
 
             if temp_folder == directory + os.sep:
                 continue
