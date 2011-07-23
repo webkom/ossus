@@ -368,13 +368,10 @@ class Storage:
             if database_backup_folder == directory + os.sep:
                 continue
 
-            try:
-                if os.path.isfile(os.path.join(directory, item)):
-                    zipf.write(os.path.join(directory, item), folder + os.sep + item)
-                elif os.path.isdir(os.path.join(directory, item)):
-                    self.create_zip(zipf, os.path.join(directory, item), folder + os.sep + item)
-            except Exception, e:
-                self.schedule.machine.log_warning(str(e))
+            if os.path.isfile(os.path.join(directory, item)):
+                zipf.write(os.path.join(directory, item), folder + os.sep + item)
+            elif os.path.isdir(os.path.join(directory, item)):
+                self.create_zip(zipf, os.path.join(directory, item), folder + os.sep + item)
 
     def upload_folder(self, folder, save_in_folder):
         filename = self.create_filename_for_folder(folder)
