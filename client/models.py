@@ -12,7 +12,7 @@ import urllib2
 import simplejson
 import socket
 
-socket.setdefaulttimeout(20.0)
+socket.setdefaulttimeout(100.0)
 
 log_file_path = "log_backup.txt"
 base_api_path = "http://"
@@ -230,7 +230,7 @@ class FTPStorage:
                 byte = next_byte
 
                 percent = int(100 * (float(byte) / (float(size_of_original_file))))
-                if percent >= self.file_upload_percent+20:
+                if percent >= self.file_upload_percent:
                     self.file_upload_percent = percent
                     self.schedule.machine.log_info("Uploaded " + str(percent) + "%")
 
