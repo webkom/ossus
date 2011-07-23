@@ -363,17 +363,21 @@ class Storage:
     def create_zip(self, zipf, directory, folder=""):
 
         for item in os.listdir(directory):
+
             if temp_folder == directory + os.sep:
                 continue
 
             if database_backup_folder == directory + os.sep:
                 continue
 
+            file_path = os.path.join(directory, item).encode("utf-8")
+            save_dir = (folder + os.sep + item).encode("utf-8")
+
             try:
-                if os.path.isfile(os.path.join(directory, item)):
-                    zipf.write(os.path.join(directory, item).encode("utf-8"), folder + os.sep + item)
-                elif os.path.isdir(os.path.join(directory, item)):
-                    self.create_zip(zipf, os.path.join(directory, item), folder + os.sep + item)
+                if os.path.isfile(file_path):
+                    zipf.write(file_path, save_dir)
+                elif os.path.isdir(file_path):
+                    self.create_zip(zipf, file_path, save_dir)
 
             except Exception, e:
                 self.schedule.machine.log_warning(str(e))
