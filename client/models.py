@@ -366,7 +366,7 @@ class Storage:
                 zip.write(fullpath, archive_name, zipfile.ZIP_DEFLATED)
         zip.close()
 
-        return save_as
+        return zip
 
     def upload_folder(self, folder, save_in_folder):
         filename = self.create_filename_for_folder(folder)
