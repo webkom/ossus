@@ -27,7 +27,6 @@ BASE_PATH = os.path.dirname(__file__)
 if BASE_PATH:
     BASE_PATH += os.sep
 
-mysql_dump = "mysqldump5"
 temp_folder = BASE_PATH + "temps" + os.sep
 database_backup_folder = BASE_PATH + "sql_backup" + os.sep
 
@@ -108,6 +107,7 @@ class Machine:
         self.username = settings_dict['username']
         self.password = settings_dict['password']
         self.os_system = settings_dict['os_system']
+        self.mysql_dump = settings_dict['mysql_dump']
         self.force_action = False
 
         if int(settings_dict['force_action']) == 1:
@@ -466,7 +466,7 @@ class SQLBackup:
         try:
             output_dir = database_backup_folder + os.sep + self.database + os.sep
             output_file = "%s.sql" % self.database
-            command = mysql_dump + " --host %s " % self.host + "--user " + self.username + " --password=" + self.password + " --add-locks --flush-privileges --add-drop-table --complete-insert --extended-insert --single-transaction --database " + self.database + " > " + output_dir + output_file
+            command = self.schedule.machine.mysql_dump + " --host %s " % self.host + "--user " + self.username + " --password=" + self.password + " --add-locks --flush-privileges --add-drop-table --complete-insert --extended-insert --single-transaction --database " + self.database + " > " + output_dir + output_file
             subprocess.call(command, shell=True)
             self.schedule.storage.upload_folder(output_dir, self.schedule.upload_path)
             self.schedule.machine.log_info("Backup of %s database complete" % self.database)
