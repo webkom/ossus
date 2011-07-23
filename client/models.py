@@ -232,7 +232,7 @@ class FTPStorage:
                 percent = int(100 * (float(byte) / (float(size_of_original_file))))
                 if percent >= self.file_upload_percent:
                     self.file_upload_percent = percent
-                    self.schedule.machine.log_info("Uploaded " + str(percent) + "%" + ", " + str(byte/(1024/1024)) + " MB" )
+                    self.schedule.machine.log_info("Uploaded " + str(percent) + "%" + ", " + str(float(byte)/float(1024*1024)) + " MB" )
 
                 if byte >= size_of_original_file:
                     not_uploaded = False
@@ -388,6 +388,8 @@ class Storage:
 
         zip_to_upload = self.save_folder_as_zip(folder, temp_folder + filename)
 
+
+        self.schedule.machine.log_info("Begun upload %s" % folder + ", " + str(float(os.path.getsize(zip_to_upload.filename))/float(1024*1024)) + " MB")
         self.upload_file(zip_to_upload.filename, filename, save_in_folder)
         return True
 
@@ -433,7 +435,7 @@ class FolderBackup:
 
     def run(self):
         try:
-            self.schedule.machine.log_info("Start backup %s folder, zipping" % self.local_folder_path + ", " + str(os.path.getsize(self.local_folder_path)/(1024/1024)) + " MB")
+            self.schedule.machine.log_info("Start backup %s folder, zipping" % self.local_folder_path)
             self.schedule.storage.upload_folder(self.local_folder_path, self.schedule.upload_path)
             self.schedule.machine.log_info("Backup of %s folder complete" % self.local_folder_path)
         except Exception, e:
