@@ -362,11 +362,7 @@ class Storage:
 
     def create_zip(self, zipf, directory, folder=""):
 
-        directory = directory.decode("utf-8")
-
         for item in os.listdir(directory):
-            item = item.decode("utf-8")
-
             if temp_folder == directory + os.sep:
                 continue
 
@@ -375,7 +371,7 @@ class Storage:
 
             try:
                 if os.path.isfile(os.path.join(directory, item)):
-                    zipf.write(os.path.join(directory, item), folder + os.sep + item)
+                    zipf.write(os.path.join(directory, item).encode("utf-8"), folder + os.sep + item)
                 elif os.path.isdir(os.path.join(directory, item)):
                     self.create_zip(zipf, os.path.join(directory, item), folder + os.sep + item)
 
