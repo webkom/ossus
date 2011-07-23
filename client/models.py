@@ -118,7 +118,7 @@ class Machine:
 
     def run_backup(self):
 
-        if self.is_busy:
+        if self.is_busy and not self.force_action:
             self.log_info("Server busy (schedule running), waiting.")
             exit()
 
@@ -145,10 +145,11 @@ class Machine:
 
 def timedelta_milliseconds(td):
     return td.days*86400000 + td.seconds*1000 + td.microseconds/1000
-            
+
 class FTPStorage:
     def __init__(self, schedule, ip, username, password, folder):
         self.connection = ftplib.FTP(ip, username, password)
+
         self.folder = folder
         self.schedule = schedule
 
@@ -174,67 +175,41 @@ class FTPStorage:
 
         self.store_path = "~/" + storage_folder + file_name
 
-        if attempts>20:
-            self.schedule.machine.log_info("Have tried to reconnect 20 times, no success... aborting")
-            return False
+        not_uploaded = True
 
-        def handle_upload_progress(block):
-            self.file_upload_size_written += 1024
+        original_file = open(local_file_path, "rb")
 
-            if self.file_upload_size_written % 52428800 == 0:
-                self.upload_file_to_folder(local_file_path, file_name, storage_folder, attempts+1)
+        size_of_original_file = os.path.getsize(local_file_path)
 
-        try:
-            #Reconnect
-            self.schedule.machine.log_info("Reconnects to %s" % self.ip)
-            self.reconnect()
+        byte = 0
 
-            #Reupload
-            self.schedule.machine.log_info("Uploading upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder))
-            self.connection.cwd("~/")
-
-            #Set FTP to binary-mode
-            self.connection.sendcmd("TYPE i")
-
-            #Check if file is new
-
-            if self.file_path_exists(self.store_path):
-                self.schedule.machine.log_info("Finds size of file uploaded so far")
-                uploaded_yet = self.connection.size(self.store_path)
-                self.schedule.machine.log_info("%s MB has been uploaded" % (uploaded_yet/1024/1024))
-
-                self.file_upload_size_written = uploaded_yet
-
-                self.schedule.machine.log_info("Making rest of file as new fil")
-                f = open(local_file_path, "rb")
-                rest_of_data = f.read()[uploaded_yet:]
-                f.close()
-
-                rest_of_file = open(local_file_path, "w")
-                rest_of_file.write(rest_of_data)
-                rest_of_file.close()
+        while not_uploaded:
 
 
-            else:
-                self.file_upload_total_size = os.path.getsize(local_file_path)
-                self.file_upload_size_written = 0
-                uploaded_yet = 0
+            next_byte = byte+1024*1024*10
 
-            rest_of_file = open(local_file_path, "rb")
-            self.schedule.machine.log_info("Create new rest_of_file for upload, remaining size of file for upload is: %s MB" % (os.path.getsize(local_file_path)/1024/1024))
+            temp_for_upload = open(temp_folder+"temp_file_for_files_who_not_uploaded_yet.zip", "wb")
+            temp_for_upload.write(original_file.read())
+            temp_for_upload.close()
 
-            #Upload (reupload from last byte)
-            self.connection.storbinary("STOR %s" % self.store_path, rest_of_file, 1024, handle_upload_progress, rest=uploaded_yet)
+            temp_for_upload = open(temp_folder+"temp_file_for_files_who_not_uploaded_yet.zip", "rb")
 
-            self.schedule.machine.log_info("Done re-upload folder %s (%s MB) to %s" % (local_file_path, str(round(float(self.file_upload_total_size)/1024/1024, 1)), storage_folder) + " used " + str(attempts) + " attempts")
+            print byte
 
+            self.connection.storbinary("STOR %s" % self.store_path, temp_for_upload, 1024, rest=byte)
+            temp_for_upload.close()
 
-        except Exception, e:
-            self.schedule.machine.log_error(str(e))
-            self.schedule.machine.log_info("Sleeping for 20 seconds")
-            time.sleep(20)
+            byte = next_byte
 
-            return self.upload_file_to_folder(local_file_path, file_name, storage_folder, attempts=attempts+1)
+            if byte >= size_of_original_file:
+                not_uploaded = False
+
+        original_file.close()
+
+        print "done!"
+
+        self.schedule.machine.log_info("Uploaded %s " % self.store_path)
+
 
     def folder_exists_in_current_directory(self, folder):
         filelist = []
@@ -289,16 +264,14 @@ class FTPStorage:
         self.connection.cwd("~/")
         
         folder = os.path.split(file_path)[0]
+        file_name = os.path.split(file_path)[1]
 
-
-        print folder, self.folder_path_exists(folder)
 
         result = False
-        if not self.folder_path_exists(folder):
-            result = False
-        else:
-            for ftp_file in self.connection.nlst(folder):
-                if ftp_file == file_path:
+        if self.folder_path_exists(folder):
+            self.connection.cwd(folder)
+            for ftp_file in self.connection.nlst():
+                if ftp_file == file_name:
                     result = True
 
         self.connection.cwd("~/")
