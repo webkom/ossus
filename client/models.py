@@ -363,7 +363,12 @@ class Storage:
                 for f in files:
                     fullpath = os.path.join(root, f)
                     archive_name = os.path.join(archive_root, f)
-                    zip.write(fullpath, archive_name.decode("utf-8"), zipfile.ZIP_DEFLATED)
+
+                    try:
+                        zip.write(fullpath, archive_name.decode("utf-8"), zipfile.ZIP_DEFLATED)
+                    except Exception, e:
+                        self.schedule.machine.log_error(str(e))
+                    
             zip.close()
             return zip
         except Exception, e:
