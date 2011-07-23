@@ -180,12 +180,15 @@ class FTPStorage:
     def upload_file_to_folder(self, local_file_path, file_name, storage_folder, attempts=1):
         self.store_path = "~/" + storage_folder + file_name
 
+        if attempts >= 5:
+            self.schedule.machine.log_info("Tried 5 times, aborting this upload")
+            return False
+
         try:
             not_uploaded = True
             byte = 0
 
             size_of_original_file = os.path.getsize(local_file_path)
-
 
             if self.file_path_exists(self.store_path):
 
