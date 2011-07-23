@@ -353,40 +353,20 @@ class Storage:
 
         self.set_correct_backend()
 
-    def save_folder_as_zip(self, folder_to_zip, save_as):
-        zipf = zipfile.ZipFile(str(save_as), mode="w", allowZip64=True)
-        self.create_zip(zipf, folder_to_zip)
-        zipf.close()
+    def save_folder_as_zip(self, dir, save_as):
+        zip = zipfile.ZipFile(save_as, 'w', allowZip64=True, compression=zipfile.ZIP_DEFLATED)
 
-        return zipf
+        root_len = len(os.path.abspath(dir))
+        for root, dirs, files in os.walk(dir):
+            archive_root = os.path.abspath(root)[root_len:]
+            for f in files:
+                fullpath = os.path.join(root, f)
+                archive_name = os.path.join(archive_root, f)
+                print f
+                zip.write(fullpath, archive_name, zipfile.ZIP_DEFLATED)
+        zip.close()
 
-    def create_zip(self, zipf, directory, folder=""):
-
-
-        directory = directory.encode("utf-8")
-
-        for item in os.listdir(directory):
-
-            item = item.encode("utf-8")
-
-            if temp_folder == directory + os.sep:
-                continue
-
-            if database_backup_folder == directory + os.sep:
-                continue
-
-            file_path = os.path.join(directory, item).encode("utf-8")
-            save_dir = (folder + os.sep + item).encode("utf-8")
-
-            try:
-                if os.path.isfile(file_path):
-                    zipf.write(file_path, save_dir)
-                elif os.path.isdir(file_path):
-                    self.create_zip(zipf, file_path, save_dir)
-
-            except Exception, e:
-                print str(e) + " | " + directory + " | " + file_path
-                self.schedule.machine.log_warning(str(e))
+        return save_as
 
     def upload_folder(self, folder, save_in_folder):
         filename = self.create_filename_for_folder(folder)
