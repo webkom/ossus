@@ -230,7 +230,7 @@ class FTPStorage:
                 byte = next_byte
 
                 percent = int(100 * (float(byte) / (float(size_of_original_file))))
-                if percent > self.file_upload_percent:
+                if percent >= self.file_upload_percent+20:
                     self.file_upload_percent = percent
                     self.schedule.machine.log_info("Uploaded " + str(percent) + "%")
 
@@ -357,7 +357,6 @@ class Storage:
             zip = zipfile.ZipFile(save_as.encode("utf-8"), 'w', allowZip64=True, compression=zipfile.ZIP_DEFLATED)
 
             dir = dir.encode("utf-8")
-            
             root_len = len(os.path.abspath(dir))
             for root, dirs, files in os.walk(dir):
                 archive_root = os.path.abspath(root)[root_len:]
@@ -366,9 +365,7 @@ class Storage:
                     archive_name = os.path.join(archive_root, f)
                     zip.write(fullpath, archive_name.decode("utf-8"), zipfile.ZIP_DEFLATED)
             zip.close()
-
             return zip
-
         except Exception, e:
             self.schedule.machine.log_error(str(e))
 
@@ -378,9 +375,7 @@ class Storage:
         if not os.path.isdir(temp_folder):
             os.makedirs(temp_folder)
 
-        self.schedule.machine.log_info("Saving folder to zip")
         zip_to_upload = self.save_folder_as_zip(folder, temp_folder + filename)
-        self.schedule.machine.log_info("uploading zip to folder")
 
         self.upload_file(zip_to_upload.filename, filename, save_in_folder)
         return True
