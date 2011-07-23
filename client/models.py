@@ -385,6 +385,7 @@ class Storage:
                     self.create_zip(zipf, file_path, save_dir)
 
             except Exception, e:
+                print str(e) + " | " + directory + " | " + file_path
                 self.schedule.machine.log_warning(str(e))
 
     def upload_folder(self, folder, save_in_folder):
