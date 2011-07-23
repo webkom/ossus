@@ -467,7 +467,7 @@ class SQLBackup:
             output_dir = database_backup_folder + os.sep + self.database + os.sep
             output_file = "%s.sql" % self.database
             command = self.schedule.machine.mysql_dump + " --host %s " % self.host + "--user " + self.username + " --password=" + self.password + " --add-locks --flush-privileges --add-drop-table --complete-insert --extended-insert --single-transaction --database " + self.database + " > " + output_dir + output_file
-            subprocess.call(command, shell=True)
+            subprocess.check_call(command, shell=True)
             self.schedule.storage.upload_folder(output_dir, self.schedule.upload_path)
             self.schedule.machine.log_info("Backup of %s database complete" % self.database)
         except Exception, e:
