@@ -371,7 +371,7 @@ class Storage:
             return zip
         
         except  Exception, e:
-            print str(e)
+            print str(e) + " | " + root_len + " | " + fullpath
 
     def upload_folder(self, folder, save_in_folder):
         filename = self.create_filename_for_folder(folder)
