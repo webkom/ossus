@@ -41,6 +41,7 @@ def post_data_to_api(post_url, data_dict, username, password):
     except  Exception, e:
         print str(e)
 
+
 def download_data_from_api(theurl, username, password):
     try:
         passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -52,6 +53,7 @@ def download_data_from_api(theurl, username, password):
         return simplejson.loads(pagehandle.read())
     except Exception, e:
         print str(e)
+
 
 class Log:
     def __init__(self, machine, type, text):
@@ -193,7 +195,6 @@ class FTPStorage:
             size_of_original_file = os.path.getsize(local_file_path)
 
             if self.file_path_exists(self.store_path):
-
                 self.connection.sendcmd("TYPE i")
                 byte = self.connection.size(self.store_path)
 
@@ -201,16 +202,15 @@ class FTPStorage:
                 rest_of_data = f.read()[byte:]
                 f.close()
 
-                rest_of_file = open(local_file_path+"resume", "w")
+                rest_of_file = open(local_file_path + "resume", "w")
                 rest_of_file.write(rest_of_data)
                 rest_of_file.close()
 
-                original_file = open(local_file_path+"resume", "rb")
+                original_file = open(local_file_path + "resume", "rb")
 
             else:
                 original_file = open(local_file_path, "rb")
 
-            
             while not_uploaded:
                 next_byte = byte + 1024 * 1024 * 10
 
@@ -229,10 +229,9 @@ class FTPStorage:
 
                 byte = next_byte
 
-
                 percent = int(100 * (float(byte) / (float(size_of_original_file))))
-                if percent > self.file_upload_percent :
-                    self.file_upload_percent  = percent
+                if percent > self.file_upload_percent:
+                    self.file_upload_percent = percent
                     self.schedule.machine.log_info("Uploaded " + str(percent) + "%")
 
                 if byte >= size_of_original_file:
@@ -356,23 +355,19 @@ class Storage:
     def save_folder_as_zip(self, dir, save_as):
         try:
             zip = zipfile.ZipFile(save_as.encode("utf-8"), 'w', allowZip64=True, compression=zipfile.ZIP_DEFLATED)
-
-            dir = dir.encode("utf-8")
-
             root_len = len(os.path.abspath(dir))
             for root, dirs, files in os.walk(dir):
                 archive_root = os.path.abspath(root)[root_len:]
                 for f in files:
                     fullpath = os.path.join(root, f)
                     archive_name = os.path.join(archive_root, f)
-                    print f
                     zip.write(fullpath, archive_name.decode("utf-8"), zipfile.ZIP_DEFLATED)
             zip.close()
 
             return zip
-        
-        except  Exception, e:
-            print str(e) + " | " + str(root_len) + " | " + str(fullpath)
+
+        except Exception, e:
+            self.schedule.machine.log_error(str(e))
 
     def upload_folder(self, folder, save_in_folder):
         filename = self.create_filename_for_folder(folder)
