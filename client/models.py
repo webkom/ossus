@@ -355,8 +355,9 @@ class Storage:
 
     def save_folder_as_zip(self, dir, save_as):
         try:
-            zip = zipfile.ZipFile(save_as, 'w', allowZip64=True, compression=zipfile.ZIP_DEFLATED)
+            zip = zipfile.ZipFile(save_as.encode("utf-8"), 'w', allowZip64=True, compression=zipfile.ZIP_DEFLATED)
 
+            dir = dir.encode("utf-8")
 
             root_len = len(os.path.abspath(dir))
             for root, dirs, files in os.walk(dir):
