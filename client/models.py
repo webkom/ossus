@@ -25,28 +25,34 @@ machine_logs_api_path = "/api/machinelogs/"
 #Local paths
 BASE_PATH = os.path.dirname(__file__)
 if BASE_PATH:
-    BASE_PATH+=os.sep
+    BASE_PATH += os.sep
 
 mysql_dump = "mysqldump5"
 temp_folder = BASE_PATH + "temps" + os.sep
 database_backup_folder = BASE_PATH + "sql_backup" + os.sep
 
 def post_data_to_api(post_url, data_dict, username, password):
-    register_openers()
-    datagen, headers = multipart_encode(data_dict)
-    request = urllib2.Request(post_url, datagen, headers)
-    base64string = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
-    request.add_header("Authorization", "Basic %s" % base64string)
-    return urllib2.urlopen(request).read()
+    try:
+        register_openers()
+        datagen, headers = multipart_encode(data_dict)
+        request = urllib2.Request(post_url, datagen, headers)
+        base64string = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
+        request.add_header("Authorization", "Basic %s" % base64string)
+        return urllib2.urlopen(request).read()
+    except  Exception, e:
+        print str(e)
 
 def download_data_from_api(theurl, username, password):
-    passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
-    passman.add_password(None, theurl, username, password)
-    authhandler = urllib2.HTTPBasicAuthHandler(passman)
-    opener = urllib2.build_opener(authhandler)
-    urllib2.install_opener(opener)
-    pagehandle = urllib2.urlopen(theurl)
-    return simplejson.loads(pagehandle.read())
+    try:
+        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+        passman.add_password(None, theurl, username, password)
+        authhandler = urllib2.HTTPBasicAuthHandler(passman)
+        opener = urllib2.build_opener(authhandler)
+        urllib2.install_opener(opener)
+        pagehandle = urllib2.urlopen(theurl)
+        return simplejson.loads(pagehandle.read())
+    except Exception, e:
+        print str(e)
 
 class Log:
     def __init__(self, machine, type, text):
@@ -117,7 +123,6 @@ class Machine:
         self.add_schedules(machine_data['schedules'])
 
     def run_backup(self):
-
         if self.is_busy and not self.force_action:
             self.log_info("Server busy (schedule running), waiting.")
             exit()
@@ -143,8 +148,10 @@ class Machine:
         for schedule in schedules:
             self.schedules.append(Schedule(self, schedule))
 
+
 def timedelta_milliseconds(td):
-    return td.days*86400000 + td.seconds*1000 + td.microseconds/1000
+    return td.days * 86400000 + td.seconds * 1000 + td.microseconds / 1000
+
 
 class FTPStorage:
     def __init__(self, schedule, ip, username, password, folder):
@@ -161,7 +168,6 @@ class FTPStorage:
         self.file_upload_total_size = 0
         self.file_upload_percent = 0
         self.file_upload_size_written = 0
-        self.file_upload_percent = 0
 
     def reconnect(self):
         try:
@@ -172,44 +178,73 @@ class FTPStorage:
         self.connection = ftplib.FTP(self.ip, self.username, self.password)
 
     def upload_file_to_folder(self, local_file_path, file_name, storage_folder, attempts=1):
-
         self.store_path = "~/" + storage_folder + file_name
 
-        not_uploaded = True
+        try:
+            not_uploaded = True
+            byte = 0
 
-        original_file = open(local_file_path, "rb")
-
-        size_of_original_file = os.path.getsize(local_file_path)
-
-        byte = 0
-
-        while not_uploaded:
+            size_of_original_file = os.path.getsize(local_file_path)
 
 
-            next_byte = byte+1024*1024*10
+            if self.file_path_exists(self.store_path):
 
-            temp_for_upload = open(temp_folder+"temp_file_for_files_who_not_uploaded_yet.zip", "wb")
-            temp_for_upload.write(original_file.read())
-            temp_for_upload.close()
+                self.connection.sendcmd("TYPE i")
+                byte = self.connection.size(self.store_path)
 
-            temp_for_upload = open(temp_folder+"temp_file_for_files_who_not_uploaded_yet.zip", "rb")
+                f = open(local_file_path, "rb")
+                rest_of_data = f.read()[byte:]
+                f.close()
 
-            print byte
+                rest_of_file = open(local_file_path+"resume", "w")
+                rest_of_file.write(rest_of_data)
+                rest_of_file.close()
 
-            self.connection.storbinary("STOR %s" % self.store_path, temp_for_upload, 1024, rest=byte)
-            temp_for_upload.close()
+                original_file = open(local_file_path+"resume", "rb")
 
-            byte = next_byte
+            else:
+                original_file = open(local_file_path, "rb")
 
-            if byte >= size_of_original_file:
-                not_uploaded = False
+            
+            while not_uploaded:
+                next_byte = byte + 1024 * 1024 * 10
 
-        original_file.close()
+                temp_for_upload = open(temp_folder + "temp_file_for_files_who_not_uploaded_yet.zip", "wb")
+                temp_for_upload.write(original_file.read(1024 * 1024 * 10))
+                temp_for_upload.close()
 
-        print "done!"
+                temp_for_upload = open(temp_folder + "temp_file_for_files_who_not_uploaded_yet.zip", "rb")
 
-        self.schedule.machine.log_info("Uploaded %s " % self.store_path)
+                self.connection.storbinary("STOR %s" % self.store_path, temp_for_upload, 1024, rest=byte)
 
+                temp_for_upload.close()
+
+                if next_byte > size_of_original_file:
+                    next_byte = size_of_original_file
+
+                byte = next_byte
+
+
+                percent = int(100 * (float(byte) / (float(size_of_original_file))))
+                if percent > self.file_upload_percent :
+                    self.file_upload_percent  = percent
+                    self.schedule.machine.log_info("Uploaded " + str(percent) + "%")
+
+                if byte >= size_of_original_file:
+                    not_uploaded = False
+
+            original_file.close()
+
+            self.schedule.machine.log_info("Uploaded %s " % self.store_path + " used " + str(attempts) + " attempts")
+
+        except Exception, e:
+            self.schedule.machine.log_error(str(e))
+            self.schedule.machine.log_info("Sleeping for 20 seconds")
+            time.sleep(20)
+            self.schedule.machine.log_info("Reconnects to %s" % self.ip)
+            self.reconnect()
+
+            return self.upload_file_to_folder(local_file_path, file_name, storage_folder, attempts + 1)
 
     def folder_exists_in_current_directory(self, folder):
         filelist = []
@@ -226,7 +261,6 @@ class FTPStorage:
         return False
 
     def folder_path_exists(self, folder):
-
         for folder_part in folder.split("/"):
             if folder_part == "" or folder_part == "~":
                 continue
@@ -240,7 +274,6 @@ class FTPStorage:
         return True
 
     def create_folder(self, ftp_folder):
-
         ftp_folder = ftp_folder
         if self.folder_path_exists(ftp_folder):
             return False
@@ -260,12 +293,10 @@ class FTPStorage:
 
 
     def file_path_exists(self, file_path):
-
         self.connection.cwd("~/")
-        
+
         folder = os.path.split(file_path)[0]
         file_name = os.path.split(file_path)[1]
-
 
         result = False
         if self.folder_path_exists(folder):
@@ -305,6 +336,7 @@ class S3Storage:
     def __init__(self, schedule, username, password, folder):
         raise NotImplementedError, "S3 not implemented yet"
 
+
 class Storage:
     def __init__(self, schedule, storage_dict):
         self.schedule = schedule
@@ -324,12 +356,11 @@ class Storage:
         return zipf
 
     def create_zip(self, zipf, directory, folder=""):
-
         for item in os.listdir(directory):
-            if temp_folder == directory+os.sep:
+            if temp_folder == directory + os.sep:
                 continue
 
-            if database_backup_folder == directory+os.sep:
+            if database_backup_folder == directory + os.sep:
                 continue
 
             try:
@@ -398,6 +429,7 @@ class FolderBackup:
         except Exception, e:
             self.schedule.machine.log_error("Backup of %s folder failed: %s" % (self.local_folder_path, str(e)))
 
+
 class SQLBackup:
     def __init__(self, schedule, sql_dict):
         self.schedule = schedule
@@ -423,13 +455,13 @@ class SQLBackup:
     def prepare_local_sql_temps_folder_for_this_backup(self):
         if os.path.isdir(database_backup_folder):
             shutil.rmtree(database_backup_folder)
-        os.makedirs(database_backup_folder+"/"+self.database)
+        os.makedirs(database_backup_folder + "/" + self.database)
 
     def backup_myssql(self):
         import subprocess
 
         try:
-            output_dir = database_backup_folder+os.sep+self.database+os.sep
+            output_dir = database_backup_folder + os.sep + self.database + os.sep
             output_file = "%s.sql" % self.database
             command = mysql_dump + " --host %s " % self.host + "--user " + self.username + " --password=" + self.password + " --add-locks --flush-privileges --add-drop-table --complete-insert --extended-insert --single-transaction --database " + self.database + " > " + output_dir + output_file
             subprocess.call(command, shell=True)
@@ -444,7 +476,7 @@ class SQLBackup:
     def backup_mssql(self):
         try:
             import pyodbc
-            
+
             database_backup_file = database_backup_folder + "%s.bak" % self.database
 
             cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER=%s;DATABASE=%s;UID=%s;PWD=%s' % (
@@ -489,7 +521,6 @@ class Schedule:
         self.next_backup_time = datetime.strptime(schedule_dict['get_next_backup_time'], "%Y-%m-%d %H:%M:%S")
 
     def run(self):
-
         if not self.schedule_should_run():
             self.machine.log_info("Waiting, %s will not run before %s" % (self, str(self.next_backup_time)))
             return
@@ -547,8 +578,8 @@ class Schedule:
             'machine_id': self.machine.machine_id,
             'running_backup': self.running_backup,
             'running_restore': self.running_restore,
-            'current_version_in_loop':self.current_version_in_loop
-            }
+            'current_version_in_loop': self.current_version_in_loop
+        }
 
         post_data_to_api(post_url, data_dict, self.machine.username, self.machine.password)
 
