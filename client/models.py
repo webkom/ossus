@@ -180,6 +180,8 @@ class FTPStorage:
     def upload_file_to_folder(self, local_file_path, file_name, storage_folder, attempts=1):
         self.store_path = "~/" + storage_folder + file_name
 
+        self.schedule.machine.log_info("started uploading...")
+
         if attempts >= 5:
             self.schedule.machine.log_info("Tried 5 times, aborting this upload")
             return False
@@ -380,7 +382,10 @@ class Storage:
         if not os.path.isdir(temp_folder):
             os.makedirs(temp_folder)
 
+        self.schedule.machine.log_info("Saving folder to zip")
         zip_to_upload = self.save_folder_as_zip(folder, temp_folder + filename)
+        self.schedule.machine.log_info("uploading zip to folder")
+
         self.upload_file(zip_to_upload.filename, filename, save_in_folder)
         return True
 
