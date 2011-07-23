@@ -354,19 +354,24 @@ class Storage:
         self.set_correct_backend()
 
     def save_folder_as_zip(self, dir, save_as):
-        zip = zipfile.ZipFile(save_as, 'w', allowZip64=True, compression=zipfile.ZIP_DEFLATED)
+        try:
+            zip = zipfile.ZipFile(save_as, 'w', allowZip64=True, compression=zipfile.ZIP_DEFLATED)
 
-        root_len = len(os.path.abspath(dir))
-        for root, dirs, files in os.walk(dir):
-            archive_root = os.path.abspath(root)[root_len:]
-            for f in files:
-                fullpath = os.path.join(root, f)
-                archive_name = os.path.join(archive_root, f)
-                print f
-                zip.write(fullpath, archive_name, zipfile.ZIP_DEFLATED)
-        zip.close()
 
-        return zip
+            root_len = len(os.path.abspath(dir))
+            for root, dirs, files in os.walk(dir):
+                archive_root = os.path.abspath(root)[root_len:]
+                for f in files:
+                    fullpath = os.path.join(root, f)
+                    archive_name = os.path.join(archive_root, f)
+                    print f
+                    zip.write(fullpath, archive_name, zipfile.ZIP_DEFLATED)
+            zip.close()
+
+            return zip
+        
+        except  Exception, e:
+            print str(e)
 
     def upload_folder(self, folder, save_in_folder):
         filename = self.create_filename_for_folder(folder)
