@@ -243,9 +243,9 @@ class FTPStorage:
 
         except Exception, e:
             self.schedule.machine.log_error(str(e))
-            self.schedule.machine.log_info("Sleeping for 20 seconds")
-            time.sleep(20)
-            self.schedule.machine.log_info("Reconnects to %s" % self.ip)
+            self.schedule.machine.log_warning("Sleeping for 2 minutes")
+            time.sleep(240)
+            self.schedule.machine.log_warning("Reconnects to %s" % self.ip)
             self.reconnect()
 
             return self.upload_file_to_folder(local_file_path, file_name, storage_folder, attempts + 1)
