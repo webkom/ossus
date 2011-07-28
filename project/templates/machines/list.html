@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <div id="add_machine">
+        <img class="machine_icon" src="{{ STATIC_URL }}images/server_add.png"> Legg til ny maskin
+    </div>
+
+    <div id="list_machines">
+        {% for company in companies %}
+
+            <h2>{{ company.name }}</h2>
+
+            <table class='data'>
+                {% for customer in company.customers.all %}
+                    <tr>
+                        <td colspan="6"><img class="machine_icon"
+                                             src="{{ STATIC_URL }}images/office.png"><b>{{ customer.name }}</b></td>
+                    </tr>
+                    {% for location in customer.locations.all %}
+                        <tr>
+                            <td style="width: 20px;"></td>
+                            <td colspan="5">{{ location.name }}</td>
+                        </tr>
+                        {% for machine in location.machines.all %}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <img class="machine_icon"
+                                         src="{{ STATIC_URL }}images/server.png"> {{ machine.name }}
+                                </td>
+
+                                <td>{{ machine.get_last_backup_time }}</td>
+                                <td>{{ machine.get_next_backup_time }}</td>
+                                <td>
+                                    {% if machine.running_backup %}
+                                        <img class="machine_icon"
+                                             src="{{ STATIC_URL }}images/spinner.png"> kjører backup
+                                        {% else %} {% if machine.running_restore %}
+                                        <img class="machine_icon"
+                                             src="{{ STATIC_URL }}images/spinner.png"> gjennoppretter
+                                    {% else %}
+                                        <img class="machine_icon"
+                                             src="{{ STATIC_URL }}images/ok.gif">
+                                    {% endif %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% for schedule in machine.schedules.all %}
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <img class="machine_icon"
+                                             src="{{ STATIC_URL }}images/schedule.png">
+                                        {{ schedule.name }}
+                                    </td>
+
+                                    <td>{{ schedule.get_next_backup_time }}</td>
+
+                                    <td>     {% if schedule.running_backup %}
+                                        <img class="machine_icon"
+                                             src="{{ STATIC_URL }}images/spinner.png"> kjører backup
+                                        {% else %} {% if schedule.running_restore %}
+                                        <img class="machine_icon"
+                                             src="{{ STATIC_URL }}images/spinner.png"> gjennoppretter
+                                    {% else %}
+                                        <img class="machine_icon"
+                                             src="{{ STATIC_URL }}images/ok.gif">
+                                    {% endif %}
+                                    {% endif %}</td>
+
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
+            </table>
+        {% endfor %}
+    </div>
+{% endblock %}

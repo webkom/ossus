@@ -123,3 +123,19 @@ img.avatar_img
 	.reports_table .value span { background: #F90; font-size: 11px; font-weight: bold; color: #FFF; width: 40px; text-align: center;  padding: 3px 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; border-radius: 6px; }
 	
 .reports_table td { padding: 5px; }
+
+#add_machine {
+    float:right;
+    height:70px;
+}
+
+.machine_icon {
+    height: 25px;
+    width: 25px;
+    vertical-align: middle;;
+}
+
+#list_machines {
+    width: 100%;
+    float:left;
+}

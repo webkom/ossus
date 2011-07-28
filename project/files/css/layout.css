@@ -52,16 +52,19 @@ body
 
 	#header h1
 	{
+		background: url(../images/logo.png) no-repeat 0 0;
 		width: 240px;
 		height: 32px;
-		line-height: 20px;
+		line-height: 600px;
+		overflow: hidden;
 		position: relative;
 		top: 25px;
-        color:white;
-        font-size:20px;
+		
+		text-shadow: 1px 1px 4px rgba(0,0,0,.5);
 	}
 	
 		#header h1 a { display: block; }
+
 
 /* -------------------------------------------------------------- 
    Nav

@@ -12,7 +12,7 @@ import urllib2
 import simplejson
 import socket
 
-socket.setdefaulttimeout(100.0)
+socket.setdefaulttimeout(10.0)
 
 log_file_path = "log_backup.txt"
 base_api_path = "http://"
@@ -182,10 +182,9 @@ class FTPStorage:
     def upload_file_to_folder(self, local_file_path, file_name, storage_folder, attempts=1):
         self.store_path = "~/" + storage_folder + file_name
 
-        self.schedule.machine.log_info("started uploading...")
 
-        if attempts >= 5:
-            self.schedule.machine.log_info("Tried 5 times, aborting this upload")
+        if attempts >= 15:
+            self.schedule.machine.log_info("Tried 15 times, aborting this upload")
             return False
 
         try:
@@ -195,6 +194,7 @@ class FTPStorage:
             size_of_original_file = os.path.getsize(local_file_path)
 
             if self.file_path_exists(self.store_path):
+                self.schedule.machine.log_info("resume uploading...")
                 self.connection.sendcmd("TYPE i")
                 byte = self.connection.size(self.store_path)
 
@@ -209,6 +209,7 @@ class FTPStorage:
                 original_file = open(local_file_path + "resume", "rb")
 
             else:
+                self.schedule.machine.log_info("started uploading...")
                 original_file = open(local_file_path, "rb")
 
             while not_uploaded:
@@ -242,6 +243,7 @@ class FTPStorage:
             self.schedule.machine.log_info("Uploaded %s " % self.store_path + " used " + str(attempts) + " attempts")
 
         except Exception, e:
+            print str(e)
             self.schedule.machine.log_error(str(e))
             self.schedule.machine.log_warning("Sleeping for 2 minutes")
             time.sleep(240)
