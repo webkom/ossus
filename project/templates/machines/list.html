@@ -37,10 +37,10 @@
                                 <td>
                                     {% if machine.running_backup %}
                                         <img class="machine_icon"
-                                             src="{{ STATIC_URL }}images/spinner.png"> kjører backup
+                                             src="{{ STATIC_URL }}images/spinner.gif"> kjører backup
                                         {% else %} {% if machine.running_restore %}
                                         <img class="machine_icon"
-                                             src="{{ STATIC_URL }}images/spinner.png"> gjennoppretter
+                                             src="{{ STATIC_URL }}images/spinner.gif"> gjennoppretter
                                     {% else %}
                                         <img class="machine_icon"
                                              src="{{ STATIC_URL }}images/ok.gif">
@@ -63,10 +63,10 @@
 
                                     <td>     {% if schedule.running_backup %}
                                         <img class="machine_icon"
-                                             src="{{ STATIC_URL }}images/spinner.png"> kjører backup
+                                             src="{{ STATIC_URL }}images/spinner.gif"> kjører backup
                                         {% else %} {% if schedule.running_restore %}
                                         <img class="machine_icon"
-                                             src="{{ STATIC_URL }}images/spinner.png"> gjennoppretter
+                                             src="{{ STATIC_URL }}images/spinner.gif"> gjennoppretter
                                     {% else %}
                                         <img class="machine_icon"
                                              src="{{ STATIC_URL }}images/ok.gif">
