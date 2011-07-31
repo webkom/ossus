@@ -198,6 +198,8 @@ class FTPStorage:
                 self.connection.sendcmd("TYPE i")
                 byte = self.connection.size(self.store_path)
 
+                self.schedule.machine.log_info("uploaded " + str(float(byte)/float(1024*1024)) + " MB so far.")
+
                 f = open(local_file_path, "rb")
                 rest_of_data = f.read()[byte:]
                 f.close()
