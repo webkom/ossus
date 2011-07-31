@@ -204,13 +204,11 @@ class FTPStorage:
                 rest_of_data = f.read()[byte:]
                 f.close()
 
-                rest_of_file = open(temp_folder + "resume.zip", "w")
+                rest_of_file = open(temp_folder + "resume.zip", "wb")
                 rest_of_file.write(rest_of_data)
                 rest_of_file.close()
 
                 original_file = open(temp_folder + "resume.zip", "rb")
-
-                print temp_folder + "resume.zip"
 
             else:
                 self.schedule.machine.log_info("started uploading...")
@@ -247,7 +245,6 @@ class FTPStorage:
             self.schedule.machine.log_info("Uploaded %s " % self.store_path + " used " + str(attempts) + " attempts")
 
         except Exception, e:
-            print str(e)
             self.schedule.machine.log_error(str(e))
             self.schedule.machine.log_warning("Sleeping for 2 minutes")
             time.sleep(240)
