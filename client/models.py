@@ -204,11 +204,13 @@ class FTPStorage:
                 rest_of_data = f.read()[byte:]
                 f.close()
 
-                rest_of_file = open(local_file_path + "resume", "w")
+                rest_of_file = open(temp_folder + "resume.zip", "w")
                 rest_of_file.write(rest_of_data)
                 rest_of_file.close()
 
-                original_file = open(local_file_path + "resume", "rb")
+                original_file = open(temp_folder + "resume.zip", "rb")
+
+                print temp_folder + "resume.zip"
 
             else:
                 self.schedule.machine.log_info("started uploading...")
