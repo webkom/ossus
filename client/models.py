@@ -200,13 +200,24 @@ class FTPStorage:
 
                 self.schedule.machine.log_info("uploaded " + str(float(byte)/float(1024*1024)) + " MB so far.")
 
+                not_created_rest_of_data = True
+
                 f = open(local_file_path, "rb")
-                rest_of_data = f.read()[byte:]
-                f.close()
 
                 rest_of_file = open(temp_folder + "resume.zip", "wb")
-                rest_of_file.write(rest_of_data)
+
+                f.read(byte)
+
+                count = byte
+                while not_created_rest_of_data:
+                    rest_of_file.write(f.read(1024*1024*50))
+                    count+=1024*1024*50
+
+                    if count >= size_of_original_file:
+                        not_created_rest_of_data = False
+
                 rest_of_file.close()
+                f.close()
 
                 original_file = open(temp_folder + "resume.zip", "rb")
 
@@ -247,7 +258,7 @@ class FTPStorage:
         except Exception, e:
             self.schedule.machine.log_error(str(e))
             self.schedule.machine.log_warning("Sleeping for 2 minutes")
-            time.sleep(240)
+            time.sleep(24)
             self.schedule.machine.log_warning("Reconnects to %s" % self.ip)
             self.reconnect()
 
