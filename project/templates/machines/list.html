@@ -24,7 +24,7 @@
                             <td colspan="5">{{ location.name }}</td>
                         </tr>
                         {% for machine in location.machines.all %}
-                            <tr>
+                            <tr class="machine_tr">
                                 <td></td>
                                 <td></td>
                                 <td>
@@ -49,7 +49,7 @@
                                 </td>
                             </tr>
                             {% for schedule in machine.schedules.all %}
-                                <tr>
+                                <tr class="schedule_tr">
                                     <td></td>
                                     <td></td>
                                     <td></td>

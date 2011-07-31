@@ -173,18 +173,18 @@ class FTPStorage:
 
     def reconnect(self):
         try:
-            self.connection.close()
+            self.connection.quit()
+            self.connection = None
         except Exception, e:
-            pass
+            self.schedule.machine.log_warning(str(e))
 
         self.connection = ftplib.FTP(self.ip, self.username, self.password)
 
     def upload_file_to_folder(self, local_file_path, file_name, storage_folder, attempts=1):
         self.store_path = "~/" + storage_folder + file_name
 
-
         if attempts >= 15:
-            self.schedule.machine.log_info("Tried 15 times, aborting this upload")
+            self.schedule.machine.log_warning("Tried 15 times, aborting this upload")
             return False
 
         try:
