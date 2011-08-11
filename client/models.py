@@ -206,14 +206,13 @@ class FTPStorage:
 
                 rest_of_file = open(temp_folder + "resume.zip", "wb")
 
-                f.read(byte)
-
-                count = byte
+                c = byte
                 while not_created_rest_of_data:
-                    rest_of_file.write(f.read(1024*1024*50))
-                    count+=1024*1024*50
+                    rest_of_file.write(f.read(1024))
 
-                    if count >= size_of_original_file:
+                    c += 1024
+                    
+                    if c >= int(size_of_original_file):
                         not_created_rest_of_data = False
 
                 rest_of_file.close()
@@ -226,10 +225,10 @@ class FTPStorage:
                 original_file = open(local_file_path, "rb")
 
             while not_uploaded:
-                next_byte = byte + 1024 * 1024 * 10
+                next_byte = byte + 1024
 
                 temp_for_upload = open(temp_folder + "temp_file_for_files_who_not_uploaded_yet.zip", "wb")
-                temp_for_upload.write(original_file.read(1024 * 1024 * 10))
+                temp_for_upload.write(original_file.read(1024))
                 temp_for_upload.close()
 
                 temp_for_upload = open(temp_folder + "temp_file_for_files_who_not_uploaded_yet.zip", "rb")
@@ -392,7 +391,7 @@ class Storage:
                     self.create_zip(zipf, os.path.join(directory, item).decode("utf-8"), folder + os.sep + item)
             except Exception, e:
                 self.schedule.machine.log_warning(str(e))
-    
+
 
     def upload_folder(self, folder, save_in_folder):
         filename = self.create_filename_for_folder(folder)
