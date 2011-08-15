@@ -6,7 +6,7 @@ from piston.utils import rc
 class SchedulesBackupHandler(BaseHandler):
     model = ScheduleBackup
     fields = (
-        'id', 'name', 'ftp_host', 'machine_id', 'running_backup', 'running_restore',('storage'), 'get_next_backup_time',
+        'id', 'name', 'ftp_host', 'machine_id', 'current_day_folder_path','current_version_in_loop', 'running_backup', 'running_restore',('storage'), 'get_next_backup_time',
             ('folder_backups', ('id', 'local_folder_path')),('backups', ('id', 'time_started')))
 
     def read(self, request, id=None):
