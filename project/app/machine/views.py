@@ -5,10 +5,7 @@ from django.shortcuts import render
 @login_required()
 def overview(request):
     companies = Company.objects.all()
-
     return render(request, "machines/list.html", {'companies':companies})
-
-
 
 @login_required()
 def view(request, id):
