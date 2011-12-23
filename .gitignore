@@ -6,6 +6,7 @@
 project.db
 pickle*.txt
 #generated buildout stuff
+.DS_Store
 bin
 develop-eggs
 downloads
