@@ -1,0 +1,21 @@
+*.pyc
+*.pyo
+*.orig
+*~
+*.egg-info
+project.db
+pickle*.txt
+#generated buildout stuff
+bin
+develop-eggs
+downloads
+eggs
+omelette
+parts
+.installed.cfg
+.settings
+.pydevproject
+media/uploads
+static_media
+.idea
+development.py
