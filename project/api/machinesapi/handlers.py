@@ -9,7 +9,7 @@ class MachineHandler(BaseHandler):
         'id', 'name', 'machine_id', 'storage','current_day_folder_path','current_version_in_loop', 'versions_count','get_next_backup_time','get_last_backup_time', 'running_backup',
         'running_restore', 'from_date', 'get_next_backup_time',
             ('folder_backups', ('id', 'local_folder_path')), ('sql_backups', ('id', 'type','host','database','username','password')), ('backups', ('id', 'time_started')))),
-                  ('backups', ('id', 'time_started','day_folder_path','is_recoverable',('schedule',('id','name',)))), ('logs', ('id', 'datetime','type','text')), )
+                  ('backups', ('id', 'time_started','day_folder_path','is_recoverable',('schedule',('id','name',)))), )
 
     def read(self, request, offset=0, limit=None, id=None):
         

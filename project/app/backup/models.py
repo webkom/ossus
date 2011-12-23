@@ -49,7 +49,7 @@ class Machine(models.Model):
     location = models.ForeignKey(Location, related_name="machines")
     machine_id = models.CharField(max_length=150)
     last_connection_to_client = models.DateTimeField(blank=True, null=True)
-    ip = models.IPAddressField()
+    ip = models.IPAddressField(null=True, blank=True)
 
     def __unicode__(self):
         return "Machine: %s, machine_id: %s" % (self.name, self.machine_id)

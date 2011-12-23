@@ -4,7 +4,9 @@
 
 
     <div id="add_machine">
-        <img class="machine_icon" src="{{ STATIC_URL }}images/server_add.png"> Legg til ny maskin
+        <a href="{% url app.machine.views.create %}">
+            <img class="machine_icon" src="{{ STATIC_URL }}images/server_add.png"> Legg til ny maskin
+        </a>
     </div>
 
     <div id="list_machines">
@@ -38,7 +40,7 @@
                                     {% if machine.running_backup %}
                                         <img class="machine_icon"
                                              src="{{ STATIC_URL }}images/spinner.gif"> kjører backup
-                                        {% else %} {% if machine.running_restore %}
+                                    {% else %} {% if machine.running_restore %}
                                         <img class="machine_icon"
                                              src="{{ STATIC_URL }}images/spinner.gif"> gjennoppretter
                                     {% else %}
@@ -64,13 +66,13 @@
                                     <td>     {% if schedule.running_backup %}
                                         <img class="machine_icon"
                                              src="{{ STATIC_URL }}images/spinner.gif"> kjører backup
-                                        {% else %} {% if schedule.running_restore %}
-                                        <img class="machine_icon"
-                                             src="{{ STATIC_URL }}images/spinner.gif"> gjennoppretter
-                                    {% else %}
-                                        <img class="machine_icon"
-                                             src="{{ STATIC_URL }}images/ok.gif">
-                                    {% endif %}
+                                    {% else %} {% if schedule.running_restore %}
+                                            <img class="machine_icon"
+                                                 src="{{ STATIC_URL }}images/spinner.gif"> gjennoppretter
+                                        {% else %}
+                                            <img class="machine_icon"
+                                                 src="{{ STATIC_URL }}images/ok.gif">
+                                        {% endif %}
                                     {% endif %}</td>
 
                                 </tr>
