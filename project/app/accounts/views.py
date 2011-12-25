@@ -2,7 +2,6 @@
 from app.accounts.forms import LoginForm
 from django.shortcuts import render_to_response, redirect, HttpResponseRedirect
 from django.conf import settings
-from django.utils.translation import ugettext as _
 from django.contrib.auth import authenticate, login, logout
 
 def login_view(request):

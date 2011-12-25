@@ -18,13 +18,6 @@ DATABASES = {
     }
 }
 
-_ = lambda s: s
-
-LANGUAGES = (
-    ('en', _('English')),
-    ('nb', _('Norwegian')),
-    )
-
 TIME_ZONE = 'Europe/Oslo'
 LANGUAGE_CODE = 'no-nb'
 
