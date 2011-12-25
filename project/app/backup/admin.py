@@ -1,5 +1,5 @@
-from app.backup.models import Backup, Machine, ScheduleBackup, FolderBackup, Company, Customer, Location, Storage, SQLBackup
 from django.contrib import admin
+from app.backup.models import Backup, Machine, ScheduleBackup, FolderBackup, Company, Customer, Location, Storage, SQLBackup
 
 class ScheduleBackupInline(admin.TabularInline):
     model = ScheduleBackup

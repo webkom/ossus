@@ -1,7 +1,7 @@
-from django.http import HttpResponse
-from app.backup.models import Machine, Company
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+
+from app.backup.models import Machine, Company
 from app.machine.forms import MachineForm
 
 @login_required()

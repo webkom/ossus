@@ -2,7 +2,7 @@ from django.conf.urls.defaults import patterns, include, handler500
 from django.conf import settings
 from django.contrib import admin
 
-#admin.autodiscover()
+admin.autodiscover()
 
 handler500 # Pyflakes
 

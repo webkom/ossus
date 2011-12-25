@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from app.accounts.forms import LoginForm
-from django.shortcuts import render_to_response, redirect, HttpResponseRedirect
-from django.conf import settings
+from django.shortcuts import render_to_response, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
+from app.accounts.forms import LoginForm
 
 def login_view(request):
     message = ""
