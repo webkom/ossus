@@ -6,8 +6,8 @@ TEMPLATE_DEBUG = True
 BASE_PATH = os.path.dirname(__file__)
 
 ADMINS = (
-('Fredrik', 'fredrik@fncit.no'),
-)
+    ('Fredrik', 'fredrik@fncit.no'),
+    )
 
 MANAGERS = ADMINS
 
@@ -17,6 +17,13 @@ DATABASES = {
         'NAME': 'project.db'
     }
 }
+
+_ = lambda s: s
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('nb', _('Norwegian')),
+    )
 
 TIME_ZONE = 'Europe/Oslo'
 LANGUAGE_CODE = 'no-nb'
@@ -28,40 +35,40 @@ MEDIA_ROOT = STATIC_URL
 ADMIN_MEDIA_PREFIX = MEDIA_ROOT + 'admin/'
 
 STATICFILES_DIRS = (
-BASE_PATH + '/files/',
-)
+    BASE_PATH + '/files/',
+    )
 
 # Don't share this with anybody.
-SECRET_KEY = 'zwvt#)v2#v&avbec*plq1!u4+an3o!rtmi(h6hchgvdxh95@7e'
+SECRET_KEY = 'zwvt#)va2#v&avbec*plq1!u4+an3o!rtmi(h6hchgvdxh95@7e'
 
 MIDDLEWARE_CLASSES = (
-'django.middleware.common.CommonMiddleware',
-'django.contrib.sessions.middleware.SessionMiddleware',
-'django.contrib.auth.middleware.AuthenticationMiddleware',
-'django.middleware.doc.XViewMiddleware',
-)
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.doc.XViewMiddleware',
+    )
 
 ROOT_URLCONF = 'project.urls'
 
 INSTALLED_APPS = (
-'django.contrib.auth',
-'django.contrib.contenttypes',
-'django.contrib.sessions',
-'django.contrib.admin',
-'django.contrib.staticfiles',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.admin',
+    'django.contrib.staticfiles',
 
-'app.backup',
+    'app.backup',
 
-'south',
-'piston',
+    'south',
+    'piston',
 
-)
+    )
 
 TEMPLATE_LOADERS = (
-'django.template.loaders.filesystem.Loader',
-'django.template.loaders.app_directories.Loader',
-)
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    )
 
 TEMPLATE_DIRS = (
-    BASE_PATH+"/templates",
-)
+    BASE_PATH + "/templates",
+    )
