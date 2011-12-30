@@ -9,8 +9,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Adding field 'Backup.time_ended'
-        db.add_column('backup_backup', 'time_ended', self.gf('django.db.models.fields.DateTimeField')(default=''), keep_default=False)
-
+        db.add_column('backup_backup', 'time_ended', self.gf('django.db.models.fields.DateTimeField')(default='datetime.datetime.now'), keep_default=False)
 
     def backwards(self, orm):
         
