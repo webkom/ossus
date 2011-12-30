@@ -28,7 +28,7 @@ class BackupHandler(BaseHandler):
             schedulebackup = instance.schedule
         else:
             instance = Backup()
-            machine = Machine.objects.get(id=request.POST['machine_id'])
+            machine = Machine.objects.get(machine_id=request.POST['machine_id'])
             schedulebackup = ScheduleBackup.objects.get(id=request.POST['schedule_id'])
 
         machine.set_last_connection_to_client()
