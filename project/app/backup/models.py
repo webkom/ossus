@@ -256,7 +256,7 @@ class Backup(models.Model):
     machine = models.ForeignKey(Machine, related_name="backups")
     schedule = models.ForeignKey(ScheduleBackup, null=True, related_name="backups")
     time_started = models.DateTimeField()
-    time_ended = models.DateTimeField()
+    time_ended = models.DateTimeField(null=True, blank=True)
     day_folder_path = models.CharField(max_length=150, blank=True)
 
     def is_recoverable(self):
