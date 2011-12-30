@@ -10,7 +10,7 @@ class ScheduleBackupForm(ModelForm):
 class BackupForm(ModelForm):
     class Meta:
         model = Backup
-        fields = ('time_started',)
+        fields = ('time_started','time_ended')
 
 class MachineLogForm(ModelForm):
     class Meta:

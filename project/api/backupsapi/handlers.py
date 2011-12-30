@@ -34,6 +34,7 @@ class BackupHandler(BaseHandler):
         machine.set_last_connection_to_client()
 
         form = BackupForm(request.POST, instance=instance)
+
         if form.is_valid():
             schedule = form.save(commit=False)
             schedule.machine = machine
@@ -42,5 +43,9 @@ class BackupHandler(BaseHandler):
 
             return schedule
 
+
         else:
+
+            print form.errors
+
             return form.errors
