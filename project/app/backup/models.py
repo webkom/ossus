@@ -107,6 +107,33 @@ class Machine(models.Model):
 
         return next_backup_time
 
+
+class MachineStats(models.Model):
+    date         = models.DateTimeField(default=datetime.now())
+    machine      = models.ForeignKey(Machine)
+
+    load_average = models.DecimalField(decimal_places=3, max_digits=10)
+
+    cpu_system   = models.DecimalField(decimal_places=3, max_digits=10)
+    cpu_user     = models.DecimalField(decimal_places=3, max_digits=10)
+    cpu_stolen   = models.DecimalField(decimal_places=3, max_digits=10)
+
+    cpu_stolen   = models.DecimalField(decimal_places=3, max_digits=10)
+
+
+class MachineProcessStats(models.Model):
+    date         = models.DateTimeField(default=datetime.now())
+    machine      = models.ForeignKey(Machine)
+
+    pid          = models.IntegerField()
+    name         = models.CharField(max_length=100)
+    user         = models.CharField(max_length=100)
+
+    cpu_usage    = models.DecimalField(decimal_places=3, max_digits=10)
+    mem_usage    = models.DecimalField(decimal_places=3, max_digits=10)
+
+
+
 log_types = (
         ('info', 'INFO'),
         ('error', 'ERROR'),
@@ -160,6 +187,7 @@ class SQLBackup(models.Model):
     schedule_backup = models.ForeignKey('ScheduleBackup', related_name='sql_backups')
 
     host = models.CharField(max_length=100)
+    port = models.CharField(max_length=15)
     database = models.CharField(max_length=100)
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
