@@ -1,1 +1,256 @@
-viser {{ machine }}
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <script type="text/javascript">
+
+        var chart;
+        $(document).ready(function () {
+            chart = new Highcharts.Chart({
+                chart:{
+                    renderTo:'container_load',
+                    defaultSeriesType:'area'
+                },
+                title:{
+                    text:'Load'
+                },
+                xAxis:{
+                    categories:[{% for stat in machine.get_latest_stats %}
+                        '{{ stat.datetime|date:"H:i" }}',
+                    {% endfor %}],
+                    tickmarkPlacement:'on',
+                    title:{
+                        enabled:false
+                    }
+                },
+                tooltip:{
+                    formatter:function () {
+                        return '' +
+                                this.x + ': ' + Highcharts.numberFormat(this.y, 0, ',') + ' millions';
+                    }
+                },
+
+                plotOptions:{
+                    area:{
+                        stacking:'normal',
+
+                        lineColor:'#666666',
+                        lineWidth:1,
+                        marker:{
+                            lineWidth:1,
+                            lineColor:'#666666'
+                        }
+                    }
+                },
+                series:[
+                    {
+                        name:'User',
+                        data:[{% for stat in machine.get_latest_stats %}
+                            {{ stat.load_average }},
+                        {% endfor %}
+                        ]
+                    }
+                ]
+            });
+        });
+
+    </script>
+
+    <div id="container_load" style="width: 800px; height: 300px; margin: 0 auto"></div>
+
+
+
+    <script type="text/javascript">
+
+        var chart;
+        $(document).ready(function () {
+            chart = new Highcharts.Chart({
+                chart:{
+                    renderTo:'container_cpu',
+                    defaultSeriesType:'area'
+                },
+                title:{
+                    text:'Prosessor'
+                },
+                xAxis:{
+                    categories:[{% for stat in machine.get_latest_stats %}
+                        '{{ stat.datetime|date:"H:i" }}',
+                    {% endfor %}],
+                    tickmarkPlacement:'on',
+                    title:{
+                        enabled:false
+                    }
+                },
+                tooltip:{
+                    formatter:function () {
+                        return '' +
+                                this.x + ': ' + Highcharts.numberFormat(this.y, 0, ',') + ' millions';
+                    }
+                },
+                yAxis:{
+                    max:'100'
+                },
+
+                plotOptions:{
+                    area:{
+                        stacking:'normal',
+
+                        lineColor:'#666666',
+                        lineWidth:1,
+                        marker:{
+                            lineWidth:1,
+                            lineColor:'#666666'
+                        }
+                    }
+                },
+                series:[
+                    {
+                        name:'User',
+                        data:[{% for stat in machine.get_latest_stats %}
+                            {{ stat.cpu_user }},
+                        {% endfor %}
+                        ]
+                    },
+                    {
+                        name:'System',
+                        data:[{% for stat in machine.get_latest_stats %}
+                            {{ stat.cpu_system }},
+                        {% endfor %}
+                        ]
+                    }
+                ]
+            });
+        });
+
+    </script>
+
+    <div id="container_cpu" style="width: 800px; height: 300px; margin: 0 auto"></div>
+
+
+    <script type="text/javascript">
+
+        var chart;
+        $(document).ready(function () {
+            chart = new Highcharts.Chart({
+                chart:{
+                    renderTo:'container',
+                    defaultSeriesType:'area'
+                },
+                title:{
+                    text:'Minnebruk'
+                },
+
+                xAxis:{
+                    categories:[{% for stat in machine.get_latest_stats %}
+                        '{{ stat.datetime|date:"H:i" }}',
+                    {% endfor %}],
+                    tickmarkPlacement:'on',
+                    title:{
+                        enabled:false
+                    }
+                },
+                yAxis:{
+                    title:{
+                        text:'Percent'
+                    }
+                },
+
+                plotOptions:{
+                    area:{
+                        stacking:'percent',
+                        lineColor:'#ffffff',
+                        lineWidth:1,
+                        marker:{
+                            lineWidth:1,
+                            lineColor:'#ffffff'
+                        }
+                    }
+                },
+                series:[
+                    {
+                        name:'Free',
+                        data:[{% for stat in machine.get_latest_stats %}
+                            {{ stat.mem_free }},
+                        {% endfor %}]
+                    },
+                    {
+                        name:'Used',
+                        data:[{% for stat in machine.get_latest_stats %}
+                            {{ stat.mem_used }},
+                        {% endfor %}
+                        ]
+                    }
+                ]
+            });
+
+
+        });
+
+    </script>
+
+    <div id="container" style="width: 800px; height: 300px; margin: 0 auto"></div>
+
+
+    <div id="content" class="xgrid">
+
+        <div class="x12">
+
+            <h2>Backups</h2>
+
+            <table class="data display">
+                <thead>
+                <tr>
+                    <th>Startet</th>
+                    <th>Avsluttet</th>
+                    <th>Schedue</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for backup in machine.get_latest_backups %}
+
+                    <tr>
+                        <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
+                        <td>{{ backup.time_ended|date:"d.m.Y H:i" }}</td>
+                        <td>{{ backup.schedule.name }}</td>
+                    </tr>
+
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="x12">
+
+            <h2>Logg</h2>
+
+            <table class="data display">
+                <thead>
+                <tr>
+                    <th>Tidspunkt</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for log in machine.get_latest_logs %}
+
+                    <tr>
+                        <td>{{ log.datetime|date:"d.m.Y H:i" }}</td>
+                        <td>{{ log.text }}</td>
+                    </tr>
+
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+{% endblock %}

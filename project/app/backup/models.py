@@ -72,6 +72,16 @@ class Machine(models.Model):
         log.machine = self
         log.save()
 
+    def get_latest_stats(self):
+        return self.stats.all().order_by("id")[self.stats.all().count()-16:]
+
+    def get_latest_logs(self):
+        return self.logs.all().order_by("-id")[0:50]
+
+
+    def get_latest_backups(self):
+        return self.backups.all().order_by("-id")[0:50]
+
     def running_backup(self):
         for schedule in self.schedules.all():
             if schedule.running_backup:
@@ -109,20 +119,23 @@ class Machine(models.Model):
 
 
 class MachineStats(models.Model):
-    date         = models.DateTimeField(default=datetime.now())
-    machine      = models.ForeignKey(Machine)
+    datetime     = models.DateTimeField(default=datetime.now())
+    machine      = models.ForeignKey(Machine, related_name="stats")
 
-    load_average = models.DecimalField(decimal_places=3, max_digits=10)
+    load_average = models.DecimalField(decimal_places=3, max_digits=50)
 
-    cpu_system   = models.DecimalField(decimal_places=3, max_digits=10)
-    cpu_user     = models.DecimalField(decimal_places=3, max_digits=10)
-    cpu_stolen   = models.DecimalField(decimal_places=3, max_digits=10)
+    cpu_system   = models.DecimalField(decimal_places=3, max_digits=50)
+    cpu_user     = models.DecimalField(decimal_places=3, max_digits=50)
+    cpu_stolen   = models.DecimalField(decimal_places=3, max_digits=50)
 
-    cpu_stolen   = models.DecimalField(decimal_places=3, max_digits=10)
+    mem_used = models.IntegerField(default=0)
+    mem_free = models.IntegerField(default=0)
+
+
 
 
 class MachineProcessStats(models.Model):
-    date         = models.DateTimeField(default=datetime.now())
+    datetime     = models.DateTimeField(default=datetime.now())
     machine      = models.ForeignKey(Machine)
 
     pid          = models.IntegerField()
@@ -131,8 +144,6 @@ class MachineProcessStats(models.Model):
 
     cpu_usage    = models.DecimalField(decimal_places=3, max_digits=10)
     mem_usage    = models.DecimalField(decimal_places=3, max_digits=10)
-
-
 
 log_types = (
         ('info', 'INFO'),
@@ -194,7 +205,6 @@ class SQLBackup(models.Model):
 
     def __unicode__(self):
         return "SQLBackup: %s" % self.host
-
 
 class ScheduleBackup(models.Model):
     #Details
