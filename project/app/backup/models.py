@@ -79,10 +79,10 @@ class Machine(models.Model):
         return self.stats.all().order_by("id")
 
     def get_latest_logs(self):
-        return self.logs.all().order_by("-id")[0:6]
+        return self.logs.all().order_by("-id")[0:50]
 
     def get_latest_backups(self):
-        return self.backups.all().order_by("-id")[0:50]
+        return self.backups.all().order_by("-id")[0:6]
 
     def running_backup(self):
         for schedule in self.schedules.all():
