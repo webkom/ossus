@@ -73,7 +73,10 @@ class Machine(models.Model):
         log.save()
 
     def get_latest_stats(self):
-        return self.stats.all().order_by("id")[self.stats.all().count()-16:]
+        if self.stats.all().count() > 15:
+            return self.stats.all().order_by("id")[self.stats.all().count()-16:]
+
+        return self.stats.all().order_by("id")
 
     def get_latest_logs(self):
         return self.logs.all().order_by("-id")[0:50]
