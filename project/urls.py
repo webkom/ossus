@@ -4,8 +4,6 @@ from django.contrib import admin
 
 admin.autodiscover()
 
-handler500 # Pyflakes
-
 urlpatterns = patterns(
 
     '',
