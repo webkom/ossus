@@ -25,23 +25,6 @@ class Location(models.Model):
     def __unicode__(self):
         return "Location: %s" % self.name
 
-up_time_types = (
-        ('up', 'UP'),
-        ('down', 'DOWN')
-    )
-
-#Meant to be base for both MachinUptime and PINGuptime
-class UptimeLogBase(models.Model):
-    datetime = models.DateTimeField(auto_now=True)
-    type = models.CharField(max_length=5, choices=up_time_types, default="up")
-
-    def fire_warning(self):
-        pass
-
-
-class MachineUptimeLog(UptimeLogBase):
-    machine = models.ForeignKey('Machine', related_name="updatelogs")
-
 machine_timeout_minutes = 10 * 60
 
 class Machine(models.Model):
@@ -65,12 +48,6 @@ class Machine(models.Model):
     def set_last_connection_to_client(self):
         self.last_connection_to_client = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.save()
-
-    def create_uptime_log(self, type):
-        log = MachineUptimeLog()
-        log.type = type
-        log.machine = self
-        log.save()
 
     def get_latest_stats(self):
         if self.stats.all().count() > 15:
@@ -277,3 +254,14 @@ class Backup(models.Model):
     def save(self, *args, **kwargs):
         self.day_folder_path = self.schedule.current_day_folder_path()
         super(Backup, self).save(args, kwargs)
+
+
+class ClientVersion(models.Model):
+    datetime = models.DateTimeField(auto_now=True)
+    name = models.CharField(max_length=50)
+    agent_link = models.CharField(max_length=255)
+    updater_link = models.CharField(max_length=255)
+    current = models.BooleanField(unique=True)
+
+    def __unicode__(self):
+        return self.name

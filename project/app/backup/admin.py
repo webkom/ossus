@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.backup.models import Backup, Machine, ScheduleBackup, FolderBackup, Company, Customer, Location, Storage, SQLBackup
+from app.backup.models import Backup, Machine, ScheduleBackup, FolderBackup, Company, Customer, Location, Storage, SQLBackup, ClientVersion
 
 class ScheduleBackupInline(admin.TabularInline):
     model = ScheduleBackup
@@ -13,6 +13,11 @@ class SQLBackupInline(admin.TabularInline):
 
 class BackupInline(admin.TabularInline):
     model = Backup
+
+class ClientVersionsAdmin(admin.ModelAdmin):
+    model = ClientVersion
+    list_display = ['name', 'datetime','current']
+
 
 class MachineAdmin(admin.ModelAdmin):
     model = Machine
@@ -74,3 +79,4 @@ admin.site.register(Company, CompanyAdmin)
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Backup, BackupAdmin)
+admin.site.register(ClientVersion, ClientVersionsAdmin)
