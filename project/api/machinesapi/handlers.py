@@ -1,3 +1,4 @@
+from api import machine_dict, schedule_dict, backup_dict
 from app.backup.forms import MachineLogForm, MachineStatsForm
 from app.backup.models import Machine, MachineLog, MachineStats
 from piston.handler import BaseHandler
@@ -5,14 +6,10 @@ from piston.utils import rc
 
 class MachineHandler(BaseHandler):
     model = Machine
-    fields = ('id', 'machine_id', 'name', 'ip','last_connection_to_client','is_busy','running_backup','running_restore','get_next_backup_time','get_last_backup_time', ('updatelogs',('id','type','datetime')),('schedules', (
-        'id', 'name', 'machine_id', 'storage','current_day_folder_path','current_version_in_loop', 'versions_count','get_next_backup_time','get_last_backup_time', 'running_backup',
-        'running_restore', 'from_date', 'get_next_backup_time',
-            ('folder_backups', ('id', 'local_folder_path')), ('sql_backups', ('id', 'type','host','port','database','username','password')), ('backups', ('id', 'time_started')))),
-                  ('backups', ('id', 'time_started','day_folder_path','is_recoverable',('schedule',('id','name',)))), )
+    fields = machine_dict + (
+    ('updatelogs', ('id', 'type', 'datetime')), ('schedules', schedule_dict), ('backups', backup_dict), )
 
     def read(self, request, offset=0, limit=None, id=None):
-        
         all = Machine.objects.all()
 
         if id:
@@ -26,16 +23,19 @@ class MachineHandler(BaseHandler):
     def create(self, request, id=False):
         pass
 
+
 class MachineStatsHandler(BaseHandler):
     model = MachineStats
-    fields = ('id', ('machine',('id','name')), 'datetime','load_average','cpu_system','cpu_stolen','cpu_user','mem_free','mem_used')
+    fields = (
+    'id', ('machine', ('id', 'name')), 'datetime', 'load_average', 'cpu_system', 'cpu_stolen', 'cpu_user', 'mem_free',
+    'mem_used')
 
     def read(self, request, offset=0, limit=None, machine_id=None):
         all = self.model.objects.all().order_by('-id')
 
         if machine_id:
             try:
-                all =  all.filter(machine__machine_id=machine_id)
+                all = all.filter(machine__machine_id=machine_id)
             except self.model.DoesNotExist:
                 return rc.NOT_FOUND
 
@@ -46,7 +46,7 @@ class MachineStatsHandler(BaseHandler):
 
     def create(self, request, id=None):
         instance = self.model()
-        machine = Machine.objects.get(machine_id = (request.POST['machine_id']))
+        machine = Machine.objects.get(machine_id=(request.POST['machine_id']))
 
         machine.set_last_connection_to_client()
 
@@ -63,14 +63,14 @@ class MachineStatsHandler(BaseHandler):
 
 class MachineLogHandler(BaseHandler):
     model = MachineLog
-    fields = ('id', ('machine',('id','name')), 'datetime','text','type',)
+    fields = ('id', ('machine', ('id', 'name')), 'datetime', 'text', 'type',)
 
     def read(self, request, offset=0, limit=None, machine_id=None):
         all = MachineLog.objects.all().order_by('-id')
 
         if machine_id:
             try:
-                all =  all.filter(machine__machine_id=machine_id)
+                all = all.filter(machine__machine_id=machine_id)
             except MachineLog.DoesNotExist:
                 return rc.NOT_FOUND
 
@@ -81,7 +81,7 @@ class MachineLogHandler(BaseHandler):
 
     def create(self, request, id=None):
         instance = MachineLog()
-        machine = Machine.objects.get(machine_id = (request.POST['machine_id']))
+        machine = Machine.objects.get(machine_id=(request.POST['machine_id']))
 
         machine.set_last_connection_to_client()
 
