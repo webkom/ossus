@@ -17,7 +17,6 @@ class Customer(models.Model):
     def __unicode__(self):
         return "Customer: %s" % self.name
 
-
 class Location(models.Model):
     name = models.CharField(max_length=150)
     customer = models.ForeignKey(Customer, related_name="locations")
@@ -36,14 +35,6 @@ class Machine(models.Model):
 
     def __unicode__(self):
         return "Machine: %s, machine_id: %s" % (self.name, self.machine_id)
-
-    @staticmethod
-    def create_uptime_logs():
-        for machine in Machine.objects.all():
-            if (datetime.now() - machine.last_connection_to_client).seconds < machine_timeout_minutes:
-                machine.create_uptime_log("up")
-            else:
-                machine.create_uptime_log("down")
 
     def set_last_connection_to_client(self):
         self.last_connection_to_client = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
