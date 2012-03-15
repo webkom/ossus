@@ -33,6 +33,16 @@ class Machine(models.Model):
     last_connection_to_client = models.DateTimeField(blank=True, null=True)
     ip = models.IPAddressField(null=True, blank=True)
 
+    auto_version = models.BooleanField(default=True)
+
+    #Current version running on client
+    current_agent_version = models.ForeignKey('ClientVersion', related_name="agent_versions", null=True)
+    current_updater_version = models.ForeignKey('ClientVersion', related_name="updater_versions", null=True)
+
+    #If not auto_version
+    selected_agent_version = models.ForeignKey('ClientVersion', related_name="agent_selected", null=True)
+    selected_updater_version = models.ForeignKey('ClientVersion', related_name="updater_selected", null=True)
+
     def __unicode__(self):
         return "Machine: %s, machine_id: %s" % (self.name, self.machine_id)
 
@@ -246,13 +256,14 @@ class Backup(models.Model):
         self.day_folder_path = self.schedule.current_day_folder_path()
         super(Backup, self).save(args, kwargs)
 
-
 class ClientVersion(models.Model):
     datetime = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=50)
     agent_link = models.CharField(max_length=255)
     updater_link = models.CharField(max_length=255)
-    current = models.BooleanField(unique=True)
+
+    current_agent = models.BooleanField(unique=True, default=False)
+    current_updater = models.BooleanField(unique=True, default=False)
 
     def __unicode__(self):
         return self.name

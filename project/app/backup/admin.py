@@ -16,7 +16,7 @@ class BackupInline(admin.TabularInline):
 
 class ClientVersionsAdmin(admin.ModelAdmin):
     model = ClientVersion
-    list_display = ['name', 'datetime','current']
+    list_display = ['name', 'datetime','current_agent', 'current_updater']
 
 
 class MachineAdmin(admin.ModelAdmin):

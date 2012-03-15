@@ -46,4 +46,9 @@ urlpatterns = patterns('',
 
     #Client versions
     url(r'clientversions/$', clientversion),
+    url(r'clientversions/(?P<name>[A-Za-z\.0-9]+)/$', clientversion),
+
+    url(r'clientversions/current_agent/$', clientversion, {'current_agent': True}),
+    url(r'clientversions/current_updater/$', clientversion, {'current_updater':True}),
+
 )
