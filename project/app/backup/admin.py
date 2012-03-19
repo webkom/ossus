@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.backup.models import Backup, Machine, ScheduleBackup, FolderBackup, Company, Customer, Location, Storage, SQLBackup, ClientVersion
+from app.backup.models import Backup, Machine, ScheduleBackup, FolderBackup, Company, Customer, Storage, SQLBackup, ClientVersion
 
 class ScheduleBackupInline(admin.TabularInline):
     model = ScheduleBackup
@@ -39,30 +39,23 @@ class ScheduleAdmin(admin.ModelAdmin):
 #Company
 class CustomerInline(admin.TabularInline):
     model = Customer
+
 class CompanyAdmin(admin.ModelAdmin):
     model = Company
     inlines = [
         CustomerInline,
         ]
 
-#Customer
-class LocationInline(admin.TabularInline):
-    model = Location
-class CustomerAdmin(admin.ModelAdmin):
-    model = Customer
-    inlines = [
-        LocationInline,
-        ]
-
-#Location
 class MachineInline(admin.TabularInline):
     model = Machine
 
-class LocationAdmin(admin.ModelAdmin):
-    model = Location
+
+class CustomerAdmin(admin.ModelAdmin):
+    model = Customer
     inlines = [
         MachineInline,
         ]
+
 
 #Backup
 class BackupAdmin(admin.ModelAdmin):
@@ -77,6 +70,5 @@ admin.site.register(Storage, StorageAdmin)
 admin.site.register(ScheduleBackup, ScheduleAdmin)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Customer, CustomerAdmin)
-admin.site.register(Location, LocationAdmin)
 admin.site.register(Backup, BackupAdmin)
 admin.site.register(ClientVersion, ClientVersionsAdmin)

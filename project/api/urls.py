@@ -34,6 +34,7 @@ urlpatterns = patterns('',
 
     #MachineStats
     url(r'machinestats/$', machinestats),
+
     url(r'machinestats/(?P<machine_id>\d+)/$', machinestats),
 
     #ScheduleBackups

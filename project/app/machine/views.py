@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-
+from django.utils.translation import ugettext as _
 from app.backup.models import Machine, Company
 from app.machine.forms import MachineForm
 
@@ -14,7 +14,7 @@ def view(request, id):
     machine = Machine.objects.get(id=id)
     return render(request, 'machines/view.html', {'machine':machine})
 
-def create(request):
+def new(request):
     return form(request)
 
 def edit(request, id):
@@ -35,4 +35,4 @@ def form(request, id = False):
         if form.is_valid():
             form.save()
 
-    return render(request, 'form.html', {'form':form})
+    return render(request, 'machines/form.html', {'form':form, "title":_("Server")})

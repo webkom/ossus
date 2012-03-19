@@ -1,38 +1,66 @@
-<script>
-    $(function() {
-        $("#loading").hide();
-        $("#form_button").click(function() {
-            $("#form_button").hide();
-            $("#loading").show();
-        })
-    })
-</script>
+{% load i18n %}
 
-<form enctype="multipart/form-data" method="post">
+<div class="row">
+    <div class="span8">
 
-    <fieldset>
-        <legend>{{ title }}</legend>
+        {{ form.errors }}
 
-        <dl>
-            {% for field in form %}
-                <dt>
-                    <label>{{ field.label }}</label>
-                </dt>
-                <dd>
-                    {{ field }}
-                    <p><span
-                            {% if field.errors %}style="color:red;" {% endif %}> {% for error in field.errors %} {{ error }} {% endfor %}</span>
-                    </p>
-                </dd>
-            {% endfor %}
-        </dl>
+        <form enctype="multipart/form-data" class="form-horizontal" method="post">
 
-    </fieldset>
+            <fieldset>
+                <legend>{{ title }}</legend>
 
-    <div id="loading">
-        <span class="loader red" title="Loading, please wait…"></span>
+                {% for field in form %}
+
+                    <div class="control-group">
+                        <label class="control-label" for="input01">{{ field.label }}</label>
+
+                        <div class="controls">
+                            {{ field }}
+
+                            <p class="help-block">In addition to freeform text, any HTML5 text-based input appears like
+                                so.</p>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+                </div>
+
+            </fieldset>
+
+        </form>
     </div>
 
-    <button id="form_button" type="submit">Save</button>
 
-</form>
+    <div class="span4">
+        <h3>Prepend &amp; append inputs</h3>
+
+        <p>Input groups&mdash;with appended or prepended text&mdash;provide an easy way to give more context for your
+            inputs. Great examples include the @ sign for Twitter usernames or $ for finances.</p>
+        <hr>
+        <h3>Checkboxes and radios</h3>
+
+        <p>Up to v1.4, Bootstrap required extra markup around checkboxes and radios to stack them. Now, it's a simple
+            matter of repeating the <code>&lt;label class="checkbox"&gt;</code> that wraps the <code>&lt;input
+                type="checkbox"&gt;</code>.</p>
+
+        <p>Inline checkboxes and radios are also supported. Just add <code>.inline</code> to any <code>.checkbox</code>
+            or <code>.radio</code> and you're done.</p>
+        <hr>
+        <h4>Inline forms and append/prepend</h4>
+
+        <p>To use prepend or append inputs in an inline form, be sure to place the <code>.add-on</code> and
+            <code>input</code> on the same line, without spaces.</p>
+        <hr>
+        <h4>Form help text</h4>
+
+        <p>To add help text for your form inputs, include inline help text with <code>&lt;span
+            class="help-inline"&gt;</code> or a help text block with <code>&lt;p class="help-block"&gt;</code> after the
+            input element.</p>
+    </div>
+
+
+</div><!-- /row -->

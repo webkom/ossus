@@ -21,6 +21,8 @@ DATABASES = {
 TIME_ZONE = 'Europe/Oslo'
 LANGUAGE_CODE = 'no-nb'
 
+AUTH_PROFILE_MODULE = 'core.UserProfile'
+
 #STATIC FILES
 STATIC_ROOT = BASE_PATH + '/static_media/'
 STATIC_URL = '/static/'
@@ -39,6 +41,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
+
+
     )
 
 ROOT_URLCONF = 'project.urls'
@@ -50,6 +54,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.staticfiles',
 
+    'core',
     'app.backup',
 
     'south',
@@ -57,10 +62,17 @@ INSTALLED_APPS = (
 
     )
 
+
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
     )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
+    )
+
 
 TEMPLATE_DIRS = (
     BASE_PATH + "/templates",

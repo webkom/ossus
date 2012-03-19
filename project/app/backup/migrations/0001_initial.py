@@ -31,56 +31,40 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('backup', ['Customer'])
 
-        # Adding model 'Location'
-        db.create_table('backup_location', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=150)),
-            ('customer', self.gf('django.db.models.fields.related.ForeignKey')(related_name='locations', to=orm['backup.Customer'])),
-        ))
-        db.send_create_signal('backup', ['Location'])
-
-        # Adding model 'UptimeLogBase'
-        db.create_table('backup_uptimelogbase', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('datetime', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('type', self.gf('django.db.models.fields.CharField')(default='up', max_length=5)),
-        ))
-        db.send_create_signal('backup', ['UptimeLogBase'])
-
-        # Adding model 'MachineUptimeLog'
-        db.create_table('backup_machineuptimelog', (
-            ('uptimelogbase_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['backup.UptimeLogBase'], unique=True, primary_key=True)),
-            ('machine', self.gf('django.db.models.fields.related.ForeignKey')(related_name='updatelogs', to=orm['backup.Machine'])),
-        ))
-        db.send_create_signal('backup', ['MachineUptimeLog'])
-
         # Adding model 'Machine'
         db.create_table('backup_machine', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=150)),
-            ('location', self.gf('django.db.models.fields.related.ForeignKey')(related_name='machines', to=orm['backup.Location'])),
+            ('customer', self.gf('django.db.models.fields.related.ForeignKey')(related_name='locations', to=orm['backup.Customer'])),
             ('machine_id', self.gf('django.db.models.fields.CharField')(max_length=150)),
             ('last_connection_to_client', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
             ('ip', self.gf('django.db.models.fields.IPAddressField')(max_length=15, null=True, blank=True)),
+            ('auto_version', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('current_agent_version', self.gf('django.db.models.fields.related.ForeignKey')(related_name='agent_versions', null=True, to=orm['backup.ClientVersion'])),
+            ('current_updater_version', self.gf('django.db.models.fields.related.ForeignKey')(related_name='updater_versions', null=True, to=orm['backup.ClientVersion'])),
+            ('selected_agent_version', self.gf('django.db.models.fields.related.ForeignKey')(related_name='agent_selected', null=True, to=orm['backup.ClientVersion'])),
+            ('selected_updater_version', self.gf('django.db.models.fields.related.ForeignKey')(related_name='updater_selected', null=True, to=orm['backup.ClientVersion'])),
         ))
         db.send_create_signal('backup', ['Machine'])
 
         # Adding model 'MachineStats'
         db.create_table('backup_machinestats', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('date', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2011, 12, 30, 1, 27, 11, 328939))),
-            ('machine', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['backup.Machine'])),
-            ('load_average', self.gf('django.db.models.fields.DecimalField')(max_digits=10, decimal_places=3)),
-            ('cpu_system', self.gf('django.db.models.fields.DecimalField')(max_digits=10, decimal_places=3)),
-            ('cpu_user', self.gf('django.db.models.fields.DecimalField')(max_digits=10, decimal_places=3)),
-            ('cpu_stolen', self.gf('django.db.models.fields.DecimalField')(max_digits=10, decimal_places=3)),
+            ('datetime', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 3, 16, 4, 6, 38, 992539))),
+            ('machine', self.gf('django.db.models.fields.related.ForeignKey')(related_name='stats', to=orm['backup.Machine'])),
+            ('load_average', self.gf('django.db.models.fields.DecimalField')(max_digits=50, decimal_places=3)),
+            ('cpu_system', self.gf('django.db.models.fields.DecimalField')(max_digits=50, decimal_places=3)),
+            ('cpu_user', self.gf('django.db.models.fields.DecimalField')(max_digits=50, decimal_places=3)),
+            ('cpu_stolen', self.gf('django.db.models.fields.DecimalField')(max_digits=50, decimal_places=3)),
+            ('mem_used', self.gf('django.db.models.fields.IntegerField')(default=0)),
+            ('mem_free', self.gf('django.db.models.fields.IntegerField')(default=0)),
         ))
         db.send_create_signal('backup', ['MachineStats'])
 
         # Adding model 'MachineProcessStats'
         db.create_table('backup_machineprocessstats', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('date', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2011, 12, 30, 1, 27, 11, 329785))),
+            ('datetime', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 3, 16, 4, 6, 38, 993353))),
             ('machine', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['backup.Machine'])),
             ('pid', self.gf('django.db.models.fields.IntegerField')()),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
@@ -156,9 +140,22 @@ class Migration(SchemaMigration):
             ('machine', self.gf('django.db.models.fields.related.ForeignKey')(related_name='backups', to=orm['backup.Machine'])),
             ('schedule', self.gf('django.db.models.fields.related.ForeignKey')(related_name='backups', null=True, to=orm['backup.ScheduleBackup'])),
             ('time_started', self.gf('django.db.models.fields.DateTimeField')()),
+            ('time_ended', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
             ('day_folder_path', self.gf('django.db.models.fields.CharField')(max_length=150, blank=True)),
         ))
         db.send_create_signal('backup', ['Backup'])
+
+        # Adding model 'ClientVersion'
+        db.create_table('backup_clientversion', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('datetime', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('agent_link', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('updater_link', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('current_agent', self.gf('django.db.models.fields.BooleanField')(default=False, unique=True)),
+            ('current_updater', self.gf('django.db.models.fields.BooleanField')(default=False, unique=True)),
+        ))
+        db.send_create_signal('backup', ['ClientVersion'])
 
 
     def backwards(self, orm):
@@ -171,15 +168,6 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Customer'
         db.delete_table('backup_customer')
-
-        # Deleting model 'Location'
-        db.delete_table('backup_location')
-
-        # Deleting model 'UptimeLogBase'
-        db.delete_table('backup_uptimelogbase')
-
-        # Deleting model 'MachineUptimeLog'
-        db.delete_table('backup_machineuptimelog')
 
         # Deleting model 'Machine'
         db.delete_table('backup_machine')
@@ -207,6 +195,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Backup'
         db.delete_table('backup_backup')
+
+        # Deleting model 'ClientVersion'
+        db.delete_table('backup_clientversion')
 
 
     models = {
@@ -245,7 +236,18 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'machine': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'backups'", 'to': "orm['backup.Machine']"}),
             'schedule': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'backups'", 'null': 'True', 'to': "orm['backup.ScheduleBackup']"}),
+            'time_ended': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'time_started': ('django.db.models.fields.DateTimeField', [], {})
+        },
+        'backup.clientversion': {
+            'Meta': {'object_name': 'ClientVersion'},
+            'agent_link': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'current_agent': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'unique': 'True'}),
+            'current_updater': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'unique': 'True'}),
+            'datetime': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'updater_link': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
         'backup.company': {
             'Meta': {'object_name': 'Company'},
@@ -266,20 +268,19 @@ class Migration(SchemaMigration):
             'schedule_backup': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'folder_backups'", 'to': "orm['backup.ScheduleBackup']"}),
             'skip_hidden_folders': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         },
-        'backup.location': {
-            'Meta': {'object_name': 'Location'},
-            'customer': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'locations'", 'to': "orm['backup.Customer']"}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '150'})
-        },
         'backup.machine': {
             'Meta': {'object_name': 'Machine'},
+            'auto_version': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'current_agent_version': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'agent_versions'", 'null': 'True', 'to': "orm['backup.ClientVersion']"}),
+            'current_updater_version': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'updater_versions'", 'null': 'True', 'to': "orm['backup.ClientVersion']"}),
+            'customer': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'locations'", 'to': "orm['backup.Customer']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'ip': ('django.db.models.fields.IPAddressField', [], {'max_length': '15', 'null': 'True', 'blank': 'True'}),
             'last_connection_to_client': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'location': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'machines'", 'to': "orm['backup.Location']"}),
             'machine_id': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '150'})
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
+            'selected_agent_version': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'agent_selected'", 'null': 'True', 'to': "orm['backup.ClientVersion']"}),
+            'selected_updater_version': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'updater_selected'", 'null': 'True', 'to': "orm['backup.ClientVersion']"})
         },
         'backup.machinelog': {
             'Meta': {'object_name': 'MachineLog'},
@@ -292,7 +293,7 @@ class Migration(SchemaMigration):
         'backup.machineprocessstats': {
             'Meta': {'object_name': 'MachineProcessStats'},
             'cpu_usage': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '3'}),
-            'date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 12, 30, 1, 27, 11, 329785)'}),
+            'datetime': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 3, 16, 4, 6, 38, 993353)'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'machine': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['backup.Machine']"}),
             'mem_usage': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '3'}),
@@ -302,18 +303,15 @@ class Migration(SchemaMigration):
         },
         'backup.machinestats': {
             'Meta': {'object_name': 'MachineStats'},
-            'cpu_stolen': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '3'}),
-            'cpu_system': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '3'}),
-            'cpu_user': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '3'}),
-            'date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 12, 30, 1, 27, 11, 328939)'}),
+            'cpu_stolen': ('django.db.models.fields.DecimalField', [], {'max_digits': '50', 'decimal_places': '3'}),
+            'cpu_system': ('django.db.models.fields.DecimalField', [], {'max_digits': '50', 'decimal_places': '3'}),
+            'cpu_user': ('django.db.models.fields.DecimalField', [], {'max_digits': '50', 'decimal_places': '3'}),
+            'datetime': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 3, 16, 4, 6, 38, 992539)'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'load_average': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '3'}),
-            'machine': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['backup.Machine']"})
-        },
-        'backup.machineuptimelog': {
-            'Meta': {'object_name': 'MachineUptimeLog', '_ormbases': ['backup.UptimeLogBase']},
-            'machine': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'updatelogs'", 'to': "orm['backup.Machine']"}),
-            'uptimelogbase_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['backup.UptimeLogBase']", 'unique': 'True', 'primary_key': 'True'})
+            'load_average': ('django.db.models.fields.DecimalField', [], {'max_digits': '50', 'decimal_places': '3'}),
+            'machine': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'stats'", 'to': "orm['backup.Machine']"}),
+            'mem_free': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'mem_used': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         'backup.schedulebackup': {
             'Meta': {'object_name': 'ScheduleBackup'},
@@ -349,12 +347,6 @@ class Migration(SchemaMigration):
             'password': ('django.db.models.fields.CharField', [], {'max_length': '80'}),
             'type': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'username': ('django.db.models.fields.CharField', [], {'max_length': '80'})
-        },
-        'backup.uptimelogbase': {
-            'Meta': {'object_name': 'UptimeLogBase'},
-            'datetime': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'type': ('django.db.models.fields.CharField', [], {'default': "'up'", 'max_length': '5'})
         },
         'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},

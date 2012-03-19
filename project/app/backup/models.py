@@ -17,21 +17,13 @@ class Customer(models.Model):
     def __unicode__(self):
         return "Customer: %s" % self.name
 
-class Location(models.Model):
-    name = models.CharField(max_length=150)
-    customer = models.ForeignKey(Customer, related_name="locations")
-
-    def __unicode__(self):
-        return "Location: %s" % self.name
-
 machine_timeout_minutes = 10 * 60
 
 class Machine(models.Model):
     name = models.CharField(max_length=150)
-    location = models.ForeignKey(Location, related_name="machines")
+    customer = models.ForeignKey(Customer, related_name="machines")
     machine_id = models.CharField(max_length=150)
     last_connection_to_client = models.DateTimeField(blank=True, null=True)
-    ip = models.IPAddressField(null=True, blank=True)
 
     auto_version = models.BooleanField(default=True)
 
@@ -110,9 +102,6 @@ class MachineStats(models.Model):
 
     mem_used = models.IntegerField(default=0)
     mem_free = models.IntegerField(default=0)
-
-
-
 
 class MachineProcessStats(models.Model):
     datetime     = models.DateTimeField(default=datetime.now())
