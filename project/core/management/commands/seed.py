@@ -2,7 +2,7 @@
 from datetime import datetime
 from random import randint
 import re
-from app.backup.models import Company, Customer, Machine, Storage, ClientVersion, ScheduleBackup
+from app.backup.models import Company, Customer, Machine, Storage, ClientVersion, ScheduleBackup, FolderBackup, SQLBackup
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 from urllib import urlopen
@@ -11,15 +11,14 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        user = User.objects.get_or_create(username="admin")[0]
-        user.set_password("admin")
-        user.is_superuser = True
-        user.is_staff = True
-        user.save()
+        admin_user = User.objects.get_or_create(username="admin")[0]
+        admin_user.set_password("admin")
+        admin_user.is_superuser = True
+        admin_user.is_staff = True
+        admin_user.save()
 
         storage = None
         version = None
-
 
         #Create client versions
         for j in range(0, randint(3,4)):
@@ -29,15 +28,25 @@ class Command(BaseCommand):
             version.save()
 
         #Create companies, with storage, customers and machines
-        for j in range(0, randint(3,4)):
+        for j in range(0,4):
             company = Company.objects.get_or_create(name="Company %s"%j)[0]
+
+            #Create test user for each company
+            user = User.objects.get_or_create(username="test%s"%j)[0]
+            user.set_password("test%s"%j)
+            user.save()
+
             company.users.add(user)
+            company.users.add(admin_user)
             company.save()
+
+            user.profile.set_company(company)
+
 
             for i in range(0,randint(1,3)):
                 storage = Storage.objects.get_or_create(type="Storage %s"%i, folder="backup/", company=company)[0]
 
-            #Create customers
+            #Customers
             for i in range(0,randint(1,3)):
                 customer = Customer.objects.get_or_create(name="Customer %s"%i, company=company)[0]
                 customer.save()
@@ -68,4 +77,17 @@ class Command(BaseCommand):
 
                         scheduleBackup.save()
 
-        user.profile.set_company(user.companies.all()[0])
+
+                        #FolderBackups
+                        for o in range(0,randint(1,3)):
+                            folderBackup = FolderBackup.objects.get_or_create(schedule_backup = scheduleBackup,
+                                                                              local_folder_path = "/")
+
+                        #SQLBackups
+                        for o in range(0,randint(1,3)):
+                            folderBackup = SQLBackup.objects.get_or_create(schedule_backup = scheduleBackup,
+                                                                            type = "FTP")
+
+
+
+            user.profile.set_company(user.companies.all()[0])
