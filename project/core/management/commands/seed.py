@@ -18,7 +18,7 @@ class Command(BaseCommand):
         admin_user.save()
 
         storage = None
-        version = None
+        versions = []
 
         #Create client versions
         for j in range(0, randint(3,4)):
@@ -26,6 +26,8 @@ class Command(BaseCommand):
             version.current_agent = True
             version.current_updater = True
             version.save()
+
+            versions.append(version)
 
         #Create companies, with storage, customers and machines
         for j in range(0,4):
@@ -56,16 +58,16 @@ class Command(BaseCommand):
                     machine = Machine.objects.get_or_create(name="Machine %s "%i, customer=customer)[0]
                     machine.machine_id = 1000+company.id+customer.id+machine.id
                     machine.last_connection_to_client = datetime.now()
-                    machine.current_agent_version = version
-                    machine.current_updater_version = version
-                    machine.selected_agent_version = version
-                    machine.selected_updater_version = version
+                    machine.current_agent_version = versions[0]
+                    machine.current_updater_version = versions[0]
+                    machine.selected_agent_version = versions[0]
+                    machine.selected_updater_version = versions[0]
 
                     machine.save()
 
                     #Schedules
                     for l in range(0,randint(1,3)):
-                        scheduleBackup = ScheduleBackup.objects.get_or_create(  name="Schedule %s "%i,
+                        scheduleBackup = ScheduleBackup.objects.get_or_create(  name="Schedule %s "%l,
                                                                                 storage = storage,
                                                                                 machine=machine,
                                                                                 from_date = datetime.now(),
@@ -81,12 +83,12 @@ class Command(BaseCommand):
                         #FolderBackups
                         for o in range(0,randint(1,3)):
                             folderBackup = FolderBackup.objects.get_or_create(schedule_backup = scheduleBackup,
-                                                                              local_folder_path = "/")
+                                                                              local_folder_path = "/%s"%o)
 
                         #SQLBackups
                         for o in range(0,randint(1,3)):
                             folderBackup = SQLBackup.objects.get_or_create(schedule_backup = scheduleBackup,
-                                                                            type = "FTP")
+                                                                            type = "FTP %s"%o)
 
 
 
