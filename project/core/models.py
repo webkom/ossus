@@ -12,4 +12,14 @@ class UserProfile(models.Model):
         self.company = company
         self.save()
 
+    def get_available_companies(self):
+
+        company_ids = []
+
+        for company in Company.objects.all():
+            if self.user in company.users.all():
+                company_ids.append(company.id)
+
+        return Company.objects.filter(id__in=company_ids)
+
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])

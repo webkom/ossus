@@ -6,8 +6,8 @@ from app.machine.forms import MachineForm
 
 @login_required()
 def overview(request):
-    companies = Company.objects.all()
-    return render(request, "machines/list.html", {'companies':companies})
+    company = request.user.profile.company
+    return render(request, "machines/list.html", locals())
 
 @login_required()
 def view(request, id):
@@ -36,3 +36,4 @@ def form(request, id = False):
             form.save()
 
     return render(request, 'machines/form.html', {'form':form, "title":_("Server")})
+

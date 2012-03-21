@@ -4,4 +4,4 @@ from app.backup.models import Machine
 class MachineForm(ModelForm):
     class Meta:
         model = Machine
-        fields = ('name','customer',)
+        fields = ('machine_id','name','customer','auto_version', 'selected_agent_version','selected_updater_version')

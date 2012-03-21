@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from app.backup.models import Company
 from django.shortcuts import render_to_response, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from app.accounts.forms import LoginForm
@@ -33,6 +34,15 @@ def login_view(request):
         form = LoginForm()
 
     return render_to_response('login.html', {'form': form})
+
+def change_company(request, id):
+    company = Company.objects.get(id=id)
+
+    if company in request.user.profile.get_available_companies():
+        request.user.profile.set_company(company)
+
+    return HttpResponseRedirect("/")
+
 
 def logout_view(request):
     logout(request)

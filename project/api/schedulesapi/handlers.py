@@ -10,11 +10,14 @@ class SchedulesBackupHandler(BaseHandler):
         'id', 'name', 'ftp_host', 'machine_id', 'current_day_folder_path','current_version_in_loop', 'running_backup', 'running_restore',('storage'), 'get_next_backup_time',
             ('folder_backups', ('id', 'local_folder_path')),('backups', backup_dict))
 
-    def read(self, request, id=None):
+    def read(self, request, id=None, machine_id=None):
         all = ScheduleBackup.objects.all()
-        if id:
+        if id or machine_id:
             try:
-                return all.get(id=id)
+                if id:
+                    return all.get(id=id)
+                elif machine_id:
+                    return all.filter(machine__id=machine_id)
             except ScheduleBackup.DoesNotExist:
                 return rc.NOT_FOUND
         else:

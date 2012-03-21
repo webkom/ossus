@@ -6,25 +6,40 @@
 
     <header class="jumbotron subhead" id="overview">
 
-        <h1>{% trans "Customers" %}</h1>
+        <h1>{% trans "Storages" %}</h1>
 
         <div class="subnav">
             <ul class="nav nav-pills">
-                <li class="{% active request "^/customers/$" %}"><a href="/customers/">List all customers</a></li>
-                <li class="{% active request "^/customers/new/$" %}"><a href="/customers/new/">New customer</a></li>
+                <li class="{% active request "^/storages/$" %}"><a href="/storages/">List all storages</a></li>
+                <li class="{% active request "^/storages/new/$" %}"><a href="/storages/new/">New storage</a></li>
             </ul>
         </div>
 
     </header>
 
     {% block main %}
+
         <section id="machines">
             <table class="table-bordered table table-striped table-condensed">
-                {% for customer in customers.all %}
+
+                <thead>
+
+                <th>Host</th>
+                <th>Type</th>
+                <th>Username</th>
+
+                </thead>
+                <tbody>
+                {% for storage in storages.all %}
                     <tr>
-                        <td><a href="/customers/{{ customer.id }}/view/">{{ customer.name }}</a></td>
+                        <td><a href="/storages/{{ storage.id }}/view/">{{ storage.host }}</a></td>
+                        <td><a href="/storages/{{ storage.id }}/view/">{{ storage.type }}</a></td>
+                        <td><a href="/storages/{{ storage.id }}/view/">{{ storage.username }}</a></td>
                     </tr>
                 {% endfor %}
+
+                </tbody>
+
             </table>
         </section>
     {% endblock %}

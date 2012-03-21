@@ -136,6 +136,7 @@ storage_types = (
 
 class Storage(models.Model):
     type = models.CharField(max_length=10, choices=storage_types)
+    company = models.ForeignKey(Company, related_name="storages", null=True)
 
     host = models.CharField(max_length=150)
     username = models.CharField(max_length=80)
@@ -251,8 +252,8 @@ class ClientVersion(models.Model):
     agent_link = models.CharField(max_length=255)
     updater_link = models.CharField(max_length=255)
 
-    current_agent = models.BooleanField(unique=True, default=False)
-    current_updater = models.BooleanField(unique=True, default=False)
+    current_agent = models.BooleanField(default=False)
+    current_updater = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name

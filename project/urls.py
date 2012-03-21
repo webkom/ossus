@@ -8,17 +8,18 @@ urlpatterns = patterns(
 
     '',
 
-        (r'^$', 'app.dashboard.views.overview'),
-        (r'^dashboard/', include('app.dashboard.urls')),
-        (r'^machines/', include('app.machine.urls')),
-        (r'^storages/', include('app.storage.urls')),
-        (r'^customers/', include('app.customer.urls')),
-        (r'^accounts/', include('app.accounts.urls')),
-        (r'^admin/', include(admin.site.urls)),
-        (r'^api/', include('api.urls')),
+    (r'^$', 'app.machine.views.overview'),
+    (r'^dashboard/', include('app.machine.urls')),
+    (r'^machines/', include('app.machine.urls')),
+    (r'^storages/', include('app.storage.urls')),
+    (r'^customers/', include('app.customer.urls')),
+    (r'^accounts/', include('app.accounts.urls')),
+    (r'^admin/', include(admin.site.urls)),
+    (r'^api/', include('api.urls')),
 
-    )
+)
 
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
     urlpatterns += staticfiles_urlpatterns()

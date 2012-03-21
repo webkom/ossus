@@ -4,4 +4,4 @@ from app.backup.models import Storage
 class StorageForm(ModelForm):
     class Meta:
         model = Storage
-        fields = ('type','host','username','password')
+        fields = ('type','host','username','password','folder')

@@ -53,10 +53,24 @@
                     <li class="{% active request "^/customers/" %}"><a href="/customers/">{% trans "Customers" %}</a>
                     </li>
                     <li class="{% active request "^/storages/" %}"><a href="/storages/">{% trans "Storages" %}</a></li>
-                    <li class="{% active request "^/settings/" %}"><a href="#contact">{% trans "Settings" %}</a></li>
+
+                    <li class="divider-vertical"></li>
+
+                    <li class="dropdown" id="menu1">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+                            {{ request.user.profile.company.name }}
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu right">
+
+                            {% for company in request.user.profile.get_available_companies %}
+                                <li><a href="/accounts/change_company/{{ company.id }}/">{{ company.name }}</a></li>
+                            {% endfor %}
+
+                        </ul>
+                    </li>
                 </ul>
             </div>
-
         </div>
     </div>
 </div>
