@@ -1,6 +1,6 @@
 from api import machine_dict, schedule_dict, backup_dict
 from app.backup.forms import MachineLogForm, MachineStatsForm
-from app.backup.models import Machine, MachineLog, MachineStats
+from app.backup.models import Machine, MachineLog, MachineStats, ClientVersion
 from piston.handler import BaseHandler
 from piston.utils import rc
 
@@ -9,15 +9,25 @@ class MachineHandler(BaseHandler):
     fields = machine_dict + (
     ('updatelogs', ('id', 'type', 'datetime')), ('schedules', schedule_dict), ('backups', backup_dict), )
 
-    def read(self, request, offset=0, limit=None, id=None):
-
-        print request.user.profile.get_machines()
-
+    def read(self, request, offset=0, limit=None, id=None, agent_version_id=False, updater_version_id=False):
         all = request.user.profile.get_machines()
 
+
         if id:
+
             try:
-                return all.get(machine_id=id)
+                machine = all.get(machine_id=id)
+
+                if agent_version_id:
+                    machine.current_agent_version = ClientVersion.objects.get(id=agent_version_id)
+
+                elif updater_version_id:
+                    machine.current_updater_version = ClientVersion.objects.get(id=updater_version_id)
+
+                machine.save()
+
+                return machine
+
             except Machine.DoesNotExist:
                 return rc.NOT_FOUND
         else:
@@ -25,7 +35,6 @@ class MachineHandler(BaseHandler):
 
     def create(self, request, id=False):
         pass
-
 
 class MachineStatsHandler(BaseHandler):
     model = MachineStats
@@ -60,7 +69,6 @@ class MachineStatsHandler(BaseHandler):
             log.save()
             return log
         else:
-            print form.errors
             return form.errors
 
 
@@ -95,5 +103,4 @@ class MachineLogHandler(BaseHandler):
             log.save()
             return log
         else:
-            print form.errors
             return form.errors

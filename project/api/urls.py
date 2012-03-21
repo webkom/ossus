@@ -25,6 +25,9 @@ urlpatterns = patterns('',
     #Machines
     url(r'machines/$', machine),
     url(r'machines/(?P<id>\w+)/$', machine),
+    #Used for updating version
+    url(r'machines/(?P<id>\w+)/set_agent_version/(?P<agent_version_id>\w+)$', machine),
+    url(r'machines/(?P<id>\w+)/set_updater_version/(?P<updater_version_id>\w+)$', machine),
 
     #MachineLog
     url(r'machinelogs/$', machinelog),

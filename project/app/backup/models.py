@@ -203,8 +203,6 @@ class ScheduleBackup(models.Model):
        return u"Machine: %s, name: %s" % (self.machine, self.name)
 
     def current_day_folder_path(self):
-        print
-
         if self.machine.last_connection_to_client.day != datetime.now().day:
             if self.current_version_in_loop < self.versions_count:
                 self.current_version_in_loop += 1

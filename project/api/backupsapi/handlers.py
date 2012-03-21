@@ -45,7 +45,4 @@ class BackupHandler(BaseHandler):
 
 
         else:
-
-            print form.errors
-
             return form.errors

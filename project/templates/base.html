@@ -54,7 +54,7 @@
 
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li class="{% active request "^/machines/" %}"><a href="/machines/">{% trans "Servers" %}</a></li>
+                    <li class="{% active request "^/machines/" %}"><a href="{% url machine_overview %}">{% trans "Servers" %}</a></li>
                     <li class="{% active request "^/customers/" %}"><a href="/customers/">{% trans "Customers" %}</a>
                     </li>
                     <li class="{% active request "^/storages/" %}"><a href="/storages/">{% trans "Storages" %}</a></li>
@@ -68,8 +68,8 @@
                         </a>
                         <ul class="dropdown-menu right">
 
-                            {% for company in request.user.profile.get_available_companies %}
-                                <li><a href="/accounts/change_company/{{ company.id }}/">{{ company.name }}</a></li>
+                            {% for company in request.user.profile.get_companies %}
+                                <li><a href="{% url change_company company.id %}">{{ company.name }}</a></li>
                             {% endfor %}
 
                         </ul>
