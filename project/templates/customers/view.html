@@ -34,7 +34,7 @@
 
                         <tr>
                             <td>{{ machine.machine_id }}</td>
-                            <td>{{ machine.name }}</td>
+                            <td><a href="{% url view_machine machine.id %}">{{ machine.name }}</a></td>
                             <td>{{ machine.last_connection_to_client }}</td>
                             <td>{{ machine.get_last_backup_time }}</td>
                             <td>{{ machine.current_updater_version }}</td>

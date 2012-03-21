@@ -1,3 +1,4 @@
+from api import client_versions_dict
 from app.backup.forms import BackupForm
 from app.backup.models import Backup, Machine, ScheduleBackup, ClientVersion
 from piston.handler import BaseHandler
@@ -25,7 +26,7 @@ def get_current_updater():
 
 class ClientVersionHandler(BaseHandler):
     model = ClientVersion
-    fields = ('')
+    fields = client_versions_dict
 
     def read(self, request, name=None, current_agent=None, current_updater=None):
         all = ClientVersion.objects.all()

@@ -11,3 +11,5 @@ schedule_dict = (
     ('backups', ('id', 'time_started')))
 
 backup_dict = ('id', 'time_started', 'day_folder_path', 'is_recoverable', ('schedule', ('id', 'name',)))
+
+client_versions_dict = ('id','updater_link','current_agent','name','current_updater','agent_link','datetime')
