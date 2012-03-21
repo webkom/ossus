@@ -11,17 +11,22 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        user = User.objects.get_or_create(username="test1")[0]
-        user.set_password("test1")
+        user = User.objects.get_or_create(username="admin")[0]
+        user.set_password("admin")
         user.is_superuser = True
         user.is_staff = True
         user.save()
 
         storage = None
+        version = None
+
 
         #Create client versions
         for j in range(0, randint(3,4)):
-            ClientVersion.objects.get_or_create(name="Version %s"%j, agent_link="/", updater_link="/")
+            version = ClientVersion.objects.get_or_create(name="Version %s"%j, agent_link="/", updater_link="/")[0]
+            version.current_agent = True
+            version.current_updater = True
+            version.save()
 
         #Create companies, with storage, customers and machines
         for j in range(0, randint(3,4)):
@@ -42,6 +47,11 @@ class Command(BaseCommand):
                     machine = Machine.objects.get_or_create(name="Machine %s "%i, customer=customer)[0]
                     machine.machine_id = 1000+company.id+customer.id+machine.id
                     machine.last_connection_to_client = datetime.now()
+                    machine.current_agent_version = version
+                    machine.current_updater_version = version
+                    machine.selected_agent_version = version
+                    machine.selected_updater_version = version
+
                     machine.save()
 
                     #Schedules

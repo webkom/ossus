@@ -1,4 +1,34 @@
 {% extends "machines/base.html" %}
 {% block main %}
     {% include "form_fields.html" %}
+
+    <script>
+        $(document).ready(function () {
+            function hide_select_boxes(hide) {
+
+                if (hide) {
+                    $("#id_selected_agent_version").parent().parent().hide();
+                    $("#id_selected_updater_version").parent().parent().hide();
+                }
+
+                else {
+                    $("#id_selected_agent_version").parent().parent().show();
+                    $("#id_selected_updater_version").parent().parent().show();
+                }
+            }
+
+            if ($("#id_auto_version").attr("checked")) {
+                hide_select_boxes(true);
+            }
+
+            $("#id_auto_version").click(function () {
+                if (this.checked) {
+                    hide_select_boxes(true);
+                } else {
+                    hide_select_boxes(false)
+                }
+            });
+        });
+    </script>
+
 {% endblock %}
