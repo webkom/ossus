@@ -23,14 +23,16 @@ class Command(BaseCommand):
         #Create client versions
         for j in range(0, randint(3,4)):
             version = ClientVersion.objects.get_or_create(name="Version %s"%j, agent_link="/", updater_link="/")[0]
-            version.current_agent = True
-            version.current_updater = True
             version.save()
+
+            version.set_current_agent()
+            version.set_current_updater()
 
             versions.append(version)
 
         #Create companies, with storage, customers and machines
         for j in range(0,4):
+
             company = Company.objects.get_or_create(name="Company %s"%j)[0]
 
             #Create test user for each company
@@ -43,7 +45,6 @@ class Command(BaseCommand):
             company.save()
 
             user.profile.set_company(company)
-
 
             for i in range(0,randint(1,3)):
                 storage = Storage.objects.get_or_create(type="Storage %s"%i, folder="backup/", company=company)[0]

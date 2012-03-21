@@ -38,7 +38,7 @@ def login_view(request):
 def change_company(request, id):
     company = Company.objects.get(id=id)
 
-    if company in request.user.profile.get_available_companies():
+    if company in request.user.profile.get_companies():
         request.user.profile.set_company(company)
 
     return HttpResponseRedirect("/")

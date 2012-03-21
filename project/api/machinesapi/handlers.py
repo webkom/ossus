@@ -10,7 +10,10 @@ class MachineHandler(BaseHandler):
     ('updatelogs', ('id', 'type', 'datetime')), ('schedules', schedule_dict), ('backups', backup_dict), )
 
     def read(self, request, offset=0, limit=None, id=None):
-        all = Machine.objects.all()
+
+        print request.user.profile.get_machines()
+
+        all = request.user.profile.get_machines()
 
         if id:
             try:

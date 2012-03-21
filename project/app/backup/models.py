@@ -257,3 +257,17 @@ class ClientVersion(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def set_current_agent(self):
+        for v in ClientVersion.objects.all():
+            v.current_agent = False
+            v.save()
+        self.current_agent = True
+        self.save()
+
+    def set_current_updater(self):
+        for v in ClientVersion.objects.all():
+            v.current_updater = False
+            v.save()
+        self.current_updater = True
+        self.save()
