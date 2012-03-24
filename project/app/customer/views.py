@@ -6,29 +6,27 @@ from app.backup.models import Customer
 
 @login_required()
 def overview(request):
-    customers = Customer.objects.filter(company=request.user.profile.company)
-    return render(request, "customers/list.html", locals())
+    customers = request.user.profile.get_customers().filter(company=request.user.profile.company)
+    return render(request, "customer/list.html", locals())
 
 
 @login_required()
 def view(request, id):
-    customer = Customer.objects.get(id=id)
-    return render(request, 'customers/view.html', locals())
+    customer = request.user.profile.get_customers().get(id=id)
+    return render(request, 'customer/view.html', locals())
 
 
 def create(request):
     return form(request)
 
-
 def edit(request, id):
     return form(request, id)
-
 
 def form(request, id=False):
     instance = Customer()
 
     if id:
-        instance = Customer.objects.get(id=id)
+        instance = request.user.profile.get_customers().get(id=id)
 
     form = CustomerForm(instance=instance)
 
@@ -42,4 +40,4 @@ def form(request, id=False):
 
             return redirect(view, customer.id)
 
-    return render(request, 'customers/form.html', {'form': form, "title": _("Server")})
+    return render(request, 'customer/form.html', {'form': form, "title": _("Server")})

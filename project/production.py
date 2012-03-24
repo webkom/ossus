@@ -15,7 +15,7 @@ DATABASES = {
         'NAME': 'fncit_backup',
         'USER': 'root',
         'PASSWORD': DB_PASSWORD,
-    }
+        }
 }
 
 STATIC_URL = '/static/'

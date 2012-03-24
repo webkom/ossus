@@ -56,6 +56,9 @@ INSTALLED_APPS = (
 
     'core',
     'app.backup',
+    'app.machine',
+    'app.customer',
+    'app.storage',
 
     'south',
     'piston',

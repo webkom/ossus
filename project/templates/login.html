@@ -1,20 +1,19 @@
+{{ form.errors }}
 
-        {{ form.errors }}
+<form action="" method="post" accept-charset="utf-8">
+    <div class="login_fields">
+        <div class="field">
+            <input type="text" name="username" value="" id="email" tabindex="1" placeholder="brukernavn"/>
+        </div>
 
-        <form action="" method="post" accept-charset="utf-8">
-            <div class="login_fields">
-                <div class="field">
-                    <input type="text" name="username" value="" id="email" tabindex="1" placeholder="brukernavn"/>
-                </div>
+        <div class="field">
 
-                <div class="field">
+            <input type="password" name="password" value="" id="password" tabindex="2" placeholder="passord"/>
+        </div>
+    </div>
+    <!-- .login_fields -->
 
-                    <input type="password" name="password" value="" id="password" tabindex="2" placeholder="passord"/>
-                </div>
-            </div>
-            <!-- .login_fields -->
-
-            <div class="login_actions">
-                <button type="submit" class="btn btn-orange" tabindex="3">Logg inn</button>
-            </div>
-        </form>
+    <div class="login_actions">
+        <button type="submit" class="btn btn-orange" tabindex="3">Logg inn</button>
+    </div>
+</form>

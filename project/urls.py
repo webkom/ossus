@@ -5,11 +5,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns(
-
     '',
-
     (r'^$', 'app.machine.views.overview'),
-    (r'^dashboard/', include('app.machine.urls')),
     (r'^machines/', include('app.machine.urls')),
     (r'^storages/', include('app.storage.urls')),
     (r'^customers/', include('app.customer.urls')),
@@ -21,5 +18,4 @@ urlpatterns = patterns(
 
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
     urlpatterns += staticfiles_urlpatterns()

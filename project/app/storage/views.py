@@ -6,8 +6,8 @@ from app.storage.forms import StorageForm
 
 @login_required()
 def overview(request):
-    storages = Storage.objects.filter(company = request.user.profile.company)
-    return render(request, "storages/list.html", locals())
+    storages = request.user.profile.get_storages().filter(company = request.user.profile.company)
+    return render(request, "storage/list.html", locals())
 
 def new(request):
     return form(request)
@@ -20,7 +20,7 @@ def form(request, id = False):
     instance = Storage()
 
     if id:
-        instance = Storage.objects.get(id=id)
+        instance = request.user.profile.get_storages().get(id=id)
 
     form = StorageForm(instance=instance)
 
@@ -29,9 +29,9 @@ def form(request, id = False):
 
         if form.is_valid():
             storage = form.save(commit=False)
-            storage .company = request.user.profile.company
-            storage .save()
+            storage.company = request.user.profile.company
+            storage.save()
 
             return redirect(edit, storage.id)
 
-    return render(request, 'storages/form.html', {'form':form, "title":_("Storage")})
+    return render(request, 'storage/form.html', {'form':form, "title":_("Storage")})

@@ -6,13 +6,13 @@ from app.machine.forms import MachineForm
 
 @login_required()
 def overview(request):
-    company = request.user.profile.company
-    return render(request, "machines/list.html", locals())
+    customers = request.user.profile.get_customers()
+    return render(request, "machine/list.html", locals())
 
 @login_required()
 def view(request, id):
-    machine = Machine.objects.get(id=id)
-    return render(request, 'machines/view.html', {'machine':machine})
+    machine = request.user.profile.get_machines().get(id=id)
+    return render(request, 'machine/view.html', {'machine':machine})
 
 def new(request):
     return form(request)
@@ -25,7 +25,7 @@ def form(request, id = False):
     instance = Machine()
 
     if id:
-        instance = Machine.objects.get(id=id)
+        instance = request.user.profile.get_machines().get(id=id)
 
     form = MachineForm(instance=instance)
 
@@ -35,5 +35,5 @@ def form(request, id = False):
         if form.is_valid():
             form.save()
 
-    return render(request, 'machines/form.html', {'form':form, "title":_("Server")})
+    return render(request, 'machine/form.html', {'form':form, "title":_("Server")})
 
