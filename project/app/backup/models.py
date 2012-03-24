@@ -44,7 +44,7 @@ class Machine(models.Model):
 
     def get_latest_stats(self):
         if self.stats.all().count() > 15:
-            return self.stats.all().order_by("id")[self.stats.all().count()-16:]
+            return self.stats.all().order_by("id")[self.stats.all().count() - 16:]
 
         return self.stats.all().order_by("id")
 
@@ -91,33 +91,34 @@ class Machine(models.Model):
 
 
 class MachineStats(models.Model):
-    datetime     = models.DateTimeField(default=datetime.now())
-    machine      = models.ForeignKey(Machine, related_name="stats")
+    datetime = models.DateTimeField(default=datetime.now())
+    machine = models.ForeignKey(Machine, related_name="stats")
 
     load_average = models.DecimalField(decimal_places=3, max_digits=50)
 
-    cpu_system   = models.DecimalField(decimal_places=3, max_digits=50)
-    cpu_user     = models.DecimalField(decimal_places=3, max_digits=50)
-    cpu_stolen   = models.DecimalField(decimal_places=3, max_digits=50)
+    cpu_system = models.DecimalField(decimal_places=3, max_digits=50)
+    cpu_user = models.DecimalField(decimal_places=3, max_digits=50)
+    cpu_stolen = models.DecimalField(decimal_places=3, max_digits=50)
 
     mem_used = models.IntegerField(default=0)
     mem_free = models.IntegerField(default=0)
 
+
 class MachineProcessStats(models.Model):
-    datetime     = models.DateTimeField(default=datetime.now())
-    machine      = models.ForeignKey(Machine)
+    datetime = models.DateTimeField(default=datetime.now())
+    machine = models.ForeignKey(Machine)
 
-    pid          = models.IntegerField()
-    name         = models.CharField(max_length=100)
-    user         = models.CharField(max_length=100)
+    pid = models.IntegerField()
+    name = models.CharField(max_length=100)
+    user = models.CharField(max_length=100)
 
-    cpu_usage    = models.DecimalField(decimal_places=3, max_digits=10)
-    mem_usage    = models.DecimalField(decimal_places=3, max_digits=10)
+    cpu_usage = models.DecimalField(decimal_places=3, max_digits=10)
+    mem_usage = models.DecimalField(decimal_places=3, max_digits=10)
 
 log_types = (
-        ('info', 'INFO'),
-        ('error', 'ERROR'),
-        ('warning', 'WARNING')
+    ('info', 'INFO'),
+    ('error', 'ERROR'),
+    ('warning', 'WARNING')
     )
 
 class MachineLog(models.Model):
@@ -130,8 +131,8 @@ class MachineLog(models.Model):
         return "%s %s %s" % (self.machine, self.datetime, self.text)
 
 storage_types = (
-        ('ftp', 'FTP'),
-        ('s3', 'Amazon S3')
+    ('ftp', 'FTP'),
+    ('s3', 'Amazon S3')
     )
 
 class Storage(models.Model):
@@ -146,7 +147,7 @@ class Storage(models.Model):
     folder = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return "Storage: %s %s" % (self.type, self.host)
+        return "Storage: %s %s, Company %s" % (self.type, self.host, self.company)
 
 
 class FolderBackup(models.Model):
@@ -159,8 +160,8 @@ class FolderBackup(models.Model):
         return "%s" % self.schedule_backup
 
 sql_types = (
-        ('mysql', 'MySQL'),
-        ('mssql', 'MSSQL')
+    ('mysql', 'MySQL'),
+    ('mssql', 'MSSQL')
     )
 
 class SQLBackup(models.Model):
@@ -176,6 +177,7 @@ class SQLBackup(models.Model):
     def __unicode__(self):
         return "SQLBackup: %s" % self.host
 
+
 class ScheduleBackup(models.Model):
     #Details
     machine = models.ForeignKey(Machine, related_name="schedules")
@@ -187,11 +189,11 @@ class ScheduleBackup(models.Model):
     last_run_time = models.DateTimeField()
 
     #Used to choose folder to save file
-    current_version_in_loop = models.IntegerField(blank=True)
-    versions_count = models.IntegerField()
+    current_version_in_loop = models.IntegerField(blank=True, default=1)
+    versions_count = models.IntegerField(default=10)
 
     #Every x minute, perfrom backup
-    repeat_every_minute = models.IntegerField()
+    repeat_every_minute = models.IntegerField(default=360)
 
     #Status messages to client
     running_backup = models.BooleanField(default=False, blank=True)
@@ -200,7 +202,7 @@ class ScheduleBackup(models.Model):
     active = models.BooleanField(default=True)
 
     def __unicode__(self):
-       return u"Machine: %s, name: %s" % (self.machine, self.name)
+        return u"Machine: %s, name: %s" % (self.machine, self.name)
 
     def current_day_folder_path(self):
         if self.machine.last_connection_to_client.day != datetime.now().day:
@@ -230,6 +232,7 @@ class ScheduleBackup(models.Model):
 
         return self.get_last_backup_time() + timedelta(0, self.repeat_every_minute * 60)
 
+
 class Backup(models.Model):
     machine = models.ForeignKey(Machine, related_name="backups")
     schedule = models.ForeignKey(ScheduleBackup, null=True, related_name="backups")
@@ -238,11 +241,8 @@ class Backup(models.Model):
     day_folder_path = models.CharField(max_length=150, blank=True)
 
     def is_recoverable(self):
-       return self.schedule.backups.filter(id__gt = self.id).count() < self.schedule.versions_count
+        return self.schedule.backups.filter(id__gt=self.id).count() < self.schedule.versions_count
 
-    def save(self, *args, **kwargs):
-        self.day_folder_path = self.schedule.current_day_folder_path()
-        super(Backup, self).save(args, kwargs)
 
 class ClientVersion(models.Model):
     datetime = models.DateTimeField(auto_now=True)

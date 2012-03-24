@@ -2,42 +2,31 @@
 {% load i18n %}
 
 {% block main %}
-
     <section id="responsive">
-
-
         <div class="page-header">
             <h3>{{ machine.name }}</h3>
         </div>
-
-
         <div class="row">
-
             <div class="span6">
+                <h2>{% trans "Info" %}</h2>
                 <table class="table table-bordered table-striped">
-
                     <tbody>
-
                     <tr>
                         <td>{% trans "Machine ID" %}</td>
                         <td>{{ machine.machine_id }}</td>
                     </tr>
-
                     <tr>
                         <td>Name</td>
                         <td>{{ machine.name }}</td>
                     </tr>
-
                     <tr>
                         <td>Customer</td>
                         <td>{{ machine.customer.name }}</td>
                     </tr>
-
                     <tr>
                         <td>Last connection to client</td>
                         <td>{{ machine.last_connection_to_client }}</td>
                     </tr>
-
                     <tr>
                         <td>Auto version</td>
                         <td>{{ machine.auto_version }}</td>
@@ -50,47 +39,35 @@
                         <td>Auto updater version</td>
                         <td>{{ machine.current_updater_version }}</td>
                     </tr>
-
                     </tbody>
                 </table>
-
             </div>
-
             <div class="span6">
-
-                <table class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>{% trans "Date start" %}</th>
-                        <th>{% trans "Date stop" %}</th>
-                        <th>{% trans "Schedule" %}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    {% for schedule in machine.schedules.all %}
-
-                        <tr>
-                            <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
-                            <td>{{ backup.time_ended|date:"d.m.Y H:i" }}</td>
-                            <td>{{ backup.schedule.name }}</td>
-                        </tr>
-
-                    {% endfor %}
-                    </tbody>
-                </table>
+                grafer
             </div>
-
-
-
-
         </div>
-
         <div class="row">
             <div class="span6">
-
+                <h2>{% trans "Schedules" %}</h2>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>{% trans "Name" %}</th>
+                        <th>{% trans "Last run time" %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for schedule in machine.schedules.all %}
+                        <tr>
+                            <td>{{ schedule.name }}{{ schedule.last_run_time }}</td>
+                            <td>{{ schedule.last_run_time|date:"d.m.Y H:i" }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="span6">
                 <h2>{% trans "Backups" %}</h2>
-
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -100,21 +77,19 @@
                     </tr>
                     </thead>
                     <tbody>
-
                     {% for backup in machine.get_latest_backups %}
-
                         <tr>
                             <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
                             <td>{{ backup.time_ended|date:"d.m.Y H:i" }}</td>
                             <td>{{ backup.schedule.name }}</td>
                         </tr>
-
                     {% endfor %}
                     </tbody>
                 </table>
             </div>
-
-            <div class="span6">
+        </div>
+        <div class="ro">
+            <div class="span12">
                 <h2>{% trans "Log" %}</h2>
                 <table class="table table-bordered table-striped">
                     <thead>
@@ -124,25 +99,15 @@
                     </tr>
                     </thead>
                     <tbody>
-
                     {% for log in machine.get_latest_logs %}
-
                         <tr>
                             <td>{{ log.datetime|date:"d.m.Y H:i" }}</td>
                             <td>{{ log.text }}</td>
                         </tr>
-
                     {% endfor %}
-
-
                     </tbody>
                 </table>
-
-
             </div>
         </div>
-
-
     </section>
-
 {% endblock %}

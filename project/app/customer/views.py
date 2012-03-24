@@ -15,7 +15,6 @@ def view(request, id):
     customer = request.user.profile.get_customers().get(id=id)
     return render(request, 'customer/view.html', locals())
 
-
 def create(request):
     return form(request)
 
