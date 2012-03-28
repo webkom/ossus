@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-from app.backup.models import Company, Customer, Machine, Storage, ClientVersion, ScheduleBackup, FolderBackup, SQLBackup, Backup, MachineLog
+from random import random, randint
+from app.backup.models import Company, Customer, Machine, Storage, ClientVersion, ScheduleBackup, FolderBackup, SQLBackup, Backup, MachineLog, MachineStats
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 
@@ -63,6 +64,21 @@ class Command(BaseCommand):
                         selected_agent_version=versions[0],
                         selected_updater_version=versions[0],
                     )[0]
+
+                    #MachineStats data
+                    for msi in range(0,30):
+
+                        cpu_system = randint(40,50)
+
+                        MachineStats.objects.get_or_create(
+                            machine = machine,
+                            load_average = random(),
+                            cpu_system = cpu_system,
+                            cpu_user = cpu_system - randint(15,35),
+                            cpu_stolen = cpu_system - randint(25,35),
+                            mem_used = randint(0,20),
+                            mem_free = randint(20,40),
+                        )
 
                     #Schedules
                     for l in range(0, 3):
