@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'app.machine',
     'app.customer',
     'app.storage',
+    'app.schedule',
 
     'south',
     'piston',

@@ -8,6 +8,7 @@ urlpatterns = patterns(
     '',
     (r'^$', 'app.machine.views.overview'),
     (r'^machines/', include('app.machine.urls')),
+    (r'^schedules/', include('app.schedule.urls')),
     (r'^storages/', include('app.storage.urls')),
     (r'^customers/', include('app.customer.urls')),
     (r'^accounts/', include('app.accounts.urls')),

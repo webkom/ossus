@@ -49,6 +49,9 @@
         <div class="row">
             <div class="span6">
                 <h2>{% trans "Schedules" %}</h2>
+
+                <a href="{% url app.schedule.views.new machine.id %}">{% trans "New schedule" %}</a>
+
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -59,8 +62,8 @@
                     <tbody>
                     {% for schedule in machine.schedules.all %}
                         <tr>
-                            <td>{{ schedule.name }}{{ schedule.last_run_time }}</td>
-                            <td>{{ schedule.last_run_time|date:"d.m.Y H:i" }}</td>
+                            <td><a href="{% url app.schedule.views.edit machine.id, schedule.id %}">{{ schedule.name }} </a></td>
+                            <td>  {{ schedule.last_run_time|date:"d.m.Y H:i" }} {% if not schedule.last_run_time %} {% trans "Not runned yet" %}{% endif %}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

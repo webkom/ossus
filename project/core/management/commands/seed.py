@@ -87,9 +87,9 @@ class Command(BaseCommand):
                         for o in range(0, 3):
                             MachineLog.objects.get_or_create(
                                 machine=machine,
-                                datetime=example_date,
+                                datetime=datetime.now(),
                                 text="Running seed for this machine",
-                                type="Type",
+                                type="INFO",
                             )
 
                         #FolderBackups

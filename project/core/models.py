@@ -1,4 +1,4 @@
-from app.backup.models import Company, Customer, Machine, Storage
+from app.backup.models import Company, Customer, Machine, Storage, ScheduleBackup
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -31,6 +31,15 @@ class UserProfile(models.Model):
         return Machine.objects.filter(id__in=machine_ids)
 
     def get_storages(self):
-        return Storage.objects.filter(company = self.company)
+        return Storage.objects.filter(company=self.company)
+
+    def get_schedules(self):
+        schedule_ids = []
+
+        for machine in self.get_machines():
+            for schedule in machine.schedules.all():
+                schedule_ids.append(schedule.id)
+
+        return ScheduleBackup.objects.filter(id__in=schedule_ids)
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])

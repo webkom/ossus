@@ -177,6 +177,10 @@ class SQLBackup(models.Model):
     def __unicode__(self):
         return "SQLBackup: %s" % self.host
 
+schedule_every_minute_choices = (
+    (60, 'Hver time'),
+    (240, 'Hver tredje time')
+    )
 
 class ScheduleBackup(models.Model):
     #Details
@@ -186,14 +190,14 @@ class ScheduleBackup(models.Model):
     storage = models.ForeignKey(Storage, related_name="schedules")
 
     from_date = models.DateTimeField()
-    last_run_time = models.DateTimeField()
+    last_run_time = models.DateTimeField(null=True, default=None)
 
     #Used to choose folder to save file
     current_version_in_loop = models.IntegerField(blank=True, default=1)
     versions_count = models.IntegerField(default=10)
 
     #Every x minute, perfrom backup
-    repeat_every_minute = models.IntegerField(default=360)
+    repeat_every_minute = models.IntegerField(default=360, choices=schedule_every_minute_choices)
 
     #Status messages to client
     running_backup = models.BooleanField(default=False, blank=True)
