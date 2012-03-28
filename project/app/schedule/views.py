@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
+from django.forms.models import modelformset_factory
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
-from app.backup.models import ScheduleBackup, Company
+from app.backup.models import ScheduleBackup, Company, FolderBackup
 from app.schedule.forms import ScheduleBackupForm
 from app.machine.views import view as machine_view
 
@@ -32,4 +33,9 @@ def form(request, machine_id, id=False):
 
             return redirect(machine_view, machine.id)
 
-    return render(request, 'schedule/form.html', {'form': form, "title": _("Schedule")})
+
+    folder_form = modelformset_factory(FolderBackup)(queryset=FolderBackup.objects.filter(schedule_backup=instance))
+
+
+
+    return render(request, 'schedule/form.html', {'form': form, 'folder_form':folder_form, "title": _("Schedule")})

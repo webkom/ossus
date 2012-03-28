@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 from app.backup.models import Machine, Company
 from app.machine.forms import MachineForm
@@ -27,13 +27,16 @@ def form(request, id = False):
     if id:
         instance = request.user.profile.get_machines().get(id=id)
 
-    form = MachineForm(instance=instance)
+    form = MachineForm(instance=instance, user=request.user)
 
     if request.method == "POST":
-        form = MachineForm(request.POST, instance=instance)
+        form = MachineForm(request.POST, instance=instance, user=request.user)
 
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
+            instance.save()
+
+            return redirect(view, instance.id)
 
     return render(request, 'machine/form.html', {'form':form, "title":_("Server")})
 

@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-        {% include "form_fields.html" %}
+    <div class="row">
+        <div class="span8">
+            {{ form.errors }}
+            <form enctype="multipart/form-data" class="form-horizontal" method="post">
+                {% include "form_fields.html" %}
+            </form>
+        </div>
+    </div>
 {% endblock %}

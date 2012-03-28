@@ -1,14 +1,13 @@
 from django import forms
 from django.db import models
-from django.forms.models import ModelForm
+from django.forms.models import ModelForm, modelformset_factory
 from app.backup.models import ScheduleBackup, Storage
-
+from django.forms.formsets import formset_factory
 
 class ScheduleBackupForm(ModelForm):
     storage = forms.ModelChoiceField(queryset=Storage.objects.none())
 
     def __init__(self, *args, **kwargs):
-
         user = None
 
         if 'user' in kwargs:
@@ -22,6 +21,4 @@ class ScheduleBackupForm(ModelForm):
 
     class Meta:
         model = ScheduleBackup
-        fields = ("name","storage","from_date","repeat_every_minute","active")
-
-
+        fields = ("name", "storage", "from_date", "repeat_every_minute", "active")

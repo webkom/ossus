@@ -2,12 +2,16 @@
 {% load i18n %}
 
 {% block main %}
+
+
+
+
     <section id="responsive">
         <div class="page-header">
             <h3>{{ machine.name }}</h3>
         </div>
         <div class="row">
-            <div class="span6">
+            <div class="span4">
                 <h2>{% trans "Info" %}</h2>
                 <table class="table table-bordered table-striped">
                     <tbody>
@@ -42,8 +46,65 @@
                     </tbody>
                 </table>
             </div>
-            <div class="span6">
-                grafer
+            <div class="span8">
+
+                <script type="text/javascript">
+
+                    var chart;
+                    $(document).ready(function () {
+                        chart = new Highcharts.Chart({
+                            chart:{
+                                renderTo:'container_load',
+                                defaultSeriesType:'area'
+                            },
+                            title:{
+                                text:'Load'
+                            },
+                            xAxis:{
+                                categories:[{% for stat in machine.get_latest_stats %}
+                                    '{{ stat.datetime|date:"H:i" }}',
+                                {% endfor %}],
+                                tickmarkPlacement:'on',
+                                title:{
+                                    enabled:false
+                                }
+                            },
+                            tooltip:{
+                                formatter:function () {
+                                    return '' +
+                                            this.x + ': ' + Highcharts.numberFormat(this.y, 0, ',') + ' millions';
+                                }
+                            },
+
+                            plotOptions:{
+                                area:{
+                                    stacking:'normal',
+
+                                    lineColor:'#666666',
+                                    lineWidth:1,
+                                    marker:{
+                                        lineWidth:1,
+                                        lineColor:'#666666'
+                                    }
+                                }
+                            },
+                            series:[
+                                {
+                                    name:'User',
+                                    data:[{% for stat in machine.get_latest_stats %}
+                                        {{ stat.load_average }},
+                                    {% endfor %}
+                                    ]
+                                }
+                            ]
+                        });
+                    });
+
+                </script>
+
+                <div id="container_load" style="width: 100px; height: 37px; margin: 0 auto"></div>
+
+
             </div>
         </div>
         <div class="row">
@@ -62,8 +123,11 @@
                     <tbody>
                     {% for schedule in machine.schedules.all %}
                         <tr>
-                            <td><a href="{% url app.schedule.views.edit machine.id, schedule.id %}">{{ schedule.name }} </a></td>
-                            <td>  {{ schedule.last_run_time|date:"d.m.Y H:i" }} {% if not schedule.last_run_time %} {% trans "Not runned yet" %}{% endif %}</td>
+                            <td>
+                                <a href="{% url app.schedule.views.edit machine.id, schedule.id %}">{{ schedule.name }} </a>
+                            </td>
+                            <td>  {{ schedule.last_run_time|date:"d.m.Y H:i" }}
+                                {% if not schedule.last_run_time %} {% trans "Not runned yet" %}{% endif %}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
