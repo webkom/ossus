@@ -14,12 +14,15 @@ def view(request, id):
     machine = request.user.profile.get_machines().get(id=id)
     return render(request, 'machine/view.html', {'machine':machine})
 
+@login_required()
 def new(request):
     return form(request)
 
+@login_required()
 def edit(request, id):
     return form(request, id)
 
+@login_required()
 def form(request, id = False):
 
     instance = Machine()

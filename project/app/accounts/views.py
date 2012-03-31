@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from app.backup.models import Company
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from app.accounts.forms import LoginForm
@@ -35,6 +36,8 @@ def login_view(request):
 
     return render_to_response('login.html', {'form': form})
 
+
+@login_required()
 def change_company(request, id):
     company = Company.objects.get(id=id)
 

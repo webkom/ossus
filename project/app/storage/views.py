@@ -9,12 +9,15 @@ def overview(request):
     storages = request.user.profile.get_storages().filter(company = request.user.profile.company)
     return render(request, "storage/list.html", locals())
 
+@login_required()
 def new(request):
     return form(request)
 
+@login_required()
 def edit(request, id):
     return form(request, id)
 
+@login_required()
 def form(request, id = False):
 
     instance = Storage()
