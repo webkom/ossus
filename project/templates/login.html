@@ -1,6 +1,8 @@
 {{ form.errors }}
 
 <form action="" method="post" accept-charset="utf-8">
+    {% csrf_token %}
+
     <div class="login_fields">
         <div class="field">
             <input type="text" name="username" value="" id="email" tabindex="1" placeholder="brukernavn"/>
