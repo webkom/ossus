@@ -2,20 +2,24 @@ from django.contrib.auth.decorators import login_required
 from django.forms.models import modelformset_factory
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
-from app.backup.models import ScheduleBackup, Company, FolderBackup
-from app.schedule.forms import ScheduleBackupForm
+from app.backup.models import ScheduleBackup
+from app.schedule.forms import ScheduleBackupForm, ScheduleFoldersForm, ScheduleSQLsForm
 from app.machine.views import view as machine_view
 
 @login_required()
 def new(request, machine_id):
     return form(request, machine_id)
 
+
 @login_required()
 def edit(request, machine_id, id):
     return form(request, machine_id, id)
 
+
 @login_required()
 def form(request, machine_id, id=False):
+    title = _("Schedules")
+
     instance = ScheduleBackup()
 
     machine = request.user.profile.get_machines().get(id=machine_id)
@@ -24,21 +28,27 @@ def form(request, machine_id, id=False):
         instance = request.user.profile.get_schedules().get(id=id)
 
     form = ScheduleBackupForm(instance=instance, user=request.user)
+    form_folders = ScheduleFoldersForm(instance=instance, prefix="folders")
+    form_sql = ScheduleSQLsForm(instance=instance, prefix="sql")
 
     if request.method == "POST":
         form = ScheduleBackupForm(request.POST, instance=instance, user=request.user)
+
+        form_folders = ScheduleFoldersForm(request.POST, prefix="folders", instance = instance)
+        form_sql = ScheduleSQLsForm(request.POST, prefix="sql", instance = instance)
 
         if form.is_valid():
             instance = form.save(commit=False)
             instance.machine = machine
 
-            instance.save()
+
+            if form_folders.is_valid() and form_sql.is_valid():
+
+                instance.save()
+                form_folders.save()
+                form_sql.save()
 
             return redirect(machine_view, machine.id)
 
 
-    folder_form = modelformset_factory(FolderBackup)(queryset=FolderBackup.objects.filter(schedule_backup=instance))
-
-
-
-    return render(request, 'schedule/form.html', {'form': form, 'folder_form':folder_form, "title": _("Schedule")})
+    return render(request, 'schedule/form.html', locals())

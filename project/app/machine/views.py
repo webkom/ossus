@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 from app.backup.models import Machine, Company
 from app.machine.forms import MachineForm
+from django.views.generic.base import TemplateView
+
 
 @login_required()
 def overview(request):
