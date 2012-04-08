@@ -1,13 +1,13 @@
-# encoding: utf-8
+# -*- coding: utf-8 -*-
 import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
         # Adding model 'Company'
         db.create_table('backup_company', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -35,22 +35,21 @@ class Migration(SchemaMigration):
         db.create_table('backup_machine', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=150)),
-            ('customer', self.gf('django.db.models.fields.related.ForeignKey')(related_name='locations', to=orm['backup.Customer'])),
+            ('customer', self.gf('django.db.models.fields.related.ForeignKey')(related_name='machines', to=orm['backup.Customer'])),
             ('machine_id', self.gf('django.db.models.fields.CharField')(max_length=150)),
             ('last_connection_to_client', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
-            ('ip', self.gf('django.db.models.fields.IPAddressField')(max_length=15, null=True, blank=True)),
             ('auto_version', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('current_agent_version', self.gf('django.db.models.fields.related.ForeignKey')(related_name='agent_versions', null=True, to=orm['backup.ClientVersion'])),
             ('current_updater_version', self.gf('django.db.models.fields.related.ForeignKey')(related_name='updater_versions', null=True, to=orm['backup.ClientVersion'])),
-            ('selected_agent_version', self.gf('django.db.models.fields.related.ForeignKey')(related_name='agent_selected', null=True, to=orm['backup.ClientVersion'])),
-            ('selected_updater_version', self.gf('django.db.models.fields.related.ForeignKey')(related_name='updater_selected', null=True, to=orm['backup.ClientVersion'])),
+            ('selected_agent_version', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='agent_selected', null=True, to=orm['backup.ClientVersion'])),
+            ('selected_updater_version', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='updater_selected', null=True, to=orm['backup.ClientVersion'])),
         ))
         db.send_create_signal('backup', ['Machine'])
 
         # Adding model 'MachineStats'
         db.create_table('backup_machinestats', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('datetime', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 3, 16, 4, 6, 38, 992539))),
+            ('datetime', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 9, 0, 0))),
             ('machine', self.gf('django.db.models.fields.related.ForeignKey')(related_name='stats', to=orm['backup.Machine'])),
             ('load_average', self.gf('django.db.models.fields.DecimalField')(max_digits=50, decimal_places=3)),
             ('cpu_system', self.gf('django.db.models.fields.DecimalField')(max_digits=50, decimal_places=3)),
@@ -64,7 +63,7 @@ class Migration(SchemaMigration):
         # Adding model 'MachineProcessStats'
         db.create_table('backup_machineprocessstats', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('datetime', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 3, 16, 4, 6, 38, 993353))),
+            ('datetime', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 9, 0, 0))),
             ('machine', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['backup.Machine'])),
             ('pid', self.gf('django.db.models.fields.IntegerField')()),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
@@ -88,6 +87,7 @@ class Migration(SchemaMigration):
         db.create_table('backup_storage', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('type', self.gf('django.db.models.fields.CharField')(max_length=10)),
+            ('company', self.gf('django.db.models.fields.related.ForeignKey')(related_name='storages', null=True, to=orm['backup.Company'])),
             ('host', self.gf('django.db.models.fields.CharField')(max_length=150)),
             ('username', self.gf('django.db.models.fields.CharField')(max_length=80)),
             ('password', self.gf('django.db.models.fields.CharField')(max_length=80)),
@@ -107,13 +107,13 @@ class Migration(SchemaMigration):
         # Adding model 'SQLBackup'
         db.create_table('backup_sqlbackup', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('type', self.gf('django.db.models.fields.CharField')(max_length=40)),
+            ('type', self.gf('django.db.models.fields.TextField')(max_length=40)),
             ('schedule_backup', self.gf('django.db.models.fields.related.ForeignKey')(related_name='sql_backups', to=orm['backup.ScheduleBackup'])),
-            ('host', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('port', self.gf('django.db.models.fields.CharField')(max_length=15)),
-            ('database', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('username', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('password', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('host', self.gf('django.db.models.fields.TextField')()),
+            ('port', self.gf('django.db.models.fields.TextField')()),
+            ('database', self.gf('django.db.models.fields.TextField')()),
+            ('username', self.gf('django.db.models.fields.TextField')()),
+            ('password', self.gf('django.db.models.fields.TextField')()),
         ))
         db.send_create_signal('backup', ['SQLBackup'])
 
@@ -124,10 +124,10 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=150, blank=True)),
             ('storage', self.gf('django.db.models.fields.related.ForeignKey')(related_name='schedules', to=orm['backup.Storage'])),
             ('from_date', self.gf('django.db.models.fields.DateTimeField')()),
-            ('last_run_time', self.gf('django.db.models.fields.DateTimeField')()),
-            ('current_version_in_loop', self.gf('django.db.models.fields.IntegerField')(blank=True)),
-            ('versions_count', self.gf('django.db.models.fields.IntegerField')()),
-            ('repeat_every_minute', self.gf('django.db.models.fields.IntegerField')()),
+            ('last_run_time', self.gf('django.db.models.fields.DateTimeField')(default=None, null=True)),
+            ('current_version_in_loop', self.gf('django.db.models.fields.IntegerField')(default=1, blank=True)),
+            ('versions_count', self.gf('django.db.models.fields.IntegerField')(default=10)),
+            ('repeat_every_minute', self.gf('django.db.models.fields.IntegerField')(default=360)),
             ('running_backup', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('running_restore', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
@@ -152,14 +152,12 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('agent_link', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('updater_link', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('current_agent', self.gf('django.db.models.fields.BooleanField')(default=False, unique=True)),
-            ('current_updater', self.gf('django.db.models.fields.BooleanField')(default=False, unique=True)),
+            ('current_agent', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('current_updater', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal('backup', ['ClientVersion'])
 
-
     def backwards(self, orm):
-        
         # Deleting model 'Company'
         db.delete_table('backup_company')
 
@@ -198,7 +196,6 @@ class Migration(SchemaMigration):
 
         # Deleting model 'ClientVersion'
         db.delete_table('backup_clientversion')
-
 
     models = {
         'auth.group': {
@@ -242,8 +239,8 @@ class Migration(SchemaMigration):
         'backup.clientversion': {
             'Meta': {'object_name': 'ClientVersion'},
             'agent_link': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'current_agent': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'unique': 'True'}),
-            'current_updater': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'unique': 'True'}),
+            'current_agent': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'current_updater': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'datetime': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
@@ -273,14 +270,13 @@ class Migration(SchemaMigration):
             'auto_version': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'current_agent_version': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'agent_versions'", 'null': 'True', 'to': "orm['backup.ClientVersion']"}),
             'current_updater_version': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'updater_versions'", 'null': 'True', 'to': "orm['backup.ClientVersion']"}),
-            'customer': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'locations'", 'to': "orm['backup.Customer']"}),
+            'customer': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'machines'", 'to': "orm['backup.Customer']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'ip': ('django.db.models.fields.IPAddressField', [], {'max_length': '15', 'null': 'True', 'blank': 'True'}),
             'last_connection_to_client': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'machine_id': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
-            'selected_agent_version': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'agent_selected'", 'null': 'True', 'to': "orm['backup.ClientVersion']"}),
-            'selected_updater_version': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'updater_selected'", 'null': 'True', 'to': "orm['backup.ClientVersion']"})
+            'selected_agent_version': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'agent_selected'", 'null': 'True', 'to': "orm['backup.ClientVersion']"}),
+            'selected_updater_version': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'updater_selected'", 'null': 'True', 'to': "orm['backup.ClientVersion']"})
         },
         'backup.machinelog': {
             'Meta': {'object_name': 'MachineLog'},
@@ -293,7 +289,7 @@ class Migration(SchemaMigration):
         'backup.machineprocessstats': {
             'Meta': {'object_name': 'MachineProcessStats'},
             'cpu_usage': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '3'}),
-            'datetime': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 3, 16, 4, 6, 38, 993353)'}),
+            'datetime': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 9, 0, 0)'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'machine': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['backup.Machine']"}),
             'mem_usage': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '3'}),
@@ -306,7 +302,7 @@ class Migration(SchemaMigration):
             'cpu_stolen': ('django.db.models.fields.DecimalField', [], {'max_digits': '50', 'decimal_places': '3'}),
             'cpu_system': ('django.db.models.fields.DecimalField', [], {'max_digits': '50', 'decimal_places': '3'}),
             'cpu_user': ('django.db.models.fields.DecimalField', [], {'max_digits': '50', 'decimal_places': '3'}),
-            'datetime': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 3, 16, 4, 6, 38, 992539)'}),
+            'datetime': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 9, 0, 0)'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'load_average': ('django.db.models.fields.DecimalField', [], {'max_digits': '50', 'decimal_places': '3'}),
             'machine': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'stats'", 'to': "orm['backup.Machine']"}),
@@ -316,31 +312,32 @@ class Migration(SchemaMigration):
         'backup.schedulebackup': {
             'Meta': {'object_name': 'ScheduleBackup'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'current_version_in_loop': ('django.db.models.fields.IntegerField', [], {'blank': 'True'}),
+            'current_version_in_loop': ('django.db.models.fields.IntegerField', [], {'default': '1', 'blank': 'True'}),
             'from_date': ('django.db.models.fields.DateTimeField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_run_time': ('django.db.models.fields.DateTimeField', [], {}),
+            'last_run_time': ('django.db.models.fields.DateTimeField', [], {'default': 'None', 'null': 'True'}),
             'machine': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'schedules'", 'to': "orm['backup.Machine']"}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '150', 'blank': 'True'}),
-            'repeat_every_minute': ('django.db.models.fields.IntegerField', [], {}),
+            'repeat_every_minute': ('django.db.models.fields.IntegerField', [], {'default': '360'}),
             'running_backup': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'running_restore': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'storage': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'schedules'", 'to': "orm['backup.Storage']"}),
-            'versions_count': ('django.db.models.fields.IntegerField', [], {})
+            'versions_count': ('django.db.models.fields.IntegerField', [], {'default': '10'})
         },
         'backup.sqlbackup': {
             'Meta': {'object_name': 'SQLBackup'},
-            'database': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'host': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'database': ('django.db.models.fields.TextField', [], {}),
+            'host': ('django.db.models.fields.TextField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'password': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'port': ('django.db.models.fields.CharField', [], {'max_length': '15'}),
+            'password': ('django.db.models.fields.TextField', [], {}),
+            'port': ('django.db.models.fields.TextField', [], {}),
             'schedule_backup': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'sql_backups'", 'to': "orm['backup.ScheduleBackup']"}),
-            'type': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
-            'username': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'type': ('django.db.models.fields.TextField', [], {'max_length': '40'}),
+            'username': ('django.db.models.fields.TextField', [], {})
         },
         'backup.storage': {
             'Meta': {'object_name': 'Storage'},
+            'company': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'storages'", 'null': 'True', 'to': "orm['backup.Company']"}),
             'folder': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'host': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),

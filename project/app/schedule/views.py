@@ -20,35 +20,29 @@ def edit(request, machine_id, id):
 def form(request, machine_id, id=False):
     title = _("Schedules")
 
-    instance = ScheduleBackup()
-
+    schedule = ScheduleBackup()
     machine = request.user.profile.get_machines().get(id=machine_id)
 
     if id:
-        instance = request.user.profile.get_schedules().get(id=id)
+        schedule = request.user.profile.get_schedules().get(id=id)
 
-    form = ScheduleBackupForm(instance=instance, user=request.user)
-    form_folders = ScheduleFoldersForm(instance=instance, prefix="folders")
-    form_sql = ScheduleSQLsForm(instance=instance, prefix="sql")
+    form = ScheduleBackupForm(instance=schedule, user=request.user)
+    form_folders = ScheduleFoldersForm(instance=schedule, prefix="folders")
+    form_sql = ScheduleSQLsForm(instance=schedule, prefix="sql")
 
     if request.method == "POST":
-        form = ScheduleBackupForm(request.POST, instance=instance, user=request.user)
+        form = ScheduleBackupForm(request.POST, instance=schedule, user=request.user)
+        form_folders = ScheduleFoldersForm(request.POST, prefix="folders", instance=schedule)
+        form_sql = ScheduleSQLsForm(request.POST, prefix="sql", instance=schedule)
 
-        form_folders = ScheduleFoldersForm(request.POST, prefix="folders", instance = instance)
-        form_sql = ScheduleSQLsForm(request.POST, prefix="sql", instance = instance)
+        if form.is_valid() and form_folders.is_valid() and form_sql.is_valid():
+            schedule = form.save(commit=False)
+            schedule.machine = machine
 
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.machine = machine
-
-
-            if form_folders.is_valid() and form_sql.is_valid():
-
-                instance.save()
-                form_folders.save()
-                form_sql.save()
+            schedule.save()
+            form_folders.save()
+            form_sql.save()
 
             return redirect(machine_view, machine.id)
-
 
     return render(request, 'schedule/form.html', locals())

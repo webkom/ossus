@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from django.db import models
@@ -33,7 +35,8 @@ class Machine(models.Model):
 
     #If not auto_version
     selected_agent_version = models.ForeignKey('ClientVersion', related_name="agent_selected", null=True, blank=True)
-    selected_updater_version = models.ForeignKey('ClientVersion', related_name="updater_selected", null=True, blank=True)
+    selected_updater_version = models.ForeignKey('ClientVersion', related_name="updater_selected", null=True,
+        blank=True)
 
     def __unicode__(self):
         return "Machine: %s, machine_id: %s" % (self.name, self.machine_id)
@@ -165,21 +168,26 @@ sql_types = (
     )
 
 class SQLBackup(models.Model):
-    type = models.CharField(max_length=40, choices=sql_types)
+    type = models.TextField(max_length=40, choices=sql_types)
     schedule_backup = models.ForeignKey('ScheduleBackup', related_name='sql_backups')
 
-    host = models.CharField(max_length=100)
-    port = models.CharField(max_length=15)
-    database = models.CharField(max_length=100)
-    username = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
+    host = models.TextField()
+    port = models.TextField()
+    database = models.TextField()
+    username = models.TextField()
+    password = models.TextField()
 
     def __unicode__(self):
         return "SQLBackup: %s" % self.host
 
 schedule_every_minute_choices = (
     (60, 'Hver time'),
-    (240, 'Hver tredje time')
+    (60*3, 'Hver tredje time'),
+    (60*12, 'Hver dag'),
+    (60*12*2, 'Hver andre dag'),
+    (60*12*3, 'Hver tredje dag'),
+    (60*12*7, 'Hver uke'),
+    (60*12*7*30, 'Hver måned'),
     )
 
 class ScheduleBackup(models.Model):

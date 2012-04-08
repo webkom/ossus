@@ -1,7 +1,8 @@
 from django import forms
 from django.db import models
 from django.forms.models import ModelForm, modelformset_factory, inlineformset_factory
-from app.backup.models import ScheduleBackup, Storage, FolderBackup, SQLBackup
+from django.forms.widgets import TextInput, Select
+from app.backup.models import ScheduleBackup, Storage, FolderBackup, SQLBackup, sql_types
 from django.forms.formsets import formset_factory
 
 class ScheduleBackupForm(ModelForm):
@@ -25,24 +26,24 @@ class ScheduleBackupForm(ModelForm):
 
 
 class FolderBackupForm(ModelForm):
-    local_folder_path = forms.CharField(max_length=255)
-
-    def __init__(self, *args, **kwargs):
-        super(FolderBackupForm, self).__init__(*args, **kwargs)
+    local_folder_path = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small'}))
 
     class Meta:
         model = FolderBackup
         fields = ("local_folder_path",)
 
-ScheduleFoldersForm = inlineformset_factory(ScheduleBackup, FolderBackup, form=FolderBackupForm,  extra=3)
-
+ScheduleFoldersForm = inlineformset_factory(ScheduleBackup, FolderBackup, form=FolderBackupForm, extra=2)
 
 class SQLBackupForm(ModelForm):
+    type = forms.ChoiceField(choices=sql_types, widget=Select(attrs={'class': 'input-small', }, choices=sql_types))
+    host = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small', }))
+    port = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-mini', }))
+    database = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small', }))
+    username = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small', }))
+    password = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small', }))
 
     class Meta:
         model = SQLBackup
-        fields = ("type","host","port","database", "username","password",)
+        fields = ("type", "host", "port", "database", "username", "password",)
 
-ScheduleSQLsForm = inlineformset_factory(ScheduleBackup, SQLBackup, form=SQLBackupForm,  extra=1)
-
-
+ScheduleSQLsForm = inlineformset_factory(ScheduleBackup, SQLBackup, form=SQLBackupForm, extra=2)

@@ -3,12 +3,18 @@
 
 {% block content %}
     <div class="row">
-        <div class="span8">
-
+        <div class="span12">
 
             <h2>{{ title }}</h2>
 
             {{ form.errors }}
+
+            {% if form_folders.errors %}
+                {{ form_folders.errors }}
+            {% endif %}
+            {% if form_sql.errors %}
+                {{ form_sql.errors }}
+            {% endif %}
             <form enctype="multipart/form-data" class="form-horizontal" method="post">
 
                 {% csrf_token %}
@@ -53,24 +59,43 @@
 
                 {{ form_sql.management_form }}
 
-                {% for element in form_sql %}
+                <div class="control-group">
+                    <div class="controls">
 
-                    <div class="control-group">
-                        <label class="control-label" for="input01">{% trans "SQL" %}</label>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>{% trans "Type" %}</th>
+                                <th>{% trans "Host" %}</th>
+                                <th>{% trans "Port" %}</th>
+                                <th>{% trans "Database" %}</th>
+                                <th>{% trans "Username" %}</th>
+                                <th>{% trans "Password" %}</th>
+                                <th>{% trans "Delete" %}</th>
+                            </tr>
+                            </thead>
 
-                        <div class="controls">
+                            <tbody>
 
-                            {% for field in element %}
+                            {% for element in form_sql %}
+                                <tr>
+                                    {% for field in element %}
 
-                                {{ field.label }} {{ field }}
+                                        <td>{{ field }}</td>
 
+                                    {% endfor %}
+                                </tr>
                             {% endfor %}
+                            <tr>
 
-                        </div>
+                            </tr>
+                            </tbody>
+
+                        </table>
 
                     </div>
 
-                {% endfor %}
+                </div>
 
 
                 <div class="form-actions">

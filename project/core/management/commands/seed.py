@@ -66,18 +66,17 @@ class Command(BaseCommand):
                     )[0]
 
                     #MachineStats data
-                    for msi in range(0,30):
-
-                        cpu_system = randint(40,50)
+                    for msi in range(0, 30):
+                        cpu_system = randint(40, 50)
 
                         MachineStats.objects.get_or_create(
-                            machine = machine,
-                            load_average = random(),
-                            cpu_system = cpu_system,
-                            cpu_user = cpu_system - randint(15,35),
-                            cpu_stolen = cpu_system - randint(25,35),
-                            mem_used = randint(0,20),
-                            mem_free = randint(20,40),
+                            machine=machine,
+                            load_average=random(),
+                            cpu_system=cpu_system,
+                            cpu_user=cpu_system - randint(15, 35),
+                            cpu_stolen=cpu_system - randint(25, 35),
+                            mem_used=randint(0, 20),
+                            mem_free=randint(20, 40),
                         )
 
                     #Schedules
@@ -119,7 +118,12 @@ class Command(BaseCommand):
                         for o in range(0, 3):
                             SQLBackup.objects.get_or_create(
                                 schedule_backup=scheduleBackup,
-                                type="FTP %s" % o
+                                type="FTP %s" % o,
+                                host="192.168.0.%s" % o,
+                                port="330%s" % o,
+                                username="username %s" % o,
+                                password="pw %s" % o,
+                                database="database %s" % o,
                             )
 
             user.profile.set_company(user.companies.all()[0])
