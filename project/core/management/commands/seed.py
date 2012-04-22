@@ -4,8 +4,9 @@ from random import random, randint
 from app.backup.models import Company, Customer, Machine, Storage, ClientVersion, ScheduleBackup, FolderBackup, SQLBackup, Backup, MachineLog, MachineStats
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
+from django.utils.timezone import utc
 
-example_date = datetime.strptime("2012-03-01 00:00:00", "%Y-%m-%d %H:%M:%S")
+example_date = datetime.utcnow().replace(tzinfo=utc)
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
@@ -102,7 +103,7 @@ class Command(BaseCommand):
                         for o in range(0, 3):
                             MachineLog.objects.get_or_create(
                                 machine=machine,
-                                datetime=datetime.now(),
+                                datetime=datetime.utcnow().replace(tzinfo=utc),
                                 text="Running seed for this machine",
                                 type="INFO",
                             )
