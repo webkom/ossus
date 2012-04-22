@@ -44,7 +44,7 @@ urlpatterns = patterns('',
     #ScheduleBackups
     url(r'schedules/$', schedules),
     url(r'schedules/(?P<id>\d+)/$', schedules),
-    
+
     #Backups
     url(r'backups/$', backups),
     url(r'backups/(?P<id>\d+)/$', backups),

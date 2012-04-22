@@ -155,8 +155,9 @@ class Storage(models.Model):
 
 
 class FolderBackup(models.Model):
-    local_folder_path = models.TextField()
     schedule_backup = models.ForeignKey('ScheduleBackup', related_name='folder_backups')
+
+    local_folder_path = models.TextField()
     skip_hidden_folders = models.BooleanField(default=False)
 
 
@@ -164,14 +165,14 @@ class FolderBackup(models.Model):
         return "%s" % self.schedule_backup
 
 sql_types = (
+    ("", "Velg"),
     ('mysql', 'MySQL'),
     ('mssql', 'MSSQL')
     )
 
 class SQLBackup(models.Model):
-    type = models.TextField(max_length=40, choices=sql_types)
     schedule_backup = models.ForeignKey('ScheduleBackup', related_name='sql_backups')
-
+    type = models.CharField(max_length=40, choices=sql_types)
     host = models.TextField()
     port = models.TextField()
     database = models.TextField()

@@ -24,7 +24,6 @@ class ScheduleBackupForm(ModelForm):
         model = ScheduleBackup
         fields = ("name", "storage", "from_date", "repeat_every_minute", "active")
 
-
 class FolderBackupForm(ModelForm):
     local_folder_path = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small'}))
 
@@ -32,7 +31,7 @@ class FolderBackupForm(ModelForm):
         model = FolderBackup
         fields = ("local_folder_path",)
 
-ScheduleFoldersForm = inlineformset_factory(ScheduleBackup, FolderBackup, form=FolderBackupForm, extra=2)
+ScheduleFoldersForm = inlineformset_factory(ScheduleBackup, FolderBackup, form=FolderBackupForm, extra=1)
 
 class SQLBackupForm(ModelForm):
     type = forms.ChoiceField(choices=sql_types, widget=Select(attrs={'class': 'input-small', }, choices=sql_types))
@@ -46,4 +45,4 @@ class SQLBackupForm(ModelForm):
         model = SQLBackup
         fields = ("type", "host", "port", "database", "username", "password",)
 
-ScheduleSQLsForm = inlineformset_factory(ScheduleBackup, SQLBackup, form=SQLBackupForm, extra=2)
+ScheduleSQLsForm = inlineformset_factory(ScheduleBackup, SQLBackup, form=SQLBackupForm, extra=1)

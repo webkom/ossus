@@ -7,7 +7,7 @@ from piston.utils import rc
 class MachineHandler(BaseHandler):
     model = Machine
     fields = machine_dict + (
-    ('updatelogs', ('id', 'type', 'datetime')), ('schedules', schedule_dict), ('backups', backup_dict), )
+    ('updatelogs', ('id', 'type', 'datetime')), ('backups', backup_dict), )
 
     def read(self, request, offset=0, limit=None, id=None, agent_version_id=False, updater_version_id=False):
         all = request.user.profile.get_machines()
