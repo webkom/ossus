@@ -45,7 +45,7 @@ class Command(BaseCommand):
 
             user.profile.set_company(company)
 
-            for i in range(0, 3):
+            for i in range(0, 1):
                 storage = Storage.objects.get_or_create(type="Storage %s" % i, folder="backup/", company=company)[0]
 
             #Customers

@@ -32,17 +32,13 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/static/ico/apple-touch-icon-57-precomposed.png">
 
-
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-
     <script src="/static/js/highcharts.js"></script>
-
 
 </head>
 
 <body>
-
 
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
@@ -53,14 +49,17 @@
                 <span class="icon-bar"></span>
             </a>
 
-            <a class="brand" href="#">Focus24</a>
+            <a class="brand" href="{% url machine_overview %}">Focus24</a>
 
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li class="{% active request "^/machines/" %}"><a href="{% url machine_overview %}">{% trans "Servers" %}</a></li>
-                    <li class="{% active request "^/customers/" %}"><a href="/customers/">{% trans "Customers" %}</a>
+                    <li class="{% active request "^/machines/" %}"><a
+                            href="{% url machine_overview %}">{% trans "Servers" %}</a></li>
+                    <li class="{% active request "^/customers/" %}"><a
+                            href="{% url customer_overview %}">{% trans "Customers" %}</a>
                     </li>
-                    <li class="{% active request "^/storages/" %}"><a href="/storages/">{% trans "Storages" %}</a></li>
+                    <li class="{% active request "^/storages/" %}"><a
+                            href="{% url storage_overview %}">{% trans "Storages" %}</a></li>
 
                     <li class="divider-vertical"></li>
 
@@ -77,6 +76,10 @@
 
                         </ul>
                     </li>
+
+                    <li><a href="{% url logout %}">{% trans "Logout" %}</a></li>
+
+
                 </ul>
             </div>
         </div>
