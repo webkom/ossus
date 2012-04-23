@@ -25,7 +25,6 @@ urlpatterns = patterns('',
     #Machines
     url(r'^machines/$', machine),
     url(r'^machines/(?P<id>\w+)/$', machine),
-    url(r'^machines/(?P<id>\w+)/schedules/$', machine, {'schedules':True}),
 
     #Used for updating version
     url(r'^machines/(?P<id>\w+)/set_agent_version/(?P<agent_version_id>\w+)$', machine),
@@ -45,6 +44,8 @@ urlpatterns = patterns('',
     #ScheduleBackups
     url(r'^schedules/$', schedules),
     url(r'^schedules/(?P<id>\d+)/$', schedules),
+
+    url(r'^machines/(?P<machine_id>\d+)/schedules/$', schedules),
 
     #Backups
     url(r'^backups/$', backups),

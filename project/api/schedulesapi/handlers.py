@@ -12,12 +12,13 @@ class SchedulesBackupHandler(BaseHandler):
 
     def read(self, request, id=None, machine_id=None):
         all = ScheduleBackup.objects.all()
+
         if id or machine_id:
             try:
                 if id:
                     return all.get(id=id)
                 elif machine_id:
-                    return all.filter(machine__id=machine_id)
+                    return Machine.objects.get(machine_id=machine_id).schedules.all()
             except ScheduleBackup.DoesNotExist:
                 return rc.NOT_FOUND
         else:
