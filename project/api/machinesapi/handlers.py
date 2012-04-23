@@ -9,9 +9,8 @@ class MachineHandler(BaseHandler):
     fields = machine_dict + (
     ('updatelogs', ('id', 'type', 'datetime')), ('backups', backup_dict), )
 
-    def read(self, request, offset=0, limit=None, id=None, agent_version_id=False, updater_version_id=False):
+    def read(self, request, offset=0, limit=None, id=None, agent_version_id=False, updater_version_id=False, schedules=False):
         all = request.user.profile.get_machines()
-
 
         if id:
 
@@ -25,6 +24,9 @@ class MachineHandler(BaseHandler):
                     machine.current_updater_version = ClientVersion.objects.get(id=updater_version_id)
 
                 machine.save()
+
+                if schedules:
+                    return machine.schedules.all()
 
                 return machine
 

@@ -3,9 +3,10 @@ from django.core.paginator import Paginator
 from piston.handler import BaseHandler
 from piston.utils import rc, validate
 
-from models import TestModel, ExpressiveTestModel, Comment, InheritedModel, PlainOldObject, Issue58Model, ListFieldsModel, CircularA, CircularB, CircularC
-from forms import EchoForm, FormWithFileField
+from models import TestModel, ExpressiveTestModel, Comment, InheritedModel, PlainOldObject
+from forms import EchoForm
 from test_project.apps.testapp import signals
+
 
 class EntryHandler(BaseHandler):
     model = TestModel
@@ -38,7 +39,7 @@ class ExpressiveHandler(BaseHandler):
         return inst
         
     def create(self, request):
-        if request.content_type and request.data:
+        if request.content_type:
             data = request.data
             
             em = self.model(title=data['title'], content=data['content'])
@@ -49,7 +50,7 @@ class ExpressiveHandler(BaseHandler):
                 
             return rc.CREATED
         else:
-            super(ExpressiveHandler, self).create(request)
+            super(ExpressiveTestModel, self).create(request)
             
 class AbstractHandler(BaseHandler):
     fields = ('id', 'some_other', 'some_field')
@@ -70,51 +71,8 @@ class PlainOldObjectHandler(BaseHandler):
         return self.model()
 
 class EchoHandler(BaseHandler):
-    allowed_methods = ('GET', 'HEAD')
+    allowed_methods = ('GET', )
 
     @validate(EchoForm, 'GET')
     def read(self, request):
-        return {'msg': request.form.cleaned_data['msg']}
-
-class ListFieldsHandler(BaseHandler):
-    model = ListFieldsModel
-    fields = ('id','kind','variety','color')
-    list_fields = ('id','variety')
-
-class Issue58Handler(BaseHandler):
-    model = Issue58Model
-
-    def read(self, request):
-        return Issue58Model.objects.all()
-                
-    def create(self, request):
-        if request.content_type:
-            data = request.data
-            em = self.model(read=data['read'], model=data['model'])
-            em.save()
-            return rc.CREATED
-        else:
-            super(Issue58Model, self).create(request)
-
-class FileUploadHandler(BaseHandler):
-    allowed_methods = ('POST',)
-    
-    @validate(FormWithFileField)
-    def create(self, request):
-        return {'chaff': request.form.cleaned_data['chaff'],
-                'file_size': request.form.cleaned_data['le_file'].size}
-
-class CircularAHandler(BaseHandler):
-    allowed_methods = ('GET',)
-    fields = ('name', 'link')
-    model = CircularA
-
-class CircularAHandler(BaseHandler):
-    allowed_methods = ('GET',)
-    fields = ('name', 'link')
-    model = CircularB
-
-class CircularAHandler(BaseHandler):
-    allowed_methods = ('GET',)
-    fields = ('name', 'link')
-    model = CircularC
+        return {'msg': request.GET['msg']}

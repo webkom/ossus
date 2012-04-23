@@ -19,41 +19,42 @@ clientversion = Resource(handler=ClientVersionHandler, authentication=auth)
 
 urlpatterns = patterns('',
     #Companies
-    url(r'companies/$', companies),
-    url(r'companies/(?P<id>\d+)/$', companies),
+    url(r'^companies/$', companies),
+    url(r'^companies/(?P<id>\d+)/$', companies),
 
     #Machines
-    url(r'machines/$', machine),
-    url(r'machines/(?P<id>\w+)/$', machine),
+    url(r'^machines/$', machine),
+    url(r'^machines/(?P<id>\w+)/$', machine),
+    url(r'^machines/(?P<id>\w+)/schedules/$', machine, {'schedules':True}),
 
     #Used for updating version
-    url(r'machines/(?P<id>\w+)/set_agent_version/(?P<agent_version_id>\w+)$', machine),
-    url(r'machines/(?P<id>\w+)/set_updater_version/(?P<updater_version_id>\w+)$', machine),
+    url(r'^machines/(?P<id>\w+)/set_agent_version/(?P<agent_version_id>\w+)$', machine),
+    url(r'^machines/(?P<id>\w+)/set_updater_version/(?P<updater_version_id>\w+)$', machine),
 
     #MachineLog
-    url(r'machinelogs/$', machinelog),
-    url(r'machinelogs/(?P<machine_id>\d+)/$', machinelog),
-    url(r'machinelogs/(?P<offset>\d+)/(?P<limit>\d+)/$', machinelog),
-    url(r'machinelogs/(?P<machine_id>\d+)/(?P<offset>\d+)/(?P<limit>\d+)/$', machinelog),
+    url(r'^machinelogs/$', machinelog),
+    url(r'^machinelogs/(?P<machine_id>\d+)/$', machinelog),
+    url(r'^machinelogs/(?P<offset>\d+)/(?P<limit>\d+)/$', machinelog),
+    url(r'^machinelogs/(?P<machine_id>\d+)/(?P<offset>\d+)/(?P<limit>\d+)/$', machinelog),
 
     #MachineStats
-    url(r'machinestats/$', machinestats),
+    url(r'^machinestats/$', machinestats),
 
-    url(r'machinestats/(?P<machine_id>\d+)/$', machinestats),
+    url(r'^machinestats/(?P<machine_id>\d+)/$', machinestats),
 
     #ScheduleBackups
-    url(r'schedules/$', schedules),
-    url(r'schedules/(?P<id>\d+)/$', schedules),
+    url(r'^schedules/$', schedules),
+    url(r'^schedules/(?P<id>\d+)/$', schedules),
 
     #Backups
-    url(r'backups/$', backups),
-    url(r'backups/(?P<id>\d+)/$', backups),
+    url(r'^backups/$', backups),
+    url(r'^backups/(?P<id>\d+)/$', backups),
 
     #Client versions
-    url(r'clientversions/$', clientversion),
-    url(r'clientversions/(?P<name>[A-Za-z\.0-9]+)/$', clientversion),
+    url(r'^clientversions/$', clientversion),
+    url(r'^clientversions/(?P<name>[A-Za-z\.0-9]+)/$', clientversion),
 
-    url(r'clientversions/current_agent/$', clientversion, {'current_agent': True}),
-    url(r'clientversions/current_updater/$', clientversion, {'current_updater':True}),
+    url(r'^clientversions/current_agent/$', clientversion, {'current_agent': True}),
+    url(r'^clientversions/current_updater/$', clientversion, {'current_updater':True}),
 
 )
