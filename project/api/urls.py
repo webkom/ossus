@@ -7,15 +7,22 @@ from api.machinesapi.handlers import MachineHandler, MachineLogHandler, MachineS
 from api.schedulesapi.handlers import SchedulesBackupHandler
 from piston.resource import Resource
 
+class CsrfExemptResource(Resource):
+    """A Custom Resource that is csrf exempt"""
+    def __init__(self, handler, authentication=None):
+        super(CsrfExemptResource, self).__init__(handler, authentication)
+        self.csrf_exempt = getattr(self.handler, 'csrf_exempt', True)
+
 auth = BackupBasicAPIAuthentication()
 
-companies = Resource(handler=CompanyHandler, authentication=auth)
-machine = Resource(handler=MachineHandler, authentication=auth)
-machinelog = Resource(handler=MachineLogHandler, authentication=auth)
-machinestats = Resource(handler=MachineStatsHandler, authentication=auth)
-schedules = Resource(handler=SchedulesBackupHandler, authentication=auth)
-backups = Resource(handler=BackupHandler, authentication=auth)
-clientversion = Resource(handler=ClientVersionHandler, authentication=auth)
+companies = CsrfExemptResource(handler=CompanyHandler, authentication=auth)
+machine = CsrfExemptResource(handler=MachineHandler, authentication=auth)
+machinelog = CsrfExemptResource(handler=MachineLogHandler, authentication=auth)
+machinestats = CsrfExemptResource(handler=MachineStatsHandler, authentication=auth)
+schedules = CsrfExemptResource(handler=SchedulesBackupHandler, authentication=auth)
+backups = CsrfExemptResource(handler=BackupHandler, authentication=auth)
+clientversion = CsrfExemptResource(handler=ClientVersionHandler, authentication=auth)
+
 
 urlpatterns = patterns('',
     #Companies

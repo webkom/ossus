@@ -24,7 +24,6 @@ class SchedulesBackupHandler(BaseHandler):
         else:
             return all
 
-
     def create(self, request, id=None):
         if id:
             instance = ScheduleBackup.objects.get(id=id)
