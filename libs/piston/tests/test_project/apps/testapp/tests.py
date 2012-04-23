@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.utils import simplejson
 from django.conf import settings
@@ -13,9 +14,9 @@ except ImportError:
     print "Can't run YAML testsuite"
     yaml = None
 
-import urllib, base64
+import urllib, base64, tempfile
 
-from test_project.apps.testapp.models import TestModel, ExpressiveTestModel, Comment, InheritedModel
+from test_project.apps.testapp.models import TestModel, ExpressiveTestModel, Comment, InheritedModel, Issue58Model, ListFieldsModel, CircularA, CircularB, CircularC
 from test_project.apps.testapp import signals
 
 class MainTests(TestCase):
@@ -41,8 +42,8 @@ class OAuthTests(MainTests):
     def setUp(self):
         super(OAuthTests, self).setUp()
 
-        self.consumer = Consumer(name='Test Consumer', description='Test', status='accepted')
-        self.consumer.generate_random_codes()
+        self.consumer = Consumer.objects.create_consumer('Test Consumer')
+        self.consumer.status = 'accepted'
         self.consumer.save()
 
     def tearDown(self):
@@ -88,19 +89,58 @@ class OAuthTests(MainTests):
 
         # Response should be a redirect...
         self.assertEqual(302, response.status_code)
-        self.assertEqual('http://printer.example.com/request_token_ready?oauth_token='+oatoken.key, response['Location'])
-
+        self.failUnless(response['Location'].startswith("http://printer.example.com/request_token_ready?"))
+        self.failUnless(('oauth_token='+oatoken.key in response['Location']))
+        
+        # Actually we can't test this last part, since it's 1.0a.
         # Obtain access token...
-        request = oauth.OAuthRequest.from_consumer_and_token(oaconsumer, token=oatoken,
-                http_url='http://testserver/api/oauth/access_token')
-        request.sign_request(self.signature_method, oaconsumer, oatoken)
-        response = self.client.get('/api/oauth/access_token', request.parameters)
+#        request = oauth.OAuthRequest.from_consumer_and_token(oaconsumer, token=oatoken,
+#                http_url='http://testserver/api/oauth/access_token')
+#        request.sign_request(self.signature_method, oaconsumer, oatoken)
+#        response = self.client.get('/api/oauth/access_token', request.parameters)
 
-        oa_atoken = oauth.OAuthToken.from_string(response.content)
-        atoken = Token.objects.get(key=oa_atoken.key, token_type=Token.ACCESS)
-        self.assertEqual(atoken.secret, oa_atoken.secret)
+#        oa_atoken = oauth.OAuthToken.from_string(response.content)
+#        atoken = Token.objects.get(key=oa_atoken.key, token_type=Token.ACCESS)
+#        self.assertEqual(atoken.secret, oa_atoken.secret)
 
- 
+class BasicAuthTest(MainTests):
+
+    def test_invalid_auth_header(self):
+        response = self.client.get('/api/entries/')
+        self.assertEquals(response.status_code, 401)
+
+        # no space
+        bad_auth_string = 'Basic%s' % base64.encodestring('admin:admin').rstrip()
+        response = self.client.get('/api/entries/',
+            HTTP_AUTHORIZATION=bad_auth_string)
+        self.assertEquals(response.status_code, 401)
+
+        # no colon
+        bad_auth_string = 'Basic %s' % base64.encodestring('adminadmin').rstrip()
+        response = self.client.get('/api/entries/',
+            HTTP_AUTHORIZATION=bad_auth_string)
+        self.assertEquals(response.status_code, 401)
+
+        # non base64 data
+        bad_auth_string = 'Basic FOOBARQ!'
+        response = self.client.get('/api/entries/',
+            HTTP_AUTHORIZATION=bad_auth_string)
+        self.assertEquals(response.status_code, 401)
+
+class TestMultipleAuthenticators(MainTests):
+    def test_both_authenticators(self):
+        for username, password in (('admin', 'admin'), 
+                                   ('admin', 'secr3t'),
+                                   ('admin', 'user'),
+                                   ('admin', 'allwork'),
+                                   ('admin', 'thisisneat')):
+            auth_string = 'Basic %s' % base64.encodestring('%s:%s' % (username, password)).rstrip()
+
+            response = self.client.get('/api/multiauth/',
+                HTTP_AUTHORIZATION=auth_string)
+
+            self.assertEquals(response.status_code, 200, 'Failed with combo of %s:%s' % (username, password))
+
 class MultiXMLTests(MainTests):
     def init_delegate(self):
         self.t1_data = TestModel()
@@ -278,7 +318,7 @@ class IncomingExpressiveTests(MainTests):
         resp = self.client.post('/api/expressive.yaml',
             '  8**sad asj lja foo',
             HTTP_AUTHORIZATION=self.auth_string,
-            content_type='application/yaml')
+            content_type='application/x-yaml')
         self.assertEquals(resp.status_code, 400)
 
 class Issue36RegressionTests(MainTests):
@@ -331,7 +371,7 @@ class ValidationTest(MainTests):
     def test_basic_validation_fails(self):
         resp = self.client.get('/api/echo')
         self.assertEquals(resp.status_code, 400)
-        self.assertEquals(resp.content, 'Bad Request: <ul class="errorlist">'
+        self.assertEquals(resp.content, 'Bad Request <ul class="errorlist">'
             '<li>msg<ul class="errorlist"><li>This field is required.</li>'
             '</ul></li></ul>')
 
@@ -346,4 +386,203 @@ class PlainOldObject(MainTests):
         resp = self.client.get('/api/popo')
         self.assertEquals(resp.status_code, 200)
         self.assertEquals({'type': 'plain', 'field': 'a field'}, simplejson.loads(resp.content))
+
+class ListFieldsTest(MainTests):
+    def init_delegate(self):
+        ListFieldsModel(kind='fruit', variety='apple', color='green').save()
+        ListFieldsModel(kind='vegetable', variety='carrot', color='orange').save()
+        ListFieldsModel(kind='animal', variety='dog', color='brown').save()
+
+    def test_single_item(self):
+        expect = '''{
+    "color": "green", 
+    "kind": "fruit", 
+    "id": 1, 
+    "variety": "apple"
+}'''
+        resp = self.client.get('/api/list_fields/1')
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(resp.content, expect)
+
+
+    def test_multiple_items(self):
+        expect = '''[
+    {
+        "id": 1, 
+        "variety": "apple"
+    }, 
+    {
+        "id": 2, 
+        "variety": "carrot"
+    }, 
+    {
+        "id": 3, 
+        "variety": "dog"
+    }
+]'''
+        resp = self.client.get('/api/list_fields')
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(resp.content, expect)
+        
+class ErrorHandlingTests(MainTests):
+    """Test proper handling of errors by Resource"""
+
+    def test_response_not_allowed(self):
+        resp = self.client.post('/api/echo')
+        self.assertEquals(resp.status_code, 405)
+        self.assertEquals(resp['Allow'], 'GET, HEAD')
+
+    def test_not_found_because_of_unexpected_http_method(self):
+        # not using self.client.head because it is not present in Django 1.0
+        resp = self.client.get('/api/echo', REQUEST_METHOD='HEAD')
+        self.assertEquals(resp.status_code, 404)
+        self.assertEquals(resp.content, '')
+
+
+class Issue58ModelTests(MainTests):
+    """
+    This testcase addresses #58 in django-piston where if a model
+    has one of the ['read','update','delete','create'] defined
+    it make piston crash with a `TypeError`
+    """
+    def init_delegate(self):
+        m1 = Issue58Model(read=True,model='t') 
+        m1.save()
+        m2 = Issue58Model(read=False,model='f')
+        m2.save()
+
+    def test_incoming_json(self):
+        outgoing = simplejson.dumps({ 'read': True, 'model': 'T'})
+
+        expected = """[
+    {
+        "read": true, 
+        "model": "t"
+    }, 
+    {
+        "read": false, 
+        "model": "f"
+    }
+]"""
+
+        # test GET
+        result = self.client.get('/api/issue58.json',
+                                HTTP_AUTHORIZATION=self.auth_string).content
+        self.assertEquals(result, expected)
+
+        # test POST
+        resp = self.client.post('/api/issue58.json', outgoing, content_type='application/json',
+                                HTTP_AUTHORIZATION=self.auth_string)
+        self.assertEquals(resp.status_code, 201)
+
+class Issue188ValidateWithFiles(MainTests):
+    def test_whoops_no_file_upload(self):
+        resp = self.client.post(
+            reverse('file-upload-test'),
+            data={'chaff': 'pewpewpew'})
+        self.assertEquals(resp.status_code, 400)
+    
+    def test_upload_with_file(self):
+        tmp_fs = tempfile.NamedTemporaryFile(suffix='.txt')
+        content = 'le_content'
+        tmp_fs.write(content)
+        tmp_fs.seek(0)
+        resp = self.client.post(
+            reverse('file-upload-test'),
+            data={'chaff': 'pewpewpew',
+                  'le_file': tmp_fs})
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(simplejson.loads(resp.content),
+                          {'chaff': 'pewpewpew',
+                           'file_size': len(content)})
+
+class EmitterFormat(MainTests):
+    def test_format_in_url(self):
+        resp = self.client.get('/api/entries.json',
+                               HTTP_AUTHORIZATION=self.auth_string)
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(resp['Content-type'],
+                          'application/json; charset=utf-8')
+        resp = self.client.get('/api/entries.xml',
+                               HTTP_AUTHORIZATION=self.auth_string)
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(resp['Content-type'],
+                          'text/xml; charset=utf-8')
+        resp = self.client.get('/api/entries.yaml',
+                               HTTP_AUTHORIZATION=self.auth_string)
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(resp['Content-type'],
+                          'application/x-yaml; charset=utf-8')
+
+    def test_format_in_get_data(self):
+        resp = self.client.get('/api/entries/?format=json',
+                               HTTP_AUTHORIZATION=self.auth_string)
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(resp['Content-type'],
+                          'application/json; charset=utf-8')
+        resp = self.client.get('/api/entries/?format=xml',
+                               HTTP_AUTHORIZATION=self.auth_string)
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(resp['Content-type'],
+                          'text/xml; charset=utf-8')
+        resp = self.client.get('/api/entries/?format=yaml',
+                               HTTP_AUTHORIZATION=self.auth_string)
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(resp['Content-type'],
+                          'application/x-yaml; charset=utf-8')
+        
+    def test_format_in_accept_headers(self):
+        resp = self.client.get('/api/entries/',
+                               HTTP_AUTHORIZATION=self.auth_string,
+                               HTTP_ACCEPT='application/json')
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(resp['Content-type'],
+                          'application/json; charset=utf-8')
+        resp = self.client.get('/api/entries/',
+                               HTTP_AUTHORIZATION=self.auth_string,
+                               HTTP_ACCEPT='text/xml')
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(resp['Content-type'],
+                          'text/xml; charset=utf-8')
+        resp = self.client.get('/api/entries/',
+                               HTTP_AUTHORIZATION=self.auth_string,
+                               HTTP_ACCEPT='application/x-yaml')
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(resp['Content-type'],
+                          'application/x-yaml; charset=utf-8')
+    
+    def test_strict_accept_headers(self):
+        import urls
+        self.assertFalse(urls.entries.strict_accept)
+        self.assertEquals(urls.entries.default_emitter, 'json')
+        resp = self.client.get('/api/entries/',
+                               HTTP_AUTHORIZATION=self.auth_string,
+                               HTTP_ACCEPT='text/html')
+        self.assertEquals(resp.status_code, 200)
+        self.assertEquals(resp['Content-type'],
+                          'application/json; charset=utf-8')
+        
+        urls.entries.strict_accept = True
+        resp = self.client.get('/api/entries/',
+                               HTTP_AUTHORIZATION=self.auth_string,
+                               HTTP_ACCEPT='text/html')
+        self.assertEquals(resp.status_code, 406)
+
+class CircularReferenceTest(MainTests):
+    def init_delegate(self):
+        self.a = CircularA.objects.create(name='foo')
+        self.b = CircularB.objects.create(name='bar')
+        self.c = CircularC.objects.create(name='baz')
+        self.a.link = self.b; self.a.save()
+        self.b.link = self.c; self.b.save()
+        self.c.link = self.a; self.c.save()
+
+    def test_circular_model_references(self):
+        self.assertRaises(
+            RuntimeError,
+            self.client.get,
+            '/api/circular_a/',
+            HTTP_AUTHORIZATION=self.auth_string)
+
+        
         
