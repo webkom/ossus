@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.timezone import utc
+from core import widgets
 
 class Company(models.Model):
     name = models.CharField(max_length=150)
@@ -26,7 +27,7 @@ class Machine(models.Model):
     name = models.CharField(max_length=150)
     customer = models.ForeignKey(Customer, related_name="machines")
     machine_id = models.CharField(max_length=150)
-    last_connection_to_client = models.DateTimeField(blank=True, null=True)
+    last_connection_to_client = widgets.DateTimeField(blank=True, null=True)
 
     auto_version = models.BooleanField(default=True)
 
@@ -95,7 +96,7 @@ class Machine(models.Model):
 
 
 class MachineStats(models.Model):
-    datetime = models.DateTimeField(default=datetime.utcnow().replace(tzinfo=utc))
+    datetime = widgets.DateTimeField(default=datetime.utcnow().replace(tzinfo=utc))
     machine = models.ForeignKey(Machine, related_name="stats")
 
     load_average = models.DecimalField(decimal_places=3, max_digits=50)
@@ -109,7 +110,7 @@ class MachineStats(models.Model):
 
 
 class MachineProcessStats(models.Model):
-    datetime = models.DateTimeField(default=datetime.utcnow().replace(tzinfo=utc))
+    datetime = widgets.DateTimeField(default=datetime.utcnow().replace(tzinfo=utc))
     machine = models.ForeignKey(Machine)
 
     pid = models.IntegerField()
@@ -127,7 +128,7 @@ log_types = (
 
 class MachineLog(models.Model):
     machine = models.ForeignKey(Machine, related_name="logs")
-    datetime = models.DateTimeField()
+    datetime = widgets.DateTimeField()
     text = models.TextField()
     type = models.CharField(max_length=10, choices=log_types)
 
@@ -173,6 +174,7 @@ sql_types = (
 class SQLBackup(models.Model):
     schedule_backup = models.ForeignKey('ScheduleBackup', related_name='sql_backups')
     type = models.CharField(max_length=40, choices=sql_types)
+
     host = models.TextField()
     port = models.TextField()
     database = models.TextField()
@@ -184,12 +186,12 @@ class SQLBackup(models.Model):
 
 schedule_every_minute_choices = (
     (60, 'Hver time'),
-    (60*3, 'Hver tredje time'),
-    (60*12, 'Hver dag'),
-    (60*12*2, 'Hver andre dag'),
-    (60*12*3, 'Hver tredje dag'),
-    (60*12*7, 'Hver uke'),
-    (60*12*7*30, 'Hver måned'),
+    (60 * 3, 'Hver tredje time'),
+    (60 * 12, 'Hver dag'),
+    (60 * 12 * 2, 'Hver andre dag'),
+    (60 * 12 * 3, 'Hver tredje dag'),
+    (60 * 12 * 7, 'Hver uke'),
+    (60 * 12 * 7 * 30, 'Hver måned'),
     )
 
 class ScheduleBackup(models.Model):
@@ -199,8 +201,8 @@ class ScheduleBackup(models.Model):
 
     storage = models.ForeignKey(Storage, related_name="schedules")
 
-    from_date = models.DateTimeField()
-    last_run_time = models.DateTimeField(null=True, default=None)
+    from_date = widgets.DateTimeField()
+    last_run_time = widgets.DateTimeField(null=True, default=None)
 
     #Used to choose folder to save file
     current_version_in_loop = models.IntegerField(blank=True, default=1)
@@ -250,8 +252,8 @@ class ScheduleBackup(models.Model):
 class Backup(models.Model):
     machine = models.ForeignKey(Machine, related_name="backups")
     schedule = models.ForeignKey(ScheduleBackup, null=True, related_name="backups")
-    time_started = models.DateTimeField()
-    time_ended = models.DateTimeField(null=True, blank=True)
+    time_started = widgets.DateTimeField()
+    time_ended = widgets.DateTimeField(null=True, blank=True)
     day_folder_path = models.CharField(max_length=150, blank=True)
 
     def is_recoverable(self):
@@ -259,7 +261,7 @@ class Backup(models.Model):
 
 
 class ClientVersion(models.Model):
-    datetime = models.DateTimeField(auto_now=True)
+    datetime = widgets.DateTimeField(auto_now=True)
     name = models.CharField(max_length=50)
     agent_link = models.CharField(max_length=255)
     updater_link = models.CharField(max_length=255)

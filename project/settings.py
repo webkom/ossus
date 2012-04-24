@@ -127,9 +127,12 @@ INSTALLED_APPS = (
     'app.customer',
     'app.storage',
     'app.schedule',
+    'app.docs',
 
     'south',
-    'piston',
+    'tastypie',
+
+    #'piston',
 
     'django.contrib.admin',
     'django.contrib.admindocs',

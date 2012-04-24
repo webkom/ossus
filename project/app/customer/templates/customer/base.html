@@ -5,13 +5,16 @@
 {% block content %}
 
     <header class="jumbotron subhead" id="overview">
-
-        <h1>{% trans "Customers" %}</h1>
+        <h1>Servers</h1>
 
         <div class="subnav">
             <ul class="nav nav-pills">
-                <li class="{% active request "^/customers/$" %}"><a href="{% url app.customer.views.overview %}">{% trans "List all customers" %}</a></li>
-                <li class="{% active request "^/customers/new/$" %}"><a href="{% url app.customer.views.new %}">{% trans "New customer" %}</a></li>
+                <ul class="nav nav-pills">
+                    <li class="{% active request "^/customers/$" %}"><a
+                            href="{% url app.customer.views.overview %}">{% trans "List all customers" %}</a></li>
+                    <li class="{% active request "^/customers/new/$" %}"><a
+                            href="{% url app.customer.views.new %}">{% trans "New customer" %}</a></li>
+                </ul>
             </ul>
         </div>
 

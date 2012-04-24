@@ -2,6 +2,12 @@ from django.forms.widgets import RadioInput, RadioFieldRenderer, RadioSelect,Tex
 from django.utils.html import conditional_escape
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
+from django.db.models import DateTimeField as dateTimeField
+
+class DateTimeField(dateTimeField):
+
+    def isoformat(self):
+        self.val = None
 
 
 class OptionsRadioInput(RadioInput):

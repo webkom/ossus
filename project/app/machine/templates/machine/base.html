@@ -4,18 +4,23 @@
 
 {% block content %}
 
-    <header class="jumbotron subhead" id="overview">
 
-        <h1>{% trans "Servers" %}</h1>
+    <header class="jumbotron subhead" id="overview">
+        <h1>Servers</h1>
 
         <div class="subnav">
             <ul class="nav nav-pills">
-                <li class="{% active request "^/machines/$" %}"><a href="{% url app.machine.views.overview %}">List all servers</a></li>
-                <li class="{% active request "^/machines/new/$" %}"><a href="{% url app.machine.views.new %}">New server</a></li>
+                <ul class="nav nav-pills">
+                    <li class="{% active request "^/machines/$" %}"><a href="{% url app.machine.views.overview %}">List
+                        all servers</a></li>
+                    <li class="{% active request "^/machines/new/$" %}"><a href="{% url app.machine.views.new %}">New
+                        server</a></li>
+                </ul>
             </ul>
         </div>
-
     </header>
+
+
 
     {% block main %}{% endblock %}
 

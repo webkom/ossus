@@ -3,17 +3,19 @@
 {% load menu_tags %}
 
 {% block content %}
-
     <header class="jumbotron subhead" id="overview">
-
-        <h1>{% trans "Storages" %}</h1>
+        <h1>Servers</h1>
 
         <div class="subnav">
             <ul class="nav nav-pills">
-                <li class="{% active request "^/storages/$" %}"><a href="{% url app.storage.views.overview %}">List all
-                    storages</a></li>
-                <li class="{% active request "^/storages/new/$" %}"><a href="{% url app.storage.views.new %}">New
-                    storage</a></li>
+                <ul class="nav nav-pills">
+                    <li class="{% active request "^/storages/$" %}"><a href="{% url app.storage.views.overview %}">List
+                        all
+                        storages</a></li>
+                    <li class="{% active request "^/storages/new/$" %}"><a href="{% url app.storage.views.new %}">New
+                        storage</a></li>
+                </ul>
+
             </ul>
         </div>
 
@@ -32,6 +34,7 @@
 
                 </thead>
                 <tbody>
+
                 {% for storage in storages.all %}
                     <tr>
                         <td><a href="/storages/{{ storage.id }}/view/">{{ storage.host }}</a></td>
