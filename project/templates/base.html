@@ -42,7 +42,6 @@
     <script src="/static/js/prettifygoogle.js"></script>
     <script src="/static/js/scrollspy.js"></script>
 
-
 </head>
 
 <body>
@@ -61,7 +60,7 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <li class="{% active request "^/machines/" %}"><a
-                            href="{% url machine_overview %}">{% trans "Servers" %}</a></li>
+                            href="{% url machine_overview %}">{% trans "Servers" %} </a></li>
                     <li class="{% active request "^/customers/" %}"><a
                             href="{% url customer_overview %}">{% trans "Customers" %}</a>
                     </li>

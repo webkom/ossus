@@ -130,9 +130,8 @@ INSTALLED_APPS = (
     'app.docs',
 
     'south',
-    'tastypie',
 
-    #'piston',
+    'piston',
 
     'django.contrib.admin',
     'django.contrib.admindocs',

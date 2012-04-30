@@ -5,6 +5,7 @@ from api.clientversions.handlers import ClientVersionHandler
 from api.companiesapi.handlers import CompanyHandler
 from api.machinesapi.handlers import MachineHandler, MachineLogHandler, MachineStatsHandler
 from api.schedulesapi.handlers import SchedulesBackupHandler
+from api.tokenauthentication import TokenAPIAuthentication
 from piston.resource import Resource
 
 class CsrfExemptResource(Resource):
@@ -13,7 +14,7 @@ class CsrfExemptResource(Resource):
         super(CsrfExemptResource, self).__init__(handler, authentication)
         self.csrf_exempt = getattr(self.handler, 'csrf_exempt', True)
 
-auth = BackupBasicAPIAuthentication()
+auth = TokenAPIAuthentication()
 
 companies = CsrfExemptResource(handler=CompanyHandler, authentication=auth)
 machine = CsrfExemptResource(handler=MachineHandler, authentication=auth)

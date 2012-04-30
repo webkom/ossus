@@ -14,7 +14,7 @@ urlpatterns = patterns(
     (r'^customers/', include('app.customer.urls')),
     (r'^accounts/', include('app.accounts.urls')),
     (r'^admin/', include(admin.site.urls)),
-    #(r'^api2/', include('api2.urls')),
+    (r'^api/', include('api.urls')),
 )
 
 if settings.DEBUG:
