@@ -263,8 +263,6 @@ class ClientVersion(models.Model):
     datetime = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=50)
 
-    agent_link = models.CharField(max_length=255)
-    updater_link = models.CharField(max_length=255)
 
     agent = models.FileField(upload_to="versions/agents/", null=True)
     updater = models.FileField(upload_to="versions/updaters/", null =True)
@@ -274,6 +272,12 @@ class ClientVersion(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def agent_link(self):
+        return self.agent.url()
+
+    def updater_link(self):
+        return self.updater.url()
 
     def set_current_agent(self):
         for v in ClientVersion.objects.all():

@@ -23,8 +23,6 @@ class Command(BaseCommand):
         for j in range(0, 4):
             version = ClientVersion.objects.get_or_create(
                 name="Version %s" % j,
-                agent_link="/",
-                updater_link="/"
             )[0]
 
             version.set_current_agent()
