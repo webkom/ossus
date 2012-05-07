@@ -274,10 +274,14 @@ class ClientVersion(models.Model):
         return self.name
 
     def agent_link(self):
-        return self.agent.url()
+        if self.agent:
+            return self.agent.url
+        return ""
 
     def updater_link(self):
-        return self.updater.url()
+        if self.updater:
+            return self.updater.url
+        return ""
 
     def set_current_agent(self):
         for v in ClientVersion.objects.all():

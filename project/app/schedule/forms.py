@@ -34,7 +34,7 @@ class FolderBackupForm(ModelForm):
 ScheduleFoldersForm = inlineformset_factory(ScheduleBackup, FolderBackup, form=FolderBackupForm, extra=1)
 
 class SQLBackupForm(ModelForm):
-    type = forms.ChoiceField(choices=sql_types, widget=Select(attrs={'class': 'input-small', }, choices=sql_types))
+    type = forms.ChoiceField(choices=sql_types, widget=Select(attrs={'class': 'input-small', }))
     host = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small', }))
     port = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-mini', }))
     database = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small', }))

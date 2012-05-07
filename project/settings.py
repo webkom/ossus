@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'app.storage',
     'app.schedule',
     'app.docs',
+    'api',
 
     'south',
 
