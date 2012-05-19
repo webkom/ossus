@@ -2,6 +2,7 @@
 *.pyo
 *.orig
 *~
+.swp
 *.egg-info
 project.db
 pickle*.txt
