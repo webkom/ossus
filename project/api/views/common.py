@@ -17,7 +17,6 @@ class HandleQuerySets(simplejson.JSONEncoder):
 
         return simplejson.JSONEncoder.default(self, obj)
 
-
 def render_data(name, data):
     """
     Returns a httpResponse with json where name is the outer scope and data is a python array with objects as dicts

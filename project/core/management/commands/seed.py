@@ -45,7 +45,7 @@ class Command(BaseCommand):
             user.profile.set_company(company)
 
             for i in range(0, 1):
-                storage = Storage.objects.get_or_create(type="Storage %s" % i, folder="backup/", company=company)[0]
+                storage = Storage.objects.get_or_create(type="Storage %s" % i, host="127.0.0.1", username="user", password="pass", folder="backup/", company=company)[0]
 
             #Customers
             for i in range(0, 3):
@@ -117,7 +117,7 @@ class Command(BaseCommand):
                         for o in range(0, 3):
                             SQLBackup.objects.get_or_create(
                                 schedule_backup=scheduleBackup,
-                                type="FTP %s" % o,
+                                type="mysql",
                                 host="192.168.0.%s" % o,
                                 port="330%s" % o,
                                 username="username %s" % o,

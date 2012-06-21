@@ -45,4 +45,4 @@ def form(request, id=False):
 
             return redirect(view, customer.id)
 
-    return render(request, 'customer/form.html', {'form': form, "title": _("Server")})
+    return render(request, 'customer/form.html', {'form': form, "title": _("Customer")})

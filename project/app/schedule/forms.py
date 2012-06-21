@@ -25,7 +25,7 @@ class ScheduleBackupForm(ModelForm):
         fields = ("name", "storage", "from_date", "repeat_every_minute", "active")
 
 class FolderBackupForm(ModelForm):
-    local_folder_path = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small'}))
+    local_folder_path = forms.CharFielrd(max_length=255, widget=TextInput(attrs={'class': 'input-small'}))
 
     class Meta:
         model = FolderBackup

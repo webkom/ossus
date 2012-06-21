@@ -4,7 +4,6 @@ from api.models import Token
 from django.http import Http404, HttpResponse
 
 class require_valid_api_token:
-
     api_token = None
     api_user = None
 
@@ -18,7 +17,6 @@ class require_valid_api_token:
 
                 if Token.objects.filter(api_token=api_token, api_user=api_user).count() > 0:
                     return func(request, *args, **kwargs)
-
 
             elif 'api_token' in request.GET and 'api_user' in request.GET:
                 api_token = request.GET['api_token']
@@ -34,3 +32,4 @@ class require_valid_api_token:
         functools.update_wrapper(validate_api_token, func)
 
         return validate_api_token
+
