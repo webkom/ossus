@@ -10,13 +10,11 @@
 
         <div class="subnav">
             <ul class="nav nav-pills">
-                <ul class="nav nav-pills">
                     <li class="{% active request "^/machines/$" %}"><a href="{% url app.machine.views.overview %}">List
                         all servers</a></li>
                     <li class="{% active request "^/machines/new/$" %}"><a href="{% url app.machine.views.new %}">New
                         server</a></li>
                 </ul>
-            </ul>
         </div>
     </header>
 

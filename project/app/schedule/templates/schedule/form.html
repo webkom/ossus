@@ -22,52 +22,34 @@
             {% endif %}
 
             <form enctype="multipart/form-data" class="form-horizontal" method="post">
-
                 {% csrf_token %}
-
                 {% for field in form %}
-
                     <div class="control-group">
-                        <label class="control-label" for="input01">{{ field.label }}</label>
-
+                        <label class="control-label">{{ field.label }}</label>
                         <div class="controls">
                             {{ field }}
                         </div>
-
                     </div>
-
                 {% endfor %}
 
                 <h2>{% trans "Folders" %}</h2>
-
                 {{ form_folders.management_form }}
-
                 {% for element in form_folders %}
-
                     <div class="control-group">
-                        <label class="control-label" for="input01">{% trans "Folder path" %}</label>
+                        <label class="control-label">{% trans "Folder path" %}</label>
 
                         <div class="controls">
-
                             {% for field in element %}
-
                                 {{ field }}
-
                             {% endfor %}
-
                         </div>
-
                     </div>
-
                 {% endfor %}
 
                 <h2>{% trans "Databases" %}</h2>
-
                 {{ form_sql.management_form }}
-
                 <div class="control-group">
                     <div class="controls">
-
                         <table>
                             <thead>
                             <tr>
@@ -80,9 +62,7 @@
                                 <th>{% trans "Delete" %}</th>
                             </tr>
                             </thead>
-
                             <tbody>
-
                             {% for element in form_sql.forms %}
                                 <tr>
                                     {% for field in element %}
@@ -92,22 +72,13 @@
                                     {% endfor %}
                                 </tr>
                             {% endfor %}
-                            <tr>
-
-                            </tr>
                             </tbody>
-
                         </table>
-
                     </div>
-
                 </div>
-
-
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
                 </div>
-
             </form>
         </div>
     </div>

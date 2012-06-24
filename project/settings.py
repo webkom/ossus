@@ -14,7 +14,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'project.db'
+        'NAME': BASE_PATH+'/project.db'
     }
 }
 
@@ -102,9 +102,6 @@ MIDDLEWARE_CLASSES = (
     )
 
 ROOT_URLCONF = 'project.urls'
-
-# Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'project.wsgi.application'
 
 TEMPLATE_DIRS = (
     BASE_PATH + '/templates/',
