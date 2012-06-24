@@ -1,9 +1,7 @@
 from django import forms
-from django.db import models
 from django.forms.models import ModelForm, modelformset_factory, inlineformset_factory
 from django.forms.widgets import TextInput, Select
 from app.backup.models import ScheduleBackup, Storage, FolderBackup, SQLBackup, sql_types
-from django.forms.formsets import formset_factory
 
 class ScheduleBackupForm(ModelForm):
     storage = forms.ModelChoiceField(queryset=Storage.objects.none())
@@ -25,7 +23,7 @@ class ScheduleBackupForm(ModelForm):
         fields = ("name", "storage", "from_date", "repeat_every_minute", "active")
 
 class FolderBackupForm(ModelForm):
-    local_folder_path = forms.CharFielrd(max_length=255, widget=TextInput(attrs={'class': 'input-small'}))
+    local_folder_path = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small'}))
 
     class Meta:
         model = FolderBackup
