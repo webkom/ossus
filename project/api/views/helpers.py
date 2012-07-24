@@ -115,6 +115,7 @@ def build_machine_fields(machine):
         'id': machine.id,
         'machine_id': machine.machine_id,
         'is_busy': machine.is_busy(),
+        'run_install':machine.run_install,
         'auto_update': machine.auto_version,
         'current_agent_version':
                 {'id': current_agent_version.id,

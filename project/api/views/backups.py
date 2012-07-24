@@ -34,15 +34,12 @@ def create_backup_for_machine(request, machine_id):
             if form.is_valid():
                 backup = Backup()
 
-                print request.POST['time_started']
-
                 backup.machine = machine
                 backup.schedule = ScheduleBackup.objects.get(id=request.POST['schedule_id'])
                 backup.time_started = request.POST['time_started']
                 backup.time_ended = request.POST['time_ended']
 
                 backup.save()
-
 
                 return render_data("backup", build_backup_fields(backup))
 

@@ -25,6 +25,7 @@ class Machine(models.Model):
     name = models.CharField(max_length=150)
     customer = models.ForeignKey(Customer, related_name="machines")
     machine_id = models.CharField(max_length=150)
+    run_install = models.BooleanField(default=False)
     last_connection_to_client = models.DateTimeField(blank=True, null=True)
 
     auto_version = models.BooleanField(default=True)
