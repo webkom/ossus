@@ -23,7 +23,6 @@ def form(request, machine_id, id=False):
     machine = request.user.profile.get_machines().get(id=machine_id)
     title = "New schedule"
 
-
     if id:
         schedule = request.user.profile.get_schedules().get(id=id)
         title = _("Schedule %s " % schedule.name)

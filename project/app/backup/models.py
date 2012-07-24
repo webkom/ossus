@@ -46,6 +46,7 @@ class Machine(models.Model):
         self.save()
 
     def get_latest_stats(self):
+
         if self.stats.all().count() > 15:
             return self.stats.all().order_by("id")[self.stats.all().count() - 10:]
 

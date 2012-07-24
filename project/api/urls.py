@@ -4,13 +4,20 @@ from api.views.client_versions import get_client_versions
 urlpatterns = patterns('api.views',
 
     #Machines
-
     (r'^machines/$', 'machines.get_machines'),
     (r'^machines/(?P<machine_id>\w+)/$', 'machines.get_machines'),
     (r'^machines/(?P<machine_id>\w+)/schedules/$', 'machines.get_schedules_for_machine'),
 
+
     (r'^machines/(?P<machine_id>\w+)/log/$', 'machines.get_log_for_machine'),
     (r'^machines/(?P<machine_id>\w+)/create_log/$', 'machines.create_log_for_machine'),
+
+    #Set machine version
+    (r'^machines/(?P<machine_id>\w+)/set_agent_version/(?P<version>\w+)$', 'machines.set_machine_agent_version'),
+    (r'^machines/(?P<machine_id>\w+)/set_updater_version/(?P<version>\w+)$', 'machines.set_machine_updater_version'),
+
+    #MachineStats
+    (r'^machines/(?P<machine_id>\w+)/create_stats/$', 'machinestats.create_stats_for_machine'),
 
     #Schedules
     (r'^schedules/$', 'schedules.get_schedules'),
@@ -21,5 +28,10 @@ urlpatterns = patterns('api.views',
     (r'^client_versions/current_updater/$', 'client_versions.get_current_updater'),
     (r'^client_versions/current_agent/$', 'client_versions.get_current_agent'),
     (r'^client_versions/(?P<id>\w+)/$', 'client_versions.get_client_versions'),
+
+    #Backups
+    (r'^backups/$', 'backups.get_backups'),
+    (r'^backups/(?P<id>\w+)/$', 'backups.get_backups'),
+    (r'^backups/(?P<machine_id>\w+)/create_backup/$', 'backups.create_backup_for_machine'),
 
 )

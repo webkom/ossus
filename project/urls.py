@@ -15,6 +15,9 @@ urlpatterns = patterns(
     (r'^accounts/', include('app.accounts.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^api/', include('api.urls')),
+
+    (r'^file/(?P<filename>.*)$', 'core.views.retrieve_file'),
+
 )
 
 if settings.DEBUG:

@@ -1,4 +1,5 @@
 from pprint import pprint
+from django.conf import settings
 
 def build_sql_backup(sql_backups):
     send_object = []
@@ -42,21 +43,43 @@ def build_machine_log(machine_logs):
 def build_client_version(obj):
     agent = {}
     updater = {}
+    agent_link = ""
+    updater_link = ""
 
     if obj.agent:
         agent = {'name':obj.agent.name}
+        agent_link = settings.URL_TO_SITE + "file/"+obj.agent.name
 
     if obj.updater:
-        updater = {'name':obj.agent.name}
+        updater = {'name':obj.updater.name}
+        updater_link = settings.URL_TO_SITE + "file/"+obj.updater.name
 
     return {'id': obj.id,
             'datetime': obj.datetime,
             'name': obj.name,
             'agent': agent,
+            'agent_link':agent_link,
+            'updater_link':updater_link,
             'updater': updater,
             'current_agent': obj.current_agent,
             'current_updater': obj.current_updater,
             }
+
+def build_backup_fields(backup):
+    return {
+        'id': backup.id,
+        'machine': {
+            'id':backup.machine.id,
+            'name':backup.machine.name,
+        },
+        'schedule': {
+            'id': backup.schedule.id,
+            'name': backup.schedule.name,
+        },
+        'time_started':backup.time_started,
+        'time_ended':backup.time_ended,
+        'day_folder_path': backup.day_folder_path,
+    }
 
 def build_schedule_fields(schedule):
     schedule_fields = {

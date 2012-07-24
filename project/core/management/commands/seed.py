@@ -27,7 +27,6 @@ class Command(BaseCommand):
 
             version.set_current_agent()
             version.set_current_updater()
-
             versions.append(version)
 
         #Create companies, with storage, customers and machines
@@ -45,7 +44,7 @@ class Command(BaseCommand):
             user.profile.set_company(company)
 
             for i in range(0, 1):
-                storage = Storage.objects.get_or_create(type="Storage %s" % i, host="127.0.0.1", username="user", password="pass", folder="backup/", company=company)[0]
+                storage = Storage.objects.get_or_create(type="Storage %s" % i, host="81.167.228.94", username="backup", password="backup", folder="backup/", company=company)[0]
 
             #Customers
             for i in range(0, 3):

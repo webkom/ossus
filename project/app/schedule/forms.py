@@ -20,7 +20,7 @@ class ScheduleBackupForm(ModelForm):
 
     class Meta:
         model = ScheduleBackup
-        fields = ("name", "storage", "from_date", "repeat_every_minute", "active")
+        fields = ("name", "storage", "from_date", "repeat_every_minute", "active", "running_backup", "running_restore")
 
 class FolderBackupForm(ModelForm):
     local_folder_path = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small'}))
