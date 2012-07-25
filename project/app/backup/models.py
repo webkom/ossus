@@ -46,8 +46,19 @@ class Machine(models.Model):
         self.last_connection_to_client = datetime.utcnow().replace(tzinfo=utc).strftime("%Y-%m-%d %H:%M:%S")
         self.save()
 
-    def get_latest_stats(self):
+    def get_selected_agent_version(self):
+        if self.auto_version:
+            return ClientVersion.objects.get(current_agent=True)
+        else:
+            return self.selected_agent_version
 
+    def get_selected_updater_version(self):
+        if self.auto_version:
+            return ClientVersion.objects.get(current_updater=True)
+        else:
+            return self.selected_updater_version
+
+    def get_latest_stats(self):
         if self.stats.all().count() > 15:
             return self.stats.all().order_by("id")[self.stats.all().count() - 10:]
 
