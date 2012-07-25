@@ -257,7 +257,7 @@ class ScheduleBackup(models.Model):
         if not self.get_last_backup():
             return self.from_date
 
-        return self.get_last_backup_time() + timedelta(0, self.repeat_every_minute)
+        return self.get_last_backup_time() + timedelta(0, self.repeat_every_minute*60)
 
 
 class Backup(models.Model):
