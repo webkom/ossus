@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from api.auth import require_valid_api_token
 from api.forms.logs import LogAPIForm
 from api.views.common import render_data, HandleQuerySets
-from api.views.helpers import build_schedule_fields, build_machine_fields, build_machine_log, build_client_version
+from api.views.helpers import build_schedule_fields, build_machine_fields, build_machine_log, build_client_version, build_machine_log_fields
 from app.backup.models import Machine, MachineLog, ClientVersion
 
 @require_valid_api_token()
@@ -72,7 +72,9 @@ def create_log_for_machine(request, machine_id):
 
                 machine_log.save()
 
-    return render_data("hei", {'a': 'b'})
+                return render_data("log", {'log': build_machine_log_fields(machine_log)})
+
+    return render_data("ERROR", {'error': 'No machine or not a valid form'})
 
 create_log_for_machine = csrf_exempt(create_log_for_machine)
 
