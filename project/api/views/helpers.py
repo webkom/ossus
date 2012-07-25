@@ -113,7 +113,7 @@ def build_machine_fields(machine):
     current_agent_version = machine.current_agent_version
     selected_agent_version = machine.get_selected_agent_version()
     current_updater_version = machine.current_updater_version
-    selected_updater_version = machine.get_selected_updatergo_version()
+    selected_updater_version = machine.get_selected_updater_version()
 
     machine_fields = {
         'id': machine.id,
