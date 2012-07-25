@@ -116,8 +116,8 @@ class MachineStats(models.Model):
     cpu_user = models.DecimalField(decimal_places=3, max_digits=50)
     cpu_stolen = models.DecimalField(decimal_places=3, max_digits=50)
 
-    mem_used = models.IntegerField(default=0)
-    mem_free = models.IntegerField(default=0)
+    mem_used = models.DecimalField(decimal_places=3, max_digits=50, default=0)
+    mem_free = models.DecimalField(decimal_places=3, max_digits=50, default=0)
 
 
 class MachineProcessStats(models.Model):
