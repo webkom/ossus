@@ -41,6 +41,10 @@ def build_machine_log(machine_logs):
 
 
 def build_client_version(obj):
+
+    if obj is None:
+        return {}
+
     agent = {}
     updater = {}
     agent_link = ""
@@ -117,31 +121,10 @@ def build_machine_fields(machine):
         'is_busy': machine.is_busy(),
         'run_install':machine.run_install,
         'auto_update': machine.auto_version,
-        'current_agent_version':
-                {'id': current_agent_version.id,
-                 'name': current_agent_version.name,
-                 'updater_link': current_agent_version.updater_link(),
-                 'agent_link': current_agent_version.agent_link(),
-
-                 },
-        'current_updater_version':
-                {'id': current_updater_version.id,
-                 'name': current_updater_version.name,
-                 'updater_link': current_updater_version.updater_link(),
-                 'agent_link': current_updater_version.agent_link(),
-                 },
-        'selected_agent_version':
-                {'id': selected_agent_version.id,
-                 'name': selected_agent_version.name,
-                 'updater_link': selected_agent_version.updater_link(),
-                 'agent_link': selected_agent_version.agent_link(),
-                 },
-        'selected_updater_version':
-                {'id': selected_updater_version.id,
-                 'name': selected_updater_version.name,
-                 'updater_link': selected_updater_version.updater_link(),
-                 'agent_link': selected_updater_version.agent_link(),
-                 },
+        'current_agent_version': build_client_version(current_agent_version),
+        'current_updater_version': build_client_version(current_updater_version),
+        'selected_agent_version': build_client_version(selected_agent_version),
+        'selected_updater_version': build_client_version(selected_updater_version),
         }
 
     return machine_fields
