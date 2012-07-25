@@ -36,7 +36,7 @@ def set_machine_agent_version(request, machine_id, version):
     if machine_id:
 
         machine = Machine.objects.get(machine_id=machine_id)
-        machine.current_agent_version.agent = client_version
+        machine.current_agent_version = client_version
         machine.save()
 
     return render_data("client_version", build_client_version(client_version))
@@ -50,7 +50,7 @@ def set_machine_updater_version(request, machine_id, version):
     if machine_id:
 
         machine = Machine.objects.get(machine_id=machine_id)
-        machine.current_updater_version.agent = client_version
+        machine.current_updater_version = client_version
         machine.save()
 
     return render_data("client_version", build_client_version(client_version))
