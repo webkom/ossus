@@ -11,7 +11,6 @@ class Company(models.Model):
     def __unicode__(self):
         return "Company: %s" % self.name
 
-
 class Customer(models.Model):
     name = models.CharField(max_length=150)
     company = models.ForeignKey(Company, related_name="customers")
@@ -43,7 +42,7 @@ class Machine(models.Model):
         return "Machine: %s, machine_id: %s" % (self.name, self.machine_id)
 
     def set_last_connection_to_client(self):
-        self.last_connection_to_client = datetime.utcnow().replace(tzinfo=utc).strftime("%Y-%m-%d %H:%M:%S")
+        self.last_connection_to_client = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.save()
 
     def get_selected_agent_version(self):
@@ -107,7 +106,7 @@ class Machine(models.Model):
 
 
 class MachineStats(models.Model):
-    datetime = models.DateTimeField(default=datetime.utcnow().replace(tzinfo=utc))
+    datetime = models.DateTimeField(default=datetime.now())
     machine = models.ForeignKey(Machine, related_name="stats")
 
     load_average = models.DecimalField(decimal_places=3, max_digits=50)
@@ -121,7 +120,7 @@ class MachineStats(models.Model):
 
 
 class MachineProcessStats(models.Model):
-    datetime = models.DateTimeField(default=datetime.utcnow().replace(tzinfo=utc))
+    datetime = models.DateTimeField(default=datetime.now())
     machine = models.ForeignKey(Machine)
 
     pid = models.IntegerField()
@@ -232,7 +231,7 @@ class ScheduleBackup(models.Model):
         return u"Machine: %s, name: %s" % (self.machine, self.name)
 
     def current_day_folder_path(self):
-        if self.machine.last_connection_to_client.day != datetime.utcnow().replace(tzinfo=utc).day:
+        if self.machine.last_connection_to_client.day != datetime.now().day:
             if self.current_version_in_loop < self.versions_count:
                 self.current_version_in_loop += 1
             else:

@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 from django.utils.timezone import utc
 
-example_date = datetime.utcnow().replace(tzinfo=utc)
+example_date = datetime.now()
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
@@ -100,7 +100,7 @@ class Command(BaseCommand):
                         for o in range(0, 3):
                             MachineLog.objects.get_or_create(
                                 machine=machine,
-                                datetime=datetime.utcnow().replace(tzinfo=utc),
+                                datetime=datetime.now(),
                                 text="Running seed for this machine",
                                 type="INFO",
                             )
