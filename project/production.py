@@ -22,6 +22,8 @@ DATABASES = {
 
 STATIC_URL = '/static/'
 
+URL_TO_SITE = "http://focus24.no/"
+
 #EMAIL DEBUG
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
