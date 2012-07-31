@@ -242,6 +242,10 @@ class ScheduleBackup(models.Model):
         return str(self.machine.machine_id) + "/" + "schedules/" + str(self.id) + "/" + str(
             self.current_version_in_loop) + "/"
 
+    def set_last_run_time(self):
+        self.last_run_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.save()
+
     def get_last_backup(self):
         if self.backups.all().count() > 0:
             return self.backups.all()[self.backups.all().count() - 1]

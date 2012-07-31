@@ -21,6 +21,7 @@ def get_schedules(request, id=False):
 
                 schedule.name = form.cleaned_data['name']
 
+
                 if form.cleaned_data['running_backup'] == "true":
                     schedule.running_backup = True
                 else:
@@ -32,6 +33,8 @@ def get_schedules(request, id=False):
                     schedule.running_restore = False
 
                 schedule.current_version_in_loop = int(form.cleaned_data['current_version_in_loop'])
+                schedule.set_last_run_time()
+
                 schedule.save()
 
 

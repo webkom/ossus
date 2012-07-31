@@ -62,8 +62,11 @@ def create_log_for_machine(request, machine_id):
     if machine_id:
         machine = Machine.objects.get(machine_id=machine_id)
 
+
         if request.method == "POST":
             form = LogAPIForm(request.POST)
+
+            machine.set_last_connection_to_client()
 
             if form.is_valid():
 
