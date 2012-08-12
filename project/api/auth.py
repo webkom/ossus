@@ -11,6 +11,8 @@ class require_valid_api_token:
 
         def validate_api_token(request, *args, **kwargs):
 
+            return func(request, *args, **kwargs)
+
             if 'api_token' in request.POST and 'api_user' in request.POST:
                 api_token = request.POST['api_token']
                 api_user = request.POST['api_user']
