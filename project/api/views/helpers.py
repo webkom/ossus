@@ -97,7 +97,7 @@ def build_schedule_fields(schedule):
     schedule_fields = {
         'id': schedule.id,
         'name': schedule.name,
-        'get_next_backup_time': schedule.get_next_backup_time(),
+        'get_next_backup_time': schedule.get_next_backup_time().strftime("Y-m-d H:i:s"),
         'storage':
                 {'id': schedule.storage.id,
                  'host': schedule.storage.host,
