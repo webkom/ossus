@@ -231,16 +231,7 @@ class ScheduleBackup(models.Model):
         return u"Machine: %s, name: %s" % (self.machine, self.name)
 
     def current_day_folder_path(self):
-        if self.machine.last_connection_to_client.day != datetime.now().day:
-            if self.current_version_in_loop < self.versions_count:
-                self.current_version_in_loop += 1
-            else:
-                self.current_version_in_loop = 1
-
-            self.save()
-
-        return str(self.machine.machine_id) + "/" + "schedules/" + str(self.id) + "/" + str(
-            self.current_version_in_loop) + "/"
+        return str(self.machine.machine_id) + "/" + "schedules/" + str(self.id) + "/" + str(self.current_version_in_loop) + "/"
 
     def set_last_run_time(self):
         self.last_run_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
