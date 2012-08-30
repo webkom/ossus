@@ -97,6 +97,7 @@ def build_schedule_fields(schedule):
     schedule_fields = {
         'id': schedule.id,
         'name': schedule.name,
+        'current_version_in_loop': schedule.current_version_in_loop,
         'get_next_backup_time': schedule.get_next_backup_time().strftime("%Y-%m-%d %H:%M:%S"),
         'storage':
                 {'id': schedule.storage.id,
@@ -115,7 +116,6 @@ def build_schedule_fields(schedule):
     }
 
     return schedule_fields
-
 
 def build_machine_fields(machine):
     current_agent_version = machine.current_agent_version

@@ -37,9 +37,7 @@ def get_schedules(request, id=False):
 
                 schedule.save()
 
-
         return render_data("schedule", build_schedule_fields(schedule))
-
 
     for obj in ScheduleBackup.objects.all():
         send_object.append(build_schedule_fields(obj))
