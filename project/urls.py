@@ -16,6 +16,10 @@ urlpatterns = patterns(
     (r'^admin/', include(admin.site.urls)),
     (r'^api/', include('api.urls')),
 
+
+    (r'^download_current_agent/', 'core.views.download_current_agent'),
+    (r'^download_current_updater/', 'core.views.download_current_updater'),
+
     (r'^file/(?P<filename>.*)$', 'core.views.retrieve_file'),
 
 )
