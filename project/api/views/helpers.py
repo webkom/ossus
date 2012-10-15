@@ -141,10 +141,10 @@ def build_machine_settings(request, machine):
 
     machine_fields = {
         'agent_folder': "/Users/frecar/workspace/focusbackupclient/",
-        'local_temp_folder': "/tmp",
-        'id': machine.id,
-        'api_user': request.user.id,
-        'api_token': request.user.profile.get_token().api_token,
+        'local_temp_folder': "/tmp/",
+        'id': "%s"%machine.id,
+        'api_user': "%s"%request.user.id,
+        'api_token': "%s"%request.user.profile.get_token().api_token,
         'server_ip': "http://focus24.no",
         'force_action': '1',
         'mysql_dump': 'mysqldump5',
