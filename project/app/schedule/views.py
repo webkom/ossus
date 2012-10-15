@@ -7,11 +7,9 @@ from app.backup.models import ScheduleBackup
 def new(request, machine_id):
     return form(request, machine_id)
 
-
 @login_required()
 def edit(request, machine_id, id):
     return form(request, machine_id, id)
-
 
 @login_required()
 def form(request, machine_id, id=False):
