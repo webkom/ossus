@@ -3,6 +3,8 @@ import functools, inspect, copy
 from api.models import Token
 from django.http import Http404, HttpResponse
 from django.conf import settings
+from django.contrib.auth import authenticate, login, logout
+
 
 class require_valid_api_token:
     api_token = None
