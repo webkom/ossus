@@ -17,6 +17,8 @@ urlpatterns = patterns('api.views',
     (r'^machines/(?P<id>\w+)/set_agent_version/(?P<version>\w+)$', 'machines.set_machine_agent_version'),
     (r'^machines/(?P<id>\w+)/set_updater_version/(?P<version>\w+)$', 'machines.set_machine_updater_version'),
 
+    (r'^machines/(?P<id>\w+)/set_machine_external_ip/(?P<ip_address>\w+)$', 'machines.set_machine_external_ip'),
+
     #MachineStats
     (r'^machines/(?P<id>\w+)/create_stats/$', 'machinestats.create_stats_for_machine'),
 

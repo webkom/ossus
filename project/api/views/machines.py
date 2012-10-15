@@ -41,7 +41,6 @@ def set_machine_agent_version(request, id, version):
     client_version = ClientVersion.objects.get(id=version)
 
     if id:
-
         machine = Machine.objects.get(id=id)
         machine.current_agent_version = client_version
         machine.save()
@@ -49,6 +48,16 @@ def set_machine_agent_version(request, id, version):
     return render_data("client_version", build_client_version(client_version))
 
 set_machine_agent_version = csrf_exempt(set_machine_agent_version)
+
+@require_valid_api_token()
+def set_machine_external_ip(request, id, ip_address):
+    machine = request.user.profile.get_machines().get(id=id)
+    machine.external_ip = ip_address
+    machine.save()
+
+    return render_data("machine", build_machine_fields(machine))
+
+set_machine_external_ip = csrf_exempt(set_machine_external_ip)
 
 @require_valid_api_token()
 def set_machine_updater_version(request, id, version):
