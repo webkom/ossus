@@ -64,7 +64,6 @@ def set_machine_updater_version(request, id, version):
     client_version = ClientVersion.objects.get(id=version)
 
     if id:
-
         machine = Machine.objects.get(id=id)
         machine.current_updater_version = client_version
         machine.save()
