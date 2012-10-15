@@ -151,3 +151,4 @@ def build_machine_settings(request, machine):
         }
 
     return machine_fields
+

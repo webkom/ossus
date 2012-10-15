@@ -30,6 +30,10 @@ def render_data(name, data):
     s = json.dumps(output_data, cls=HandleQuerySets, indent=4)
     return HttpResponse(s, mimetype="application/json")
 
+def get_external_ip(request):
+    ip_address = request.META.get('HTTP_X_FORWARDED_FOR',) or request.META.get('REMOTE_ADDR')
+    return HttpResponse(ip_address)
+
 def check_token(token):
     """
     Checks if there exists a token and it is active

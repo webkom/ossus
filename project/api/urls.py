@@ -9,7 +9,6 @@ urlpatterns = patterns('api.views',
     (r'^machines/(?P<id>\w+)/schedules/$', 'machines.get_schedules_for_machine'),
     (r'^machines/(?P<id>\w+)/settings/$', 'machines.get_settings_for_machine'),
 
-
     (r'^machines/(?P<id>\w+)/log/$', 'machines.get_log_for_machine'),
     (r'^machines/(?P<id>\w+)/create_log/$', 'machines.create_log_for_machine'),
 
@@ -36,5 +35,11 @@ urlpatterns = patterns('api.views',
     (r'^backups/$', 'backups.get_backups'),
     (r'^backups/(?P<id>\w+)/$', 'backups.get_backups'),
     (r'^backups/(?P<id>\w+)/create_backup/$', 'backups.create_backup_for_machine'),
+
+
+    #Get external IP
+    (r'^ip/$', 'common.get_external_ip'),
+
+
 
 )
