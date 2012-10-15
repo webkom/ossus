@@ -2,6 +2,7 @@ from datetime import datetime
 from random import random
 import hashlib
 from app.backup.models import Company, Customer, Machine, Storage, ScheduleBackup
+from api.models import Token
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -35,6 +36,9 @@ class UserProfile(models.Model):
 
     def get_storages(self):
         return Storage.objects.filter(company=self.company)
+
+    def get_token(self):
+        return Token.objects.get_or_create(api_user=self.user, active=True)[0]
 
     def get_schedules(self):
         schedule_ids = []

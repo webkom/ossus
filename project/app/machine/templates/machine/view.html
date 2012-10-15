@@ -13,8 +13,8 @@
         <table class="table table-bordered table-striped">
             <tbody>
             <tr>
-                <td>{% trans "Machine ID" %}</td>
-                <td>{{ machine.machine_id }}</td>
+                <td>{% trans "ID" %}</td>
+                <td>{{ machine.id }}</td>
             </tr>
             <tr>
                 <td>Name</td>
@@ -27,6 +27,10 @@
             <tr>
                 <td>Last connection to client</td>
                 <td>{{ machine.last_connection_to_client }}</td>
+            </tr>
+            <tr>
+                <td>External IP</td>
+                <td>{{ machine.external_ip }}</td>
             </tr>
             <tr>
                 <td>Auto version</td>

@@ -56,7 +56,7 @@ class Command(BaseCommand):
                         name="Machine %s " % i,
                         customer=customer,
                         last_connection_to_client=example_date,
-                        machine_id=1000 + company.id + customer.id,
+                        id=1000 + company.id + customer.id,
                         current_agent_version=versions[0],
                         current_updater_version=versions[0],
                         selected_agent_version=versions[0],

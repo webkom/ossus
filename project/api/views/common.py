@@ -21,7 +21,11 @@ def render_data(name, data):
     """
     Returns a httpResponse with json where name is the outer scope and data is a python array with objects as dicts
     """
+
     output_data = {name: data}
+
+    if not name:
+        output_data = data
 
     s = json.dumps(output_data, cls=HandleQuerySets, indent=4)
     return HttpResponse(s, mimetype="application/json")

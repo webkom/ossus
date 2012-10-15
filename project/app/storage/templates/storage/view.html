@@ -33,7 +33,7 @@
                     {% for machine in customer.machines.all %}
 
                         <tr>
-                            <td>{{ machine.machine_id }}</td>
+                            <td>{{ machine.id }}</td>
                             <td>{{ machine.name }}</td>
                             <td>{{ machine.last_connection_to_client }}</td>
                             <td>{{ machine.get_last_backup_time }}</td>

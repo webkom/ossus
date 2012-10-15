@@ -21,7 +21,7 @@ class ClientVersionsAdmin(admin.ModelAdmin):
 
 class MachineAdmin(admin.ModelAdmin):
     model = Machine
-    search_fields = ['machine_id', 'name']
+    search_fields = ['id', 'name']
 
     inlines = [
         ScheduleBackupInline,

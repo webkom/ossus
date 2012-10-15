@@ -6,10 +6,10 @@ from api.views.common import render_data
 from app.backup.models import Machine, MachineStats
 
 @require_valid_api_token()
-def create_stats_for_machine(request, machine_id):
+def create_stats_for_machine(request, id):
 
-    if machine_id:
-        machine = Machine.objects.get(machine_id=machine_id)
+    if id:
+        machine = Machine.objects.get(id=id)
 
         if request.method == "POST":
             form = MachineStatsForm(request.POST, instance=MachineStats())

@@ -2,6 +2,7 @@
 import functools, inspect, copy
 from api.models import Token
 from django.http import Http404, HttpResponse
+from django.conf import settings
 
 class require_valid_api_token:
     api_token = None
@@ -10,6 +11,9 @@ class require_valid_api_token:
     def __call__(self, func):
 
         def validate_api_token(request, *args, **kwargs):
+
+            if settings.DEBUG and request.user.id:
+                return func(request, *args, **kwargs)
 
             if 'api_token' in request.POST and 'api_user' in request.POST:
                 api_token = request.POST['api_token']

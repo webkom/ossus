@@ -5,13 +5,13 @@ from django.views.decorators.csrf import csrf_exempt
 from api.auth import require_valid_api_token
 from api.forms.logs import LogAPIForm
 from api.views.common import render_data, HandleQuerySets
-from api.views.helpers import build_schedule_fields, build_machine_fields, build_machine_log, build_client_version, build_machine_log_fields
+from api.views.helpers import build_schedule_fields, build_machine_fields, build_machine_log, build_client_version, build_machine_log_fields, build_machine_settings
 from app.backup.models import Machine, MachineLog, ClientVersion
 
 @require_valid_api_token()
-def get_machines(request, machine_id=False):
-    if machine_id:
-        return render_data("machine", build_machine_fields(Machine.objects.get(machine_id=machine_id)))
+def get_machines(request, id=False):
+    if id:
+        return render_data("machine", build_machine_fields(Machine.objects.get(id=id)))
 
     else:
         send_object = []
@@ -23,19 +23,26 @@ def get_machines(request, machine_id=False):
 get_machines = csrf_exempt(get_machines)
 
 @require_valid_api_token()
-def get_log_for_machine(request, machine_id):
+def get_log_for_machine(request, id):
     return render_data("machine_log",
-        build_machine_log(Machine.objects.get(machine_id=machine_id).logs.all().order_by("-id")))
+        build_machine_log(Machine.objects.get(id=id).logs.all().order_by("-id")))
 
 get_log_for_machine = csrf_exempt(get_log_for_machine)
 
 @require_valid_api_token()
-def set_machine_agent_version(request, machine_id, version):
+def get_settings_for_machine(request, id):
+    return render_data("",
+        build_machine_settings(request, Machine.objects.get(id=id)))
+
+get_log_for_machine = csrf_exempt(get_settings_for_machine)
+
+@require_valid_api_token()
+def set_machine_agent_version(request, id, version):
     client_version = ClientVersion.objects.get(id=version)
 
-    if machine_id:
+    if id:
 
-        machine = Machine.objects.get(machine_id=machine_id)
+        machine = Machine.objects.get(id=id)
         machine.current_agent_version = client_version
         machine.save()
 
@@ -44,12 +51,12 @@ def set_machine_agent_version(request, machine_id, version):
 set_machine_agent_version = csrf_exempt(set_machine_agent_version)
 
 @require_valid_api_token()
-def set_machine_updater_version(request, machine_id, version):
+def set_machine_updater_version(request, id, version):
     client_version = ClientVersion.objects.get(id=version)
 
-    if machine_id:
+    if id:
 
-        machine = Machine.objects.get(machine_id=machine_id)
+        machine = Machine.objects.get(id=id)
         machine.current_updater_version = client_version
         machine.save()
 
@@ -58,9 +65,9 @@ def set_machine_updater_version(request, machine_id, version):
 set_machine_updater_version = csrf_exempt(set_machine_updater_version)
 
 @require_valid_api_token()
-def create_log_for_machine(request, machine_id):
-    if machine_id:
-        machine = Machine.objects.get(machine_id=machine_id)
+def create_log_for_machine(request, id):
+    if id:
+        machine = Machine.objects.get(id=id)
 
 
         if request.method == "POST":
@@ -82,9 +89,9 @@ def create_log_for_machine(request, machine_id):
 create_log_for_machine = csrf_exempt(create_log_for_machine)
 
 @require_valid_api_token()
-def get_schedules_for_machine(request, machine_id):
+def get_schedules_for_machine(request, id):
     send_object = []
-    for schedule in Machine.objects.get(machine_id=machine_id).schedules.all():
+    for schedule in Machine.objects.get(id=id).schedules.all():
         send_object.append(build_schedule_fields(schedule))
 
     return render_data("schedules", send_object)

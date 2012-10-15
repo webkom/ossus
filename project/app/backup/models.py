@@ -23,9 +23,10 @@ machine_timeout_minutes = 10 * 60
 class Machine(models.Model):
     name = models.CharField(max_length=150)
     customer = models.ForeignKey(Customer, related_name="machines")
-    machine_id = models.CharField(max_length=150)
     run_install = models.BooleanField(default=False)
     last_connection_to_client = models.DateTimeField(blank=True, null=True, default=datetime.now())
+
+    external_ip = models.IPAddressField(default="")
 
     auto_version = models.BooleanField(default=True)
 
@@ -39,7 +40,7 @@ class Machine(models.Model):
         blank=True)
 
     def __unicode__(self):
-        return "Machine: %s, machine_id: %s" % (self.name, self.machine_id)
+        return "Machine: %s, id: %s" % (self.name, self.id)
 
     def set_last_connection_to_client(self):
         self.last_connection_to_client = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -164,7 +165,6 @@ class Storage(models.Model):
     def __unicode__(self):
         return "Storage: %s %s, Company %s" % (self.type, self.host, self.company)
 
-
 class FolderBackup(models.Model):
     schedule_backup = models.ForeignKey('ScheduleBackup', related_name='folder_backups')
 
@@ -231,7 +231,7 @@ class ScheduleBackup(models.Model):
         return u"Machine: %s, name: %s" % (self.machine, self.name)
 
     def current_day_folder_path(self):
-        return str(self.machine.machine_id) + "/" + "schedules/" + str(self.id) + "/" + str(self.current_version_in_loop) + "/"
+        return str(self.machine.id) + "/" + "schedules/" + str(self.id) + "/" + str(self.current_version_in_loop) + "/"
 
     def set_last_run_time(self):
         self.last_run_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

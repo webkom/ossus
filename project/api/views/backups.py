@@ -23,10 +23,10 @@ get_backups = csrf_exempt(get_backups)
 
 
 @require_valid_api_token()
-def create_backup_for_machine(request, machine_id):
+def create_backup_for_machine(request, id):
 
-    if machine_id:
-        machine = Machine.objects.get(machine_id=machine_id)
+    if id:
+        machine = Machine.objects.get(id=id)
 
         if request.method == "POST":
             form = BackupAPIForm(request.POST)
