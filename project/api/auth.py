@@ -4,7 +4,7 @@ from api.models import Token
 from django.http import Http404, HttpResponse
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
-
+from django.contrib.auth.models import User
 
 class require_valid_api_token:
     api_token = None
@@ -22,8 +22,7 @@ class require_valid_api_token:
                 api_user = request.POST['api_user']
 
                 if Token.objects.filter(api_token=api_token, api_user=api_user).count() == 1:
-                    user = Token.objects.get(api_token=api_token, api_user=api_user).api_user
-                    login(request, user)
+                    request.user = User.objects.get(id=api_user)
 
                     return func(request, *args, **kwargs)
 
@@ -32,8 +31,7 @@ class require_valid_api_token:
                 api_user = request.GET['api_user']
 
                 if Token.objects.filter(api_token=api_token, api_user=api_user).count() == 1:
-                    user = Token.objects.get(api_token=api_token, api_user=api_user).api_user
-                    login(request, user)
+                    request.user = User.objects.get(id=api_user)
 
                     return func(request, *args, **kwargs)
 
