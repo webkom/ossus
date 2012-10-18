@@ -22,7 +22,7 @@ class require_valid_api_token:
                 api_user = request.POST['api_user']
 
                 if Token.objects.filter(api_token=api_token, api_user=api_user).count() == 1:
-                    user = Token.objects.filter(api_token=api_token, api_user=api_user).api_user
+                    user = Token.objects.get(api_token=api_token, api_user=api_user).api_user
                     login(request, user)
 
                     return func(request, *args, **kwargs)
@@ -32,7 +32,7 @@ class require_valid_api_token:
                 api_user = request.GET['api_user']
 
                 if Token.objects.filter(api_token=api_token, api_user=api_user).count() == 1:
-                    user = Token.objects.filter(api_token=api_token, api_user=api_user).api_user
+                    user = Token.objects.get(api_token=api_token, api_user=api_user).api_user
                     login(request, user)
 
                     return func(request, *args, **kwargs)
