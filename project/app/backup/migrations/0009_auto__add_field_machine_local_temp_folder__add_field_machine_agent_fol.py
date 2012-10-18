@@ -10,12 +10,12 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Machine.local_temp_folder'
         db.add_column('backup_machine', 'local_temp_folder',
-                      self.gf('django.db.models.fields.CharField')(default='C:\\focus24\\tmp\\', max_length=255),
+                      self.gf('django.db.models.fields.CharField')(default='', max_length=255),
                       keep_default=False)
 
         # Adding field 'Machine.agent_folder'
         db.add_column('backup_machine', 'agent_folder',
-                      self.gf('django.db.models.fields.CharField')(default='C:\\focus24\\', max_length=255),
+                      self.gf('django.db.models.fields.CharField')(default='', max_length=255),
                       keep_default=False)
 
         # Adding field 'Machine.mysql_dump'
@@ -105,7 +105,7 @@ class Migration(SchemaMigration):
         },
         'backup.machine': {
             'Meta': {'object_name': 'Machine'},
-            'agent_folder': ('django.db.models.fields.CharField', [], {'default': "'C:\\\\focus24\\\\'", 'max_length': '255'}),
+            'agent_folder': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255'}),
             'auto_version': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'current_agent_version': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'agent_versions'", 'null': 'True', 'to': "orm['backup.ClientVersion']"}),
             'current_updater_version': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'updater_versions'", 'null': 'True', 'to': "orm['backup.ClientVersion']"}),
@@ -113,7 +113,7 @@ class Migration(SchemaMigration):
             'external_ip': ('django.db.models.fields.IPAddressField', [], {'default': "''", 'max_length': '15'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_connection_to_client': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 10, 18, 0, 0)', 'null': 'True', 'blank': 'True'}),
-            'local_temp_folder': ('django.db.models.fields.CharField', [], {'default': "'C:\\\\focus24\\\\tmp\\\\'", 'max_length': '255'}),
+            'local_temp_folder': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255'}),
             'mysql_dump': ('django.db.models.fields.CharField', [], {'default': "'mysqldump'", 'max_length': '255'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
             'run_install': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
