@@ -16,4 +16,4 @@ class MachineForm(ModelForm):
     class Meta:
         model = Machine
         fields = (
-        'id', 'name', 'customer', 'auto_version', 'run_install', 'selected_agent_version', 'selected_updater_version')
+        'id', 'name', 'customer', 'local_temp_folder', 'agent_folder', 'mysql_dump', 'auto_version', 'run_install', 'selected_agent_version', 'selected_updater_version')

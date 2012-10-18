@@ -18,8 +18,6 @@ def get_absolute_filename(filename='', safe=True):
 def retrieve_file(request, filename=''):
     abs_filename = get_absolute_filename(filename)
 
-    print "abs_filename: " + abs_filename
-
     mimetypes.add_type('application/vnd.openxmlformats-officedocument.wordprocessingml.document', '.docx', True)
     mime = mimetypes.guess_type(abs_filename)
 
@@ -28,7 +26,6 @@ def retrieve_file(request, filename=''):
     response['Content-Length'] = os.path.getsize(abs_filename)
     response['filename'] = "test.jar"
     return response
-
 
 def download_current_agent(request):
     current_agent = ClientVersion.objects.get(current_agent=True)

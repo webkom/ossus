@@ -24,9 +24,16 @@ class Machine(models.Model):
     name = models.CharField(max_length=150)
     customer = models.ForeignKey(Customer, related_name="machines")
     run_install = models.BooleanField(default=False)
-    last_connection_to_client = models.DateTimeField(blank=True, null=True, default=datetime.now())
 
+    #Info from the client
+    last_connection_to_client = models.DateTimeField(blank=True, null=True, default=datetime.now())
     external_ip = models.IPAddressField(default="")
+
+    #For generating settings-file
+    local_temp_folder = models.CharField(max_length=255, default="C:\\focus24\\tmp\\")
+    agent_folder = models.CharField(max_length=255, default="C:\\focus24\\")
+    mysql_dump = models.CharField(max_length=255, default="mysqldump")
+
 
     auto_version = models.BooleanField(default=True)
 
