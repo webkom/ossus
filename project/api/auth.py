@@ -21,14 +21,30 @@ class require_valid_api_token:
                 api_token = request.POST['api_token']
                 api_user = request.POST['api_user']
 
-                if Token.objects.filter(api_token=api_token, api_user=api_user).count() > 0:
+                if Token.objects.filter(api_token=api_token, api_user=api_user).count() == 1:
+                    user = Token.objects.filter(api_token=api_token, api_user=api_user).api_user
+                    login(request, user)
+
                     return func(request, *args, **kwargs)
 
             elif 'api_token' in request.GET and 'api_user' in request.GET:
                 api_token = request.GET['api_token']
                 api_user = request.GET['api_user']
 
-                if Token.objects.filter(api_token=api_token, api_user=api_user).count() > 0:
+                if Token.objects.filter(api_token=api_token, api_user=api_user).count() == 1:
+                    user = Token.objects.filter(api_token=api_token, api_user=api_user).api_user
+                    login(request, user)
+
+                    return func(request, *args, **kwargs)
+
+            elif 'username' in request.GET and 'password' in request.GET:
+                username = request.GET['username']
+                password = request.GET['password']
+
+                user = authenticate(username=username, password=password)
+
+                if user is not None:
+                    login(request, user)
                     return func(request, *args, **kwargs)
 
             resp = HttpResponse()
