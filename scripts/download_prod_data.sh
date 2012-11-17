@@ -15,6 +15,7 @@ ssh focus@kontor.focussecurity.no '
 scp focus@kontor.focussecurity.no:~/dumpdata.json .
 
 echo "Perform load"
-bin/django loaddata dumpdata.json
+bin/django flush --noinput
+bin/django loadprod dumpdata.json
 
 echo "Done!"
