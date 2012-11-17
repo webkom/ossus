@@ -3,7 +3,7 @@ echo "Performing dump"
 ssh focus@'kontor.focussecurity.no' '
     ssh 'focus'@'10.0.6.31' "
         cd /var/webapps/focus24/focusbackup
-        bin/django dumpdata -n > dumpdata.json
+        bin/django dumpdata -a > dumpdata.json
     "
 '
 echo "Downloading data"

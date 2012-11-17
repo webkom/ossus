@@ -5,22 +5,6 @@
 
     <section id="machines">
 
-        <table class="table-bordered table table-striped table-condensed">
-            <thead>
-
-            <tr>
-                <th style="width:10%;">ID</th>
-                <td style="width:15%;">Name</td>
-                <th style="width:20%;">Last connection</th>
-                <th style="width:30%">Last backup time</th>
-                <th style="width:30%">Updater version</th>
-                <th style="width:30%">Status</th>
-            </tr>
-
-            </thead>
-
-        </table>
-
         {% for customer in customers %}
 
             <h4>{{ customer.name }}</h4>
@@ -32,11 +16,11 @@
                 {% for machine in customer.machines.all %}
 
                     <tr>
-                        <td style="width:10%;">{{ machine.id }}</td>
-                        <td style="width:15%;"><a href="{% url view_machine machine.id  %}">{{ machine.name }}</a>
+                        <td style="width:40%;"><a href="{% url view_machine machine.id  %}">{{ machine.name }}</a>
                         </td>
-                        <td style="width:20%;">{{ machine.last_connection_to_client }}</td>
+                        <td>{{ machine.last_connection_to_client }}</td>
                         <td>{{ machine.get_last_backup_time }}</td>
+                        <td>{{ machine.current_agent_version }}</td>
                         <td>{{ machine.current_updater_version }}</td>
                         <td>
 
