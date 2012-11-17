@@ -225,10 +225,10 @@ class ScheduleBackup(models.Model):
     current_version_in_loop = models.IntegerField(blank=True, default=1)
     versions_count = models.IntegerField(default=10)
 
-    #Every x minute, perfrom backup
+    #Perform backup every x minute
     repeat_every_minute = models.IntegerField(default=360, choices=schedule_every_minute_choices)
 
-    #Status messages to client
+    #Status messages for client
     running_backup = models.BooleanField(default=False, blank=True)
     running_restore = models.BooleanField(default=False, blank=True)
 

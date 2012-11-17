@@ -2,6 +2,7 @@ from django import forms
 from django.forms.models import ModelForm, modelformset_factory, inlineformset_factory
 from django.forms.widgets import TextInput, Select
 from app.backup.models import ScheduleBackup, Storage, FolderBackup, SQLBackup, sql_types
+from datetime import datetime
 
 class ScheduleBackupForm(ModelForm):
     storage = forms.ModelChoiceField(queryset=Storage.objects.none())
@@ -18,9 +19,15 @@ class ScheduleBackupForm(ModelForm):
         if user:
             self.fields['storage'].queryset = user.profile.get_storages()
 
+        self.fields['from_date'].initial = "OK"
+
+
+        print self.fields['from_date'].__dict__
+
+
     class Meta:
         model = ScheduleBackup
-        fields = ("name", "storage", "from_date", "repeat_every_minute", "active", "running_backup", "running_restore")
+        fields = ("name", "storage", "from_date", "repeat_every_minute", "active", "versions_count")
 
 class FolderBackupForm(ModelForm):
     local_folder_path = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small'}))

@@ -9,6 +9,7 @@ pickle*.txt
 #generated buildout stuff
 .DS_Store
 bin
+dumpdata.json
 develop-eggs
 downloads
 eggs
