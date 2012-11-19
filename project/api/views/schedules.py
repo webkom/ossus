@@ -21,7 +21,6 @@ def get_schedules(request, id=False):
 
                 schedule.name = form.cleaned_data['name']
 
-
                 if form.cleaned_data['running_backup'] == "true":
                     schedule.running_backup = True
                 else:

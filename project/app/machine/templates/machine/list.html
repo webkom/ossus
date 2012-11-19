@@ -5,19 +5,21 @@
 
     <section id="machines">
 
-        {% for customer in customers %}
+        <table class="table-bordered table table-striped table-condensed">
+            <tbody>
 
-            <h4>{{ customer.name }}</h4>
 
-            <table class="table-bordered table table-striped table-condensed">
+            {% for customer in customers %}
 
-                <tbody>
+                <tr >
+                       <td colspan="6" style="font-size: 15px; font-weight: bold;">{{ customer.name }}</td>
+                </tr>
 
                 {% for machine in customer.machines.all %}
 
                     <tr>
-                        <td style="width:40%;"><a href="{% url view_machine machine.id  %}">{{ machine.name }}</a>
-                        </td>
+                        <td><img src="/static/img/server.png"> <a
+                                href="{% url view_machine machine.id %}">{{ machine.name }}</a></td>
                         <td>{{ machine.last_connection_to_client }}</td>
                         <td>{{ machine.get_last_backup_time }}</td>
                         <td>{{ machine.current_agent_version }}</td>
@@ -44,11 +46,14 @@
 
                 {% endfor %}
 
-                </tbody>
 
-            </table>
 
-        {% endfor %}
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
 
     </section>
 

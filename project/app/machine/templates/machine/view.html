@@ -273,8 +273,8 @@
                         <td>  {{ schedule.last_run_time|date:"d.m.Y H:i" }}
                             {% if not schedule.last_run_time %} {% trans "Not runned yet" %}{% endif %}</td>
 
-                        <td>  {{ schedule.get_next_backup_time|date:"d.m.Y H:i" }}
-                            {% if not schedule.get_next_backup_time %} {% trans "Not scheduled" %}{% endif %}</td>
+                        <td>  {{ schedule.get_next_run_time|date:"d.m.Y H:i" }}
+                            {% if not schedule.get_next_run_time %} {% trans "Not scheduled" %}{% endif %}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

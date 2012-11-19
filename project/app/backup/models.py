@@ -97,7 +97,7 @@ class Machine(models.Model):
         for schedule in self.schedules.all():
             if not next_backup_time:
                 next_backup_time = schedule.get_last_backup_time()
-            elif schedule.get_next_backup_time() > next_backup_time:
+            elif schedule.get_next_run_time() > next_backup_time:
                 next_backup_time = schedule.get_last_backup_time()
 
         return next_backup_time
@@ -204,11 +204,11 @@ class SQLBackup(models.Model):
 schedule_every_minute_choices = (
     (60, 'Hver time'),
     (60 * 3, 'Hver tredje time'),
-    (60 * 12, 'Hver dag'),
-    (60 * 12 * 2, 'Hver andre dag'),
-    (60 * 12 * 3, 'Hver tredje dag'),
-    (60 * 12 * 7, 'Hver uke'),
-    (60 * 12 * 7 * 30, 'Hver måned'),
+    (60 * 24, 'Hver dag'),
+    (60 * 24 * 2, 'Hver andre dag'),
+    (60 * 24 * 3, 'Hver tredje dag'),
+    (60 * 24 * 7, 'Hver uke'),
+    (60 * 24 * 7 * 30, 'Hver måned'),
     )
 
 class ScheduleBackup(models.Model):
@@ -241,8 +241,13 @@ class ScheduleBackup(models.Model):
         return str(self.machine.id) + "/" + "schedules/" + str(self.id) + "/" + str(self.current_version_in_loop) + "/"
 
     def set_last_run_time(self):
-        self.last_run_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.last_run_time = datetime.now()
         self.save()
+
+    def get_next_run_time(self):
+        if self.last_run_time:
+            return self.last_run_time + timedelta(minutes=self.repeat_every_minute)
+        return None
 
     def get_last_backup(self):
         if self.backups.all().count() > 0:
@@ -254,13 +259,6 @@ class ScheduleBackup(models.Model):
             return self.get_last_backup().time_started
         return None
 
-    def get_next_backup_time(self):
-        if not self.get_last_backup():
-            return self.from_date
-
-        return self.get_last_backup_time() + timedelta(0, self.repeat_every_minute*60)
-
-
 class Backup(models.Model):
     machine = models.ForeignKey(Machine, related_name="backups")
     schedule = models.ForeignKey(ScheduleBackup, null=True, related_name="backups")
@@ -271,11 +269,9 @@ class Backup(models.Model):
     def is_recoverable(self):
         return self.schedule.backups.filter(id__gt=self.id).count() < self.schedule.versions_count
 
-
 class ClientVersion(models.Model):
     datetime = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=50)
-
 
     agent = models.FileField(upload_to="versions/agents/", null=True)
     updater = models.FileField(upload_to="versions/updaters/", null =True)
