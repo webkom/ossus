@@ -14,16 +14,14 @@
             </div>
             <!-- /.span -->
             <div class="span12">
-                <h2>{% trans "Machines" %}</h2>
+                <h4>{% trans "Machines" %}</h4>
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <td>Name</td>
-                        <th>Last connection to client</th>
-                        <th>Last backup time</th>
-                        <th>Updater version</th>
-                        <th>Status</th>
+                        <td></td>
+                        <td>Last online</td>
+                        <td>Status</td>
+                        <td></td>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,29 +29,22 @@
                     {% for machine in customer.machines.all %}
 
                         <tr>
-                            <td>{{ machine.id }}</td>
-                            <td><a href="{% url view_machine machine.id %}">{{ machine.name }}</a></td>
-                            <td>{{ machine.last_connection_to_client }}</td>
-                            <td>{{ machine.get_last_backup_time }}</td>
-                            <td>{{ machine.current_updater_version }}</td>
+                            <td><img src="/static/img/glyphicons/png/glyphicons_086_display.png" width="14px">
+                                <a href="{% url view_machine machine.id %}">{{ machine.name }}</a></td>
+
+                            <td><i class="icon-time"></i> {{ machine.last_connection_to_client|timesince }} ago</td>
+
                             <td>
-
                                 {% if machine.running_backup %}
-
-                                    <span class="label label-info">{% trans "running backup" %}</span>
-
-                                {% else %} {% if machine.running_restore %}
-                                    <span class="label label-info">{% trans "running restore" %}</span>
-
-
+                                    <i class="icon-adjust"></i> {% trans "running backup" %}
+                                {% elif not machine.is_up_to_date %}
+                                    <i class="icon-remove"></i> {% trans "Outdated" %}
                                 {% else %}
-
-                                    <span class="label label-success">{% trans "OK" %}</span>
-
+                                    <i class="icon-ok"></i>
                                 {% endif %}
-                                {% endif %}
-
                             </td>
+                            <td><a href="/machines/{{ machine.id }}/edit/"><i class="icon-pencil"></i></a></td>
+
                         </tr>
 
                     {% endfor %}

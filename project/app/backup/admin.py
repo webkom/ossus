@@ -23,9 +23,6 @@ class MachineAdmin(admin.ModelAdmin):
     model = Machine
     search_fields = ['id', 'name']
 
-    inlines = [
-        ScheduleBackupInline,
-        ]
 
 class ScheduleAdmin(admin.ModelAdmin):
     model = ScheduleBackup

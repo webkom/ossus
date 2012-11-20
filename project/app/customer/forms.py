@@ -1,7 +1,7 @@
 from django.forms.models import ModelForm
-from app.backup.models import Machine
+from app.backup.models import Customer
 
 class CustomerForm(ModelForm):
     class Meta:
-        model = Machine
-        fields = ('name',)
+        model = Customer
+        fields = ('name','address','contact_person','contact_phone' ,'contact_email')

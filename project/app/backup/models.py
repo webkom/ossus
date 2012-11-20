@@ -13,6 +13,11 @@ class Company(models.Model):
 
 class Customer(models.Model):
     name = models.CharField(max_length=150)
+    address = models.CharField(max_length=100, blank=True, null=True)
+    contact_person = models.CharField(max_length=100, blank=True, null=True)
+    contact_email = models.CharField(max_length=100, blank=True, null=True)
+    contact_phone = models.CharField(max_length=20, blank=True, null=True)
+
     company = models.ForeignKey(Company, related_name="customers")
 
     def __unicode__(self):
@@ -34,7 +39,6 @@ class Machine(models.Model):
     agent_folder = models.CharField(max_length=255, default="")
     mysql_dump = models.CharField(max_length=255, default="mysqldump")
 
-
     auto_version = models.BooleanField(default=True)
 
     #Current version running on client
@@ -48,6 +52,10 @@ class Machine(models.Model):
 
     def __unicode__(self):
         return "Machine: %s, id: %s" % (self.name, self.id)
+
+    def is_up_to_date(self):
+        return self.current_agent_version == ClientVersion.objects.get(current_agent=True) and \
+               self.current_updater_version == ClientVersion.objects.get(current_updater=True)
 
     def set_last_connection_to_client(self):
         self.last_connection_to_client = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -72,7 +80,7 @@ class Machine(models.Model):
         return self.stats.all().order_by("id")
 
     def get_latest_logs(self):
-        return self.logs.all().order_by("-id")[0:50]
+        return self.logs.all().order_by("-id")[0:7]
 
     def get_latest_backups(self):
         return self.backups.all().order_by("-id")[0:6]
@@ -161,6 +169,9 @@ storage_types = (
 class Storage(models.Model):
     type = models.CharField(max_length=10, choices=storage_types)
     company = models.ForeignKey(Company, related_name="storages", null=True)
+
+    name  = models.CharField(max_length=100, default="")
+    notes = models.TextField(default="")
 
     host = models.CharField(max_length=150)
     username = models.CharField(max_length=80)

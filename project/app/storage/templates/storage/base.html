@@ -4,15 +4,18 @@
 
 {% block content %}
     <header class="jumbotron subhead" id="overview">
-        <h1>Servers</h1>
+
+        <div class="page-header">
+            <h2>Storages</h2>
+        </div>
 
         <div class="subnav">
             <ul class="nav nav-pills">
-                    <li class="{% active request "^/storages/$" %}"><a href="{% url app.storage.views.overview %}">List
-                        all
-                        storages</a></li>
-                    <li class="{% active request "^/storages/new/$" %}"><a href="{% url app.storage.views.new %}">New
-                        storage</a></li>
+                <li class="{% active request "^/storages/$" %}"><a href="{% url app.storage.views.overview %}">List
+                    all
+                    storages</a></li>
+                <li class="{% active request "^/storages/new/$" %}"><a href="{% url app.storage.views.new %}">New
+                    storage</a></li>
             </ul>
         </div>
 
@@ -25,18 +28,26 @@
 
                 <thead>
 
-                <th>Host</th>
+                <th>Name</th>
                 <th>Type</th>
+                <th>Host</th>
                 <th>Username</th>
+                <th>Folder</th>
+                <th>Notes</th>
+                <th></th>
 
                 </thead>
                 <tbody>
 
                 {% for storage in storages.all %}
                     <tr>
-                        <td><a href="/storages/{{ storage.id }}/view/">{{ storage.host }}</a></td>
-                        <td><a href="/storages/{{ storage.id }}/view/">{{ storage.type }}</a></td>
-                        <td><a href="/storages/{{ storage.id }}/view/">{{ storage.username }}</a></td>
+                        <td><i class="icon-hdd"></i> <a href="/storages/{{ storage.id }}/view/">{{ storage.name }}</a></td>
+                        <td>{{ storage.type }}</td>
+                        <td>{{ storage.host }}</td>
+                        <td>{{ storage.username }}</td>
+                        <td>{{ storage.folder }}</td>
+                        <td>{{ storage.notes }}</td>
+                        <td><a href="/storages/{{ storage.id }}/edit/"><i class="icon-pencil"></i></a></td>
                     </tr>
                 {% endfor %}
 

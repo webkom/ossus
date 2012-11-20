@@ -35,6 +35,6 @@ def form(request, id = False):
             storage.company = request.user.profile.company
             storage.save()
 
-            return redirect(edit, storage.id)
+            return redirect(overview)
 
     return render(request, 'storage/form.html', {'form':form, "title":_("Storage")})
