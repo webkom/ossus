@@ -256,8 +256,13 @@ class ScheduleBackup(models.Model):
         self.save()
 
     def get_next_run_time(self):
+
+        if self.from_date > self.last_run_time:
+            return self.from_date
+
         if self.last_run_time:
             return self.last_run_time + timedelta(minutes=self.repeat_every_minute)
+
         return None
 
     def get_last_backup(self):
