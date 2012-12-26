@@ -225,7 +225,7 @@ schedule_every_minute_choices = (
 class ScheduleBackup(models.Model):
     #Details
     machine = models.ForeignKey(Machine, related_name="schedules")
-    name = models.CharField(max_length=150, blank=True)
+    name = models.CharField(max_length=150)
 
     storage = models.ForeignKey(Storage, related_name="schedules")
 
@@ -257,16 +257,10 @@ class ScheduleBackup(models.Model):
 
     def get_next_run_time(self):
 
-        if self.from_date > self.last_run_time:
-            return self.from_date
-
-        if self.last_run_time:
+        if self.last_run_time and self.from_date < self.last_run_time:
             return self.last_run_time + timedelta(minutes=self.repeat_every_minute)
 
-        if self.from_date:
-            return self.from_date
-
-        return None
+        return self.from_date
 
     def get_last_backup(self):
         if self.backups.all().count() > 0:

@@ -5,7 +5,7 @@ from app.backup.models import ScheduleBackup, Storage, FolderBackup, SQLBackup, 
 from datetime import datetime
 
 class ScheduleBackupForm(ModelForm):
-    storage = forms.ModelChoiceField(queryset=Storage.objects.none())
+    #storage = forms.ModelChoiceField(queryset=Storage.objects.none())
 
     def __init__(self, *args, **kwargs):
         user = None
@@ -17,20 +17,15 @@ class ScheduleBackupForm(ModelForm):
         super(ScheduleBackupForm, self).__init__(*args, **kwargs)
 
         if user:
-            self.fields['storage'].queryset = user.profile.get_storages()
-
-        self.fields['from_date'].initial = "OK"
-
-
-        print self.fields['from_date'].__dict__
-
+            self.fields['storage'].queryset =user.profile.get_storages()
 
     class Meta:
         model = ScheduleBackup
         fields = ("name", "storage", "from_date", "repeat_every_minute", "active", "versions_count")
 
+
 class FolderBackupForm(ModelForm):
-    local_folder_path = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small'}))
+    local_folder_path = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-xxlarge'}))
 
     class Meta:
         model = FolderBackup

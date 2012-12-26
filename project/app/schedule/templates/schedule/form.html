@@ -99,7 +99,6 @@
                 {% for field in form %}
                     <div class="control-group">
                         <label class="control-label">{{ field.label }}</label>
-
                         <div class="controls">
                             {{ field }}
                         </div>
@@ -111,7 +110,6 @@
                 {% for element in form_folders %}
                     <div class="control-group">
                         <label class="control-label">{% trans "Folder path" %}</label>
-
                         <div class="controls">
                             {% for field in element %}
                                 {{ field }}
@@ -140,9 +138,7 @@
                             {% for element in form_sql.forms %}
                                 <tr>
                                     {% for field in element %}
-
                                         <td>{{ field }}</td>
-
                                     {% endfor %}
                                 </tr>
                             {% endfor %}
