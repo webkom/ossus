@@ -38,7 +38,7 @@ def create_backup_for_machine(request, id):
                 backup.schedule = ScheduleBackup.objects.get(id=request.POST['schedule_id'])
                 backup.time_started = request.POST['time_started']
                 backup.time_ended = request.POST['time_ended']
-                backup.day_folder_path = backup.schedule.current_day_folder_path()
+                #backup.day_folder_path = backup.schedule.current_day_folder_path()
 
                 backup.save()
 
