@@ -261,7 +261,7 @@
                         <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
                         <td>{{ backup.time_ended|date:"d.m.Y H:i" }}</td>
                         <td>{{ backup.schedule.name }}</td>
-                        <td>{{ backup.schedule.day_folder_path }}</td>
+                        <td><a href="{{ backup.recover_link }}" target="_blank">Recover</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
