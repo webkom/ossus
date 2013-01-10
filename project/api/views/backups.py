@@ -39,7 +39,9 @@ def create_backup_for_machine(request, id):
                 backup.schedule = schedule
                 backup.time_started = request.POST['time_started']
                 backup.time_ended = request.POST['time_ended']
-                backup.day_folder_path = request.POST['upload_path']
+
+                if 'upload_path' in request.POST:
+                    backup.day_folder_path = request.POST['upload_path']
 
                 backup.save()
 
