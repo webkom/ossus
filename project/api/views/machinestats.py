@@ -19,7 +19,9 @@ def create_stats_for_machine(request, id):
                 log.datetime = datetime.now()
                 log.save()
 
-                return render_data("stats", {'id': log.id})
+                machine.set_last_connection_to_client()
+
+            return render_data("stats", {'id': log.id})
 
     return render_data("error", {'error':'invalid form'})
 
