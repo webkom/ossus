@@ -281,6 +281,11 @@ class Backup(models.Model):
     def is_recoverable(self):
         return self.schedule.backups.filter(id__gt=self.id).count() < self.schedule.versions_count
 
+    def recover_link(self):
+        if self.is_recoverable():
+            return ""
+        return ""
+
 class ClientVersion(models.Model):
     datetime = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=50)

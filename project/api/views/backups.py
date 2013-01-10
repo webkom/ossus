@@ -22,7 +22,7 @@ def get_backups(request, id=False):
 get_backups = csrf_exempt(get_backups)
 
 
-@require_valid_api_token()
+#@require_valid_api_token()
 def create_backup_for_machine(request, id):
 
     if id:
@@ -33,12 +33,13 @@ def create_backup_for_machine(request, id):
 
             if form.is_valid():
                 backup = Backup()
+                schedule = ScheduleBackup.objects.get(id=request.POST['schedule_id'])
 
                 backup.machine = machine
-                backup.schedule = ScheduleBackup.objects.get(id=request.POST['schedule_id'])
+                backup.schedule = schedule
                 backup.time_started = request.POST['time_started']
                 backup.time_ended = request.POST['time_ended']
-                #backup.day_folder_path = backup.schedule.current_day_folder_path()
+                backup.day_folder_path = backup.schedule.current_day_folder_path()
 
                 backup.save()
 
