@@ -282,7 +282,7 @@ class Backup(models.Model):
         return self.schedule.backups.filter(id__gt=self.id).count() < self.schedule.versions_count
 
     def recover_link(self):
-        if self.is_recoverable():
+        if self.is_recoverable() and self.day_folder_path:
             url = "ftp://%s:%s@%s/%s" % (self.schedule.storage.username, self.schedule.storage.password, self.schedule.storage.host, self.day_folder_path)
             return url
         return ""
