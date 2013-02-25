@@ -34,8 +34,8 @@ class Machine(models.Model):
     external_ip = models.IPAddressField(default="")
 
     #For generating settings-file
-    local_temp_folder = models.CharField(max_length=255, default="")
-    agent_folder = models.CharField(max_length=255, default="")
+    local_temp_folder = models.CharField(max_length=255, default="C:\\focus24\\temp\\")
+    agent_folder = models.CharField(max_length=255, default="C:\\focus24\\")
     mysql_dump = models.CharField(max_length=255, default="mysqldump")
 
     auto_version = models.BooleanField(default=True)
