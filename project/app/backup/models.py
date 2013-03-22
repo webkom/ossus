@@ -276,15 +276,16 @@ class ScheduleBackup(models.Model):
 
     def get_next_run_time(self):
 
-        runs = list(rrule(MINUTELY,
-                          cache=True,
-                          interval=self.repeat_every_minute,
-                          until=datetime.date.today() + relativedelta(weeks=3, weekday=FR(-1)),
-                          dtstart=self.from_date))
+        if self.from_date:
+            runs = list(rrule(MINUTELY,
+                              cache=True,
+                              interval=self.repeat_every_minute,
+                              until=datetime.date.today() + relativedelta(weeks=3, weekday=FR(-1)),
+                              dtstart=self.from_date))
 
-        for run in runs:
-            if run > self.last_run_time:
-                return run
+            for run in runs:
+                if run > self.last_run_time:
+                    return run
 
         return self.from_date
 
