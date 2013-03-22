@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime, timedelta
+import datetime
+from dateutil.relativedelta import relativedelta, FR
+from dateutil.rrule import rrule, MINUTELY
+from django.core.cache import cache
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -34,7 +37,7 @@ class Machine(models.Model):
     run_install = models.BooleanField(default=False)
 
     #Info from the client
-    last_connection_to_client = models.DateTimeField(blank=True, null=True, default=datetime.now())
+    last_connection_to_client = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now())
     external_ip = models.IPAddressField(default="")
 
     #For generating settings-file
@@ -61,7 +64,7 @@ class Machine(models.Model):
                self.current_updater_version == ClientVersion.objects.get(current_updater=True)
 
     def set_last_connection_to_client(self):
-        self.last_connection_to_client = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.last_connection_to_client = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.save()
 
     def get_selected_agent_version(self):
@@ -125,7 +128,7 @@ class Machine(models.Model):
 
 
 class MachineStats(models.Model):
-    datetime = models.DateTimeField(default=datetime.now())
+    datetime = models.DateTimeField(default=datetime.datetime.now())
     machine = models.ForeignKey(Machine, related_name="stats")
 
     load_average = models.DecimalField(decimal_places=3, max_digits=50)
@@ -139,7 +142,7 @@ class MachineStats(models.Model):
 
 
 class MachineProcessStats(models.Model):
-    datetime = models.DateTimeField(default=datetime.now())
+    datetime = models.DateTimeField(default=datetime.datetime.now())
     machine = models.ForeignKey(Machine)
 
     pid = models.IntegerField()
@@ -229,8 +232,8 @@ schedule_every_minute_choices = (
     (60 * 24, 'Hver dag'),
     (60 * 24 * 2, 'Hver andre dag'),
     (60 * 24 * 3, 'Hver tredje dag'),
-    (60 * 24 * 7, 'Hver uke'),
-    (60 * 24 * 7 * 30, 'Hver måned'),
+    (60 * 60 * 24 * 7, 'Hver uke'),
+    (2629743, 'Hver måned'),
 )
 
 
@@ -264,13 +267,24 @@ class ScheduleBackup(models.Model):
         return str(self.machine.id) + "/" + "schedules/" + str(self.id) + "/" + str(self.current_version_in_loop) + "/"
 
     def set_last_run_time(self):
-        self.last_run_time = datetime.now()
+        self.last_run_time = datetime.datetime.now()
         self.save()
+
+    def save(self, *args, **kwargs):
+        super(ScheduleBackup, self).save(*args, **kwargs)
+        cache.delete("get_next_run_time_%s" % self.pk)
 
     def get_next_run_time(self):
 
-        if self.last_run_time and self.from_date < self.last_run_time:
-            return self.last_run_time + timedelta(minutes=self.repeat_every_minute)
+        runs = list(rrule(MINUTELY,
+                          cache=True,
+                          interval=self.repeat_every_minute,
+                          until=datetime.date.today() + relativedelta(weeks=3, weekday=FR(-1)),
+                          dtstart=self.from_date))
+
+        for run in runs:
+            if run > self.last_run_time:
+                return run
 
         return self.from_date
 
@@ -298,8 +312,8 @@ class Backup(models.Model):
     def recover_link(self):
         if self.is_recoverable() and self.day_folder_path:
             url = "ftp://%s:%s@%s/%s" % (
-            self.schedule.storage.username, self.schedule.storage.password, self.schedule.storage.host,
-            self.day_folder_path)
+                self.schedule.storage.username, self.schedule.storage.password, self.schedule.storage.host,
+                self.day_folder_path)
             return url
         return ""
 
