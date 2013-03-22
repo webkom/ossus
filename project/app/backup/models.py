@@ -3,12 +3,14 @@ from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from django.db import models
 
+
 class Company(models.Model):
     name = models.CharField(max_length=150)
     users = models.ManyToManyField(User, related_name="companies")
 
     def __unicode__(self):
         return "Company: %s" % self.name
+
 
 class Customer(models.Model):
     name = models.CharField(max_length=150)
@@ -22,7 +24,9 @@ class Customer(models.Model):
     def __unicode__(self):
         return "Customer: %s" % self.name
 
+
 machine_timeout_minutes = 10 * 60
+
 
 class Machine(models.Model):
     name = models.CharField(max_length=150)
@@ -47,7 +51,7 @@ class Machine(models.Model):
     #If not auto_version
     selected_agent_version = models.ForeignKey('ClientVersion', related_name="agent_selected", null=True, blank=True)
     selected_updater_version = models.ForeignKey('ClientVersion', related_name="updater_selected", null=True,
-        blank=True)
+                                                 blank=True)
 
     def __unicode__(self):
         return "Machine: %s, id: %s" % (self.name, self.id)
@@ -145,11 +149,13 @@ class MachineProcessStats(models.Model):
     cpu_usage = models.DecimalField(decimal_places=3, max_digits=10)
     mem_usage = models.DecimalField(decimal_places=3, max_digits=10)
 
+
 log_types = (
     ('info', 'INFO'),
     ('error', 'ERROR'),
     ('warning', 'WARNING')
-    )
+)
+
 
 class MachineLog(models.Model):
     machine = models.ForeignKey(Machine, related_name="logs")
@@ -160,16 +166,18 @@ class MachineLog(models.Model):
     def __unicode__(self):
         return "%s %s %s" % (self.machine, self.datetime, self.text)
 
+
 storage_types = (
     ('ftp', 'FTP'),
     ('s3', 'Amazon S3')
-    )
+)
+
 
 class Storage(models.Model):
     type = models.CharField(max_length=10, choices=storage_types)
     company = models.ForeignKey(Company, related_name="storages", null=True)
 
-    name  = models.CharField(max_length=100, default="")
+    name = models.CharField(max_length=100, default="")
     notes = models.TextField(default="")
 
     host = models.CharField(max_length=150)
@@ -182,6 +190,7 @@ class Storage(models.Model):
     def __unicode__(self):
         return "Storage: %s %s, Company %s" % (self.type, self.host, self.company)
 
+
 class FolderBackup(models.Model):
     schedule_backup = models.ForeignKey('ScheduleBackup', related_name='folder_backups')
 
@@ -192,11 +201,13 @@ class FolderBackup(models.Model):
     def __unicode__(self):
         return "%s" % self.schedule_backup
 
+
 sql_types = (
     ("", "Velg"),
     ('mysql', 'MySQL'),
     ('mssql', 'MSSQL')
-    )
+)
+
 
 class SQLBackup(models.Model):
     schedule_backup = models.ForeignKey('ScheduleBackup', related_name='sql_backups')
@@ -211,6 +222,7 @@ class SQLBackup(models.Model):
     def __unicode__(self):
         return "SQLBackup: %s" % self.host
 
+
 schedule_every_minute_choices = (
     (60, 'Hver time'),
     (60 * 3, 'Hver tredje time'),
@@ -219,7 +231,8 @@ schedule_every_minute_choices = (
     (60 * 24 * 3, 'Hver tredje dag'),
     (60 * 24 * 7, 'Hver uke'),
     (60 * 24 * 7 * 30, 'Hver måned'),
-    )
+)
+
 
 class ScheduleBackup(models.Model):
     #Details
@@ -271,6 +284,7 @@ class ScheduleBackup(models.Model):
             return self.get_last_backup().time_started
         return None
 
+
 class Backup(models.Model):
     machine = models.ForeignKey(Machine, related_name="backups")
     schedule = models.ForeignKey(ScheduleBackup, null=True, related_name="backups")
@@ -283,16 +297,19 @@ class Backup(models.Model):
 
     def recover_link(self):
         if self.is_recoverable() and self.day_folder_path:
-            url = "ftp://%s:%s@%s/%s" % (self.schedule.storage.username, self.schedule.storage.password, self.schedule.storage.host, self.day_folder_path)
+            url = "ftp://%s:%s@%s/%s" % (
+            self.schedule.storage.username, self.schedule.storage.password, self.schedule.storage.host,
+            self.day_folder_path)
             return url
         return ""
+
 
 class ClientVersion(models.Model):
     datetime = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=50)
 
     agent = models.FileField(upload_to="versions/agents/", null=True)
-    updater = models.FileField(upload_to="versions/updaters/", null =True)
+    updater = models.FileField(upload_to="versions/updaters/", null=True)
 
     current_agent = models.BooleanField(default=False)
     current_updater = models.BooleanField(default=False)
