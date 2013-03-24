@@ -276,6 +276,9 @@ class ScheduleBackup(models.Model):
 
     def get_next_run_time(self):
 
+        if self.repeat_every_minute == 0:
+            return datetime.date.today()
+
         if self.from_date:
             runs = list(rrule(MINUTELY,
                               cache=True,
