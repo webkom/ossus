@@ -232,8 +232,8 @@ schedule_every_minute_choices = (
     (60 * 24, 'Hver dag'),
     (60 * 24 * 2, 'Hver andre dag'),
     (60 * 24 * 3, 'Hver tredje dag'),
-    (60 * 60 * 24 * 7, 'Hver uke'),
-    (2629743, 'Hver måned'),
+    (10080, 'Hver uke'),
+    (43829, 'Hver måned'),
 )
 
 
@@ -269,10 +269,6 @@ class ScheduleBackup(models.Model):
     def set_last_run_time(self):
         self.last_run_time = datetime.datetime.now()
         self.save()
-
-    def save(self, *args, **kwargs):
-        super(ScheduleBackup, self).save(*args, **kwargs)
-        cache.delete("get_next_run_time_%s" % self.pk)
 
     def get_next_run_time(self):
 
