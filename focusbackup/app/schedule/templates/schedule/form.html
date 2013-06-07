@@ -1,0 +1,160 @@
+{% extends "machine/base.html" %}
+{% load i18n %}
+
+{% block main %}
+
+
+    <div class="page-header">
+        <h3>{{ machine.name }} - schedules</h3>
+    </div>
+
+
+    <div class="row">
+        <div class="span6">
+            <h2><a href="{% url 'app.machine.views.view' machine.id %}">{{ machine.name }}</a></h2>
+
+
+            <table class="table table-bordered table-striped">
+                <tbody>
+                <tr>
+                    <td>{% trans "ID" %}</td>
+                    <td>{{ machine.id }}</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{ machine.name }}</td>
+                </tr>
+                <tr>
+                    <td>Customer</td>
+                    <td>{{ machine.customer.name }}</td>
+                </tr>
+                <tr>
+                    <td>Last connection to client</td>
+                    <td>{{ machine.last_connection_to_client }}</td>
+                </tr>
+                <tr>
+                    <td>Auto version</td>
+                    <td>{{ machine.auto_version }}</td>
+                </tr>
+                <tr>
+                    <td>Current agent version</td>
+                    <td>{{ machine.current_agent_version }}</td>
+                </tr>
+                <tr>
+                    <td>Auto updater version</td>
+                    <td>{{ machine.current_updater_version }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="span6">
+            <h2>{% trans "Schedules" %}</h2>
+
+            <a href="{% url 'app.schedule.views.new' machine.id %}">{% trans "New schedule" %}</a>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>{% trans "Name" %}</th>
+                    <th>{% trans "Last run time" %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for schedule in machine.schedules.all %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'app.schedule.views.edit' machine.id, schedule.id %}">{{ schedule.name }} </a>
+                        </td>
+                        <td>
+                            {{ schedule.last_run_time|date:"d.m.Y H:i" }}
+                            {% if not schedule.last_run_time %}
+                                {% trans "Not runned yet" %}
+                            {% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="span12">
+
+
+            <h2>{{ title }}</h2>
+
+            {% if form.errors %}
+
+                Form-errors:{{ form.errors }}
+
+            {% endif %}
+
+            {% if form_folders.errors %}
+                Folders-form-errors: {{ form_folders.errors }}
+            {% endif %}
+
+            {% if form_sql.errors %}
+                SQL-form-errors: {{ form_sql.errors }}
+            {% endif %}
+
+            <form enctype="multipart/form-data" class="form-horizontal" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="control-group">
+                        <label class="control-label">{{ field.label }}</label>
+
+                        <div class="controls">
+                            {{ field }}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <h2>{% trans "Folders" %}</h2>
+                {{ form_folders.management_form }}
+                {% for element in form_folders %}
+                    <div class="control-group">
+                        <label class="control-label">{% trans "Folder path" %}</label>
+
+                        <div class="controls">
+                            {% for field in element %}
+                                {{ field }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <h2>{% trans "Databases" %}</h2>
+                {{ form_sql.management_form }}
+                <div class="control-group">
+                    <div class="controls">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>{% trans "Type" %}</th>
+                                <th>{% trans "Host" %}</th>
+                                <th>{% trans "Port" %}</th>
+                                <th>{% trans "Database" %}</th>
+                                <th>{% trans "Username" %}</th>
+                                <th>{% trans "Password" %}</th>
+                                <th>{% trans "Delete" %}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for element in form_sql.forms %}
+                                <tr>
+                                    {% for field in element %}
+                                        <td>{{ field }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

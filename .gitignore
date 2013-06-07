@@ -2,6 +2,7 @@
 *.pyo
 *.orig
 *~
+local.py
 .swp
 *.egg-info
 project.db
@@ -20,6 +21,7 @@ parts
 .pydevproject
 media/uploads
 static_media
+venv
 .idea
 development.py
 project/media/versions/

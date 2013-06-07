@@ -1,0 +1,63 @@
+{% extends "machine/base.html" %}
+{% load i18n %}
+
+{% block main %}
+
+<section id="machines">
+
+    <table class="table-bordered table table-striped table-condensed">
+        <tbody>
+
+        <tr>
+            <td></td>
+            <td>Last online</td>
+            <td>Status</td>
+            <td></td>
+        </tr>
+
+        {% for customer in customers %}
+
+        <tr>
+            <td colspan="4" style="font-size: 15px; font-weight: bold;">{{ customer.name }}</td>
+        </tr>
+
+        {% for machine in customer.machines.all %}
+
+        <tr>
+            <td><img src="/static/img/glyphicons/png/glyphicons_086_display.png" width="14px">
+                <a href="{% url 'view_machine' machine.id %}">{{ machine.name }}</a></td>
+
+            <td><i class="icon-time"></i> {{ machine.last_connection_to_client|timesince }} ago</td>
+
+            <td>
+                {% if machine.running_backup %}
+                    <i class="icon-adjust"></i> {% trans "running backup" %}
+                {% elif not machine.is_up_to_date %}
+                    <i class="icon-remove"></i> {% trans "Outdated" %}
+                {% else %}
+                    <i class="icon-ok"></i>
+                {% endif %}
+            </td>
+            <td><a href="/machines/{{ machine.id }}/edit/"><i class="icon-pencil"></i></a></td>
+
+        </tr>
+
+        {% endfor %}
+
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+
+</section>
+
+<hr>
+
+<footer>
+    <p></p>
+</footer>
+
+{% endblock %}

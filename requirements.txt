@@ -1,0 +1,6 @@
+django
+south
+pil
+ipython
+django-extensions
+python-dateutil

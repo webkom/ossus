@@ -9,7 +9,8 @@ echo "Downloading data"
 scp focus@kontor.focussecurity.no:~/dumpdata.json .
 
 echo "Perform load"
-bin/django flush --noinput
-bin/django loadprod dumpdata.json
+python manage.py syncdb --migrate --noinput
+python manage.py flush --noinput
+python manage.py loadprod dumpdata.json
 
 echo "Done!"
