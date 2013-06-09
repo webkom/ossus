@@ -11,6 +11,7 @@ pickle*.txt
 .DS_Store
 bin
 dumpdata.json
+focusbackup.db
 develop-eggs
 downloads
 eggs
