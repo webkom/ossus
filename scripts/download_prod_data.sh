@@ -9,6 +9,7 @@ echo "Downloading data"
 scp focus@kontor.focussecurity.no:~/dumpdata.json .
 
 echo "Perform load"
+source venv/bin/activate
 python manage.py syncdb --migrate --noinput
 python manage.py flush --noinput
 python manage.py loadprod dumpdata.json

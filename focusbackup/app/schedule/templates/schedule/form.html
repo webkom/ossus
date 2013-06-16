@@ -64,7 +64,7 @@
                 {% for schedule in machine.schedules.all %}
                     <tr>
                         <td>
-                            <a href="{% url 'app.schedule.views.edit' machine.id, schedule.id %}">{{ schedule.name }} </a>
+                            <a href="{% url 'app.schedule.views.edit' machine.id schedule.id %}">{{ schedule.name }} </a>
                         </td>
                         <td>
                             {{ schedule.last_run_time|date:"d.m.Y H:i" }}
@@ -77,10 +77,7 @@
             </table>
         </div>
 
-
         <div class="span12">
-
-
             <h2>{{ title }}</h2>
 
             {% if form.errors %}

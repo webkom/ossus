@@ -15,7 +15,7 @@ def edit(request, machine_id, id):
 @login_required()
 def form(request, machine_id, id=False):
 
-    from app.schedule.forms import ScheduleBackupForm, ScheduleFoldersForm, ScheduleSQLsForm
+    from focusbackup.app.schedule.forms import ScheduleBackupForm, ScheduleFoldersForm, ScheduleSQLsForm
 
     schedule = ScheduleBackup()
 

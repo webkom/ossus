@@ -1,17 +1,20 @@
 from pprint import pprint
 from django.conf import settings
 
+
 def build_sql_backup(sql_backups):
     send_object = []
     for sql_backup in sql_backups:
         send_object.append(
-                {'id': sql_backup.id,
-                 'host': sql_backup.host,
-                 'username': sql_backup.username,
-                 'password': sql_backup.password,
-                 'database': sql_backup.database,
-                 'type': sql_backup.type,
-                 'port': sql_backup.port}
+            {
+                'id': sql_backup.id,
+                'host': sql_backup.host,
+                'username': sql_backup.username,
+                'password': sql_backup.password,
+                'database': sql_backup.database,
+                'type': sql_backup.type,
+                'port': sql_backup.port
+            }
         )
     return send_object
 
@@ -20,12 +23,11 @@ def build_folder_backup(folder_backups):
     send_object = []
     for folder_backup in folder_backups:
         send_object.append(
-                {'id': folder_backup.id,
-                 'local_folder_path': folder_backup.local_folder_path,
-                 }
+            {'id': folder_backup.id,
+             'local_folder_path': folder_backup.local_folder_path,
+            }
         )
     return send_object
-
 
 
 def build_machine_log_fields(machine_log):
@@ -33,7 +35,8 @@ def build_machine_log_fields(machine_log):
             'datetime': machine_log.datetime,
             'text': machine_log.text,
             'type': machine_log.type,
-            }
+    }
+
 
 def build_machine_log(machine_logs):
     send_object = []
@@ -43,8 +46,6 @@ def build_machine_log(machine_logs):
         )
 
     return send_object
-
-
 
 
 def build_client_version(obj):
@@ -73,7 +74,7 @@ def build_client_version(obj):
             'updater': updater,
             'current_agent': obj.current_agent,
             'current_updater': obj.current_updater,
-            }
+    }
 
 
 def build_backup_fields(backup):
@@ -82,15 +83,15 @@ def build_backup_fields(backup):
         'machine': {
             'id': backup.machine.id,
             'name': backup.machine.name,
-            },
+        },
         'schedule': {
             'id': backup.schedule.id,
             'name': backup.schedule.name,
-            },
+        },
         'time_started': backup.time_started,
         'time_ended': backup.time_ended,
         'day_folder_path': backup.day_folder_path,
-        }
+    }
 
 
 def build_schedule_fields(schedule):
@@ -101,13 +102,13 @@ def build_schedule_fields(schedule):
         'versions_count': schedule.versions_count,
         'get_next_backup_time': schedule.get_next_run_time().strftime("%Y-%m-%d %H:%M:%S"),
         'storage':
-                {'id': schedule.storage.id,
-                 'host': schedule.storage.host,
-                 'username': schedule.storage.username,
-                 'password': schedule.storage.password,
-                 'folder': schedule.storage.folder,
-                 'current_day_folder_path': schedule.current_day_folder_path(),
-                 },
+            {'id': schedule.storage.id,
+             'host': schedule.storage.host,
+             'username': schedule.storage.username,
+             'password': schedule.storage.password,
+             'folder': schedule.storage.folder,
+             'current_day_folder_path': schedule.current_day_folder_path(),
+            },
         'running_backup': schedule.running_backup,
         'running_restore': schedule.running_restore,
 
@@ -117,6 +118,7 @@ def build_schedule_fields(schedule):
     }
 
     return schedule_fields
+
 
 def build_machine_fields(machine):
     current_agent_version = machine.current_agent_version
@@ -134,12 +136,12 @@ def build_machine_fields(machine):
         'current_updater_version': build_client_version(current_updater_version),
         'selected_agent_version': build_client_version(selected_agent_version),
         'selected_updater_version': build_client_version(selected_updater_version),
-        }
+    }
 
     return machine_fields
 
-def build_machine_settings(request, machine):
 
+def build_machine_settings(request, machine):
     machine_fields = {
         'agent_folder': "%s" % machine.agent_folder,
         'local_temp_folder': "%s" % machine.local_temp_folder,
