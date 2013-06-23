@@ -1,12 +1,14 @@
+# -*- coding: utf-8 -*-
 from django.forms.models import ModelForm
 from focusbackup.app.backup.models import Machine
+
 
 class MachineForm(ModelForm):
     def __init__(self, *args, **kwargs):
         user = None
         if 'user' in kwargs:
             user = kwargs['user']
-            del(kwargs['user'])
+            del (kwargs['user'])
 
         super(MachineForm, self).__init__(*args, **kwargs)
 
@@ -15,5 +17,6 @@ class MachineForm(ModelForm):
 
     class Meta:
         model = Machine
-        fields = (
-        'id', 'name', 'customer', 'local_temp_folder', 'agent_folder', 'mysql_dump', 'auto_version', 'run_install', 'selected_agent_version', 'selected_updater_version')
+        fields = ('id', 'name', 'customer', 'local_temp_folder', 'agent_folder',
+                  'mysql_dump', 'auto_version', 'run_install',
+                  'selected_agent_version', 'selected_updater_version')

@@ -1,4 +1,4 @@
-from pprint import pprint
+# -*- coding: utf-8 -*-
 from django.conf import settings
 
 
@@ -113,7 +113,7 @@ def build_schedule_fields(schedule):
         'running_restore': schedule.running_restore,
 
         'sql_backups': build_sql_backup(schedule.sql_backups.all()),
-        'folder_backups': build_folder_backup(schedule.folder_backups.all())
+        'folder_backups': build_folder_backup(schedule.folders.all())
 
     }
 

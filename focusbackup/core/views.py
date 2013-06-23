@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import mimetypes
 import os
 
@@ -5,8 +6,7 @@ from django.core.servers.basehttp import FileWrapper
 from django.http import HttpResponse
 from django.conf import settings
 from django.shortcuts import redirect
-
-from focusbackup.app.backup.models import ClientVersion
+from focusbackup.app.client.models import ClientVersion
 
 STATIC_ROOT = os.path.join(settings.PROJECT_ROOT_DIRECTORY, "media")
 

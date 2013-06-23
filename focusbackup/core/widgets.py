@@ -1,11 +1,12 @@
-from django.forms.widgets import RadioInput, RadioFieldRenderer, RadioSelect,TextInput
+# -*- coding: utf-8 -*-
+from django.forms.widgets import RadioInput, RadioFieldRenderer, RadioSelect, TextInput
 from django.utils.html import conditional_escape
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from django.db.models import DateTimeField as dateTimeField
 
-class DateTimeField(dateTimeField):
 
+class DateTimeField(dateTimeField):
     def isoformat(self):
         self.val = None
 
@@ -31,6 +32,8 @@ class OptionsRadioRenderer(RadioFieldRenderer):
 class OptionsRadio(RadioSelect):
     renderer = OptionsRadioRenderer
 
+
 class AppendedText(TextInput):
     def render(self, name, value, attrs=None):
-        return '%s<span class="add-on">%s</span>' % (super(AppendedText,self).render(name, value, attrs),self.attrs['append_text'])
+        return '%s<span class="add-on">%s</span>' % (
+        super(AppendedText, self).render(name, value, attrs), self.attrs['append_text'])

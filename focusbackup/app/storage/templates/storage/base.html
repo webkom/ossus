@@ -2,24 +2,26 @@
 {% load i18n %}
 {% load menu_tags %}
 
+{% block sidebar %}
+
+    <div class="sidebar">
+        <ul class="col-nav span3">
+            <li class="{% active request "^/storages/$" %}">
+                <a href="{% url 'focusbackup.app.storage.views.overview' %}">
+                    List all storages
+                </a>
+            </li>
+            <li class="{% active request "^/storages/new/$" %}">
+                <a href="{% url 'focusbackup.app.storage.views.new' %}">
+                    New storage
+                </a>
+            </li>
+        </ul>
+    </div>
+
+{% endblock %}
+
 {% block content %}
-    <header class="jumbotron subhead" id="overview">
-
-        <div class="page-header">
-            <h2>Storages</h2>
-        </div>
-
-        <div class="subnav">
-            <ul class="nav nav-pills">
-                <li class="{% active request "^/storages/$" %}"><a href="{% url 'app.storage.views.overview' %}">List
-                    all
-                    storages</a></li>
-                <li class="{% active request "^/storages/new/$" %}"><a href="{% url 'app.storage.views.new' %}">New
-                    storage</a></li>
-            </ul>
-        </div>
-
-    </header>
 
     {% block main %}
 
@@ -41,7 +43,8 @@
 
                 {% for storage in storages.all %}
                     <tr>
-                        <td><i class="icon-hdd"></i> <a href="/storages/{{ storage.id }}/view/">{{ storage.name }}</a></td>
+                        <td><i class="icon-hdd"></i> <a href="/storages/{{ storage.id }}/view/">{{ storage.name }}</a>
+                        </td>
                         <td>{{ storage.type }}</td>
                         <td>{{ storage.host }}</td>
                         <td>{{ storage.username }}</td>

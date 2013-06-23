@@ -2,28 +2,43 @@
 {% load i18n %}
 {% load menu_tags %}
 
+{% block sidebar %}
+
+    <div class="sidebar">
+        <ul class="col-nav span3">
+            <li class="{% active request "^/machines/$" %}">
+                <a href="{% url 'focusbackup.app.machine.views.overview' %}">
+                    List all servers
+                </a>
+            </li>
+            <li class="{% active request "^/machines/new/$" %}">
+                <a href="{% url 'focusbackup.app.machine.views.new' %}">
+                    New server
+                </a>
+            </li>
+        </ul>
+    </div>
+
+{% endblock %}
+
 {% block content %}
 
-
-    <header class="jumbotron subhead" id="overview">
+    {% if machine %}
 
         <div class="page-header">
-            <h2>Servers</h2>
-        </div>
+            <h2>{{ machine.name }}</h2>
 
-        <div class="subnav">
-            <ul class="nav nav-pills">
-                <li class="{% active request "^/machines/$" %}"><a href="{% url 'app.machine.views.overview' %}">List
-                    all servers</a></li>
-                <li class="{% active request "^/machines/new/$" %}"><a href="{% url 'app.machine.views.new' %}">New
-                    server</a></li>
-            </ul>
+            <div class="subnav">
+                <ul class="nav nav-pills">
+                    <li><a href="{% url "machines.view" machine.id %}">Info</a></li>
+                    <li><a href="{% url "machines.view_schedules" machine.id %}">Schedules</a></li>
+                    <li><a href="{% url "machines.view_backups" machine.id %}">Backups</a></li>
+                    <li><a href="{% url "machines.view_log" machine.id %}">Log</a></li>
+                </ul>
+            </div>
         </div>
-
-    </header>
+    {% endif %}
 
     {% block main %}{% endblock %}
-
-    <footer></footer>
 
 {% endblock %}

@@ -2,24 +2,21 @@
 {% load i18n %}
 {% load menu_tags %}
 
+
+{% block sidebar %}
+
+    <div class="sidebar">
+        <ul class="col-nav span3">
+            <li class="{% active request "^/customers/$" %}"><a
+                    href="{% url 'focusbackup.app.customer.views.overview' %}">{% trans "List all customers" %}</a></li>
+            <li class="{% active request "^/customers/new/$" %}"><a
+                    href="{% url 'focusbackup.app.customer.views.new' %}">{% trans "New customer" %}</a></li>
+        </ul>
+    </div>
+
+{% endblock %}
+
 {% block content %}
-
-    <header class="jumbotron subhead" id="overview">
-
-        <div class="page-header">
-            <h2>Customers</h2>
-        </div>
-
-        <div class="subnav">
-            <ul class="nav nav-pills">
-                <li class="{% active request "^/customers/$" %}"><a
-                        href="{% url 'app.customer.views.overview' %}">{% trans "List all customers" %}</a></li>
-                <li class="{% active request "^/customers/new/$" %}"><a
-                        href="{% url 'app.customer.views.new' %}">{% trans "New customer" %}</a></li>
-            </ul>
-        </div>
-
-    </header>
 
     {% block main %}
         <section id="machines">

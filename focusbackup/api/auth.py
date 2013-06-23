@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-import functools, inspect, copy
-from focusbackup.api.models import Token
-from django.http import Http404, HttpResponse
+import functools
 from django.conf import settings
+
+from django.http import Http404, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+
+from focusbackup.api.models import Token
+
 
 class require_valid_api_token:
     api_token = None
@@ -14,8 +17,8 @@ class require_valid_api_token:
 
         def validate_api_token(request, *args, **kwargs):
 
-            #if settings.DEBUG and request.user.id:
-            #    return func(request, *args, **kwargs)
+            if settings.DEBUG and request.user.id:
+                return func(request, *args, **kwargs)
 
             if 'api_token' in request.POST and 'api_user' in request.POST:
                 api_token = request.POST['api_token']

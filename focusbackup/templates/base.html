@@ -1,105 +1,136 @@
 {% load i18n %}
 {% load menu_tags %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="description" content="description of your site">
+    <meta name="author" content="author of the site">
     <title>Focus24</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Le styles -->
-    <link href="/static/css/bootstrap.css" rel="stylesheet">
-    <link href="/static/css/style.css" rel="stylesheet">
-    <style type="text/css">
-        body {
-            padding-top: 60px;
-            padding-bottom: 40px;
-        }
-    </style>
-
-    <script src="/static/js/jquery.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
-    <script src="/static/js/highcharts.js"></script>
-
-    {#% <link href="/static/css/bootstrap-responsive.css" rel="stylesheet"> %#}
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="/static/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="/static/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/fonts.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/styles.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/toastr.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/fullcalendar.css">
+    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.knob.js"></script>
+    <script src="{{ STATIC_URL }}js/d3.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.sparkline.min.js"></script>
+    <script src="{{ STATIC_URL }}js/toastr.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.peity.min.js"></script>
+    <script src="{{ STATIC_URL }}js/fullcalendar.min.js"></script>
+    <script src="{{ STATIC_URL }}js/gcal.js"></script>
+    <script src="{{ STATIC_URL }}js/setup.js"></script>
 </head>
-
 <body>
-
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="{% url 'machine_overview' %}">Focus24</a>
-
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li class="{% active request "^/machines/" %}"><a
-                            href="{% url 'machine_overview' %}">{% trans "Servers" %} </a></li>
-                    <li class="{% active request "^/customers/" %}"><a
-                            href="{% url 'customer_overview' %}">{% trans "Customers" %}</a>
-                    </li>
-                    <li class="{% active request "^/storages/" %}"><a
-                            href="{% url 'storage_overview' %}">{% trans "Storages" %}</a></li>
-
-                    <li class="divider-vertical"></li>
-
-                    <li class="dropdown" id="menu1">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
-                            {{ request.user.profile.company.name }}
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu right">
-
-                            {% for company in request.user.profile.get_companies %}
-                                <li><a href="{% url 'change_company' company.id %}">{{ company.name }}</a></li>
-                            {% endfor %}
-
-                        </ul>
-                    </li>
-
-                    <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
-
-
+<div id="in-nav">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul class="pull-right">
+                    <li><a href="login.html">Logout</a></li>
                 </ul>
+                <a id="logo" href="/">
+                    <h4>Focus<strong>24</strong></h4></a>
             </div>
-
-
         </div>
     </div>
 </div>
-
-<div class="container">
-    {% block content %}{% endblock %}
-    <footer>
-        <p>Focus Security AS | <a href="/static/setup.jar">Download installer</a> </p>
-
-    </footer>
+<div id="in-sub-nav">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul>
+                    <li><a href="/" class="active"><i class="batch home"></i><br>Dashboard</a></li>
+                    <li><a href="/machines/"><i class="batch users"></i><br>Servers</a></li>
+                    <li><a href="/customers/"><i class="batch settings"></i><br>Customers</a></li>
+                    <li><a href="/storages/"><i class="batch settings"></i><br>Storages</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="page">
+    <div class="page-container">
+        <div class="container">
 
-<!-- /container -->
+            <div class="row">
 
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
+                <div class="span3">
+                    {% block sidebar %}{% endblock %}
+                </div>
 
+                <div class="span9">
+                    <h4>{{ title }}</h4>
+
+                    {% block content %}
+
+
+                        <div class="row">
+                            <div class="span3">
+                                <h4>Dashboard</h4>
+
+                            </div>
+                            <div class="span9">
+                                <h4 class="header">Stats</h4>
+
+                                <div class="stats">
+                                    <div class="row-fluid">
+                                        <div class="span3">
+                                            <div class="stat info">
+                                                <h2>21</h2>
+                                                <h6>Tweets</h6>
+                                            </div>
+                                        </div>
+                                        <div class="span3">
+                                            <div class="stat danger">
+                                                <h2>04</h2>
+                                                <h6>Comments</h6>
+                                            </div>
+                                        </div>
+                                        <div class="span3">
+                                            <div class="stat warning">
+                                                <h2>17</h2>
+                                                <h6>Photos</h6>
+                                            </div>
+                                        </div>
+                                        <div class="span3">
+                                            <div class="stat inverse">
+                                                <h2>12</h2>
+                                                <h6>Followers</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    {% endblock %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <p class="pull-right">Focus Security AS</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
+
+<script src="{{ STATIC_URL }}js/d3-setup.js"></script>
+<script src="{{ STATIC_URL }}js/highcharts.js"></script>
+
 </html>

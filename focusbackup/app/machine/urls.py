@@ -1,8 +1,12 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls.defaults import patterns, url
 
 urlpatterns = patterns('focusbackup.app.machine.views',
-                        url(r'^$', 'overview', name="machine_overview"),
-                        (r'^new/$', 'new'),
-                        url(r'^(?P<id>\w+)/view/$', 'view', name="view_machine"),
-                        (r'^(?P<id>\w+)/edit/$', 'edit'),
+                       url(r'^$', 'overview', name="machine_overview"),
+                       url(r'^new/$', 'new'),
+                       url(r'^(?P<id>\w+)/view/$', 'view', name="machines.view"),
+                       url(r'^(?P<id>\w+)/view/log/$', 'view_log', name="machines.view_log"),
+                       url(r'^(?P<id>\w+)/view/schedules/$', 'view_schedules', name="machines.view_schedules"),
+                       url(r'^(?P<id>\w+)/view/backups/$', 'view_backups', name="machines.view_backups"),
+                       url(r'^(?P<id>\w+)/edit/$', 'edit'),
 )

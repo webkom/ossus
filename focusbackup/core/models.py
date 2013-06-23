@@ -1,8 +1,13 @@
+# -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
 from django.db import models
 
-from focusbackup.app.backup.models import Company, Customer, Machine, Storage, ScheduleBackup
 from focusbackup.api.models import Token
+from focusbackup.app.accounts.models import Company
+from focusbackup.app.backup.models import Schedule
+from focusbackup.app.customer.models import Customer
+from focusbackup.app.machine.models import Machine
+from focusbackup.app.storage.models import Storage
 
 
 class UserProfile(models.Model):
@@ -46,6 +51,6 @@ class UserProfile(models.Model):
             for schedule in machine.schedules.all():
                 schedule_ids.append(schedule.id)
 
-        return ScheduleBackup.objects.filter(id__in=schedule_ids)
+        return Schedule.objects.filter(id__in=schedule_ids)
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])

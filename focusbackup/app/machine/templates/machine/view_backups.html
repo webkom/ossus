@@ -1,0 +1,36 @@
+{% extends "machine/base.html" %}
+{% load i18n %}
+
+{% block main %}
+
+    <table class="table table-bordered table-striped">
+
+        <thead>
+        <tr>
+            <th>Date start</th>
+            <th>Runtime to complete backup</th>
+            <th>Schedule</th>
+            <th>Path</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        {% for backup in machine.get_latest_backups %}
+            <tr>
+                <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
+                <td>{{ backup.time_started|timesince:backup.time_ended }}
+                    - {{ backup.time_ended|date:"d.m.Y H:i" }}</td>
+                <td>{{ backup.schedule.name }}</td>
+                <td>
+                    {% if backup.recover_link %}
+                        <a href="{{ backup.recover_link }}" target="_blank">Recover</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}

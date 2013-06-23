@@ -121,22 +121,24 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
 
+    'focusbackup',
     'focusbackup.core',
+    'focusbackup.app.accounts',
+    'focusbackup.app.client',
     'focusbackup.app.backup',
     'focusbackup.app.machine',
     'focusbackup.app.customer',
     'focusbackup.app.storage',
-    'focusbackup.app.schedule',
-    'focusbackup.app.docs',
     'focusbackup.api',
 
     'django_extensions',
-    'south',
+    'south'
 
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
+    'django.core.context_processors.static',
     'django.contrib.auth.context_processors.auth',
 )
 

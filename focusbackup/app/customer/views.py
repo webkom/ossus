@@ -4,13 +4,17 @@ from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
 from focusbackup.app.customer.forms import CustomerForm
-from focusbackup.app.backup.models import Customer
+from focusbackup.app.customer.models import Customer
 
 
 @login_required()
 def overview(request):
     customers = request.user.profile.get_customers().filter(company=request.user.profile.company)
-    return render(request, "customer/list.html", locals())
+    return render(request, "customer/list.html",
+                  {
+                      'customers': customers,
+                      'title': 'List all customers'
+                  })
 
 
 @login_required()

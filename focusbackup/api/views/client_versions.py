@@ -1,9 +1,9 @@
-import json
-from django.views.decorators.csrf import csrf_exempt
+# -*- coding: utf-8 -*-
 from focusbackup.api.auth import require_valid_api_token
-from focusbackup.api.views.common import render_data, HandleQuerySets
+from focusbackup.api.views.common import render_data
 from focusbackup.api.views.helpers import build_client_version
-from focusbackup.app.backup.models import ClientVersion
+from focusbackup.app.client.models import ClientVersion
+
 
 @require_valid_api_token()
 def get_client_versions(request, id=False):
@@ -17,9 +17,11 @@ def get_client_versions(request, id=False):
 
         return render_data("client_versions", send_object)
 
+
 @require_valid_api_token()
 def get_current_updater(request):
     return render_data("client_version", build_client_version(ClientVersion.objects.get(current_updater=True)))
+
 
 @require_valid_api_token()
 def get_current_agent(request):

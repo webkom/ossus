@@ -1,6 +1,8 @@
-from django.template import Library, Node
+# -*- coding: utf-8 -*-
+from django.template import Library
 
 register = Library()
+
 
 @register.simple_tag
 def active(request, pattern):

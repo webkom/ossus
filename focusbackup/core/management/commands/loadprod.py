@@ -1,11 +1,8 @@
-from django.conf import settings
+# -*- coding: utf-8 -*-
+
 from django.core.management.commands.loaddata import Command as loaddata
 from django.db import connection, transaction
 
-#
-# The only thing nerd-loaddata does is really
-# to remove cache invalidating, as it fucks up things.
-#
 
 class Command(loaddata):
     def handle (self, *args, **kwargs):

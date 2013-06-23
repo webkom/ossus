@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from random import random, randint
-from focusbackup.app.backup.models import Company, Customer, Machine, Storage, ClientVersion, ScheduleBackup, FolderBackup, SQLBackup, Backup, MachineLog, MachineStats
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
-from django.utils.timezone import utc
+from focusbackup.app.accounts.models import Company
+from focusbackup.app.backup.models import Schedule, Backup, Folder, SQL
+from focusbackup.app.client.models import ClientVersion
+from focusbackup.app.customer.models import Customer
+from focusbackup.app.machine.models import Machine, MachineStats, MachineLog
+from focusbackup.app.storage.models import Storage
 
 example_date = datetime.now()
 
@@ -79,7 +83,7 @@ class Command(BaseCommand):
 
                     #Schedules
                     for l in range(0, 3):
-                        scheduleBackup = ScheduleBackup.objects.get_or_create(
+                        scheduleBackup = Schedule.objects.get_or_create(
                             name="Schedule %s " % l,
                             storage=storage,
                             machine=machine,
@@ -107,15 +111,15 @@ class Command(BaseCommand):
 
                         #FolderBackups
                         for o in range(0, 3):
-                            FolderBackup.objects.get_or_create(
-                                schedule_backup=scheduleBackup,
+                            Folder.objects.get_or_create(
+                                schedule=scheduleBackup,
                                 local_folder_path="/%s" % o
                             )
 
                         #SQLBackups
                         for o in range(0, 3):
-                            SQLBackup.objects.get_or_create(
-                                schedule_backup=scheduleBackup,
+                            SQL.objects.get_or_create(
+                                schedule=scheduleBackup,
                                 type="mysql",
                                 host="192.168.0.%s" % o,
                                 port="330%s" % o,

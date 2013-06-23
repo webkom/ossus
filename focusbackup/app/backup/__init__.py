@@ -1,2 +1,1 @@
-__author__ = 'fnc'
-  
+# -*- coding: utf-8 -*-

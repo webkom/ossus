@@ -1,0 +1,17 @@
+{% extends "machine/base.html" %}
+{% load i18n %}
+
+{% block main %}
+
+    <div class="stream">
+        {% for log in logs %}
+            <div class="item">
+                <div class="stream-icon stream-success"><i class="icon-off icon-white"></i></div>
+                <p class="date">{{ log.datetime|date:"d.m.Y H:i" }}</p>
+                <h4>{{ log.type }}</h4>
+                <p>{{ log.text }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

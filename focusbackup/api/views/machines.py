@@ -1,12 +1,14 @@
-from datetime import datetime
-import json
-from django.http import HttpResponse
+# -*- coding: utf-8 -*-
+import datetime
+
 from django.views.decorators.csrf import csrf_exempt
+
 from focusbackup.api.auth import require_valid_api_token
-from focusbackup.api.forms.logs import LogAPIForm
-from focusbackup.api.views.common import render_data, HandleQuerySets
+from focusbackup.api.forms import LogAPIForm
+from focusbackup.api.views.common import render_data
 from focusbackup.api.views.helpers import build_schedule_fields, build_machine_fields, build_machine_log, build_client_version, build_machine_log_fields, build_machine_settings
-from focusbackup.app.backup.models import Machine, MachineLog, ClientVersion
+from focusbackup.app.client.models import ClientVersion
+from focusbackup.app.machine.models import Machine, MachineLog
 
 
 @require_valid_api_token()
@@ -38,7 +40,7 @@ def get_settings_for_machine(request, id):
     return render_data("", build_machine_settings(request, Machine.objects.get(id=id)))
 
 
-get_log_for_machine = csrf_exempt(get_settings_for_machine)
+get_settings_for_machine = csrf_exempt(get_settings_for_machine)
 
 
 @require_valid_api_token()

@@ -1,1 +1,1 @@
-__author__ = 'frecar'
+# -*- coding: utf-8 -*-

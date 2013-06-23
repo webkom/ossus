@@ -3,11 +3,19 @@
 {% block content %}
 
     <div class="row">
-        <div class="span8">
+        <div class="span12 header">
+            <h4>Settings</h4>
+        </div>
+        <div class="span6">
+
+
             {{ form.errors }}
+
             <form enctype="multipart/form-data" class="form-horizontal" method="post">
                 {% include "form_fields.html" %}
             </form>
+
         </div>
     </div>
+
 {% endblock %}

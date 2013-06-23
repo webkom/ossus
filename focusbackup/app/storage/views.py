@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
@@ -11,7 +10,7 @@ from focusbackup.app.storage.forms import StorageForm
 @login_required()
 def overview(request):
     storages = request.user.profile.get_storages().filter(company=request.user.profile.company)
-    return render(request, "storage/list.html", locals())
+    return render(request, "storage/list.html", {'storages': storages, 'title': "List all storages"})
 
 
 @login_required()

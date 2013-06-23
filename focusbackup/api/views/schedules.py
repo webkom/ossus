@@ -1,9 +1,13 @@
+# -*- coding: utf-8 -*-
+
 from django.views.decorators.csrf import csrf_exempt
+
 from focusbackup.api.auth import require_valid_api_token
-from focusbackup.api.forms.schedules import ScheduleAPIForm
+from focusbackup.api.forms import ScheduleAPIForm
 from focusbackup.api.views.common import render_data
 from focusbackup.api.views.helpers import build_schedule_fields
-from focusbackup.app.backup.models import ScheduleBackup
+from focusbackup.app.backup.models import Schedule
+
 
 @require_valid_api_token()
 def get_schedules(request, id=False):
@@ -11,7 +15,7 @@ def get_schedules(request, id=False):
 
     if id:
 
-        schedule = ScheduleBackup.objects.get(id=id)
+        schedule = Schedule.objects.get(id=id)
 
         if request.method == "POST":
 
@@ -41,7 +45,7 @@ def get_schedules(request, id=False):
 
         return render_data("schedule", build_schedule_fields(schedule))
 
-    for obj in ScheduleBackup.objects.all():
+    for obj in Schedule.objects.all():
         send_object.append(build_schedule_fields(obj))
 
     return render_data("schedules", send_object)

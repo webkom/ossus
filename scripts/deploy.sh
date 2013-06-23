@@ -1,9 +1,8 @@
 #!/bin/bash
 
-ssh focus@'kontor.focussecurity.no' '
-    cd /var/webapps/focus24/focusbackup
+ssh web@'kontor.focussecurity.no' '
+    cd /opt/web/focus24.no/focusbackup
     git pull origin master
-    bin/django syncdb
-    bin/django migrate --merge
-    sudo /etc/init.d/httpd restart
+    source venv/bin/activate
+    python manage.py syncdb --migrate
 '
