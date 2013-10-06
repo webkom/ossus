@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.forms.models import ModelForm
 from focusbackup.app.backup.models import Machine
+from focusbackup.core.forms import BootstrapModelForm
 
 
-class MachineForm(ModelForm):
+class MachineForm(BootstrapModelForm):
     def __init__(self, *args, **kwargs):
         user = None
         if 'user' in kwargs:

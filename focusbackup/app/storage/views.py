@@ -10,7 +10,8 @@ from focusbackup.app.storage.forms import StorageForm
 @login_required()
 def overview(request):
     storages = request.user.profile.get_storages().filter(company=request.user.profile.company)
-    return render(request, "storage/list.html", {'storages': storages, 'title': "List all storages"})
+    return render(request, "storage/list.html", {'storages': storages,
+                                                 'title': "List all storages"})
 
 
 @login_required()
@@ -42,4 +43,4 @@ def form(request, id=False):
 
             return redirect(overview)
 
-    return render(request, 'storage/form.html', {'form': form, "title": _("Storage")})
+    return render(request, 'form.html', {'form': form, "title": _("Storage")})

@@ -5,6 +5,8 @@ TEMPLATE_DEBUG = DEBUG
 
 PROJECT_ROOT_DIRECTORY = os.path.dirname(os.path.dirname(__file__))
 
+print PROJECT_ROOT_DIRECTORY
+
 ADMINS = (
     ('frecar', 'fredrik@fncit.no'),
 )
@@ -48,41 +50,22 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = False
 
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = PROJECT_ROOT_DIRECTORY + '/media/'
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT_DIRECTORY, 'uploads')
+MEDIA_URL = '/uploads/'
 
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = PROJECT_ROOT_DIRECTORY + '/static/'
-
-# URL prefix for static files.
-# Example: "http://media.lawrence.com/static/"
+STATIC_ROOT = os.path.join(PROJECT_ROOT_DIRECTORY, 'static')
 STATIC_URL = '/static/'
 
-# Additional locations of static files
 STATICFILES_DIRS = (
-    PROJECT_ROOT_DIRECTORY + '/files/',
-
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT_DIRECTORY, 'files/static'),
 )
 
-# List of finder classes that know how to find static files in
-# various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '-4d(=bk(k&amp;uzw$1_()l!y-mu&amp;yai=#&amp;(x%d&amp;oy7k*u_e(i#5=4'

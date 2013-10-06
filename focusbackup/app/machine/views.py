@@ -75,5 +75,5 @@ def form(request, id=False):
 
             return redirect(view, instance.id)
 
-    return render(request, 'machine/form.html', {'form': form, "title": _("Server")})
+    return render(request, 'form.html', {'form': form, "title": _("Server")})
 

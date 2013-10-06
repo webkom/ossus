@@ -1,136 +1,277 @@
-{% load i18n %}
-{% load menu_tags %}
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    <meta name="description" content="description of your site">
-    <meta name="author" content="author of the site">
+
+    <!-- start: Meta -->
+    <meta charset="utf-8">
     <title>Focus24</title>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/fonts.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/styles.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/toastr.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/fullcalendar.css">
-    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.knob.js"></script>
-    <script src="{{ STATIC_URL }}js/d3.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.sparkline.min.js"></script>
-    <script src="{{ STATIC_URL }}js/toastr.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.peity.min.js"></script>
-    <script src="{{ STATIC_URL }}js/fullcalendar.min.js"></script>
-    <script src="{{ STATIC_URL }}js/gcal.js"></script>
-    <script src="{{ STATIC_URL }}js/setup.js"></script>
+    <meta name="description" content="Focus24">
+    <!-- end: Meta -->
+
+    <!-- start: Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- end: Mobile Specific -->
+
+    <!-- start: CSS -->
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/style.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/retina.min.css" rel="stylesheet">
+    <!-- end: CSS -->
+
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+
+	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="{{STATIC_URL}}js/respond.min.js"></script>
+		<script src="{{STATIC_URL}}css/ie6-8.css"></script>
+
+	<![endif]-->
+
+    <!-- start: Favicon and Touch Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="{{ STATIC_URL }}ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="{{ STATIC_URL }}ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed"
+          href="http://localhost:8888/bootstrap/simpliq2/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="http://localhost:8888/bootstrap/simpliq2/ico/favicon.png">
+    <!-- end: Favicon and Touch Icons -->
+
 </head>
+
 <body>
-<div id="in-nav">
+<!-- start: Header -->
+<header class="navbar">
     <div class="container">
-        <div class="row">
-            <div class="span12">
-                <ul class="pull-right">
-                    <li><a href="login.html">Logout</a></li>
-                </ul>
-                <a id="logo" href="/">
-                    <h4>Focus<strong>24</strong></h4></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="in-sub-nav">
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <ul>
-                    <li><a href="/" class="active"><i class="batch home"></i><br>Dashboard</a></li>
-                    <li><a href="/machines/"><i class="batch users"></i><br>Servers</a></li>
-                    <li><a href="/customers/"><i class="batch settings"></i><br>Customers</a></li>
-                    <li><a href="/storages/"><i class="batch settings"></i><br>Storages</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="page">
-    <div class="page-container">
-        <div class="container">
+        <button class="navbar-toggle" type="button" data-toggle="collapse"
+                data-target=".sidebar-nav.nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand col-lg-2 col-sm-1 col-xs-12" href="/">
+            <span>Focus24</span>
+        </a>
+        <!-- start: Header Menu -->
+        <div class="nav-no-collapse header-nav">
+            <ul class="nav navbar-nav pull-right">
 
-            <div class="row">
+                <!-- end: Message Dropdown -->
 
-                <div class="span3">
-                    {% block sidebar %}{% endblock %}
-                </div>
-
-                <div class="span9">
-                    <h4>{{ title }}</h4>
-
-                    {% block content %}
-
-
-                        <div class="row">
-                            <div class="span3">
-                                <h4>Dashboard</h4>
-
-                            </div>
-                            <div class="span9">
-                                <h4 class="header">Stats</h4>
-
-                                <div class="stats">
-                                    <div class="row-fluid">
-                                        <div class="span3">
-                                            <div class="stat info">
-                                                <h2>21</h2>
-                                                <h6>Tweets</h6>
-                                            </div>
-                                        </div>
-                                        <div class="span3">
-                                            <div class="stat danger">
-                                                <h2>04</h2>
-                                                <h6>Comments</h6>
-                                            </div>
-                                        </div>
-                                        <div class="span3">
-                                            <div class="stat warning">
-                                                <h2>17</h2>
-                                                <h6>Photos</h6>
-                                            </div>
-                                        </div>
-                                        <div class="span3">
-                                            <div class="stat inverse">
-                                                <h2>12</h2>
-                                                <h6>Followers</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
+                <!-- start: User Dropdown -->
+                <li class="dropdown">
+                    <a class="btn account dropdown-toggle" data-toggle="dropdown"
+                       href="index.html#">
+                        <div class="avatar"></div>
+                        <div class="user">
+                            <span class="hello">Welcome!</span>
+                            <span class="name">{{ user }}</span>
                         </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-menu-title">
 
-                    {% endblock %}
-
-                </div>
-            </div>
-
+                        </li>
+                        <li><a href="index.html#"><i class="icon-user"></i> Profile</a></li>
+                        <li><a href="index.html#"><i class="icon-cog"></i> Settings</a></li>
+                        <li><a href="index.html#"><i class="icon-envelope"></i> Messages</a></li>
+                        <li><a href="login.html"><i class="icon-off"></i> Logout</a></li>
+                    </ul>
+                </li>
+                <!-- end: User Dropdown -->
+            </ul>
         </div>
+        <!-- end: Header Menu -->
+
     </div>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <p class="pull-right">Focus Security AS</p>
-                </div>
+</header>
+<!-- end: Header -->
+
+<div class="container">
+    <div class="row">
+
+        <!-- start: Main Menu -->
+        <div id="sidebar-left" class="col-lg-2 col-sm-1">
+
+            <div class="nav-collapse sidebar-nav collapse navbar-collapse bs-navbar-collapse">
+                <ul class="nav nav-tabs nav-stacked main-menu">
+                    <li><a href="/"><i class="icon-bar-chart"></i><span
+                            class="hidden-sm"> Dashboard</span></a>
+                    </li>
+
+
+                    <li>
+                        <a class="dropmenu" href="#"><i class="icon-desktop"></i>
+                            <span class="hidden-sm"> Machines</span>
+                        </a>
+                        <ul style="display: none;">
+                            <li>
+                                <a class="submenu"
+                                   href="{% url 'focusbackup.app.machine.views.overview' %}">
+                                    <i class="icon-th-list"></i>
+                                    <span class="hidden-sm"> List machines</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="submenu"
+                                   href="{% url 'focusbackup.app.machine.views.new' %}">
+                                    <i class="icon-plus"></i>
+                                    <span class="hidden-sm"> New machine</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a class="dropmenu" href="#"><i class="icon-user"></i>
+                            <span class="hidden-sm"> Customers</span>
+                        </a>
+                        <ul style="display: none;">
+                            <li>
+                                <a class="submenu"
+                                   href="{% url 'focusbackup.app.customer.views.overview' %}">
+                                    <i class="icon-th-list"></i>
+                                    <span class="hidden-sm"> List customers</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="submenu"
+                                   href="{% url 'focusbackup.app.customer.views.new' %}">
+                                    <i class="icon-plus"></i>
+                                    <span class="hidden-sm"> New customer</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="dropmenu" href="#"><i class="icon-hdd"></i>
+                            <span class="hidden-sm"> Storages</span>
+                        </a>
+                        <ul style="display: none;">
+                            <li>
+                                <a class="submenu"
+                                   href="{% url 'focusbackup.app.storage.views.overview' %}">
+                                    <i class="icon-th-list"></i>
+                                    <span class="hidden-sm"> List storages</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="submenu"
+                                   href="{% url 'focusbackup.app.storage.views.new' %}">
+                                    <i class="icon-plus"></i>
+                                    <span class="hidden-sm"> New storage</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                </ul>
             </div>
         </div>
-    </footer>
+        <!-- end: Main Menu -->
+
+        <!-- start: Content -->
+        <div id="content" class="col-lg-10 col-sm-11">
+            {% block sidebar %} {% endblock %}
+            {% block content %}{% endblock %}
+        </div>
+        <!-- end: Content -->
+
+    </div>
+    <!--/row-->
+
+</div>
+<!--/container-->
+
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>Here settings can be configured...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="clearfix"></div>
+
+<footer>
+</footer>
+
+<!-- start: JavaScript-->
+<!--[if !IE]>-->
+
+<script src="{{ STATIC_URL }}js/jquery-2.0.3.min.js"></script>
+
+<!--<![endif]-->
+
+<!--[if IE]>
+
+		<script src="{{STATIC_URL}}js/jquery-1.10.2.min.js"></script>
+
+	<![endif]-->
+
+<!--[if !IE]>-->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='{{STATIC_URL}}js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+</script>
+
+<!--<![endif]-->
+
+<!--[if IE]>
+
+		<script type="text/javascript">
+	 	window.jQuery || document.write("<script src='{{STATIC_URL}}js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+		</script>
+
+	<![endif]-->
+<script src="{{ STATIC_URL }}js/jquery-migrate-1.2.1.min.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+
+<!-- page scripts -->
+<script src="{{ STATIC_URL }}js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.ui.touch-punch.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.sparkline.min.js"></script>
+<script src="{{ STATIC_URL }}js/fullcalendar.min.js"></script>
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{STATIC_URL}}js/excanvas.min.js"></script>
+<![endif]-->
+<script src="{{ STATIC_URL }}js/jquery.flot.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.flot.pie.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.flot.stack.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.flot.resize.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.flot.time.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.autosize.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.placeholder.min.js"></script>
+
+<!-- theme scripts -->
+<script src="{{ STATIC_URL }}js/custom.min.js"></script>
+<script src="{{ STATIC_URL }}js/core.min.js"></script>
+
+<!-- inline scripts related to this page -->
+<script src="{{ STATIC_URL }}js/pages/index.js"></script>
+
+<!-- end: JavaScript-->
+
 </body>
-
-<script src="{{ STATIC_URL }}js/d3-setup.js"></script>
-<script src="{{ STATIC_URL }}js/highcharts.js"></script>
-
 </html>

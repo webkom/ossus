@@ -2,52 +2,64 @@
 {% load i18n %}
 {% load menu_tags %}
 
-
-{% block sidebar %}
-
-    <div class="sidebar">
-        <ul class="col-nav span3">
-            <li class="{% active request "^/customers/$" %}"><a
-                    href="{% url 'focusbackup.app.customer.views.overview' %}">{% trans "List all customers" %}</a></li>
-            <li class="{% active request "^/customers/new/$" %}"><a
-                    href="{% url 'focusbackup.app.customer.views.new' %}">{% trans "New customer" %}</a></li>
-        </ul>
-    </div>
-
-{% endblock %}
-
 {% block content %}
 
     {% block main %}
-        <section id="machines">
-            <table class="table-bordered table table-striped table-condensed">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Contact person</th>
-                    <th>Contact email</th>
-                    <th>Contact phone</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for customer in customers.all %}
-                    <tr>
-                        <td><i class="icon-user"></i> <a
-                                href="/customers/{{ customer.id }}/view/">{{ customer.name }}</a></td>
-                        <td>{{ customer.address }}</td>
-                        <td>{{ customer.contact_person }}</td>
-                        <td>{{ customer.contact_phone }}</td>
-                        <td>{{ customer.contact_email }}</td>
-                        <td><a href="/customers/{{ customer.id }}/edit/"><i class="icon-pencil"></i></a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </section>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-header" data-original-title>
+                        <h2><i class="icon-user"></i><span class="break"></span>{{ title }}</h2>
+                    </div>
+                    <div class="box-content">
+                        <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Contact person</th>
+                                <th>Contact email</th>
+                                <th>Contact phone</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for customer in customers.all %}
+                                <tr>
+                                    <td><i class="icon-user"></i> <a
+                                            href="{% url 'focusbackup.app.customer.views.view' customer.id %}">{{ customer.name }}</a>
+                                    </td>
+                                    <td>{{ customer.address }}</td>
+                                    <td>{{ customer.contact_person }}</td>
+                                    <td>{{ customer.contact_phone }}</td>
+                                    <td>{{ customer.contact_email }}</td>
+                                    <td class="center">
+                                        <a class="btn btn-success" href="{% url 'focusbackup.app.customer.views.view' customer.id %}">
+                                            <i class="icon-zoom-in "></i>
+                                        </a>
+                                        <a class="btn btn-info" href="{% url 'focusbackup.app.customer.views.edit' customer.id %}">
+                                            <i class="icon-edit "></i>
+                                        </a>
+                                        <a class="btn btn-danger" href="#">
+                                            <i class="icon-trash "></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     {% endblock %}
 
-    <footer></footer>
 
 {% endblock %}

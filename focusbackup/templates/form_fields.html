@@ -1,22 +1,20 @@
-{% load i18n %}
+{% for field in form %}
+    {% if field.is_hidden %}
+        {{ field }}
+    {% else %}
+        <div class="form-group">
+            <label>{{ field.label }}</label>
+            {{ field }}
 
-<fieldset>
-    {% csrf_token %}
+            {% for error in field.errors %}
+                <span class="help-inline" style="color:red;">{{ error }}</span>
+            {% endfor %}
 
-    {% for field in form %}
-        <div class="control-group">
-            <label class="control-label" for="input01">{{ field.label }}</label>
-
-            <div class="controls">
-                {{ field }}
-            </div>
+            {% if field.help_text %}
+                <p class="help-block">
+                    {{ field.help_text }}
+                </p>
+            {% endif %}
         </div>
-
-    {% endfor %}
-
-
-    <div class="controls">
-        <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-    </div>
-
-</fieldset>
+    {% endif %}
+{% endfor %}
