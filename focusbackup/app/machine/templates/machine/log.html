@@ -3,15 +3,28 @@
 
 {% block main %}
 
-    <div class="stream">
+
+    <h1>Log</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Text</th>
+            <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
         {% for log in logs %}
-            <div class="item">
-                <div class="stream-icon stream-success"><i class="icon-off icon-white"></i></div>
-                <p class="date">{{ log.datetime|date:"d.m.Y H:i" }}</p>
-                <h4>{{ log.type }}</h4>
-                <p>{{ log.text }}</p>
-            </div>
+            <tr>
+                <td class="center">{{ log.datetime|date:"d.m.Y H:i" }}</td>
+                <td class="center">{{ log.text }}</td>
+                <td class="center">
+                    <span class="label label-success">{{ log.type }}</span>
+                </td>
+            </tr>
         {% endfor %}
-    </div>
+
+    </table>
 
 {% endblock %}

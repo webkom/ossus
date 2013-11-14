@@ -1,202 +1,235 @@
 {% extends "machine/base.html" %}
 {% load i18n %}
 
+{% block js %}
+    {{ block.super }}
+
+
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+     <script type="text/javascript">
+
+            var chart;
+            $(document).ready(function () {
+                chart = new Highcharts.Chart({
+                    chart:{
+                        renderTo:'container_load',
+                        defaultSeriesType:'area'
+                    },
+                    title:{
+                        text:'Load'
+                    },
+                    xAxis:{
+                        categories:[{% for stat in machine.get_latest_stats %}
+                            '{{ stat.datetime|date:"H:i" }}',
+                        {% endfor %}],
+                        tickmarkPlacement:'on',
+                        title:{
+                            enabled:false
+                        }
+                    },
+                    tooltip:{
+                        formatter:function () {
+                            return '' +
+                                    this.x + ': ' + Highcharts.numberFormat(this.y, 0, ',') + ' millions';
+                        }
+                    },
+
+                    plotOptions:{
+                        area:{
+                            stacking:'normal',
+
+                            lineColor:'#666666',
+                            lineWidth:1,
+                            marker:{
+                                lineWidth:1,
+                                lineColor:'#666666'
+                            }
+                        }
+                    },
+                    series:[
+                        {
+                            name:'User',
+                            data:[{% for stat in machine.get_latest_stats %}
+                                {{ stat.load_average }},
+                            {% endfor %}
+                            ]
+                        }
+                    ]
+                });
+            });
+
+        </script>
+
+        <script type="text/javascript">
+
+            var chart;
+            $(document).ready(function () {
+                chart = new Highcharts.Chart({
+                    chart:{
+                        renderTo:'container_cpu',
+                        defaultSeriesType:'area'
+                    },
+                    title:{
+                        text:'Prosessor'
+                    },
+                    xAxis:{
+                        categories:[{% for stat in machine.get_latest_stats %}
+                            '{{ stat.datetime|date:"H:i" }}',
+                        {% endfor %}],
+                        tickmarkPlacement:'on',
+                        title:{
+                            enabled:false
+                        }
+                    },
+                    tooltip:{
+                        formatter:function () {
+                            return '' +
+                                    this.x + ': ' + Highcharts.numberFormat(this.y, 0, ',') + ' millions';
+                        }
+                    },
+                    yAxis:{
+                        max:'100'
+                    },
+
+                    plotOptions:{
+                        area:{
+                            stacking:'normal',
+
+                            lineColor:'#666666',
+                            lineWidth:1,
+                            marker:{
+                                lineWidth:1,
+                                lineColor:'#666666'
+                            }
+                        }
+                    },
+                    series:[
+                        {
+                            name:'User',
+                            data:[{% for stat in machine.get_latest_stats %}
+                                {{ stat.cpu_user }},
+                            {% endfor %}
+                            ]
+                        },
+                        {
+                            name:'System',
+                            data:[{% for stat in machine.get_latest_stats %}
+                                {{ stat.cpu_system }},
+                            {% endfor %}
+                            ]
+                        }
+                    ]
+                });
+            });
+
+        </script>
+
+
+        <script type="text/javascript">
+
+            var chart;
+            $(document).ready(function () {
+                chart = new Highcharts.Chart({
+                    chart:{
+                        renderTo:'container',
+                        defaultSeriesType:'area'
+                    },
+                    title:{
+                        text:'Minnebruk'
+                    },
+
+                    xAxis:{
+                        categories:[{% for stat in machine.get_latest_stats %}
+                            '{{ stat.datetime|date:"H:i" }}',
+                        {% endfor %}],
+                        tickmarkPlacement:'on',
+                        title:{
+                            enabled:false
+                        }
+                    },
+                    yAxis:{
+                        title:{
+                            text:'Percent'
+                        }
+                    },
+
+                    plotOptions:{
+                        area:{
+                            stacking:'percent',
+                            lineColor:'#ffffff',
+                            lineWidth:1,
+                            marker:{
+                                lineWidth:1,
+                                lineColor:'#ffffff'
+                            }
+                        }
+                    },
+                    series:[
+                        {
+                            name:'Free',
+                            data:[{% for stat in machine.get_latest_stats %}
+                                {{ stat.mem_free }},
+                            {% endfor %}]
+                        },
+                        {
+                            name:'Used',
+                            data:[{% for stat in machine.get_latest_stats %}
+                                {{ stat.mem_used }},
+                            {% endfor %}
+                            ]
+                        }
+                    ]
+                });
+
+
+            });
+
+        </script>
+
+{% endblock %}
+
 {% block main %}
 
-    <div class="row">
-        <div class="span4">
-            <h4>Details</h4>
-            <table class="table table-bordered table-striped">
-                <tbody>
-                <tr>
-                    <td class="span2">ID</td>
-                    <td>{{ machine.id }}</td>
-                </tr>
-                <tr>
-                    <td>Name</td>
-                    <td>{{ machine.name }}</td>
-                </tr>
-                <tr>
-                    <td>Customer</td>
-                    <td>{{ machine.customer.name }}</td>
-                </tr>
-                <tr>
-                    <td>Last online</td>
-                    <td>{{ machine.last_connection_to_client|timesince }}</td>
-                </tr>
-                <tr>
-                    <td>External IP</td>
-                    <td>{{ machine.external_ip }}</td>
-                </tr>
-                <tr>
-                    <td>Auto version</td>
-                    <td>{{ machine.auto_version }}</td>
-                </tr>
-                <tr>
-                    <td>Agent</td>
-                    <td>{{ machine.current_agent_version }}</td>
-                </tr>
-                <tr>
-                    <td>Updater</td>
-                    <td>{{ machine.current_updater_version }}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="span5">
-            <h4>Recent log</h4>
+    <h1>Info</h1>
+    <table class="table table-bordered table-striped">
+        <tbody>
+        <tr>
+            <td class="span2">ID</td>
+            <td>{{ machine.id }}</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{ machine.name }}</td>
+        </tr>
+        <tr>
+            <td>Customer</td>
+            <td>{{ machine.customer.name }}</td>
+        </tr>
+        <tr>
+            <td>Last online</td>
+            <td>{{ machine.last_connection_to_client|timesince }}</td>
+        </tr>
+        <tr>
+            <td>External IP</td>
+            <td>{{ machine.external_ip }}</td>
+        </tr>
+        <tr>
+            <td>Auto version</td>
+            <td>{{ machine.auto_version }}</td>
+        </tr>
+        <tr>
+            <td>Agent</td>
+            <td>{{ machine.current_agent_version }}</td>
+        </tr>
+        <tr>
+            <td>Updater</td>
+            <td>{{ machine.current_updater_version }}</td>
+        </tr>
+        </tbody>
+    </table>
 
-            <table class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th>{% trans "Date" %}</th>
-                    <th>{% trans "Description" %}</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for log in machine.get_latest_logs %}
-                    <tr>
-                        <td>{{ log.datetime|date:"d.m.Y H:i" }}</td>
-                        <td>{{ log.text }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-
-        </div>
-    </div>
-
-
-
+    <div id="container_load" style="width: 100%; height: 300px; margin: 0 auto"></div>
     <div id="container_cpu" style="width: 100%; height: 300px; margin: 0 auto"></div>
     <div id="container" style="width: 100%; height: 300px; margin: 0 auto"></div>
-
-
-    <script type="text/javascript">
-
-        var chart;
-        $(document).ready(function () {
-            chart = new Highcharts.Chart({
-                chart: {
-                    renderTo: 'container_cpu',
-                    defaultSeriesType: 'area'
-                },
-                title: {
-                    text: 'Prosessor'
-                },
-                xAxis: {
-                    categories: [{% for stat in machine.get_latest_stats %}
-                        '{{ stat.datetime|date:"H:i" }}',
-                    {% endfor %}],
-                    tickmarkPlacement: 'on',
-                    title: {
-                        enabled: false
-                    }
-                },
-                tooltip: {
-                    formatter: function () {
-                        return '' +
-                                this.x + ': ' + Highcharts.numberFormat(this.y, 0, ',') + ' millions';
-                    }
-                },
-                yAxis: {
-                    max: '100'
-                },
-
-                plotOptions: {
-                    area: {
-                        stacking: 'normal',
-
-                        lineColor: '#666666',
-                        lineWidth: 1,
-                        marker: {
-                            lineWidth: 1,
-                            lineColor: '#666666'
-                        }
-                    }
-                },
-                series: [
-                    {
-                        name: 'User',
-                        data: [{% for stat in machine.get_latest_stats %}
-                            {{ stat.cpu_user }},
-                        {% endfor %}
-                        ]
-                    },
-                    {
-                        name: 'System',
-                        data: [{% for stat in machine.get_latest_stats %}
-                            {{ stat.cpu_system }},
-                        {% endfor %}
-                        ]
-                    }
-                ]
-            });
-        });
-
-    </script>
-
-
-    <script type="text/javascript">
-
-        var chart;
-        $(document).ready(function () {
-            chart = new Highcharts.Chart({
-                chart: {
-                    renderTo: 'container',
-                    defaultSeriesType: 'area'
-                },
-                title: {
-                    text: 'Minnebruk'
-                },
-
-                xAxis: {
-                    categories: [
-                        {% for stat in machine.get_latest_stats %}'{{ stat.datetime|date:"H:i" }}',{% endfor %}],
-                    tickmarkPlacement: 'on',
-                    title: {
-                        enabled: false
-                    }
-                },
-                yAxis: {
-                    title: {
-                        text: 'Percent'
-                    }
-                },
-
-                plotOptions: {
-                    area: {
-                        stacking: 'percent',
-                        lineColor: '#ffffff',
-                        lineWidth: 1,
-                        marker: {
-                            lineWidth: 1,
-                            lineColor: '#ffffff'
-                        }
-                    }
-                },
-                series: [
-                    {
-                        name: 'Free',
-                        data: [{% for stat in machine.get_latest_stats %}
-                            {{ stat.mem_free }},
-                        {% endfor %}]
-                    },
-                    {
-                        name: 'Used',
-                        data: [{% for stat in machine.get_latest_stats %}
-                            {{ stat.mem_used }},
-                        {% endfor %}
-                        ]
-                    }
-                ]
-            });
-
-
-        });
-
-    </script>
-
-
 
 {% endblock %}

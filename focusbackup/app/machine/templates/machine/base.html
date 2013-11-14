@@ -12,17 +12,20 @@
                 </div>
                 <div class="box-content">
 
-                    <div class="subnav">
-                        <ul class="nav nav-pills">
-                            <li><a href="{% url "machines.view" machine.id %}">Info</a></li>
-                            <li>
-                                <a href="{% url "machines.view_schedules" machine.id %}">Schedules</a>
-                            </li>
-                            <li><a href="{% url "machines.view_backups" machine.id %}">Backups</a>
-                            </li>
-                            <li><a href="{% url "machines.view_log" machine.id %}">Log</a></li>
-                        </ul>
-                    </div>
+                    {% if machine %}
+                        <div class="subnav">
+                            <ul class="nav nav-pills">
+                                <li><a href="{% url "machines.view" machine.id %}">Info</a></li>
+                                <li>
+                                    <a href="{% url "machines.view_schedules" machine.id %}">Schedules</a>
+                                </li>
+                                <li>
+                                    <a href="{% url "machines.view_backups" machine.id %}">Backups</a>
+                                </li>
+                                <li><a href="{% url "machines.view_log" machine.id %}">Log</a></li>
+                            </ul>
+                        </div>
+                    {% endif %}
 
                     {% block main %}{% endblock %}
 

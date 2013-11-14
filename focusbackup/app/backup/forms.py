@@ -23,11 +23,11 @@ class MachineLogForm(ModelForm):
 class MachineStatsForm(ModelForm):
     class Meta:
         model = MachineStats
-        fields = ('datetime', 'load_average', 'cpu_stolen', 'cpu_user', 'cpu_system', 'mem_free', 'mem_used')
+        fields = ('datetime', 'load_average', 'cpu_stolen',
+                  'cpu_user', 'cpu_system', 'mem_free', 'mem_used')
 
 
 class ScheduleForm(ModelForm):
-
     def __init__(self, *args, **kwargs):
         user = None
 
@@ -42,11 +42,13 @@ class ScheduleForm(ModelForm):
 
     class Meta:
         model = Schedule
-        fields = ("name", "storage", "from_date", "repeat_every_minute", "active", "versions_count")
+        fields = ("name", "storage", "from_date",
+                  "repeat_every_minute", "active", "versions_count")
 
 
 class FolderBackupForm(ModelForm):
-    local_folder_path = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-xxlarge'}))
+    local_folder_path = forms.CharField(max_length=255,
+                                        widget=TextInput(attrs={'class': 'input-xxlarge'}))
 
     class Meta:
         model = Folder

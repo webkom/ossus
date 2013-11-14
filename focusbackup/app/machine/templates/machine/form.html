@@ -1,33 +1,25 @@
-{% extends "machine/base.html" %}
+{% extends "form.html" %}
 
-{% block main %}
-    <div class="row">
-        <div class="span8">
-            {{ form.errors }}
-            <form enctype="multipart/form-data" class="form-horizontal" method="post">
-                {% include "form_fields.html" %}
-            </form>
-        </div>
-    </div>
-
+{% block js %}
+    {{ block.super }}
     <script>
         $(document).ready(function () {
             function hide_select_boxes(hide) {
 
                 if (hide) {
-                    $("#id_selected_agent_version").parent().parent().hide();
-                    $("#id_selected_updater_version").parent().parent().hide();
+                    $("#id_selected_agent_version").parent().hide();
+                    $("#id_selected_updater_version").parent().hide();
                 }
 
                 else {
-                    $("#id_selected_agent_version").parent().parent().show();
-                    $("#id_selected_updater_version").parent().parent().show();
+                    $("#id_selected_agent_version").parent().show();
+                    $("#id_selected_updater_version").parent().show();
                 }
-            }
+            };
 
             if ($("#id_auto_version").attr("checked")) {
                 hide_select_boxes(true);
-            }
+            };
 
             $("#id_auto_version").click(function () {
                 if (this.checked) {

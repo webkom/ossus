@@ -3,21 +3,19 @@
 
 {% block main %}
 
+    <h1>Schedules</h1>
+    <a class="btn btn-success btn-medium"
+       href="{% url 'focusbackup.app.backup.views.new' machine.id %}">{% trans "New schedule" %}</a>
 
-    <a class="btn btn-success btn-medium" href="{% url 'focusbackup.app.backup.views.new' machine.id %}">{% trans "New schedule" %}</a>
 
-    <br>
-    <br>
-
-    <table class="table table-bordered table-striped">
+    <table class="table table-striped">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Last run time</th>
-            <th>Next run time</th>
+            <th>Date</th>
+            <th>Text</th>
+            <th>Type</th>
         </tr>
         </thead>
-
         <tbody>
         {% for schedule in machine.schedules.all %}
             <tr>

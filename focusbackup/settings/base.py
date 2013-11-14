@@ -5,8 +5,6 @@ TEMPLATE_DEBUG = DEBUG
 
 PROJECT_ROOT_DIRECTORY = os.path.dirname(os.path.dirname(__file__))
 
-print PROJECT_ROOT_DIRECTORY
-
 ADMINS = (
     ('frecar', 'fredrik@fncit.no'),
 )
