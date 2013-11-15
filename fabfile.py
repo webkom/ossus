@@ -12,7 +12,7 @@ env.hosts = ['kontor.focussecurity.no']
 
 site = App(
     project_paths={
-        'focus24': '/opt/web/focus24.no/focusbackup',
+        'focus': '/opt/web/focus24.no/focusbackup',
     },
     project_package='focusbackup',
     test_settings='focusbackup.settings.test',
