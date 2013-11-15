@@ -9,7 +9,7 @@ ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {
-        'HOST': '10.0.6.30',
+        'HOST': '10.0.6.31',
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'focus24',
         'USER': 'focus24',
