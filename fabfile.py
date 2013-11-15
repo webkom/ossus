@@ -16,7 +16,10 @@ site = App(
     },
     project_package='focusbackup',
     test_settings='focusbackup.settings.test',
-    restart_command='/etc/init.d/supervisord restart'
+    restart_command='/etc/init.d/supervisord restart',
+    requirements = {
+        'focus': 'requirements.txt',
+    }
 )
 
 
