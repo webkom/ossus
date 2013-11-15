@@ -7,3 +7,4 @@ django-fabric
 python-dateutil
 pyes
 gunicorn
+python-mysql
