@@ -3,5 +3,6 @@ south
 pil
 ipython
 django-extensions
+django-fabric
 python-dateutil
 pyes
