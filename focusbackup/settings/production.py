@@ -5,6 +5,8 @@ f = open('/var/passwords/focus24', 'rb')
 DB_PASSWORD = f.readline().strip()
 f.close()
 
+ALLOWED_HOSTS = ['*']
+
 DATABASES = {
     'default': {
         'HOST': '10.0.6.30',
