@@ -27,7 +27,7 @@ def view(request, id):
 @login_required()
 def view_log(request, id):
     machine = request.user.profile.get_machines().get(id=id)
-    logs = machine.logs.all()[0:1000]
+    logs = machine.logs.all().order_by("-id")
     return render(request, 'machine/log.html', {'machine': machine,
                                                 'logs': logs,
                                                 'title': machine.name})
