@@ -4,6 +4,8 @@ pil
 ipython
 django-extensions
 django-fabric
+django-debug-toolbar
+django-cache-panel
 python-dateutil
 pyes
 gunicorn

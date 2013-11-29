@@ -15,7 +15,7 @@
             <!-- /.span -->
             <div class="span12">
                 <h4>{% trans "Machines" %}</h4>
-                <table class="table table-bordered table-striped">
+                <table class="table">
                     <thead>
                     <tr>
                         <td></td>
@@ -29,7 +29,7 @@
                     {% for machine in customer.machines.all %}
 
                         <tr>
-                            <td><img src="/static/img/glyphicons/png/glyphicons_086_display.png" width="14px">
+                            <td>
                                 <a href="{% url 'machines.view' machine.id %}">{{ machine.name }}</a></td>
 
                             <td><i class="icon-time"></i> {{ machine.last_connection_to_client|timesince }} ago</td>
