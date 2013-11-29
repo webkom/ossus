@@ -54,4 +54,8 @@ def form(request, machine_id, id=False):
 
             return redirect("machines.view", machine.id)
 
-    return render(request, 'backup/form.html', locals())
+    return render(request, 'backup/form.html', {'form': form,
+                                                'machine': machine,
+                                                'form_folders': form_folders,
+                                                'form_sql': form_sql,
+                                                'title': title})
