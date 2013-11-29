@@ -2,20 +2,12 @@
 
 {% block content %}
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="awidget">
-                <div class="awidget-head">
-                    <h3>Form</h3>
-                </div>
-                <div class="awidget-body">
-                    <form class="form-horizontal" role="form">
-                        {% csrf_token %}
-                        {% include "form_fields.html" %}
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <form class="form-horizontal" role="form">
+        {% csrf_token %}
+        {% include "form_fields.html" %}
+
+        <input type="submit" class="btn btn-success" value="Save">
+
+    </form>
 
 {% endblock %}
