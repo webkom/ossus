@@ -19,7 +19,7 @@ site = App(
     restart_command='/etc/init.d/supervisord restart',
     local_tables_to_flush=[],
     requirements={
-        'focus': 'requirements.txt',
+        'prod': 'requirements.txt',
     }
 )
 
