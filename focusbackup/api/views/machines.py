@@ -96,7 +96,7 @@ def create_log_for_machine(request, id):
             machine.set_last_connection_to_client()
 
             if form.is_valid():
-                machine_log = MachineLog(machine=machine, datetime=datetime.now(), type=request.POST['type'],
+                machine_log = MachineLog(machine=machine, datetime=datetime.datetime.now(), type=request.POST['type'],
                                          text=request.POST['text'])
 
                 machine_log.save()

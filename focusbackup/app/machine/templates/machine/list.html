@@ -3,78 +3,74 @@
 
 {% block content %}
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="box">
-                <div class="box-header" data-original-title>
-                    <h2><i class="icon-desktop"></i><span class="break"></span>{{ title }}</h2>
-                </div>
-                <div class="box-content">
+    {% for customer in customers %}
+        {% if customer.machines.all %}
 
-                    {% for customer in customers %}
+            <div class="row">
+                <div class="col-md-12">
 
-                        {% if customer.machines.all %}
+                    <h2>{{ customer.name }}</h2>
 
-                            <h2>{{ customer.name }}</h2>
+                    <table class="table table-hover table-bordered ">
+                        <thead>
+                        <tr>
+                            <td style="width: 40%"></td>
+                            <td style="width: 20%">Last online</td>
+                            <td style="width: 15%">Status</td>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                            <table class="table table-striped table-bordered bootstrap-datatable datatable">
-                                <thead>
-                                <tr>
-                                    <td></td>
-                                    <td>Last online</td>
-                                    <td>Status</td>
-                                    <td></td>
-                                </tr>
-                                </thead>
-                                <tbody>
+                        {% for machine in customer.machines.all %}
 
+                            <tr>
+                                <td>
+                                    <a href="{% url 'machines.view' machine.id %}">{{ machine.name }}</a>
+                                </td>
+                                <td>
+                                    <i class="icon-time"></i>
+                                    {{ machine.last_connection_to_client|timesince }} ago
 
-                                {% for machine in customer.machines.all %}
+                                </td>
+                                <td>
+                                    {% if machine.running_backup %}
+                                        <i class="icon-adjust"></i>
+                                        {% trans "running backup" %}
+                                    {% elif not machine.is_up_to_date %}
+                                        <i class="icon-remove"></i> {% trans "Outdated" %}
+                                    {% else %}
+                                        <i class="icon-ok"></i>
+                                    {% endif %}
+                                </td>
 
-                                    <tr>
-                                        <td>
-                                            <a href="{% url 'machines.view' machine.id %}">{{ machine.name }}</a>
-                                        </td>
-                                        <td>
-                                            <i class="icon-time"></i>
-                                            {{ machine.last_connection_to_client|timesince }} ago
+                                <td class="center">
+                                    <a class="btn btn-success"
+                                       href="{% url 'focusbackup.app.machine.views.view' machine.id %}">
+                                        <i class="icon-zoom-in "></i>
+                                    </a>
+                                    <a class="btn btn-info"
+                                       href="{% url 'focusbackup.app.machine.views.edit' machine.id %}">
+                                        <i class="icon-edit "></i>
+                                    </a>
+                                    <a class="btn btn-danger"
+                                       href="{% url 'focusbackup.app.machine.views.edit' machine.id %}">
+                                        <i class="icon-trash "></i>
+                                    </a>
+                                </td>
 
-                                        </td>
-                                        <td>
-                                            {% if machine.running_backup %}
-                                                <i class="icon-adjust"></i>
-                                                {% trans "running backup" %}
-                                            {% elif not machine.is_up_to_date %}
-                                                <i class="icon-remove"></i> {% trans "Outdated" %}
-                                            {% else %}
-                                                <i class="icon-ok"></i>
-                                            {% endif %}
-                                        </td>
+                            </tr>
 
-                                        <td class="center">
-                                            <a class="btn btn-success" href="{% url 'focusbackup.app.machine.views.view' machine.id %}">
-                                                <i class="icon-zoom-in "></i>
-                                            </a>
-                                            <a class="btn btn-info" href="{% url 'focusbackup.app.machine.views.edit' machine.id %}">
-                                                <i class="icon-edit "></i>
-                                            </a>
-                                            <a class="btn btn-danger" href="{% url 'focusbackup.app.machine.views.edit' machine.id %}">
-                                                <i class="icon-trash "></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                        {% endfor %}
 
-                                {% endfor %}
-
-                                </tbody>
-                            </table>
-                        {% endif %}
-
-                    {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
-    </div>
 
+
+        {% endif %}
+
+    {% endfor %}
 
 {% endblock %}

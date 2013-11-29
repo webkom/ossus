@@ -4,83 +4,108 @@
 {% block main %}
 
     <div class="row">
+        <div class="col-md-12">
+            <div class="awidget">
+                <div class="awidget-head">
+                    <h3>Form</h3>
+                </div>
 
-        <div class="span12">
+                {% if form.errors %}
 
-            {% if form.errors %}
+                    Form-errors:{{ form.errors }}
 
-                Form-errors:{{ form.errors }}
+                {% endif %}
 
-            {% endif %}
+                {% if form_folders.errors %}
+                    Folders-form-errors: {{ form_folders.errors }}
+                {% endif %}
 
-            {% if form_folders.errors %}
-                Folders-form-errors: {{ form_folders.errors }}
-            {% endif %}
+                {% if form_sql.errors %}
+                    SQL-form-errors: {{ form_sql.errors }}
+                {% endif %}
 
-            {% if form_sql.errors %}
-                SQL-form-errors: {{ form_sql.errors }}
-            {% endif %}
+                <form enctype="multipart/form-data" class="form-horizontal" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">{{ field.label }}</label>
 
-            <form enctype="multipart/form-data" class="form-horizontal" method="post">
-                {% csrf_token %}
-                {% for field in form %}
-                    <div class="control-group">
-                        <label class="control-label">{{ field.label }}</label>
-
-                        <div class="controls">
-                            {{ field }}
-                        </div>
-                    </div>
-                {% endfor %}
-
-                <h2>{% trans "Folders" %}</h2>
-                {{ form_folders.management_form }}
-                {% for element in form_folders %}
-                    <div class="control-group">
-                        <label class="control-label">{% trans "Folder path" %}</label>
-
-                        <div class="controls">
-                            {% for field in element %}
+                            <div class="col-lg-10">
                                 {{ field }}
-                            {% endfor %}
+
+                                {% for error in field.errors %}
+                                    <span class="help-inline" style="color:red;">{{ error }}</span>
+                                {% endfor %}
+
+                                {% if field.help_text %}
+                                    <p class="help-block">
+                                        {{ field.help_text }}
+                                    </p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <h2>{% trans "Folders" %}</h2>
+                    {{ form_folders.management_form }}
+                    {% for element in form_folders %}
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">{{ field.label }}</label>
+
+                            <div class="col-lg-10">
+                                {{ field }}
+
+                                {% for error in field.errors %}
+                                    <span class="help-inline" style="color:red;">{{ error }}</span>
+                                {% endfor %}
+
+                                {% if field.help_text %}
+                                    <p class="help-block">
+                                        {{ field.help_text }}
+                                    </p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <h2>{% trans "Databases" %}</h2>
+                    {{ form_sql.management_form }}
+                    <div class="control-group">
+                        <div class="controls">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>{% trans "Type" %}</th>
+                                    <th>{% trans "Host" %}</th>
+                                    <th>{% trans "Port" %}</th>
+                                    <th>{% trans "Database" %}</th>
+                                    <th>{% trans "Username" %}</th>
+                                    <th>{% trans "Password" %}</th>
+                                    <th>{% trans "Delete" %}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for element in form_sql.forms %}
+                                    <tr>
+                                        {% for field in element %}
+                                            <td>{{ field }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                {% endfor %}
 
-                <h2>{% trans "Databases" %}</h2>
-                {{ form_sql.management_form }}
-                <div class="control-group">
                     <div class="controls">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>{% trans "Type" %}</th>
-                                <th>{% trans "Host" %}</th>
-                                <th>{% trans "Port" %}</th>
-                                <th>{% trans "Database" %}</th>
-                                <th>{% trans "Username" %}</th>
-                                <th>{% trans "Password" %}</th>
-                                <th>{% trans "Delete" %}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for element in form_sql.forms %}
-                                <tr>
-                                    {% for field in element %}
-                                        <td>{{ field }}</td>
-                                    {% endfor %}
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                        <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
                     </div>
-                </div>
 
-                <div class="controls">
-                    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-                </div>
-
-            </form>
+                </form>
+            </div>
         </div>
     </div>
+
 {% endblock %}

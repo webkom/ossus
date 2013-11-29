@@ -12,11 +12,12 @@ env.hosts = ['kontor.focussecurity.no']
 
 site = App(
     project_paths={
-        'focus': '/opt/web/focus24.no/focusbackup',
+        'prod': '/opt/web/focus24.no/focusbackup/',
     },
     project_package='focusbackup',
     test_settings='focusbackup.settings.test',
     restart_command='/etc/init.d/supervisord restart',
+    local_tables_to_flush=[],
     requirements={
         'focus': 'requirements.txt',
     }
@@ -25,4 +26,9 @@ site = App(
 
 @task
 def deploy():
-    site.deploy('focus')
+    site.deploy('prod')
+
+
+@task
+def clone_prod_data():
+    site.clone_data('prod')

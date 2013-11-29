@@ -2,19 +2,24 @@
     {% if field.is_hidden %}
         {{ field }}
     {% else %}
+
         <div class="form-group">
-            <label>{{ field.label }}</label>
-            {{ field }}
+            <label class="col-lg-2 control-label">{{ field.label }}</label>
 
-            {% for error in field.errors %}
-                <span class="help-inline" style="color:red;">{{ error }}</span>
-            {% endfor %}
+            <div class="col-lg-10">
+                {{ field }}
 
-            {% if field.help_text %}
-                <p class="help-block">
-                    {{ field.help_text }}
-                </p>
-            {% endif %}
+                {% for error in field.errors %}
+                    <span class="help-inline" style="color:red;">{{ error }}</span>
+                {% endfor %}
+
+                {% if field.help_text %}
+                    <p class="help-block">
+                        {{ field.help_text }}
+                    </p>
+                {% endif %}
+
+            </div>
         </div>
     {% endif %}
 {% endfor %}

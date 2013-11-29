@@ -20,7 +20,8 @@ def overview(request):
 @login_required()
 def view(request, id):
     machine = request.user.profile.get_machines().get(id=id)
-    return render(request, 'machine/view.html', {'machine': machine})
+    return render(request, 'machine/view.html', {'machine': machine,
+                                                 'title': machine.name})
 
 
 @login_required()
@@ -28,7 +29,8 @@ def view_log(request, id):
     machine = request.user.profile.get_machines().get(id=id)
     logs = machine.logs.all()[0:1000]
     return render(request, 'machine/log.html', {'machine': machine,
-                                                'logs': logs})
+                                                'logs': logs,
+                                                'title': machine.name})
 
 
 @login_required()
@@ -36,7 +38,8 @@ def view_schedules(request, id):
     machine = request.user.profile.get_machines().get(id=id)
     schedules = machine.schedules.all()
     return render(request, 'machine/view_schedules.html', {'machine': machine,
-                                                           'schedules': schedules})
+                                                           'schedules': schedules,
+                                                           'title': machine.name})
 
 
 @login_required()
@@ -44,7 +47,8 @@ def view_backups(request, id):
     machine = request.user.profile.get_machines().get(id=id)
     backups = machine.backups.all()
     return render(request, 'machine/view_backups.html', {'machine': machine,
-                                                         'backups': backups})
+                                                         'backups': backups,
+                                                         'title': machine.name})
 
 
 @login_required()
