@@ -24,6 +24,10 @@ AUTH_PROFILE_MODULE = 'core.UserProfile'
 
 URL_TO_SITE = "http://localhost:8000/"
 
+#Used to script upload of new client files
+PATH_LOCAL_FOCUSBACKUPCLIENT = "/Users/frecar/code/focusbackupclient/out/artifacts/"
+
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.

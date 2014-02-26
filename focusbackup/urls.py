@@ -20,13 +20,6 @@ urlpatterns = patterns(
     (r'^download_current_agent/', 'focusbackup.core.views.download_current_agent'),
     (r'^download_current_updater/', 'focusbackup.core.views.download_current_updater'),
 
-    (r'^file/(?P<filename>.*)$', 'focusbackup.core.views.retrieve_file'),
-
 )
 
 urlpatterns += staticfiles_urlpatterns()
-
-#urlpatterns += patterns('',
-#                        (r'^uploads/(?P<path>.*)$', 'django.views.static.serve',
-#                         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
-#)
