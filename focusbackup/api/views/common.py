@@ -3,14 +3,12 @@ import json
 import datetime
 
 from django.http import HttpResponse
-from django.utils import simplejson
 from django.db.models.query import QuerySet
 from django.core import serializers
 from focusbackup.api.models import Token
 
 
-class HandleQuerySets(simplejson.JSONEncoder):
-    """ simplejson.JSONEncoder extension: handle querysets """
+class HandleQuerySets(json.JSONEncoder):
 
     def default(self, obj):
         if isinstance(obj, QuerySet):

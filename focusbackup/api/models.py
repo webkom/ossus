@@ -20,7 +20,7 @@ class Token(models.Model):
     """
     api_token = models.CharField(default=generate_token(), max_length=40, editable=False)
     api_user = models.OneToOneField(User, related_name="api_tokens")
-    active = models.BooleanField(default=True, verbose_name=("Is token active"))
+    active = models.BooleanField(default=True, verbose_name="Is token active")
 
     def __unicode__(self):
         return "%s" % self.api_token

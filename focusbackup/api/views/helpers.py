@@ -23,18 +23,20 @@ def build_folder_backup(folder_backups):
     send_object = []
     for folder_backup in folder_backups:
         send_object.append(
-            {'id': folder_backup.id,
-             'local_folder_path': folder_backup.local_folder_path,
+            {
+                'id': folder_backup.id,
+                'local_folder_path': folder_backup.local_folder_path,
             }
         )
     return send_object
 
 
 def build_machine_log_fields(machine_log):
-    return {'id': machine_log.id,
-            'datetime': machine_log.datetime,
-            'text': machine_log.text,
-            'type': machine_log.type,
+    return {
+        'id': machine_log.id,
+        'datetime': machine_log.datetime,
+        'text': machine_log.text,
+        'type': machine_log.type,
     }
 
 
@@ -65,15 +67,16 @@ def build_client_version(obj):
         updater = {'name': obj.updater.name}
         updater_link = settings.URL_TO_SITE + "file/" + obj.updater.name
 
-    return {'id': obj.id,
-            'datetime': obj.datetime,
-            'name': obj.name,
-            'agent': agent,
-            'agent_link': agent_link,
-            'updater_link': updater_link,
-            'updater': updater,
-            'current_agent': obj.current_agent,
-            'current_updater': obj.current_updater,
+    return {
+        'id': obj.id,
+        'datetime': obj.datetime,
+        'name': obj.name,
+        'agent': agent,
+        'agent_link': agent_link,
+        'updater_link': updater_link,
+        'updater': updater,
+        'current_agent': obj.current_agent,
+        'current_updater': obj.current_updater,
     }
 
 
@@ -95,29 +98,26 @@ def build_backup_fields(backup):
 
 
 def build_schedule_fields(schedule):
-    schedule_fields = {
+    return {
         'id': schedule.id,
         'name': schedule.name,
         'current_version_in_loop': schedule.current_version_in_loop,
         'versions_count': schedule.versions_count,
         'get_next_backup_time': schedule.get_next_run_time().strftime("%Y-%m-%d %H:%M:%S"),
-        'storage':
-            {'id': schedule.storage.id,
-             'host': schedule.storage.host,
-             'username': schedule.storage.username,
-             'password': schedule.storage.password,
-             'folder': schedule.storage.folder,
-             'current_day_folder_path': schedule.current_day_folder_path(),
-            },
+        'storage': {
+            'id': schedule.storage.id,
+            'host': schedule.storage.host,
+            'username': schedule.storage.username,
+            'password': schedule.storage.password,
+            'folder': schedule.storage.folder,
+            'current_day_folder_path': schedule.current_day_folder_path(),
+        },
         'running_backup': schedule.running_backup,
         'running_restore': schedule.running_restore,
 
         'sql_backups': build_sql_backup(schedule.sql_backups.all()),
         'folder_backups': build_folder_backup(schedule.folders.all())
-
     }
-
-    return schedule_fields
 
 
 def build_machine_fields(machine):
@@ -126,7 +126,7 @@ def build_machine_fields(machine):
     current_updater_version = machine.current_updater_version
     selected_updater_version = machine.get_selected_updater_version()
 
-    machine_fields = {
+    return {
         'id': machine.id,
         'is_busy': machine.is_busy(),
         'external_ip': machine.external_ip,
@@ -138,11 +138,9 @@ def build_machine_fields(machine):
         'selected_updater_version': build_client_version(selected_updater_version),
     }
 
-    return machine_fields
-
 
 def build_machine_settings(request, machine):
-    machine_fields = {
+    return {
         'agent_folder': "%s" % machine.agent_folder,
         'local_temp_folder': "%s" % machine.local_temp_folder,
         'id': "%s" % machine.id,
@@ -152,6 +150,3 @@ def build_machine_settings(request, machine):
         'force_action': '0',
         'mysql_dump': "%s" % machine.mysql_dump,
     }
-
-    return machine_fields
-

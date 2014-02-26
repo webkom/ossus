@@ -1,6 +1,5 @@
 django
 south
-pil
 ipython
 django-extensions
 django-fabric

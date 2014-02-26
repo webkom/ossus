@@ -7,11 +7,8 @@ urlpatterns = patterns('focusbackup.api.views',
                        (r'^machines/$', 'machines.get_machines'),
                        (r'^machines/(?P<id>\w+)/$', 'machines.get_machines'),
                        (r'^machines/(?P<id>\w+)/schedules/$', 'machines.get_schedules_for_machine'),
-
                        (r'^machines/(?P<id>\w+)/settings/$', 'machines.get_settings_for_machine'),
-
                        (r'^machines/(?P<id>\w+)/log/$', 'machines.get_log_for_machine'),
-
                        (r'^machines/(?P<id>\w+)/create_log/$', 'machines.create_log_for_machine'),
 
                        #Set machine version
