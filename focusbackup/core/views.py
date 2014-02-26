@@ -35,9 +35,9 @@ def retrieve_file(request, filename=''):
 
 def download_current_agent(request):
     current_agent = ClientVersion.objects.get(current_agent=True)
-    return redirect("/file/%s" % current_agent.agent.name)
+    return redirect("/uploads/%s" % current_agent.agent.name)
 
 
 def download_current_updater(request):
     current_agent = ClientVersion.objects.get(current_updater=True)
-    return redirect("/file/%s" % current_agent.updater.name)
+    return redirect("/uploads/%s" % current_agent.updater.name)
