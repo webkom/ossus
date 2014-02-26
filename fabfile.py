@@ -3,6 +3,7 @@ import sys
 
 from django.conf import settings
 from django_fabric import App
+from fabric.context_managers import cd
 
 from fabric.decorators import task
 from fabric.operations import put
@@ -35,8 +36,11 @@ def upload_client():
 
     #Upload Agent
     put("%s%s" % (settings.PATH_LOCAL_FOCUSBACKUPCLIENT, "Agent_jar/Agent.jar"), "/tmp/Agent.jar")
-    put("%s%s" % (settings.PATH_LOCAL_FOCUSBACKUPCLIENT, "Updater_jar/Updater.jar"), "/tmp/Update.jar")
+    put("%s%s" % (settings.PATH_LOCAL_FOCUSBACKUPCLIENT, "Updater_jar/Updater.jar"), "/tmp/Updater.jar")
     put("%s%s" % (settings.PATH_LOCAL_FOCUSBACKUPCLIENT, "setup_jar/setup.jar"), "/tmp/installer.jar")
+
+    with cd(site.project_paths['prod']):
+        site.run_management_command('prod', "set_new_client")
 
 
 @task
