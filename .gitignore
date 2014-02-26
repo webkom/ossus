@@ -2,6 +2,7 @@
 *.pyo
 *.orig
 *~
+*.json
 local.py
 .swp
 *.egg-info
