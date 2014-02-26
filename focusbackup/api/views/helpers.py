@@ -61,11 +61,11 @@ def build_client_version(obj):
 
     if obj.agent:
         agent = {'name': obj.agent.name}
-        agent_link = settings.URL_TO_SITE + "file/" + obj.agent.name
+        agent_link = settings.URL_TO_SITE + "uploads/" + obj.agent.name
 
     if obj.updater:
         updater = {'name': obj.updater.name}
-        updater_link = settings.URL_TO_SITE + "file/" + obj.updater.name
+        updater_link = settings.URL_TO_SITE + "uploads/" + obj.updater.name
 
     return {
         'id': obj.id,
