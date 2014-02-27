@@ -38,6 +38,9 @@ class Machine(models.Model):
         return self.current_agent_version == ClientVersion.objects.get(current_agent=True) and \
                self.current_updater_version == ClientVersion.objects.get(current_updater=True)
 
+    def lost_connection_to_client(self):
+        return datetime.datetime.now() - self.last_connection_to_client > datetime.timedelta(minutes=10)
+
     def set_last_connection_to_client(self):
         self.last_connection_to_client = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.save()
