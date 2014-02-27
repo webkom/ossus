@@ -6,28 +6,28 @@ from django.forms.widgets import TextInput, Select
 
 from focusbackup.app.backup.models import Backup, Folder, Schedule, SQL, sql_types
 from focusbackup.app.machine.models import MachineLog, MachineStats
+from focusbackup.core.forms import BootstrapModelForm
 
 
-class BackupForm(ModelForm):
+class BackupForm(BootstrapModelForm):
     class Meta:
         model = Backup
         fields = ('time_started', 'time_ended')
 
 
-class MachineLogForm(ModelForm):
+class MachineLogForm(BootstrapModelForm):
     class Meta:
         model = MachineLog
         fields = ('datetime', 'text', 'type')
 
 
-class MachineStatsForm(ModelForm):
+class MachineStatsForm(BootstrapModelForm):
     class Meta:
         model = MachineStats
         fields = ('datetime', 'load_average', 'cpu_stolen',
                   'cpu_user', 'cpu_system', 'mem_free', 'mem_used')
 
-
-class ScheduleForm(ModelForm):
+class ScheduleForm(BootstrapModelForm):
     def __init__(self, *args, **kwargs):
         user = None
 
@@ -46,7 +46,7 @@ class ScheduleForm(ModelForm):
                   "repeat_every_minute", "active", "versions_count")
 
 
-class FolderBackupForm(ModelForm):
+class FolderBackupForm(BootstrapModelForm):
     local_folder_path = forms.CharField(max_length=255,
                                         widget=TextInput(attrs={'class': 'input-xxlarge'}))
 
@@ -58,7 +58,7 @@ class FolderBackupForm(ModelForm):
 ScheduleFoldersForm = inlineformset_factory(Schedule, Folder, form=FolderBackupForm, extra=1)
 
 
-class SQLBackupForm(ModelForm):
+class SQLBackupForm(BootstrapModelForm):
     type = forms.ChoiceField(choices=sql_types, widget=Select(attrs={'class': 'input-small', }))
     host = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-small', }))
     port = forms.CharField(max_length=255, widget=TextInput(attrs={'class': 'input-mini', }))

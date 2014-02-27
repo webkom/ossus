@@ -32,7 +32,7 @@ class Schedule(models.Model):
 
     #Used to choose folder to save file
     current_version_in_loop = models.IntegerField(blank=True, default=1)
-    versions_count = models.IntegerField(default=10)
+    versions_count = models.IntegerField(default=10, verbose_name="Number of copies")
 
     #Perform backup every x minute
     repeat_every_minute = models.IntegerField(default=360, choices=schedule_every_minute_choices)
