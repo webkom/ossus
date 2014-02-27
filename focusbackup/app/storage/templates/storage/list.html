@@ -1,1 +1,43 @@
 {% extends "storage/base.html" %}
+
+
+{% block main %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Host</th>
+            <th>Username</th>
+            <th>Folder</th>
+            <th>Notes</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for storage in storages.all %}
+            <tr>
+                <td><i class="icon-hdd"></i> <a
+                        href="/storages/{{ storage.id }}/view/">{{ storage.name }}</a>
+                </td>
+                <td>{{ storage.type }}</td>
+                <td>{{ storage.host }}</td>
+                <td>{{ storage.username }}</td>
+                <td>{{ storage.folder }}</td>
+                <td>{{ storage.notes }}</td>
+                <td class="center">
+                    <a class="btn btn-info"
+                       href="{% url 'focusbackup.app.storage.views.edit' storage.id %}">
+                        <i class="fa fa-edit "></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+{% endblock %}

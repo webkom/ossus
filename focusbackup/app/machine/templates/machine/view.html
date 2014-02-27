@@ -259,7 +259,7 @@
                         {% for log in machine.get_latest_logs %}
                             <tr>
                                 <td>{{ log.datetime|date:"d.m.Y H:i" }}</td>
-                                <td>{{ log.text|truncatechars:60 }}</td>
+                                <td>{{ log.text|truncatechars:40 }}</td>
                                 <td>
                                     <span class="label label-success">{{ log.type }}</span>
                                 </td>
@@ -268,7 +268,7 @@
 
                         </tbody>
                     </table>
-                    <a href="{% url 'machines.view_log' machine.id %}">see more logs</a>
+                    <a href="{% url 'machines.view_log' machine.id %}">see more</a>
                 </div>
             </div>
         </div>
@@ -286,7 +286,7 @@
                         {% for backup in machine.get_latest_backups %}
                             <tr>
                                 <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
-                                <td>{{ backup.schedule.name|truncatechars:60 }}</td>
+                                <td>{{ backup.schedule.name|truncatechars:40 }}</td>
 
                                 <td class="left">
                                     {% if backup.recover_link %}
@@ -299,7 +299,7 @@
 
                         </tbody>
                     </table>
-                    <a href="{% url 'machines.view_backups' machine.id %}">see more backups</a>
+                    <a href="{% url 'machines.view_backups' machine.id %}">see more</a>
                 </div>
             </div>
         </div>

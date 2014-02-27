@@ -4,63 +4,25 @@
 
 {% block content %}
 
-    {% block main %}
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="box">
-                    <div class="box-header" data-original-title>
-                        <h2><i class="icon-hdd"></i><span class="break"></span>{{ title }}</h2>
-                    </div>
-                    <div class="box-content">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Host</th>
-                                <th>Username</th>
-                                <th>Folder</th>
-                                <th>Notes</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            {% for storage in storages.all %}
-                                <tr>
-                                    <td><i class="icon-hdd"></i> <a
-                                            href="/storages/{{ storage.id }}/view/">{{ storage.name }}</a>
-                                    </td>
-                                    <td>{{ storage.type }}</td>
-                                    <td>{{ storage.host }}</td>
-                                    <td>{{ storage.username }}</td>
-                                    <td>{{ storage.folder }}</td>
-                                    <td>{{ storage.notes }}</td>
-                                    <td class="center">
-                                        <a class="btn btn-success"
-                                           href="{% url 'focusbackup.app.storage.views.edit' storage.id %}">
-                                            <i class="icon-zoom-in "></i>
-                                        </a>
-                                        <a class="btn btn-info"
-                                           href="{% url 'focusbackup.app.storage.views.edit' storage.id %}">
-                                            <i class="icon-edit "></i>
-                                        </a>
-                                        <a class="btn btn-danger"
-                                           href="{% url 'focusbackup.app.storage.views.edit' storage.id %}">
-                                            <i class="icon-trash "></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    <div class="header">
+        <div class="col-md-12">
+            <h3 class="header-title">Storages</h3>
         </div>
 
-    {% endblock %}
+        {% if not storage %}
+
+            <ul class="nav nav-tabs">
+                <li><a href="{% url "storages.new" %}">New storage</a></li>
+            </ul>
+
+        {% endif %}
+
+    </div>
+
+    <div class="main-content">
+        {% block main %}{% endblock %}
+    </div>
+
 
 {% endblock %}

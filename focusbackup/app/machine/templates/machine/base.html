@@ -16,7 +16,15 @@
                 <li><a href="{% url "machines.view_backups" machine.id %}">Backups</a></li>
                 <li><a href="{% url "machines.view_log" machine.id %}">Log</a></li>
             </ul>
+
+        {% else %}
+
+            <ul class="nav nav-tabs">
+                <li><a href="{% url "machines.new" %}">New server</a></li>
+            </ul>
+
         {% endif %}
+
     </div>
 
     <div class="main-content">
