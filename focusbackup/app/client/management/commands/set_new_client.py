@@ -9,11 +9,14 @@ class Command(loaddata):
     def handle (self, *args, **kwargs):
 
         client_version = ClientVersion()
-        client_version.name = "New update"
+        client_version.name = "Client"
 
         client_version.agent = File(open("/tmp/Agent.jar"))
         client_version.updater = File(open("/tmp/Updater.jar"))
         client_version.installer = File(open("/tmp/installer.jar"))
 
         client_version.save()
+        client_version.name = "Client %s" % client_version.id
+        client_version.save()
+
         client_version.set_current()
