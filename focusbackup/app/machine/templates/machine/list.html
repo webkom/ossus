@@ -1,76 +1,60 @@
-{% extends "base.html" %}
+{% extends "machine/base.html" %}
 {% load i18n %}
 
-{% block content %}
+{% block main %}
+
+    <style>
+
+        .machine-round {
+            border: 1px solid #eee;
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+        .machine-round .error {
+            color: red;
+        }
+
+    </style>
 
     {% for customer in customers %}
         {% if customer.machines.all %}
 
             <div class="row">
-                <div class="col-md-12">
-
-                    <h2>{{ customer.name }}</h2>
-
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <td style="width: 40%"></td>
-                            <td style="width: 20%">Last online</td>
-                            <td style="width: 15%">Status</td>
-                            <td></td>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        {% for machine in customer.machines.all %}
-
-                            <tr>
-                                <td>
-                                    <a href="{% url 'machines.view' machine.id %}">{{ machine.name }}</a>
-                                </td>
-                                <td>
-                                    <i class="icon-time"></i>
-                                    {{ machine.last_connection_to_client|timesince }} ago
-
-                                </td>
-                                <td>
-                                    {% if machine.running_backup %}
-                                        <i class="icon-adjust"></i>
-                                        {% trans "running backup" %}
-                                    {% elif not machine.is_up_to_date %}
-                                        <i class="icon-remove"></i> {% trans "Outdated" %}
-                                    {% else %}
-                                        <i class="icon-ok"></i>
-                                    {% endif %}
-                                </td>
-
-                                <td class="center">
-                                    <a class="btn btn-success"
-                                       href="{% url 'focusbackup.app.machine.views.view' machine.id %}">
-                                        <i class="icon-zoom-in "></i>
-                                    </a>
-                                    <a class="btn btn-info"
-                                       href="{% url 'focusbackup.app.machine.views.edit' machine.id %}">
-                                        <i class="icon-edit "></i>
-                                    </a>
-                                    <a class="btn btn-danger"
-                                       href="{% url 'focusbackup.app.machine.views.edit' machine.id %}">
-                                        <i class="icon-trash "></i>
-                                    </a>
-                                </td>
-
-                            </tr>
-
-                        {% endfor %}
-
-                        </tbody>
-                    </table>
+                <div class="col-md-3">
+                    <h3>{{ customer.name }}</h3>
                 </div>
+
+                <div class="col-md-9">
+
+
+                    {% for machine in customer.machines.all %}
+                        <a href='{% url 'machines.view' machine.id %}'>
+                            {% if not machine.is_up_to_date %}
+                                <div class="machine-round">
+                                    <div class="title error">
+                                        <i class="fa fa-warning"></i> {{ machine.name }}
+                                    </div>
+                                </div></a>
+                            {% else %}
+                                <div class="machine-round">
+                                    <div class="title">
+                                        <i class="fa fa-desktop"></i> {{ machine.name }}
+                                    </div>
+                                </div></a>
+                            {% endif %}
+
+
+                    {% endfor %}
+
+                </div>
+
             </div>
 
+            <hr>
 
         {% endif %}
-
     {% endfor %}
-
 {% endblock %}

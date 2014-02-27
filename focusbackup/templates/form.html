@@ -2,12 +2,23 @@
 
 {% block content %}
 
-    <form class="form-horizontal" role="form">
-        {% csrf_token %}
-        {% include "form_fields.html" %}
+    <div class="header">
+        <div class="col-md-12">
+            <h3 class="header-title">{{ title }}</h3>
+        </div>
+    </div>
 
-        <input type="submit" class="btn btn-success" value="Save">
+    <div class="main-content">
+        <div class="row">
+            <form class="form-horizontal" role="form" method="POST">
+                {% csrf_token %}
+                {% include "form_fields.html" %}
 
-    </form>
+                <input type="submit" class="btn btn-success" value="Save">
+            </form>
+        </div>
+    </div>
+
+
 
 {% endblock %}

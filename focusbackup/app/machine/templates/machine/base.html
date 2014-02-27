@@ -2,26 +2,32 @@
 {% load i18n %}
 {% load menu_tags %}
 
-
 {% block content %}
 
-
-    {% if machine %}
-        <div class="subnav">
-            <ul class="nav nav-pills">
-                <li><a href="{% url "machines.view" machine.id %}">Info</a></li>
-                <li>
-                    <a href="{% url "machines.view_schedules" machine.id %}">Schedules</a>
-                </li>
-                <li>
-                    <a href="{% url "machines.view_backups" machine.id %}">Backups</a>
-                </li>
-                <li><a href="{% url "machines.view_log" machine.id %}">Log</a></li>
-            </ul>
+    <div class="header">
+        <div class="col-md-12">
+            <h3 class="header-title">Dashboard</h3>
         </div>
-    {% endif %}
 
-    {% block main %}{% endblock %}
+        {% if machine %}
+            <div class="subnav">
+                <ul class="nav nav-pills">
+                    <li><a href="{% url "machines.view" machine.id %}">Info</a></li>
+                    <li>
+                        <a href="{% url "machines.view_schedules" machine.id %}">Schedules</a>
+                    </li>
+                    <li>
+                        <a href="{% url "machines.view_backups" machine.id %}">Backups</a>
+                    </li>
+                    <li><a href="{% url "machines.view_log" machine.id %}">Log</a></li>
+                </ul>
+            </div>
+        {% endif %}
 
+    </div>
+
+    <div class="main-content">
+        {% block main %}{% endblock %}
+    </div>
 
 {% endblock %}

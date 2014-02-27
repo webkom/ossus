@@ -1,75 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Focus24</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <!-- Le styles -->
-    <link href="/static/css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-            /* Override some defaults */
-        html, body {
-            background-color: #eee;
-        }
-        body {
-            padding-top: 40px;
-        }
-        .container {
-            width: 300px;
-        }
+    <title>ArkAdmin Theme</title>
+    <link rel="shortcut icon" href="{{ STATIC_URL }}img/ico/favicon.png"/>
 
-            /* The white background content wrapper */
-        .container > .content {
-            background-color: #fff;
-            padding: 20px;
-            margin: 0 -20px;
-            -webkit-border-radius: 10px 10px 10px 10px;
-            -moz-border-radius: 10px 10px 10px 10px;
-            border-radius: 10px 10px 10px 10px;
-            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-            box-shadow: 0 1px 2px rgba(0,0,0,.15);
-        }
+    <!-- CSS -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}vendor/bootstrap-jasny/dist/extend/css/jasny-bootstrap.min.css" rel="stylesheet"/>
+    <!--<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />-->
+    <link href="{{ STATIC_URL }}vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/select2/select2.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/select2/select2-bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/jquery.uniform/themes/default/css/uniform.default.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ STATIC_URL }}css/ark.css" rel="stylesheet" type="text/css"/>
 
-        .login-form {
-            margin-left: 65px;
-        }
-
-        legend {
-            margin-right: -50px;
-            font-weight: bold;
-            color: #404040;
-        }
-
-    </style>
-
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
 </head>
-<body>
-<div class="container">
-    <div class="content">
-        <div class="row">
-            <div class="login-form">
 
-                {{ form.errors }}
+<body class="cover">
 
-                <h2>Focus24</h2>
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    <fieldset>
-                        <div class="clearfix">
-                            <input type="text" name="username" placeholder="Username">
-                        </div>
-                        <div class="clearfix">
-                            <input type="password" name="password" placeholder="Password">
-                        </div>
-                        <button class="btn btn-primary" type="submit">Sign in</button>
-                    </fieldset>
-                </form>
+<div class="login-wrap">
+    <span class="brand">
+        Focus24
+    </span>
+
+    <div class="panel">
+
+        {% if form.errors %}
+
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-exclamation-triangle"></i>
+                <strong>Access denied!</strong>
             </div>
+
+        {% endif %}
+
+        <div class="panel-body">
+            <form action="" method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group {% if form.errors.username %} has-error {% endif %}">
+                    <input type="username" name="username" class="form-control" id="exampleInputEmail1"
+                           placeholder="Username"
+                           value="{% if form.username.value %}{{ form.username.value }}{% endif %}">
+
+                    {% if form.errors.username %}
+                        <span class="help-block">{{ form.errors.username }}</span>
+                    {% endif %}
+
+                </div>
+
+                <div class="form-group {% if form.errors.password %} has-error {% endif %}">
+
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                           placeholder="Password">
+
+                    {% if form.errors.password %}
+                        <span class="help-block">{{ form.errors.password }}</span>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-primary">Login</button>
+                <br/>
+                <br/>
+
+            </form>
         </div>
     </div>
-</div> <!-- /container -->
+</div>
+
+<!-- JS -->
+<script src="{{ STATIC_URL }}vendor/jquery/jquery.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery-ui/js/jquery-ui.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery.uniform/jquery.uniform.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/bootstrap-jasny/dist/extend/js/jasny-bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery-autosize/jquery.autosize.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/moment/min/moment.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="{{ STATIC_URL }}vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="{{ STATIC_URL }}vendor/dropzone/downloads/dropzone.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery-flot/jquery.flot.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery-flot/jquery.flot.pie.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery-flot/jquery.flot.stack.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery-flot/jquery.flot.resize.js"></script>
+<script src="{{ STATIC_URL }}vendor/select2/select2.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/fullcalendar/fullcalendar.min.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/prettify.js"></script>
+<script src="{{ STATIC_URL }}js/ark.min.js"></script>
 </body>
 </html>

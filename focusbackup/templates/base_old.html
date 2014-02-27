@@ -1,124 +1,178 @@
-{% load i18n %}
-{% load menu_tags %}
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    <meta name="description" content="description of your site">
-    <meta name="author" content="author of the site">
-    <title>Focus24</title>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/fonts.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/styles.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/toastr.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/fullcalendar.css">
-    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.knob.js"></script>
-    <script src="{{ STATIC_URL }}js/d3.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.sparkline.min.js"></script>
-    <script src="{{ STATIC_URL }}js/toastr.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.peity.min.js"></script>
-    <script src="{{ STATIC_URL }}js/fullcalendar.min.js"></script>
-    <script src="{{ STATIC_URL }}js/gcal.js"></script>
-    <script src="{{ STATIC_URL }}js/setup.js"></script>
-</head>
-<body>
-<div id="in-nav">
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <ul class="pull-right">
-                    <li><a href="/accounts/logout">Logout</a></li>
-                </ul>
-                <a id="logo" href="/">
-                    <h4>Focus<strong>24</strong></h4></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="in-sub-nav">
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <ul>
-                    <li><a href="/" class="active"><i class="batch home"></i><br>Dashboard</a></li>
-                    <li><a href="/machines/"><i class="batch users"></i><br>Servers</a></li>
-                    <li><a href="/customers/"><i class="batch settings"></i><br>Customers</a></li>
-                    <li><a href="/storages/"><i class="batch settings"></i><br>Storages</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="page">
-    <div class="page-container">
-        <div class="container">
-            <div class="row">
-                <div class="span3">
-                    {% block sidebar %}{% endblock %}
-                </div>
-                <div class="span9">
-                    <h4>{{ title }}</h4>
-                    {% block content %}
-                        <div class="row">
-                            <div class="span3">
-                                <h4>Dashboard</h4>
-                            </div>
-                            <div class="span9">
-                                <h4 class="header">Stats</h4>
+    <!-- Title here -->
+    <title>focus24</title>
+    <!-- Description, Keywords and Author -->
+    <meta name="description" content="Your description">
+    <meta name="keywords" content="Your,Keywords">
+    <meta name="author" content="ResponsiveWebInc">
 
-                                <div class="stats">
-                                    <div class="row-fluid">
-                                        <div class="span3">
-                                            <div class="stat info">
-                                                <h2>21</h2>
-                                                <h6>Tweets</h6>
-                                            </div>
-                                        </div>
-                                        <div class="span3">
-                                            <div class="stat danger">
-                                                <h2>04</h2>
-                                                <h6>Comments</h6>
-                                            </div>
-                                        </div>
-                                        <div class="span3">
-                                            <div class="stat warning">
-                                                <h2>17</h2>
-                                                <h6>Photos</h6>
-                                            </div>
-                                        </div>
-                                        <div class="span3">
-                                            <div class="stat inverse">
-                                                <h2>12</h2>
-                                                <h6>Followers</h6>
-                                            </div>
-                                        </div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600italic,600' rel='stylesheet'
+          type='text/css'>
+
+    <!-- Styles -->
+    <!-- Bootstrap CSS -->
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate css -->
+    <link href="{{ STATIC_URL }}css/animate.min.css" rel="stylesheet">
+    <!-- Calendar -->
+    <link href="{{ STATIC_URL }}css/fullcalendar.css" rel="stylesheet">
+    <!-- Bootstrap toggable -->
+    <link href="{{ STATIC_URL }}css/bootstrap-switch.css" rel="stylesheet">
+    <!-- Date and Time picker -->
+    <link href="{{ STATIC_URL }}css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- Star rating -->
+    <link href="{{ STATIC_URL }}css/rateit.css" rel="stylesheet">
+    <!-- Star rating -->
+    <link href="{{ STATIC_URL }}css/jquery.cleditor.css" rel="stylesheet">
+    <!-- jQuery UI -->
+    <link href="{{ STATIC_URL }}css/jquery-ui.css" rel="stylesheet">
+    <!-- prettyPhoto -->
+    <link href="{{ STATIC_URL }}css/prettyPhoto.css" rel="stylesheet">
+    <!-- Font awesome CSS -->
+    <link href="{{ STATIC_URL }}css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body>
+
+
+<!-- Logo & Navigation starts -->
+
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Logo -->
+                <div class="logo">
+                    <h1><a href="/">focus24</a></h1>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-lg-10">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="navbar navbar-inverse" role="banner">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse"
+                                data-target=".bs-navbar-collapse">
+                            <span>Menu</span>
+                        </button>
+                    </div>
+                    <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
+                        <ul class="nav navbar-nav">
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
+                                    {{ request.user.profile.company.name }} <b class="caret"></b></a>
+                                <!-- Big dropdown menu -->
+                                <ul class="dropdown-menu dropdown-big">
+                                    <!-- Dropdown menu header -->
+
+                                    <!-- Dropdown menu body -->
+                                    <div class="dropdown-body">
+                                        {% for company in request.user.profile.get_companies %}
+                                            <li>
+                                                <a href="{% url 'change_company' company.id %}">{{ company.name }}</a>
+                                            </li>
+                                        {% endfor %}
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endblock %}
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b
+                                        class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div class="page-content blocky">
+    <div class="container">
+        <div class="sidebar-dropdown"><a href="#">MENU</a></div>
+        <div class="sidey">
+            <div class="side-cont">
+                <ul class="nav">
+                    <!-- Main menu -->
+                    <li class="current">
+                        <a href="{% url 'focusbackup.app.machine.views.overview' %}">
+                            <i class="icon-th"></i> Machines</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'focusbackup.app.customer.views.overview' %}">
+                            <i class="icon-user"></i>Customers</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'focusbackup.app.storage.views.overview' %}">
+                            <i class="icon-hdd"></i>
+                            Storages
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mainy">
+            <!-- Page title -->
+
+            <div class="page-title">
+                <h2>{{ title }}</h2>
+                <hr/>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="awidget">
+                        <div class="awidget-body">
+                            {% block content %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer starts -->
     <footer>
         <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <p class="pull-right">Focus Security AS</p>
-                </div>
+
+            <div class="copy text-center">
+                Focus Security AS
             </div>
+
         </div>
     </footer>
-</div>
+    <!-- Footer ends -->
+
+    <!-- Scroll to top -->
+    <span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span>
+    <!-- Javascript files -->
+    <!-- jQuery -->
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="{{ STATIC_URL }}js/jquery-ui-1.10.2.custom.min.js"></script>
+
+    {% block js %}{% endblock %}
 </body>
-
-<script src="{{ STATIC_URL }}js/d3-setup.js"></script>
-<script src="{{ STATIC_URL }}js/highcharts.js"></script>
-
 </html>

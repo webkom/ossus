@@ -1,178 +1,161 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <!-- Title here -->
-    <title>focus24</title>
-    <!-- Description, Keywords and Author -->
-    <meta name="description" content="Your description">
-    <meta name="keywords" content="Your,Keywords">
-    <meta name="author" content="ResponsiveWebInc">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus24</title>
+    <link rel="shortcut icon" href="/{{ STATIC_URL }}img/ico/favicon.png"/>
 
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600italic,600' rel='stylesheet'
-          type='text/css'>
+    <!-- CSS -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}vendor/bootstrap-jasny/dist/extend/css/jasny-bootstrap.min.css" rel="stylesheet"/>
+    <!--<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />-->
+    <link href="{{ STATIC_URL }}vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/select2/select2.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/select2/select2-bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/jquery.uniform/themes/default/css/uniform.default.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ STATIC_URL }}css/prettify.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}vendor/fullcalendar/fullcalendar.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}vendor/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print"/>
+    <link href="{{ STATIC_URL }}css/ark.css" rel="stylesheet" type="text/css"/>
 
-    <!-- Styles -->
-    <!-- Bootstrap CSS -->
-    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
-    <!-- Animate css -->
-    <link href="{{ STATIC_URL }}css/animate.min.css" rel="stylesheet">
-    <!-- Calendar -->
-    <link href="{{ STATIC_URL }}css/fullcalendar.css" rel="stylesheet">
-    <!-- Bootstrap toggable -->
-    <link href="{{ STATIC_URL }}css/bootstrap-switch.css" rel="stylesheet">
-    <!-- Date and Time picker -->
-    <link href="{{ STATIC_URL }}css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <!-- Star rating -->
-    <link href="{{ STATIC_URL }}css/rateit.css" rel="stylesheet">
-    <!-- Star rating -->
-    <link href="{{ STATIC_URL }}css/jquery.cleditor.css" rel="stylesheet">
-    <!-- jQuery UI -->
-    <link href="{{ STATIC_URL }}css/jquery-ui.css" rel="stylesheet">
-    <!-- prettyPhoto -->
-    <link href="{{ STATIC_URL }}css/prettyPhoto.css" rel="stylesheet">
-    <!-- Font awesome CSS -->
-    <link href="{{ STATIC_URL }}css/font-awesome.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
+    <!-- Remove this line on production-->
+    <link href="{{ STATIC_URL }}css/examples.css" rel="stylesheet" type="text/css"/>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="#">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 </head>
 
-<body>
+<body class="cover">
 
-
-<!-- Logo & Navigation starts -->
-
-<div class="header">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <!-- Logo -->
-                <div class="logo">
-                    <h1><a href="/">focus24</a></h1>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="row">
-                    <div class="col-lg-10">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="navbar navbar-inverse" role="banner">
-                    <div class="navbar-header">
-                        <button class="navbar-toggle" type="button" data-toggle="collapse"
-                                data-target=".bs-navbar-collapse">
-                            <span>Menu</span>
-                        </button>
-                    </div>
-                    <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
-                        <ul class="nav navbar-nav">
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
-                                    {{ request.user.profile.company.name }} <b class="caret"></b></a>
-                                <!-- Big dropdown menu -->
-                                <ul class="dropdown-menu dropdown-big">
-                                    <!-- Dropdown menu header -->
-
-                                    <!-- Dropdown menu body -->
-                                    <div class="dropdown-body">
-                                        {% for company in request.user.profile.get_companies %}
-                                            <li>
-                                                <a href="{% url 'change_company' company.id %}">{{ company.name }}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </div>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b
-                                        class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+<div class="wrapper">
+    <div class="navbar navbar-default navbar-static-top navbar-main" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Focus24</a>
         </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="visible-xs">
+                <a href="#" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                </a>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    {{ request.user.profile.company.name }}
+                <span class="label label-danger arrowed arrow-left-in pull-right">
+
+                    {% if request.user.profile.get_companies.count > 1 %}
+                        {{ request.user.profile.get_companies.count }}
+                    {% endif %}
+
+                </span>
+                    <i class="fa"></i>
+                </a>
+
+                {% if request.user.profile.get_companies.count > 1 %}
+                    <ul class="dropdown-menu pull-right">
+                        {% for company in request.user.profile.get_companies %}
+                            <li>
+                                <a href="{% url 'change_company' company.id %}">{{ company.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    {{ request.user.get_full_name }}
+                    <span class="label label-danger arrowed arrow-left-in pull-right"></span>
+                    <i class="fa"></i>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="#"><i class="fa fa-gear"></i>Account Settings</a></li>
+                    <li><a href="profile.html"><i class="fa fa-user"></i>View Profile</a></li>
+                    <li class="divider"></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out"></i>Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+
     </div>
+    <!-- END: HEAD NAV -->
+
+    <!-- BODY -->
+    <div class="body">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <ul class="nav nav-stacked">
+                <li class="active"><a href="/"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a></li>
+
+                <li>
+                    <a href="{% url 'focusbackup.app.machine.views.overview' %}">
+                        <i class="fa fa-dashboard fa-fw"></i>
+                        Servers
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'focusbackup.app.customer.views.overview' %}">
+                        <i class="fa fa-dashboard fa-fw">
+                        </i>Customers
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'focusbackup.app.storage.views.overview' %}">
+                        <i class="fa fa-dashboard fa-fw"></i>Storages
+                    </a>
+                </li>
+
+            </ul>
+        </aside>
+        <!-- END: SIDEBAR -->
+
+        <section class="content">
+            {% block content %}
+            {% endblock %}
+        </section>
+
+    </div>
+    <!-- END: BODY -->
 </div>
 
-<div class="page-content blocky">
-    <div class="container">
-        <div class="sidebar-dropdown"><a href="#">MENU</a></div>
-        <div class="sidey">
-            <div class="side-cont">
-                <ul class="nav">
-                    <!-- Main menu -->
-                    <li class="current">
-                        <a href="{% url 'focusbackup.app.machine.views.overview' %}">
-                            <i class="icon-th"></i> Machines</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'focusbackup.app.customer.views.overview' %}">
-                            <i class="icon-user"></i>Customers</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'focusbackup.app.storage.views.overview' %}">
-                            <i class="icon-hdd"></i>
-                            Storages
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="mainy">
-            <!-- Page title -->
-
-            <div class="page-title">
-                <h2>{{ title }}</h2>
-                <hr/>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="awidget">
-                        <div class="awidget-body">
-                            {% block content %}{% endblock %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Footer starts -->
-    <footer>
-        <div class="container">
-
-            <div class="copy text-center">
-                Focus Security AS
-            </div>
-
-        </div>
-    </footer>
-    <!-- Footer ends -->
-
-    <!-- Scroll to top -->
-    <span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span>
-    <!-- Javascript files -->
-    <!-- jQuery -->
-    <script src="{{ STATIC_URL }}js/jquery.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-    <!-- jQuery UI -->
-    <script src="{{ STATIC_URL }}js/jquery-ui-1.10.2.custom.min.js"></script>
-
-    {% block js %}{% endblock %}
+<!-- JS -->
+<script src="{{ STATIC_URL }}vendor/jquery/jquery.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery-ui/js/jquery-ui.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery.uniform/jquery.uniform.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/bootstrap-jasny/dist/extend/js/jasny-bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery-autosize/jquery.autosize.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/moment/min/moment.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="{{ STATIC_URL }}vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="{{ STATIC_URL }}vendor/dropzone/downloads/dropzone.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery-flot/jquery.flot.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery-flot/jquery.flot.pie.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery-flot/jquery.flot.stack.js"></script>
+<script src="{{ STATIC_URL }}vendor/jquery-flot/jquery.flot.resize.js"></script>
+<script src="{{ STATIC_URL }}vendor/select2/select2.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/fullcalendar/fullcalendar.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/nestable/jquery.nestable.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/prettify.js"></script>
+<script src="{{ STATIC_URL }}js/ark.min.js"></script>
 </body>
 </html>
+
