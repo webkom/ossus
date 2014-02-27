@@ -2386,9 +2386,7 @@ div.radio span.checked:before {
   text-transform: uppercase;
   font-weight: bold;
 }
-.table a {
-  text-decoration: underline;
-}
+
 .table .table-preview img {
   width: 60px;
   margin-right: 10px;
@@ -2422,7 +2420,6 @@ div.radio span.checked:before {
 }
 a.fc-event:hover {
   color: #ffffff;
-  text-decoration: underline;
 }
 .fc-widget-header,
 .fc-widget-content {

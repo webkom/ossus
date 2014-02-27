@@ -3,61 +3,30 @@
 
 {% block main %}
 
-    <section id="responsive">
-        <div class="page-header">
+    <div class="row">
+        <div class="col-md-3">
             <h3>{{ customer.name }}</h3>
         </div>
-        <!-- Supported devices -->
-        <div class="row">
-            <div class="span4">
 
-            </div>
-            <!-- /.span -->
-            <div class="span12">
-                <h4>{% trans "Machines" %}</h4>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <td></td>
-                        <td>Last online</td>
-                        <td>Status</td>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    {% for machine in customer.machines.all %}
-
-                        <tr>
-                            <td>
-                                <a href="{% url 'machines.view' machine.id %}">{{ machine.name }}</a></td>
-
-                            <td><i class="icon-time"></i> {{ machine.last_connection_to_client|timesince }} ago</td>
-
-                            <td>
-                                {% if machine.running_backup %}
-                                    <i class="icon-adjust"></i> {% trans "running backup" %}
-                                {% elif not machine.is_up_to_date %}
-                                    <i class="icon-remove"></i> {% trans "Outdated" %}
-                                {% else %}
-                                    <i class="icon-ok"></i>
-                                {% endif %}
-                            </td>
-                            <td><a href="/machines/{{ machine.id }}/edit/"><i class="icon-pencil"></i></a></td>
-
-                        </tr>
-
-                    {% endfor %}
-
-
-                    </tbody>
-                </table>
-
-
-            </div>
+        <div class="col-md-9">
+            {% for machine in customer.machines.all %}
+                <a href='{% url 'machines.view' machine.id %}'>
+                    {% if machine.lost_connection_to_client %}
+                        <div class="machine-round">
+                            <div class="title error"><i class="fa fa-warning"></i> {{ machine.name }}</div>
+                        </div>
+                    {% elif not machine.is_up_to_date %}
+                        <div class="machine-round">
+                            <div class="title warning"><i class="fa fa-adjust"></i> {{ machine.name }}</div>
+                        </div>
+                    {% else %}
+                        <div class="machine-round">
+                            <div class="title ok"><i class="fa fa-check"></i> {{ machine.name }}</div>
+                        </div>
+                    {% endif %}
+                </a>
+            {% endfor %}
         </div>
-
-
-    </section>
+    </div>
 
 {% endblock %}

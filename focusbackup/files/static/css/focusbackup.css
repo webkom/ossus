@@ -1,0 +1,16 @@
+.machine-round {
+    border: 1px solid #eee;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.machine-round .error {
+    color: red;
+}
+
+.machine-round .ok {
+    color: #5cb85c;
+}
