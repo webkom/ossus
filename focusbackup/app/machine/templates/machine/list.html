@@ -34,17 +34,14 @@
                         <a href='{% url 'machines.view' machine.id %}'>
                             {% if not machine.is_up_to_date %}
                                 <div class="machine-round">
-                                    <div class="title error">
-                                        <i class="fa fa-warning"></i> {{ machine.name }}
-                                    </div>
-                                </div></a>
+                                    <div class="title error"><i class="fa fa-warning"></i> {{ machine.name }}</div>
+                                </div>
                             {% else %}
                                 <div class="machine-round">
-                                    <div class="title">
-                                        <i class="fa fa-desktop"></i> {{ machine.name }}
-                                    </div>
-                                </div></a>
+                                    <div class="title"><i class="fa fa-check"></i> {{ machine.name }}</div>
+                                </div>
                             {% endif %}
+                        </a>
 
 
                     {% endfor %}

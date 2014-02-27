@@ -191,60 +191,63 @@
 {% block main %}
 
 
+
     <div class="row">
 
+        <div class="col-md-12">
 
-        <div class="col-md-4">
-            <div class="panel ">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Information</h3>
-                </div>
+
+            <div class="panel">
                 <div class="panel-body">
+                    <ul class="col-md-12 stats">
+                        <li class="stat col-md-2 col-sm-1 col-xs-6">
+                            <span><b class="value">{{ machine.id }}</b> </span>
+                            <em>ID</em>
+                        </li>
+                        <li class="stat col-md-5 col-sm-5 col-xs-6">
+                            <span><b class="value">{{ machine.name }}</b> </span>
+                            <em>Name</em>
+                        </li>
+                        <li class="stat col-md-5 col-sm-5 col-xs-6">
+                            <span><b class="value">{{ machine.customer.name }}</b> </span>
+                            <em>Customer</em>
+                        </li>
 
-                    <table class="table table-striped">
-                        <tbody>
-                        <tr>
-                            <td class="span2">ID</td>
-                            <td>{{ machine.id }}</td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>{{ machine.name }}</td>
-                        </tr>
-                        <tr>
-                            <td>Customer</td>
-                            <td>{{ machine.customer.name }}</td>
-                        </tr>
-                        <tr>
-                            <td>Last online</td>
-                            <td>{{ machine.last_connection_to_client|timesince }}</td>
-                        </tr>
-                        <tr>
-                            <td>External IP</td>
-                            <td>{{ machine.external_ip }}</td>
-                        </tr>
-                        <tr>
-                            <td>Auto version</td>
-                            <td>{{ machine.auto_version }}</td>
-                        </tr>
-                        <tr>
-                            <td>Agent</td>
-                            <td>{{ machine.current_agent_version }}</td>
-                        </tr>
-                        <tr>
-                            <td>Updater</td>
-                            <td>{{ machine.current_updater_version }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <br>
+                    </ul>
                 </div>
             </div>
+
+            <div class="panel">
+                <div class="panel-body">
+                    <ul class="col-md-12 stats">
+
+                        <li class="stat col-md-2 col-sm-4 col-xs-6">
+                            <span><b
+                                    class="value">{{ machine.last_connection_to_client|timesince }} ago</b> </span>
+                            <em>Last seen</em>
+                        </li>
+                        <li class="stat col-md-5 col-sm-4 col-xs-6">
+                            <span><b class="value">{{ machine.external_ip }}</b> </span>
+                            <em>IP</em>
+                        </li>
+                        <li class="stat col-md-5 col-sm-4 col-xs-6">
+
+                            <span><b class="value">{{ machine.current_agent_version }}, {{ machine.current_updater_version }}</b> </span>
+                            <em>Agent, Updater</em>
+
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
         </div>
 
+    </div>
 
-        <div class="col-md-4">
+    <div class="row">
+
+        <div class="col-md-6">
             <div class="panel ">
                 <div class="panel-heading">
                     <h3 class="panel-title">Log</h3>
@@ -255,9 +258,9 @@
                         <tbody>
                         {% for log in machine.get_latest_logs %}
                             <tr>
-                                <td class="center">{{ log.datetime|date:"d.m.Y H:i" }}</td>
-                                <td class="center">{{ log.text|truncatechars:30 }}</td>
-                                <td class="center">
+                                <td>{{ log.datetime|date:"d.m.Y H:i" }}</td>
+                                <td>{{ log.text|truncatechars:60 }}</td>
+                                <td>
                                     <span class="label label-success">{{ log.type }}</span>
                                 </td>
                             </tr>
@@ -271,7 +274,7 @@
         </div>
 
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="panel ">
                 <div class="panel-heading">
                     <h3 class="panel-title">Backups</h3>
@@ -283,12 +286,14 @@
                         {% for backup in machine.get_latest_backups %}
                             <tr>
                                 <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
-                                <td>{{ backup.schedule.name }}</td>
-                                <td>
+                                <td>{{ backup.schedule.name|truncatechars:60 }}</td>
+
+                                <td class="left">
                                     {% if backup.recover_link %}
-                                        <a href="{{ backup.recover_link }}" target="_blank">Recover</a>
+                                        <a href="{{ backup.recover_link }}" target="_blank">Download</a>
                                     {% endif %}
                                 </td>
+
                             </tr>
                         {% endfor %}
 
