@@ -56,15 +56,15 @@ class Machine(models.Model):
 
     def get_latest_stats(self):
         if self.stats.all().count() > 15:
-            return self.stats.all().order_by("id")[self.stats.all().count() - 10:]
+            return self.stats.all().order_by("id")[self.stats.all().count() - 20:]
 
         return self.stats.all().order_by("id")
 
     def get_latest_logs(self):
-        return self.logs.all().order_by("-id")[0:7]
+        return self.logs.all().order_by("-id")[0:8]
 
     def get_latest_backups(self):
-        return self.backups.all().order_by("-id")[0:6]
+        return self.backups.all().order_by("-id")[0:8]
 
     def running_backup(self):
         for schedule in self.schedules.all():

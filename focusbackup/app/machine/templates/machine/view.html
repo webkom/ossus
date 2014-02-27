@@ -4,7 +4,8 @@
 {% block js %}
     {{ block.super }}
 
-    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="{{ STATIC_URL }}js/highcharts.js"></script>
+
     <script type="text/javascript">
 
         var chart;
@@ -189,46 +190,150 @@
 
 {% block main %}
 
-    <h1>Info</h1>
-    <table class="table table-bordered table-striped">
-        <tbody>
-        <tr>
-            <td class="span2">ID</td>
-            <td>{{ machine.id }}</td>
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td>{{ machine.name }}</td>
-        </tr>
-        <tr>
-            <td>Customer</td>
-            <td>{{ machine.customer.name }}</td>
-        </tr>
-        <tr>
-            <td>Last online</td>
-            <td>{{ machine.last_connection_to_client|timesince }}</td>
-        </tr>
-        <tr>
-            <td>External IP</td>
-            <td>{{ machine.external_ip }}</td>
-        </tr>
-        <tr>
-            <td>Auto version</td>
-            <td>{{ machine.auto_version }}</td>
-        </tr>
-        <tr>
-            <td>Agent</td>
-            <td>{{ machine.current_agent_version }}</td>
-        </tr>
-        <tr>
-            <td>Updater</td>
-            <td>{{ machine.current_updater_version }}</td>
-        </tr>
-        </tbody>
-    </table>
 
-    <div id="container_load" style="width: 100%; height: 300px; margin: 0 auto"></div>
-    <div id="container_cpu" style="width: 100%; height: 300px; margin: 0 auto"></div>
-    <div id="container" style="width: 100%; height: 300px; margin: 0 auto"></div>
+    <div class="row">
+
+
+        <div class="col-md-4">
+            <div class="panel ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Information</h3>
+                </div>
+                <div class="panel-body">
+
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td class="span2">ID</td>
+                            <td>{{ machine.id }}</td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>{{ machine.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Customer</td>
+                            <td>{{ machine.customer.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Last online</td>
+                            <td>{{ machine.last_connection_to_client|timesince }}</td>
+                        </tr>
+                        <tr>
+                            <td>External IP</td>
+                            <td>{{ machine.external_ip }}</td>
+                        </tr>
+                        <tr>
+                            <td>Auto version</td>
+                            <td>{{ machine.auto_version }}</td>
+                        </tr>
+                        <tr>
+                            <td>Agent</td>
+                            <td>{{ machine.current_agent_version }}</td>
+                        </tr>
+                        <tr>
+                            <td>Updater</td>
+                            <td>{{ machine.current_updater_version }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <br>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="panel ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Log</h3>
+                </div>
+                <div class="panel-body">
+
+                    <table class="table table-striped">
+                        <tbody>
+                        {% for log in machine.get_latest_logs %}
+                            <tr>
+                                <td class="center">{{ log.datetime|date:"d.m.Y H:i" }}</td>
+                                <td class="center">{{ log.text|truncatechars:30 }}</td>
+                                <td class="center">
+                                    <span class="label label-success">{{ log.type }}</span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                    <a href="{% url 'machines.view_log' machine.id %}">see more logs</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="panel ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Backups</h3>
+                </div>
+                <div class="panel-body">
+
+                    <table class="table table-striped">
+                        <tbody>
+                        {% for backup in machine.get_latest_backups %}
+                            <tr>
+                                <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
+                                <td>{{ backup.schedule.name }}</td>
+                                <td>
+                                    {% if backup.recover_link %}
+                                        <a href="{{ backup.recover_link }}" target="_blank">Recover</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                    <a href="{% url 'machines.view_backups' machine.id %}">see more backups</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <div class="panel ">
+                <div class="panel-body">
+                    <div id="container_cpu" style="width: 100%; height: 300px; margin: 0 auto"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="panel ">
+                <div class="panel-body">
+
+                    <div id="container" style="width: 100%; height: 300px; margin: 0 auto"></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel ">
+                <div class="panel-body">
+                    <div id="container_load" style="width: 100%; height: 300px; margin: 0 auto"></div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
 
 {% endblock %}
