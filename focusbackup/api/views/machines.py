@@ -71,6 +71,19 @@ set_machine_external_ip = csrf_exempt(set_machine_external_ip)
 
 
 @require_valid_api_token()
+def set_busy_updating(request, id, busy):
+
+    machine = Machine.objects.get(id=id)
+    machine.updating_client = True if busy == '1' else False
+    machine.save()
+
+    return render_data("machine", build_machine_fields(machine))
+
+
+set_busy_updating = csrf_exempt(set_busy_updating)
+
+
+@require_valid_api_token()
 def set_machine_updater_version(request, id, version):
     client_version = ClientVersion.objects.get(id=version)
 

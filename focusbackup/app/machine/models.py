@@ -23,6 +23,8 @@ class Machine(models.Model):
 
     auto_version = models.BooleanField(default=True)
 
+    updating_client = models.BooleanField(default=False)
+
     #Current version running on client
     current_agent_version = models.ForeignKey(ClientVersion, related_name="agent_versions", null=True)
     current_updater_version = models.ForeignKey(ClientVersion, related_name="updater_versions", null=True)
@@ -82,7 +84,7 @@ class Machine(models.Model):
         return False
 
     def is_busy(self):
-        return self.running_restore() or self.running_backup()
+        return self.running_restore() or self.running_backup() or self.updating_client
 
     def get_last_backup_time(self):
         next_backup_time = None
