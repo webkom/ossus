@@ -58,7 +58,7 @@ class Machine(models.Model):
             return self.selected_updater_version
 
     def get_latest_stats(self):
-        if self.stats.all().count() > 15:
+        if self.stats.all().count() > 20:
             return self.stats.all().order_by("id")[self.stats.all().count() - 20:]
 
         return self.stats.all().order_by("id")
