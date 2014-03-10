@@ -53,11 +53,13 @@ class Machine(models.Model):
 
             for folder in schedule.folders.all():
                 folder_copy = deepcopy(folder)
+                folder_copy.pk = None
                 folder_copy.schedule = schedule_copy
                 folder_copy.save()
 
             for sql in schedule.sql_backups.all():
                 sql_copy = deepcopy(sql)
+                sql_copy.pk = None
                 sql_copy.schedule = schedule_copy
                 sql_copy.save()
 
