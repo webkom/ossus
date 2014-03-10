@@ -92,6 +92,7 @@ def create_new_machine_from_template(request, id, name):
     machine = template.clone()
 
     machine.name = name
+    machine.template = False
     machine.save()
 
     return render_data("machine", build_machine_fields(machine))
