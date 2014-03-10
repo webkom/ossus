@@ -18,6 +18,4 @@ class MachineForm(BootstrapModelForm):
 
     class Meta:
         model = Machine
-        fields = ('id', 'name', 'customer', 'local_temp_folder', 'agent_folder',
-                  'mysql_dump', 'auto_version', 'run_install',
-                  'selected_agent_version', 'selected_updater_version')
+        fields = ('id', 'name', 'customer', 'local_temp_folder', 'agent_folder', 'template')

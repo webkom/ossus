@@ -27,6 +27,7 @@ class MachineStatsForm(BootstrapModelForm):
         fields = ('datetime', 'load_average', 'cpu_stolen',
                   'cpu_user', 'cpu_system', 'mem_free', 'mem_used')
 
+
 class ScheduleForm(BootstrapModelForm):
     def __init__(self, *args, **kwargs):
         user = None
@@ -42,7 +43,7 @@ class ScheduleForm(BootstrapModelForm):
 
     class Meta:
         model = Schedule
-        fields = ("name", "storage", "from_date",
+        fields = ("name", "storage", "from_date", 'running_backup',
                   "repeat_every_minute", "active", "versions_count")
 
 

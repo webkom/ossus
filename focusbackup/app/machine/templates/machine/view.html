@@ -1,6 +1,11 @@
 {% extends "machine/base.html" %}
 {% load i18n %}
 
+{% block title %}
+{{ machine.name }}
+
+{% endblock title %}
+
 {% block js %}
     {{ block.super }}
 

@@ -1,0 +1,40 @@
+{% extends "machine/base.html" %}
+
+{% block main %}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact person</th>
+            <th>Contact email</th>
+            <th>Contact phone</th>
+            <th></th>
+        </tr>
+
+        </thead>
+        <tbody>
+
+        {% for customer in customers.all %}
+            <tr>
+                <td><i class="icon-user"></i> <a
+                        href="{% url 'focusbackup.app.customer.views.view' customer.id %}">{{ customer.name }}</a>
+                </td>
+                <td>{{ customer.address }}</td>
+                <td>{{ customer.contact_person }}</td>
+                <td>{{ customer.contact_phone }}</td>
+                <td>{{ customer.contact_email }}</td>
+                <td class="center">
+                    <a class="btn btn-info" href="{% url 'focusbackup.app.customer.views.edit' customer.id %}">
+                        <i class="fa fa-edit "></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
+{% endblock %}

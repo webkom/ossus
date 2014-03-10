@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from copy import deepcopy
 import datetime
 
 from django.db import models
@@ -33,8 +34,34 @@ class Machine(models.Model):
     selected_agent_version = models.ForeignKey(ClientVersion, related_name="agent_selected", null=True, blank=True)
     selected_updater_version = models.ForeignKey(ClientVersion, related_name="updater_selected", null=True, blank=True)
 
+    template = models.BooleanField(default=False)
+
     def __unicode__(self):
         return "Machine: %s, id: %s" % (self.name, self.id)
+
+    def clone(self):
+        copy = deepcopy(self)
+        copy.pk = None
+        copy.template = False
+        copy.save()
+
+        for schedule in self.schedules.all():
+            schedule_copy = deepcopy(schedule)
+            schedule_copy.pk = None
+            schedule_copy.machine = copy
+            schedule_copy.save()
+
+            for folder in schedule.folders.all():
+                folder_copy = deepcopy(folder)
+                folder_copy.schedule = schedule_copy
+                folder_copy.save()
+
+            for sql in schedule.sql_backups.all():
+                sql_copy = deepcopy(sql)
+                sql_copy.schedule = schedule_copy
+                sql_copy.save()
+
+        return copy
 
     def is_up_to_date(self):
         return self.current_agent_version == ClientVersion.objects.get(current_agent=True) and \

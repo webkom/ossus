@@ -18,6 +18,15 @@ def overview(request):
 
 
 @login_required()
+def templates(request):
+
+    return render(request, "machine/list_templates.html", {
+        'templates': request.user.profile.get_machines().filter(template=True),
+        'title': 'List all templates'}
+    )
+
+
+@login_required()
 def view(request, id):
     machine = request.user.profile.get_machines().get(id=id)
     return render(request, 'machine/view.html', {'machine': machine,

@@ -89,6 +89,9 @@ class Backup(models.Model):
     time_ended = models.DateTimeField(null=True, blank=True)
     day_folder_path = models.CharField(max_length=150, blank=True)
 
+    def __unicode__(self):
+        return u"Backup machine: %s, schedule: %s" % (self.machine, self.schedule)
+
 
     def is_recoverable(self):
         return self.schedule.backups.filter(id__gt=self.id).count() < self.schedule.versions_count
@@ -103,13 +106,13 @@ class Backup(models.Model):
 
 
 class Folder(models.Model):
-    schedule = models.ForeignKey(Schedule, related_name='folders')
+    schedule = models.ForeignKey(Schedule, related_name='folders', null=True)
 
     local_folder_path = models.TextField()
     skip_hidden_folders = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return self.schedule
+        return u"Folder %s, schedule %s, machine %s" % (self.local_folder_path, self.schedule, self.schedule.machine)
 
 
 sql_types = (
@@ -120,7 +123,7 @@ sql_types = (
 
 
 class SQL(models.Model):
-    schedule = models.ForeignKey(Schedule, related_name='sql_backups')
+    schedule = models.ForeignKey(Schedule, related_name='sql_backups', null=True)
     type = models.CharField(max_length=40, choices=sql_types)
 
     host = models.TextField()
@@ -131,3 +134,4 @@ class SQL(models.Model):
 
     def __unicode__(self):
         return "SQLBackup: %s" % self.host
+

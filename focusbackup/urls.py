@@ -20,7 +20,6 @@ urlpatterns = patterns(
     (r'^download_current_agent/', 'focusbackup.core.views.download_current_agent'),
     (r'^download_current_updater/', 'focusbackup.core.views.download_current_updater'),
     (r'^download_current_installer/', 'focusbackup.core.views.download_current_installer'),
-
 )
 
 urlpatterns += staticfiles_urlpatterns()

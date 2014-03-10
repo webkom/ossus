@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+from django.shortcuts import get_object_or_404
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -8,6 +9,7 @@ from focusbackup.api.forms import LogAPIForm
 from focusbackup.api.views.common import render_data
 from focusbackup.api.views.helpers import build_schedule_fields, build_machine_fields, build_machine_log, build_client_version, build_machine_log_fields, build_machine_settings
 from focusbackup.app.client.models import ClientVersion
+from focusbackup.app.machine.forms import MachineForm
 from focusbackup.app.machine.models import Machine, MachineLog
 
 
@@ -81,6 +83,20 @@ def set_busy_updating(request, id, busy):
 
 
 set_busy_updating = csrf_exempt(set_busy_updating)
+
+
+@require_valid_api_token()
+def create_new_machine_from_template(request, id, name):
+
+    template = get_object_or_404(Machine, id=id, template=True)
+    machine = template.clone()
+
+    machine.name = name
+    machine.save()
+
+    return render_data("machine", build_machine_fields(machine))
+
+create_new_machine_from_template = csrf_exempt(create_new_machine_from_template)
 
 
 @require_valid_api_token()

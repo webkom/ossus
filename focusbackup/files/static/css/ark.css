@@ -2147,9 +2147,6 @@ fieldset[disabled] .form-control {
 .has-info .radio,
 .has-info .checkbox,
 .has-info .radio-inline,
-.has-info .checkbox-inline {
-  color: #5b98cc;
-}
 .has-info .input-group-addon {
   border-color: #5b98cc;
 }
@@ -2169,11 +2166,7 @@ fieldset[disabled] .form-control {
 .has-error .help-block,
 .has-error .control-label,
 .has-warning .radio,
-.has-error .checkbox,
 .has-error .radio-inline,
-.has-error .checkbox-inline {
-  color: #d97572;
-}
 .has-error .input-group-addon {
   border-color: #d97572;
 }
@@ -2181,9 +2174,6 @@ fieldset[disabled] .form-control {
  * Uniform styles
  */
 input[type="radio"],
-input[type="checkbox"] {
-  visibility: hidden;
-}
 .radiobox,
 .checkbox,
 .radio-inline,
@@ -2203,21 +2193,7 @@ input[type="checkbox"] {
   font-weight: normal;
   cursor: pointer;
 }
-div.checker span {
-  font-family: FontAwesome;
-  font-size: 16px;
-  line-height: 20px;
-  color: #666;
-  background-image: none;
-}
-div.checker span:before {
-  content: "\f096";
-  margin-left: 0px;
-}
-div.checker span.checked:before {
-  content: "\f046";
-  margin-left: 2px;
-}
+
 div.radio span {
   font-family: FontAwesome;
   font-size: 16px;
@@ -2228,9 +2204,7 @@ div.radio span {
 div.radio span:before {
   content: "\f10c";
 }
-div.radio span.checked:before {
-  content: "\f192";
-}
+
 /**
  * Nestable
  */
