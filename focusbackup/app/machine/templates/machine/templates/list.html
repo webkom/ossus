@@ -20,7 +20,7 @@
             <tr>
                 <td>
                     <i class="icon-user"></i>
-                    <a href="{% url 'templates.view' machine.id %}">{{ machine.name }}</a>
+                    <a href="{% url 'templates.view' machine.id %}">{{ machine.id }} - {{ machine.name }}</a>
                 </td>
                 <td class="center">
                     <a class="btn btn-info" href="{% url 'focusbackup.app.machine.views.edit' machine.id %}">
