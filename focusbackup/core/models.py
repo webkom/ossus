@@ -29,14 +29,20 @@ class UserProfile(models.Model):
     def get_customers(self):
         return Customer.objects.filter(company=self.company)
 
-    def get_machines(self):
+    def get_all_machines(self):
         machine_ids = []
 
         for customer in self.get_customers():
-            for machine in customer.machines.filter(template=False):
+            for machine in customer.machines.all():
                 machine_ids.append(machine.id)
 
         return Machine.objects.filter(id__in=machine_ids)
+
+    def get_machines(self):
+        return self.get_all_machines().filter(template=False)
+
+    def get_templates(self):
+        return self.get_all_machines().filter(template=True)
 
     def get_storages(self):
         return Storage.objects.filter(company=self.company)
@@ -47,7 +53,7 @@ class UserProfile(models.Model):
     def get_schedules(self):
         schedule_ids = []
 
-        for machine in self.get_machines():
+        for machine in self.get_all_machines():
             for schedule in machine.schedules.all():
                 schedule_ids.append(schedule.id)
 

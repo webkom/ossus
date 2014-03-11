@@ -19,23 +19,38 @@ def overview(request):
 
 @login_required()
 def templates(request):
-
-    return render(request, "machine/list_templates.html", {
-        'templates': request.user.profile.get_machines().filter(template=True),
+    return render(request, "machine/templates/list.html", {
+        'templates': request.user.profile.get_templates(),
         'title': 'List all templates'}
     )
 
 
 @login_required()
 def view(request, id):
-    machine = request.user.profile.get_machines().get(id=id)
+    machine = request.user.profile.get_all_machines().get(id=id)
     return render(request, 'machine/view.html', {'machine': machine,
                                                  'title': machine.name})
 
 
 @login_required()
+def view_template(request, id):
+    machine = request.user.profile.get_templates().get(id=id)
+    return render(request, 'machine/templates/view.html', {'machine': machine,
+                                                           'title': machine.name})
+
+
+@login_required()
+def view_template_schedules(request, id):
+    machine = request.user.profile.get_all_machines().get(id=id)
+    schedules = machine.schedules.all()
+    return render(request, 'machine/templates/schedules.html', {'machine': machine,
+                                                                'schedules': schedules,
+                                                                'title': machine.name})
+
+
+@login_required()
 def view_log(request, id):
-    machine = request.user.profile.get_machines().get(id=id)
+    machine = request.user.profile.get_all_machines().get(id=id)
     logs = machine.logs.all().order_by("-id")[0:300]
     return render(request, 'machine/log.html', {'machine': machine,
                                                 'logs': logs,
@@ -44,7 +59,7 @@ def view_log(request, id):
 
 @login_required()
 def view_schedules(request, id):
-    machine = request.user.profile.get_machines().get(id=id)
+    machine = request.user.profile.get_all_machines().get(id=id)
     schedules = machine.schedules.all()
     return render(request, 'machine/view_schedules.html', {'machine': machine,
                                                            'schedules': schedules,
@@ -53,7 +68,7 @@ def view_schedules(request, id):
 
 @login_required()
 def view_backups(request, id):
-    machine = request.user.profile.get_machines().get(id=id)
+    machine = request.user.profile.get_all_machines().get(id=id)
     backups = machine.backups.all()
     return render(request, 'machine/view_backups.html', {'machine': machine,
                                                          'backups': backups,
@@ -75,7 +90,7 @@ def form(request, id=False):
     instance = Machine()
 
     if id:
-        instance = request.user.profile.get_machines().get(id=id)
+        instance = request.user.profile.get_all_machines().get(id=id)
 
     form = MachineForm(instance=instance, user=request.user)
 

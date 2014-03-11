@@ -3,6 +3,7 @@
 {% block main %}
 
     <h3>Schedules</h3>
+
     <a class="btn btn-success btn-medium"
        href="{% url 'focusbackup.app.backup.views.new' machine.id %}">New schedule</a>
 
@@ -21,7 +22,8 @@
                     <a href="{% url 'focusbackup.app.backup.views.edit' machine.id schedule.id %}">{{ schedule.name }} </a>
                 </td>
                 <td>  {{ schedule.last_run_time|date:"d.m.Y H:i" }}
-                    {% if not schedule.last_run_time %} Not runned yet {% endif %}</td>
+                    {% if not schedule.last_run_time %} "Not runned yet {% endif %}</td>
+
                 <td>
                     {{ schedule.get_next_run_time|timeuntil:schedule.last_run_time }} -
                     ({{ schedule.get_next_run_time|date:"d.m.Y H:i" }})

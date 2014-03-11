@@ -8,24 +8,26 @@ from focusbackup.app.backup.forms import ScheduleForm, ScheduleFoldersForm, Sche
 
 from focusbackup.app.backup.models import Schedule
 
+
 @login_required()
 def new(request, machine_id):
     return form(request, machine_id)
+
 
 @login_required()
 def edit(request, machine_id, id):
     return form(request, machine_id, id)
 
+
 @login_required()
 def form(request, machine_id, id=False):
-
     schedule = Schedule()
 
-    machine = request.user.profile.get_machines().get(id=machine_id)
+    machine = request.user.profile.get_all_machines().get(id=machine_id)
     title = "New schedule"
 
     def next_from_date():
-        next = datetime.datetime.now()+ datetime.timedelta(days=1)
+        next = datetime.datetime.now() + datetime.timedelta(days=1)
         return next.strftime("%Y-%m-%d") + " 02:00:00"
 
     initial_data = {'from_date': next_from_date()}
@@ -52,7 +54,10 @@ def form(request, machine_id, id=False):
             form_folders.save()
             form_sql.save()
 
-            return redirect("machines.view", machine.id)
+            if machine.template:
+                return redirect("templates.view", machine.id)
+            else:
+                return redirect("machines.view", machine.id)
 
     return render(request, 'backup/form.html', {'form': form,
                                                 'machine': machine,

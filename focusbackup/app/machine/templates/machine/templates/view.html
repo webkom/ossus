@@ -1,0 +1,34 @@
+{% extends "machine/base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {{ machine.name }}
+
+{% endblock title %}
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <ul class="col-md-12 stats">
+                        <li class="stat col-md-2 col-sm-1 col-xs-6">
+                            <span><b class="value">{{ machine.id }}</b> </span>
+                            <em>ID</em>
+                        </li>
+                        <li class="stat col-md-5 col-sm-5 col-xs-6">
+                            <span><b class="value">{{ machine.name }}</b> </span>
+                            <em>Name</em>
+                        </li>
+                        <li class="stat col-md-5 col-sm-5 col-xs-6">
+                            <span><b class="value">{{ machine.customer.name }}</b> </span>
+                            <em>Customer</em>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

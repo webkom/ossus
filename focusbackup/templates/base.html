@@ -1,3 +1,5 @@
+{% load menu_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,33 +99,35 @@
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <ul class="nav nav-stacked">
-                <li class="active"><a href="/"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a></li>
 
-                <li>
+                <li class="{% active request "machines|^\/$" %}">
                     <a href="{% url 'focusbackup.app.machine.views.overview' %}">
-                        <i class="fa fa-desktop fa-fw"></i>
+                        <i class="fa fa-cloud fa-fw"></i>
                         Servers
                     </a>
                 </li>
 
-                <li>
+                <li class="{% active request "templates" %}">
+                    <a href="{% url 'templates.overview' %}">
+                        <i class="fa fa-folder fa-fw"></i>
+                        Server templates
+                    </a>
+                </li>
+
+                <li class="{% active request "customers" %}">
                     <a href="{% url 'focusbackup.app.customer.views.overview' %}">
-                        <i class="fa fa-users fa-fw">
-                        </i>Customers
+                        <i class="fa fa-user fa-fw"></i>
+                        Customers
                     </a>
                 </li>
 
-                <li>
+                <li class="{% active request "storages" %}">
                     <a href="{% url 'focusbackup.app.storage.views.overview' %}">
-                        <i class="fa fa-truck fa-fw"></i>Storages
+                        <i class="fa fa-truck fa-fw"></i>
+                        Storages
                     </a>
                 </li>
 
-                <li>
-                    <a href="{% url 'machine_templates' %}">
-                        <i class="fa fa-truck fa-fw"></i>Templates
-                    </a>
-                </li>
 
             </ul>
         </aside>
