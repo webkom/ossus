@@ -22,18 +22,21 @@ site = App(
     test_settings='focusbackup.settings.test',
     restart_command='/etc/init.d/supervisord restart',
     local_tables_to_flush=[],
+    dumpdata_command="dumpdata --exclude machine.MachineStats --exclude machine.MachineProcessStats "
+                     "--exclude machine.MachineLog --exclude backup.backup",
     requirements={
         'prod': 'requirements.txt',
     }
 )
 
+
 @task
 def deploy():
     site.deploy('prod')
 
+
 @task
 def upload_client():
-
     #Upload Agent
     put("%s%s" % (settings.PATH_LOCAL_FOCUSBACKUPCLIENT, "Agent_jar/Agent.jar"), "/tmp/Agent.jar")
     put("%s%s" % (settings.PATH_LOCAL_FOCUSBACKUPCLIENT, "Updater_jar/Updater.jar"), "/tmp/Updater.jar")

@@ -33,7 +33,7 @@ class UserProfile(models.Model):
         machine_ids = []
 
         for customer in self.get_customers():
-            for machine in customer.machines.all():
+            for machine in customer.machines.filter(template=False):
                 machine_ids.append(machine.id)
 
         return Machine.objects.filter(id__in=machine_ids)
