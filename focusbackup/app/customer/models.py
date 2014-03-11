@@ -14,3 +14,6 @@ class Customer(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_machines(self):
+        return self.machines.filter(template=False)

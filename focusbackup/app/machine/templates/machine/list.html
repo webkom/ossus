@@ -14,7 +14,7 @@
                 <div class="col-md-9">
 
 
-                    {% for machine in customer.machines.all %}
+                    {% for machine in customer.get_machines %}
                         <a href='{% url 'machines.view' machine.id %}'>
                             {% if machine.lost_connection_to_client %}
                                 <div class="machine-round">
