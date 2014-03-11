@@ -67,6 +67,10 @@ def view_schedules(request, id):
 
 
 @login_required()
+def install_instructions(request):
+    return render(request, 'machine/install_instructions.html')
+
+@login_required()
 def view_backups(request, id):
     machine = request.user.profile.get_all_machines().get(id=id)
     backups = machine.backups.all()

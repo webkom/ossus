@@ -53,6 +53,17 @@
                 </a>
             </li>
 
+
+            <li>
+
+                <a href="{% url "machines.install_instructions" %}">
+                    <i class="fa fa-download fa-fw"></i>
+                    Install new Server
+                </a>
+
+            </li>
+
+
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     {{ request.user.profile.company.name }}
@@ -128,10 +139,10 @@
                     </a>
                 </li>
 
-
             </ul>
         </aside>
         <!-- END: SIDEBAR -->
+
 
         <section class="content">
             {% block content %}

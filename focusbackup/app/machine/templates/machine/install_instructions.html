@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="header">
+        <div class="col-md-12">
+            <h3 class="header-title">{% block title %}Install new server{% endblock %}</h3>
+        </div>
+    </div>
+
+    <div class="main-content">
+
+        <div class="col-md-8">
+
+
+            <h2>1. Install Java 7</h2>
+
+            <p>You need java installed, <a
+                    href="http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-windows-x64.exe?AuthParam=1394540159_33d1eb465ec1d42f7c172e2af587972a">download
+                java 7</a> before installing backup. If the downloaded version is not supported on your system, <a
+                    href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">find the
+                correct on the java website</a>. </p>
+
+            <h2>2. Download backup installer</h2>
+
+            <p><a href="http://focus24.no/download_current_installer/">Download Focus24 Installer</a> and click to open
+                the
+                file.</p>
+
+            <h3>3. Start the installer</h3>
+
+            <p>When you have opened the installer, you will se the following picture<br>
+                <img src="{{ STATIC_URL }}img/install_step1.png" width="299" height="148">
+            </p>
+
+            <h3>4. Configure</h3>
+
+            <p>
+
+            <table class="table">
+                <tr>
+                    <td>Machine</td>
+                    <td>Name of the machine (e.g NEDAP-HIVE)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Local admin user</td>
+                    <td>(e.g Administrator)</td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td>Local admin password</td>
+                    <td>the password for the admin user</td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td>Template ID</td>
+                    <td>
+                        Provide the ID for the template you want this machine to be based on.
+                        <br>You can select from this <a
+                            href="/machines/templates/">list of templates</a>.
+                        Click on the desired template, find the ID and use this id in the installer.
+                    </td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td>Server</td>
+                    <td>Default server http://focus24.no</td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td>Focus24 user</td>
+                    <td>Your username for login at Server (focus24.no)</td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td>Focus24 password</td>
+                    <td>Your password</td>
+                    <td></td>
+
+                </tr>
+
+            </table>
+            <br>
+            Example<br>
+            <img src="{{ STATIC_URL }}img/install_step2.png" width="299" height="148">
+            </p>
+
+            <h3>5. Complete the installation</h3>
+
+            <p>Click on install</p>
+
+
+            <h3>6. Further configuration</h3>
+
+            <p>Go to <a href="/machines/">list of machines</a> to find your new machine. Click on it to see if its
+                reporting and do more configuration under "schedules".</p>
+
+        </div>
+
+    </div>
+
+{% endblock %}
