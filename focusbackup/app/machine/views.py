@@ -90,6 +90,12 @@ def edit(request, id):
 
 
 @login_required()
+def delete(request, id):
+    instance = request.user.profile.get_all_machines().get(id=id)
+    instance.delete()
+    return redirect(overview)
+
+@login_required()
 def form(request, id=False):
     instance = Machine()
 
