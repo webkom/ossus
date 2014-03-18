@@ -23,7 +23,7 @@ site = App(
     restart_command='/etc/init.d/supervisord restart',
     local_tables_to_flush=[],
     dumpdata_command="dumpdata --exclude machine.MachineStats --exclude machine.MachineProcessStats "
-                     "--exclude machine.MachineLog --exclude backup.backup",
+                     "--exclude machine.MachineLog",
     requirements={
         'prod': 'requirements.txt',
     }

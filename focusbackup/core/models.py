@@ -20,14 +20,14 @@ class UserProfile(models.Model):
 
     def get_companies(self):
         company_ids = []
-        for company in Company.objects.all():
+        for company in Company.objects.all().prefetch_related("users"):
             if self.user in company.users.all():
                 company_ids.append(company.id)
 
         return Company.objects.filter(id__in=company_ids)
 
     def get_customers(self):
-        return Customer.objects.filter(company=self.company)
+        return Customer.objects.filter(company=self.company).prefetch_related("machines")
 
     def get_all_machines(self):
         machine_ids = []

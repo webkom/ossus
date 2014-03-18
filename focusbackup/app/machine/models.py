@@ -100,6 +100,16 @@ class Machine(models.Model):
     def get_latest_backups(self):
         return self.backups.all().order_by("-id")[0:8]
 
+    def get_recoverable_backups(self):
+        backups = self.backups.all().select_related("schedule").order_by("-id")[0:100]
+        res = []
+
+        for b in backups:
+            if b.is_recoverable():
+                res.append(b)
+
+        return res
+
     def running_backup(self):
         for schedule in self.schedules.all():
             if schedule.running_backup:

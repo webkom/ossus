@@ -92,7 +92,6 @@ class Backup(models.Model):
     def __unicode__(self):
         return u"Backup machine: %s, schedule: %s" % (self.machine, self.schedule)
 
-
     def is_recoverable(self):
         return self.schedule.backups.filter(id__gt=self.id).count() < self.schedule.versions_count
 

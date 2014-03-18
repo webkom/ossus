@@ -15,7 +15,7 @@
         </thead>
         <tbody>
 
-        {% for backup in machine.get_latest_backups %}
+        {% for backup in machine.get_recoverable_backups %}
             <tr>
                 <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
                 <td>{{ backup.time_started|timesince:backup.time_ended }}
