@@ -8,8 +8,7 @@ from focusbackup.app.machine.models import Machine
 
 
 class Command(BaseCommand):
-
-    def handle (self, *args, **kwargs):
+    def handle(self, *args, **kwargs):
 
         lost_machines = []
 
@@ -17,14 +16,15 @@ class Command(BaseCommand):
             if machine.lost_connection_to_client():
                 lost_machines.append(machine)
 
-        template = loader.get_template("machine/templates/lost_machines.html")
+        if lost_machines:
+            template = loader.get_template("machine/templates/lost_machines.html")
 
-        subject, from_email, to = 'Focus24 - lost machines', 'focus24@focus24.no', 'me@frecar.no'
+            subject, from_email, to = 'Focus24 - lost machines', 'focus24@focus24.no', 'me@frecar.no'
 
-        html_content = template.render(Context({
-            'machines': lost_machines
-        }))
+            html_content = template.render(Context({
+                'machines': lost_machines
+            }))
 
-        msg = EmailMultiAlternatives(subject, "", from_email, [to])
-        msg.attach_alternative(html_content, "text/html")
-        msg.send()
+            msg = EmailMultiAlternatives(subject, "", from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
