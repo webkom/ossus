@@ -53,6 +53,9 @@ class Schedule(models.Model):
         self.last_run_time = datetime.datetime.now()
         self.save()
 
+    def is_delayed(self):
+        return self.get_next_run_time() < (datetime.datetime.now() - datetime.timedelta(hours=3))
+
     def get_next_run_time(self):
 
         if self.repeat_every_minute == 0:

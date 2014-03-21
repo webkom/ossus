@@ -97,6 +97,15 @@ class Machine(models.Model):
     def get_latest_logs(self):
         return self.logs.all().order_by("-id")[0:8]
 
+    def delayed_schedules(self):
+        schedules = []
+
+        for schedule in self.schedules.all():
+            if schedule.is_delayed():
+                schedules.append(schedule.id)
+
+        return self.schedules.filter(id__in=schedules)
+
     def get_latest_backups(self):
         return self.backups.all().order_by("-id")[0:8]
 

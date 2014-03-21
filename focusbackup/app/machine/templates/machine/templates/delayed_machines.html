@@ -1,0 +1,30 @@
+{% for machine in machines %}
+
+    <h2>{{ machine.name }}</h2>
+
+    <table class="table table-striped">
+
+        <thead>
+
+        <tr>
+            <th>Name</th>
+            <th>Next runtime</th>
+            <th>Schedules</th>
+        </tr>
+
+        </thead>
+        <tbody>
+
+        {% for schedule in machine.delayed_schedules %}
+            <tr>
+                <td>{{ schedule.name }}</td>
+                <td>{{ schedule.get_next_runtime }}</td>
+                <td><a href="http://focus24.no/machines/{{ machine.id }}/view/schedules/">details</a></td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+{% endfor %}

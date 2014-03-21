@@ -9,9 +9,11 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Date</th>
-            <th>Text</th>
-            <th>Type</th>
+            <th>Name</th>
+            <th>Last runtime</th>
+            <th>Next runtime</th>
+            <th>Time until text runtime</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -23,9 +25,11 @@
                 <td>  {{ schedule.last_run_time|date:"d.m.Y H:i" }}
                     {% if not schedule.last_run_time %} Not runned yet {% endif %}</td>
                 <td>
-                    {{ schedule.get_next_run_time|timeuntil:schedule.last_run_time }} -
-                    ({{ schedule.get_next_run_time|date:"d.m.Y H:i" }})
+                    {{ schedule.get_next_run_time|date:"d.m.Y H:i" }}
                 </td>
+                <td>{{ schedule.get_next_run_time|timeuntil:schedule.last_run_time }}
+                </td>
+                <td></td>
             </tr>
         {% endfor %}
         </tbody>
