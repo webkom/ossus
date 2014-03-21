@@ -29,7 +29,14 @@
                 </td>
                 <td>{{ schedule.get_next_run_time|timeuntil:schedule.last_run_time }}
                 </td>
-                <td></td>
+
+                <td>
+                    {% if schedule.is_delayed %}
+                        <div class="title warning"><i class="fa fa-warning"></i> delayed</div>
+                    {% else %}
+                        <div class="title ok"><i class="fa fa-check"></i></div>
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>
