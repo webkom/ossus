@@ -5,7 +5,7 @@
     <p>
         Last connection to client: {{ machine.last_connection_to_client|date:"d.m.Y H:i" }} }}<br>
         External IP: {{ machine.external_ip }} <br>
-        Last backup: {{ machine.get_last_backup_time|date:"d.m.Y H:i" }} }}<br>
+        Last backup: {{ machine.get_last_backup_time|date:"d.m.Y H:i" }} <br>
     </p>
 
     <br>
@@ -36,6 +36,8 @@
 
         </tbody>
     </table>
+
+    <br><br><br>
 
 
 {% endfor %}
