@@ -1,0 +1,29 @@
+<table class="table table-striped">
+
+    <thead>
+
+    <tr>
+        <th>Name</th>
+        <th>Last connection</th>
+        <th>External IP</th>
+        <th>Last backup</th>
+        <th></th>
+    </tr>
+
+    </thead>
+    <tbody>
+
+    {% for machine in machines %}
+
+        <tr>
+
+            <td>{{ machine.customer }} - {{ machine.name }}</td>
+            <td>{{ machine.last_connection_to_client|date:"d.m.Y H:i" }}</td>
+            <td>{{ machine.external_ip }}</td>
+            <td> {{ machine.get_last_backup_time|date:"d.m.Y H:i" }} </td>
+        </tr>
+
+    {% endfor %}
+    </tbody>
+</table>
+
