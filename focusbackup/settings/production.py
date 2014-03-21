@@ -18,5 +18,4 @@ DATABASES = {
 }
 
 STATIC_URL = '/static/'
-
 URL_TO_SITE = "http://focus24.no/"
