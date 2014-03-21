@@ -16,11 +16,11 @@
     {% for machine in machines %}
 
         <tr>
-
             <td>{{ machine.customer }} - {{ machine.name }}</td>
             <td>{{ machine.last_connection_to_client|date:"d.m.Y H:i" }}</td>
             <td>{{ machine.external_ip }}</td>
             <td> {{ machine.get_last_backup_time|date:"d.m.Y H:i" }} </td>
+            <td><a href="http://focus24.no/machines/{{ machine.id }}/view/">view</a></td>
         </tr>
 
     {% endfor %}
