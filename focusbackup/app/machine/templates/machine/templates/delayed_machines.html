@@ -29,6 +29,7 @@
             <tr>
                 <td>{{ schedule.name }}</td>
                 <td>{{ schedule.last_run_time|date:"d.m.Y H:i" }} </td>
+                <td>{{ schedule.get_next_run_time|date:"d.m.Y H:i" }} </td>
                 <td>{{ schedule.get_last_backup_time|date:"d.m.Y H:i" }} </td>
                 <td><a href="http://focus24.no/machines/{{ machine.id }}/view/schedules/">details</a></td>
             </tr>
