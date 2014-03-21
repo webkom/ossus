@@ -1,6 +1,10 @@
 {% for machine in machines %}
 
-    <h2>{{ machine.name }}</h2>
+    <h2>{{ machine.customer }} - {{ machine.name }}</h2>
+
+    Last connection to client: {{ machine.last_connection_to_client }}<br>
+    External IP: {{ machine.external_ip }}      <br>
+    Last backup: {{ machine.get_last_backup_time }}
 
     <table class="table table-striped">
 
@@ -8,8 +12,10 @@
 
         <tr>
             <th>Name</th>
+            <th>Last runtime</th>
             <th>Next runtime</th>
-            <th>Schedules</th>
+            <th>Last backup</th>
+            <th></th>
         </tr>
 
         </thead>
@@ -18,7 +24,8 @@
         {% for schedule in machine.delayed_schedules %}
             <tr>
                 <td>{{ schedule.name }}</td>
-                <td>{{ schedule.get_next_runtime }}</td>
+                <td>{{ schedule.last_run_time }}</td>
+                <td>{{ schedule.get_last_backup_time }}</td>
                 <td><a href="http://focus24.no/machines/{{ machine.id }}/view/schedules/">details</a></td>
             </tr>
         {% endfor %}
