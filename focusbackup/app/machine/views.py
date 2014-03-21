@@ -27,21 +27,21 @@ def templates(request):
 
 @login_required()
 def view(request, id):
-    machine = request.user.profile.get_all_machines().get(id=id)
+    machine = request.user.profile.get_machine_or_change_company(id=id)
     return render(request, 'machine/view.html', {'machine': machine,
                                                  'title': machine.name})
 
 
 @login_required()
 def view_template(request, id):
-    machine = request.user.profile.get_templates().get(id=id)
+    machine = request.user.profile.get_machine_or_change_company(id=id)
     return render(request, 'machine/templates/view.html', {'machine': machine,
                                                            'title': machine.name})
 
 
 @login_required()
 def view_template_schedules(request, id):
-    machine = request.user.profile.get_all_machines().get(id=id)
+    machine = request.user.profile.get_machine_or_change_company(id=id)
     schedules = machine.schedules.all()
     return render(request, 'machine/templates/schedules.html', {'machine': machine,
                                                                 'schedules': schedules,
@@ -50,7 +50,7 @@ def view_template_schedules(request, id):
 
 @login_required()
 def view_log(request, id):
-    machine = request.user.profile.get_all_machines().get(id=id)
+    machine = request.user.profile.get_machine_or_change_company(id=id)
     logs = machine.logs.all().order_by("-id")[0:300]
     return render(request, 'machine/log.html', {'machine': machine,
                                                 'logs': logs,
@@ -72,7 +72,7 @@ def install_instructions(request):
 
 @login_required()
 def view_backups(request, id):
-    machine = request.user.profile.get_all_machines().get(id=id)
+    machine = request.user.profile.get_machine_or_change_company(id=id)
     backups = machine.backups.all()
     return render(request, 'machine/view_backups.html', {'machine': machine,
                                                          'backups': backups,
@@ -91,7 +91,7 @@ def edit(request, id):
 
 @login_required()
 def delete(request, id):
-    instance = request.user.profile.get_all_machines().get(id=id)
+    instance = request.user.profile.get_machine_or_change_company(id=id)
     instance.delete()
     return redirect(overview)
 
@@ -100,7 +100,7 @@ def form(request, id=False):
     instance = Machine()
 
     if id:
-        instance = request.user.profile.get_all_machines().get(id=id)
+        instance = request.user.profile.get_machine_or_change_company(id=id)
 
     form = MachineForm(instance=instance, user=request.user)
 

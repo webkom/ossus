@@ -29,6 +29,21 @@ class UserProfile(models.Model):
     def get_customers(self):
         return Customer.objects.filter(company=self.company).prefetch_related("machines")
 
+    def get_machine_or_change_company(self, id):
+
+        try:
+            return self.get_all_machines().get(id=id)
+        except Machine.DoesNotExist:
+            machine = Machine.objects.get(id=id)
+
+            if machine.customer.company in self.get_companies():
+                self.company = machine.customer.company
+                self.save()
+
+                return machine
+
+            raise Machine.DoesNotExist
+
     def get_all_machines(self):
         machine_ids = []
 
