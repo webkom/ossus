@@ -23,7 +23,7 @@ def edit(request, machine_id, id):
 def form(request, machine_id, id=False):
     schedule = Schedule()
 
-    machine = request.user.profile.get_all_machines().get(id=machine_id)
+    machine = request.user.profile.get_machine_or_change_company(id=id)
     title = "New schedule"
 
     def next_from_date():
