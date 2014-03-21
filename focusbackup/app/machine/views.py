@@ -59,7 +59,7 @@ def view_log(request, id):
 
 @login_required()
 def view_schedules(request, id):
-    machine = request.user.profile.get_all_machines().get(id=id)
+    machine = request.user.profile.get_machine_or_change_company(id=id)
     schedules = machine.schedules.all()
     return render(request, 'machine/view_schedules.html', {'machine': machine,
                                                            'schedules': schedules,
