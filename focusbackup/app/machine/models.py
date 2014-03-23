@@ -11,7 +11,7 @@ from focusbackup.app.customer.models import Customer
 class Machine(models.Model):
     name = models.CharField(max_length=150)
     customer = models.ForeignKey(Customer, related_name="machines")
-    run_install = models.BooleanField(default=False)
+    run_install = models.BooleanField(default=True)
 
     #Info from the client
     last_connection_to_client = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now())

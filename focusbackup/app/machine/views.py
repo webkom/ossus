@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
 from focusbackup.app.backup.models import Machine
+from focusbackup.app.client.models import ClientVersion
 from focusbackup.app.machine.forms import MachineForm
 
 
@@ -70,6 +71,7 @@ def view_schedules(request, id):
 def install_instructions(request):
     return render(request, 'machine/install_instructions.html')
 
+
 @login_required()
 def view_backups(request, id):
     machine = request.user.profile.get_machine_or_change_company(id=id)
@@ -95,6 +97,7 @@ def delete(request, id):
     instance.delete()
     return redirect(overview)
 
+
 @login_required()
 def form(request, id=False):
     instance = Machine()
@@ -109,6 +112,11 @@ def form(request, id=False):
 
         if form.is_valid():
             instance = form.save(commit=False)
+
+            if not instance.id:
+                instance.current_agent_version = ClientVersion.objects.get(current_agent=True)
+                instance.current_updater_version = ClientVersion.objects.get(current_updater=True)
+
             instance.save()
 
             return redirect(view, instance.id)
