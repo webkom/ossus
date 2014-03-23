@@ -45,6 +45,9 @@ def create_backup_for_machine(request, id):
                 if 'upload_path' in request.POST:
                     backup.day_folder_path = request.POST['upload_path']
 
+                if 'file_name' in request.POST:
+                    backup.file_name = request.POST['file_name']
+
                 backup.save()
 
                 return render_data("backup", build_backup_fields(backup))

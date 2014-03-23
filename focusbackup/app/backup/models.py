@@ -91,6 +91,7 @@ class Backup(models.Model):
     time_started = models.DateTimeField()
     time_ended = models.DateTimeField(null=True, blank=True)
     day_folder_path = models.CharField(max_length=150, blank=True)
+    file_name = models.CharField(max_length=150, blank=True, null=True)
 
     def __unicode__(self):
         return u"Backup machine: %s, schedule: %s" % (self.machine, self.schedule)
@@ -99,16 +100,23 @@ class Backup(models.Model):
         return self.schedule.backups.filter(id__gt=self.id).count() < self.schedule.versions_count
 
     def recover_link(self):
+
+        file_name = ""
+
+        if self.schedule:
+            if self.schedule.folders.all().count() + self.schedule.sql_backups.all().count() == 1:
+                file_name = self.file_name
+
         if self.is_recoverable() and self.day_folder_path:
             url = "ftp://%s:%s@%s/%s" % (
                 self.schedule.storage.username, self.schedule.storage.password, self.schedule.storage.host,
                 self.day_folder_path)
-            return url
+            return url + file_name
         return ""
 
 
 class Folder(models.Model):
-    schedule = models.ForeignKey(Schedule, related_name='folders', null=True)
+    schedule = models.ForeignKey(Schedule, null=True, related_name='folders')
 
     local_folder_path = models.TextField()
     skip_hidden_folders = models.BooleanField(default=False)
