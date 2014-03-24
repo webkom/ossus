@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="header">
+        <div class="col-md-12">
+            <h2 class="header-title">{% block title %}Install new server on Linux{% endblock %}</h2>
+        </div>
+    </div>
+
+    <div class="main-content">
+
+        <div class="col-md-8">
+
+            <h2>0. Create new machine on focus24.no</h2>
+
+            <p>
+                <a href="http://www.focus24.no/machines/new/">Create new machine</a>
+            </p>
+
+            <h2>1. Install Java 7</h2>
+
+            <p>
+                <a href="http://www.if-not-true-then-false.com/2010/install-sun-oracle-java-jdk-jre-7-on-fedora-centos-red-hat-rhel/">Guide for CentOS</a>
+            </p>
+
+            <h2>2. Create folder for backup software</h2>
+
+            <p>
+                mkdir /opt/focus24
+            </p>
+
+            <h2>2. Download Focus24 agent</h2>
+
+            <p>
+                <a href="http://focus24.no/download_current_agent/">Download Focus24 Agent</a>
+                wget http://focus24.no/download_current_agent/ /opt/focus24/Agent.jar
+            </p>
+
+            <h2>3. Download Focus24 settings</h2>
+
+            <p>
+                wget http://focus24.no/download_current_agent/ /opt/focus24/Agent.jar
+            </p>
+
+        </div>
+
+    </div>
+
+{% endblock %}

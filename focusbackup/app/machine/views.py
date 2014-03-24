@@ -75,6 +75,11 @@ def install_instructions(request):
 
 
 @login_required()
+def install_instructions_linux(request):
+    return render(request, 'machine/install_instructions_linux.html')
+
+
+@login_required()
 def view_backups(request, id):
     machine = request.user.profile.get_machine_or_change_company(id=id)
     backups = machine.backups.all()
