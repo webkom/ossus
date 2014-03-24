@@ -10,6 +10,9 @@ from focusbackup.app.storage.models import Storage
 
 
 schedule_every_minute_choices = (
+    (5, 'Hvert 5 min'),
+    (10, 'Hvert 10 min'),
+    (15, 'Hvert kvarter'),
     (60, 'Hver time'),
     (180, 'Hver tredje time'),
     (1440, 'Hver dag'),
