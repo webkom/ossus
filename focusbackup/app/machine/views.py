@@ -2,6 +2,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
+from focusbackup.api.views.common import render_data
+from focusbackup.api.views.helpers import build_machine_settings
 
 from focusbackup.app.backup.models import Machine
 from focusbackup.app.client.models import ClientVersion
@@ -79,6 +81,11 @@ def view_backups(request, id):
     return render(request, 'machine/view_backups.html', {'machine': machine,
                                                          'backups': backups,
                                                          'title': machine.name})
+
+
+@login_required()
+def settings(request, id):
+    return render_data("", build_machine_settings(request, Machine.objects.get(id=id)))
 
 
 @login_required()
