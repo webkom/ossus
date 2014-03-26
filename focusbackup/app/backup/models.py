@@ -116,7 +116,7 @@ class Backup(models.Model):
 
         if self.schedule:
             if self.schedule.folders.all().count() + self.schedule.sql_backups.all().count() == 1:
-                file_name = self.file_name
+                file_name = self.file_name.replace("C:", "")
 
         if self.is_recoverable() and self.day_folder_path:
             url = "ftp://%s:%s@%s/%s" % (
