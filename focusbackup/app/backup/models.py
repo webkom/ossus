@@ -122,7 +122,7 @@ class Backup(models.Model):
             url = "ftp://%s:%s@%s/%s" % (
                 self.schedule.storage.username, self.schedule.storage.password, self.schedule.storage.host,
                 self.day_folder_path)
-            return url
+            return url + file_name
         return ""
 
 
