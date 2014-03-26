@@ -73,10 +73,11 @@ class Schedule(models.Model):
 
             for run in runs:
                 if run > self.last_run_time:
-                    return run
 
-        if self.from_date < (datetime.datetime.now() - datetime.timedelta(hours=3)):
-            return datetime.datetime.now() - datetime.timedelta(minutes=30)
+                    if run < (datetime.datetime.now() - datetime.timedelta(hours=3)):
+                        return datetime.datetime.now() - datetime.timedelta(minutes=30)
+
+                    return run
 
         return self.from_date
 
