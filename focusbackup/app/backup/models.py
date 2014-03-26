@@ -79,7 +79,7 @@ class Schedule(models.Model):
             return datetime.datetime.now() - datetime.timedelta(minutes=30)
 
         if self.is_delayed():
-            return datetime.datetime.now() - datetime.timedelta(minutes=30)
+            return datetime.datetime.now() - datetime.timedelta(days=2)
 
         next_run_time = self.calculate_next_run_time()
 
