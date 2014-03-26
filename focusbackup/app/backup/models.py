@@ -57,29 +57,32 @@ class Schedule(models.Model):
         self.save()
 
     def is_delayed(self):
-        return self.get_next_run_time() < (datetime.datetime.now() - datetime.timedelta(hours=3))
+        return self.calculate_next_run_time() < (datetime.datetime.now() - datetime.timedelta(hours=3))
+
+    def calculate_next_run_time(self):
+        runs = list(rrule(MINUTELY,
+                          cache=True,
+                          interval=self.repeat_every_minute,
+                          until=datetime.date.today() + relativedelta(weeks=3, weekday=FR(-1)),
+                          dtstart=self.from_date))
+
+        for run in runs:
+            if run > self.last_run_time:
+                return run
+
+        return self.from_date
 
     def get_next_run_time(self):
 
         if self.repeat_every_minute == 0:
             return datetime.datetime.now() - datetime.timedelta(minutes=30)
 
-        if self.from_date and self.last_run_time:
-            runs = list(rrule(MINUTELY,
-                              cache=True,
-                              interval=self.repeat_every_minute,
-                              until=datetime.date.today() + relativedelta(weeks=3, weekday=FR(-1)),
-                              dtstart=self.from_date))
+        next_run_time = self.calculate_next_run_time()
 
-            for run in runs:
-                if run > self.last_run_time:
+        if next_run_time < (datetime.datetime.now() - datetime.timedelta(hours=3)):
+            return datetime.datetime.now() - datetime.timedelta(minutes=30)
 
-                    if run < (datetime.datetime.now() - datetime.timedelta(hours=3)):
-                        return datetime.datetime.now() - datetime.timedelta(minutes=30)
-
-                    return run
-
-        return self.from_date
+        return next_run_time
 
     def get_last_backup(self):
         if self.backups.all().count() > 0:
