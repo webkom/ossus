@@ -64,6 +64,9 @@ class Schedule(models.Model):
         if self.repeat_every_minute == 0:
             return datetime.datetime.now() - datetime.timedelta(minutes=30)
 
+        if self.is_delayed():
+            return datetime.datetime.now() - datetime.timedelta(minutes=30)
+
         if self.from_date and self.last_run_time:
             runs = list(rrule(MINUTELY,
                               cache=True,
