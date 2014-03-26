@@ -110,7 +110,7 @@ class Machine(models.Model):
         return self.backups.all().order_by("-id")[0:8]
 
     def get_recoverable_backups(self):
-        backups = self.backups.all().select_related("schedule").order_by("-id")[0:100]
+        backups = self.backups.all().select_related("schedule").order_by("-id")[0:300]
         res = []
 
         for b in backups:
