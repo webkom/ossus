@@ -78,10 +78,10 @@ class Schedule(models.Model):
         if self.repeat_every_minute == 0:
             return datetime.datetime.now() - datetime.timedelta(minutes=30)
 
-        next_run_time = self.calculate_next_run_time()
-
-        if next_run_time < (datetime.datetime.now() - datetime.timedelta(hours=3)):
+        if self.is_delayed():
             return datetime.datetime.now() - datetime.timedelta(minutes=30)
+
+        next_run_time = self.calculate_next_run_time()
 
         return next_run_time
 
