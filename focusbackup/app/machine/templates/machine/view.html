@@ -218,6 +218,11 @@
                             <em>Customer</em>
                         </li>
 
+                        <li class="stat col-md-5 col-sm-5 col-xs-6">
+                            <span><b class="value">{{ machine.active }}</b> </span>
+                            <em>Active</em>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -227,9 +232,12 @@
                     <ul class="col-md-12 stats">
 
                         <li class="stat col-md-2 col-sm-4 col-xs-6">
-                            <span><b
-                                    class="value">{{ machine.last_connection_to_client|timesince }} ago</b> </span>
+                            <span><b class="value">{{ machine.last_connection_to_client|timesince }} ago</b> </span>
                             <em>Last seen</em>
+                        </li>
+                        <li class="stat col-md-2 col-sm-4 col-xs-6">
+                            <span><b class="value">{{ machine.is_busy }} ago</b> </span>
+                            <em>Is busy</em>
                         </li>
                         <li class="stat col-md-5 col-sm-4 col-xs-6">
                             <span><b class="value">{{ machine.external_ip }}</b> </span>

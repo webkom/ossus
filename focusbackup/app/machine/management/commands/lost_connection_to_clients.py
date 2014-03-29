@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
         lost_machines = []
 
-        for machine in Machine.objects.filter(template=False):
+        for machine in Machine.objects.filter(template=False, active=True):
             if machine.lost_connection_to_client():
                 lost_machines.append(machine)
 

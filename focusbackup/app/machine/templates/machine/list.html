@@ -16,7 +16,11 @@
 
                     {% for machine in customer.get_machines %}
                         <a href='{% url 'machines.view' machine.id %}'>
-                            {% if machine.lost_connection_to_client %}
+                            {% if not machine.active %}
+                                <div class="machine-round">
+                                    <div class="title notactive"><i class="fa fa-warning"></i> {{ machine.name }}</div>
+                                </div>
+                            {% elif machine.lost_connection_to_client %}
                                 <div class="machine-round">
                                     <div class="title error"><i class="fa fa-warning"></i> {{ machine.name }}</div>
                                 </div>

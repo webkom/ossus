@@ -84,6 +84,17 @@ def set_busy_updating(request, id, busy):
 
 set_busy_updating = csrf_exempt(set_busy_updating)
 
+@require_valid_api_token()
+def deactivate(request, id):
+
+    machine = Machine.objects.get(id=id)
+    machine.active = False
+    machine.save()
+
+    return render_data("machine", build_machine_fields(machine))
+
+deactivate = csrf_exempt(deactivate)
+
 
 @require_valid_api_token()
 def create_new_machine_from_template(request, id, name):

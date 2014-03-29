@@ -11,6 +11,10 @@
     color: red;
 }
 
+.machine-round .notactive {
+    color: grey;
+}
+
 .machine-round .ok {
     color: #5cb85c;
 }

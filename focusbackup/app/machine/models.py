@@ -13,6 +13,9 @@ class Machine(models.Model):
     customer = models.ForeignKey(Customer, related_name="machines")
     run_install = models.BooleanField(default=True)
 
+    active = models.BooleanField(default=True)
+    template = models.BooleanField(default=False)
+
     #Info from the client
     last_connection_to_client = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now())
     external_ip = models.IPAddressField(default="")
@@ -34,7 +37,6 @@ class Machine(models.Model):
     selected_agent_version = models.ForeignKey(ClientVersion, related_name="agent_selected", null=True, blank=True)
     selected_updater_version = models.ForeignKey(ClientVersion, related_name="updater_selected", null=True, blank=True)
 
-    template = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "Machine: %s, id: %s" % (self.name, self.id)
@@ -74,6 +76,7 @@ class Machine(models.Model):
 
     def set_last_connection_to_client(self):
         self.last_connection_to_client = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.active = True
         self.save()
 
     def get_selected_agent_version(self):

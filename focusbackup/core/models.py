@@ -53,6 +53,9 @@ class UserProfile(models.Model):
 
         return Machine.objects.filter(id__in=machine_ids)
 
+    def get_all_active_machines(self):
+        return self.get_all_machines().filter(active=True)
+
     def get_machines(self):
         return self.get_all_machines().filter(template=False)
 

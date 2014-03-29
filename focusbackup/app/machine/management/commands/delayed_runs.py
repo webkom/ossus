@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
         delayed_machines = []
 
-        for machine in Machine.objects.filter(template=False):
+        for machine in Machine.objects.filter(template=False, active=True):
             if machine.delayed_schedules():
                 delayed_machines.append(machine)
 
