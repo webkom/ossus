@@ -130,6 +130,7 @@ def build_machine_fields(machine):
         'id': machine.id,
         'name': machine.name,
         'is_busy': machine.is_busy(),
+        'active': machine.active,
         'external_ip': machine.external_ip,
         'run_install': machine.run_install,
         'auto_update': machine.auto_version,

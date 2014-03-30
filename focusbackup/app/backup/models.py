@@ -61,29 +61,19 @@ class Schedule(models.Model):
 
     def calculate_next_run_time(self):
         if self.last_run_time:
-            runs = list(rrule(MINUTELY,
-                              cache=True,
-                              interval=self.repeat_every_minute,
-                              until=datetime.date.today() + relativedelta(weeks=3, weekday=FR(-1)),
-                              dtstart=self.from_date))
-
-            for run in runs:
-                if run > self.last_run_time:
-                    return run
+            return self.last_run_time + relativedelta(minutes=self.repeat_every_minute)
 
         return self.from_date
 
     def get_next_run_time(self):
 
         if self.repeat_every_minute == 0:
-            return datetime.datetime.now() - datetime.timedelta(minutes=30)
+            return datetime.datetime.now() - datetime.timedelta(days=2)
 
         if self.is_delayed():
             return datetime.datetime.now() - datetime.timedelta(days=2)
 
-        next_run_time = self.calculate_next_run_time()
-
-        return next_run_time
+        return self.calculate_next_run_time()
 
     def get_last_backup(self):
         if self.backups.all().count() > 0:

@@ -205,20 +205,19 @@
             <div class="panel">
                 <div class="panel-body">
                     <ul class="col-md-12 stats">
-                        <li class="stat col-md-2 col-sm-1 col-xs-6">
+                        <li class="stat col-md-2 col-sm-2 col-xs-2">
                             <span><b class="value">{{ machine.id }}</b> </span>
                             <em>ID</em>
                         </li>
-                        <li class="stat col-md-5 col-sm-5 col-xs-6">
+                        <li class="stat col-md-4 col-sm-4 col-xs-4">
                             <span><b class="value">{{ machine.name }}</b> </span>
                             <em>Name</em>
                         </li>
-                        <li class="stat col-md-5 col-sm-5 col-xs-6">
+                        <li class="stat col-md-4 col-sm-4 col-xs-4">
                             <span><b class="value">{{ machine.customer.name }}</b> </span>
                             <em>Customer</em>
                         </li>
-
-                        <li class="stat col-md-5 col-sm-5 col-xs-6">
+                        <li class="stat col-md-2 col-sm-2 col-xs-2">
                             <span><b class="value">{{ machine.active }}</b> </span>
                             <em>Active</em>
                         </li>
@@ -231,23 +230,21 @@
                 <div class="panel-body">
                     <ul class="col-md-12 stats">
 
-                        <li class="stat col-md-2 col-sm-4 col-xs-6">
+                        <li class="stat col-md-2 col-sm-2 col-xs-2">
                             <span><b class="value">{{ machine.last_connection_to_client|timesince }} ago</b> </span>
                             <em>Last seen</em>
                         </li>
-                        <li class="stat col-md-2 col-sm-4 col-xs-6">
-                            <span><b class="value">{{ machine.is_busy }} ago</b> </span>
+                        <li class="stat col-md-3 col-sm-3 col-xs-3">
+                            <span><b class="value">{{ machine.is_busy }}</b> </span>
                             <em>Is busy</em>
                         </li>
-                        <li class="stat col-md-5 col-sm-4 col-xs-6">
+                        <li class="stat col-md-3 col-sm-3 col-xs-3">
                             <span><b class="value">{{ machine.external_ip }}</b> </span>
                             <em>IP</em>
                         </li>
-                        <li class="stat col-md-5 col-sm-4 col-xs-6">
-
+                        <li class="stat col-md-3 col-sm-3 col-xs-3">
                             <span><b class="value">{{ machine.current_agent_version }}, {{ machine.current_updater_version }}</b> </span>
                             <em>Agent, Updater</em>
-
                         </li>
 
                     </ul>
