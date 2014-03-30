@@ -28,7 +28,7 @@
                     {{ schedule.get_next_run_time|date:"d.m.Y H:i" }}
                 </td>
                 <td>
-                    {{ schedule.get_next_run_time|timeuntil:schedule.last_run_time }}
+                    {{ schedule.get_next_run_time|timeuntil }}
                 </td>
 
                 <td>
