@@ -37,7 +37,6 @@ class Machine(models.Model):
     selected_agent_version = models.ForeignKey(ClientVersion, related_name="agent_selected", null=True, blank=True)
     selected_updater_version = models.ForeignKey(ClientVersion, related_name="updater_selected", null=True, blank=True)
 
-
     def __unicode__(self):
         return "Machine: %s, id: %s" % (self.name, self.id)
 

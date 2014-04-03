@@ -43,6 +43,25 @@ def view_template(request, id):
 
 
 @login_required()
+def replace_schedules_with_template(request, id, template_id):
+    template = request.user.profile.get_templates().get(id=template_id)
+    template_clone = template.clone()
+
+    machine = request.user.profile.get_all_machines().get(id=id)
+
+    machine.schedules.all().delete()
+
+    for schedule in template_clone.schedules.all():
+        schedule.machine = machine
+        schedule.save()
+
+    template_clone.delete()
+
+    return render(request, 'machine/templates/view.html', {'machine': machine,
+                                                           'title': machine.name})
+
+
+@login_required()
 def view_template_schedules(request, id):
     machine = request.user.profile.get_machine_or_change_company(id=id)
     schedules = machine.schedules.all()
