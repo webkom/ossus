@@ -12,6 +12,7 @@
             <th>Name</th>
             <th>Last runtime</th>
             <th>Next runtime</th>
+            <th>Busy</th>
             <th>Time until text runtime</th>
             <th></th>
         </tr>
@@ -27,9 +28,12 @@
                 <td>
                     {{ schedule.get_next_run_time|date:"d.m.Y H:i" }}
                 </td>
+
                 <td>
                     {{ schedule.get_next_run_time|timeuntil }}
                 </td>
+
+                <td>{{ schedule.is_busy }}</td>
 
                 <td>
                     {% if schedule.is_delayed %}
