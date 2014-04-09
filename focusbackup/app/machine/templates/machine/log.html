@@ -20,8 +20,15 @@
                 <td class="center">{{ log.datetime|date:"d.m.Y H:i" }}</td>
                 <td class="center">{{ log.text }}</td>
                 <td class="center">
-                    <span class="label label-success">{{ log.type }}</span>
+                    {% if log.type == "warning" %}
+                        <span class="label label-warning">{{ log.type }}</span>
+                    {% elif log.type == "error" %}
+                        <span class="label label-danger">{{ log.type }}</span>
+                    {% else %}
+                        <span class="label label-success">{{ log.type }}</span>
+                    {% endif %}
                 </td>
+
             </tr>
         {% endfor %}
 
