@@ -218,10 +218,11 @@
                             <em>Customer</em>
                         </li>
                         <li class="stat col-md-2 col-sm-2 col-xs-2">
-                            <span><b class="value">{{ machine.active }}</b> </span>
+                            <a href="{% url 'machines.toggle_active' machine.id %}">
+                                {{ machine.active }}
+                            </a>
                             <em>Active</em>
                         </li>
-
                     </ul>
                 </div>
             </div>

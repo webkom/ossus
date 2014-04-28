@@ -111,10 +111,20 @@ def view_backups(request, id):
 def settings(request, id):
     return render_data("", build_machine_settings(request, Machine.objects.get(id=id)))
 
+
 @login_required()
 def toggle_busy(request, id):
     machine = request.user.profile.get_machine_or_change_company(id=id)
     machine.updating_client = not machine.updating_client
+    machine.save()
+
+    return redirect(view, id)
+
+
+@login_required()
+def toggle_active(request, id):
+    machine = request.user.profile.get_machine_or_change_company(id=id)
+    machine.active = not machine.active
     machine.save()
 
     return redirect(view, id)
