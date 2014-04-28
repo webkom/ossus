@@ -218,9 +218,11 @@
                             <em>Customer</em>
                         </li>
                         <li class="stat col-md-2 col-sm-2 col-xs-2">
-                            <a href="{% url 'machines.toggle_active' machine.id %}">
-                                {{ machine.active }}
-                            </a>
+                            <b class="value">
+                                <a href="{% url 'machines.toggle_active' machine.id %}">
+                                    {{ machine.active }}
+                                </a>
+                            </b>
                             <em>Active</em>
                         </li>
                     </ul>
