@@ -248,7 +248,7 @@
                         <li class="stat col-md-2 col-sm-2 col-xs-2">
                             <span>
                                 <b class="value">
-                                    <a href="{% url 'machines.view_backups' machine.id %}">
+                                    <a href="{% url 'machines.toggle_busy' machine.id %}">
                                         {{ machine.is_busy }}
                                     </a>
                                 </b>
