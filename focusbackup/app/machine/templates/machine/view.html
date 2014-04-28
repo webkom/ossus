@@ -231,7 +231,8 @@
                     <ul class="col-md-12 stats">
 
                         <li class="stat col-md-2 col-sm-2 col-xs-2">
-                            <span><b class="value">{{ machine.last_connection_to_client|timesince }} ago</b> </span>
+                            <span><b class="value">{{ machine.last_connection_to_client|timesince }}
+                                ago</b> </span>
                             <em>Last seen</em>
                         </li>
 
@@ -245,7 +246,13 @@
                             <em>Agent, Updater</em>
                         </li>
                         <li class="stat col-md-2 col-sm-2 col-xs-2">
-                            <span><b class="value">{{ machine.is_busy }}</b> </span>
+                            <span>
+                                <b class="value">
+                                    <a href="{% url 'machines.view_backups' machine.id %}">
+                                        {{ machine.is_busy }}
+                                    </a>
+                                </b>
+                            </span>
                             <em>Is busy</em>
                         </li>
                     </ul>
@@ -324,7 +331,8 @@
         <div class="col-md-12">
             <div class="panel ">
                 <div class="panel-body">
-                    <div id="container_cpu" style="width: 100%; height: 300px; margin: 0 auto"></div>
+                    <div id="container_cpu"
+                         style="width: 100%; height: 300px; margin: 0 auto"></div>
                 </div>
             </div>
         </div>
@@ -341,7 +349,8 @@
         <div class="col-md-12">
             <div class="panel ">
                 <div class="panel-body">
-                    <div id="container_load" style="width: 100%; height: 300px; margin: 0 auto"></div>
+                    <div id="container_load"
+                         style="width: 100%; height: 300px; margin: 0 auto"></div>
                 </div>
             </div>
         </div>

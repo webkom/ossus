@@ -12,6 +12,7 @@ urlpatterns = patterns('focusbackup.app.machine.views',
                        url(r'^(?P<id>\w+)/view/backups/$', 'view_backups', name="machines.view_backups"),
                        url(r'^(?P<id>\w+)/edit/$', 'edit'),
                        url(r'^(?P<id>\w+)/settings/$', 'settings'),
+                       url(r'^(?P<id>\w+)/toggle_busy/$', 'toggle_busy'),
                        url(r'^(?P<id>\w+)/delete/$', 'delete'),
                        url(r'^(?P<id>\w+)/replace-schedules/(?P<template_id>\w+)/$', 'replace_schedules_with_template'),
 
