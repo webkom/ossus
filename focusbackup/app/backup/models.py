@@ -94,6 +94,9 @@ class Backup(models.Model):
     day_folder_path = models.CharField(max_length=150, blank=True)
     file_name = models.CharField(max_length=150, blank=True, null=True)
 
+    class Meta:
+        ordering = ["-id"]
+
     def __unicode__(self):
         return u"Backup machine: %s, schedule: %s" % (self.machine, self.schedule)
 

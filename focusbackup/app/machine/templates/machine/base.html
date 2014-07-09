@@ -6,7 +6,7 @@
 
     <div class="header">
         <div class="col-md-12">
-            <h3 class="header-title">{% block title %}Dashboard{% endblock %}</h3>
+            <h3 class="header-title">{% block title %}Dashboard{% endblock %} {% if machine %} - {{ machine.name }}{% endif %}</h3>
         </div>
 
         {% if machine %}

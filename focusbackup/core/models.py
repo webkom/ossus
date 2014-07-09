@@ -19,14 +19,13 @@ class UserProfile(models.Model):
         self.save()
 
     def get_companies(self):
-        company_ids = []
-        for company in Company.objects.all().prefetch_related("users", "users__profile"):
+        company_ids = set([])
 
-            if self.user in company.users.all().values_list("id", flat=True):
-                company_ids.append(company.id)
+        for company in Company.objects.all().prefetch_related("users").select_related("users__profile"):
+            if self.user.id in company.users.all().values_list("id", flat=True):
+                company_ids.add(int(company.id))
 
-        return list(Company.objects.filter(id__in=company_ids).prefetch_related("users",
-                                                                                "users__profile"))
+        return Company.objects.filter(id__in=company_ids).prefetch_related("users").select_related("users__profile")
 
     def get_customers(self):
         return Customer.objects.filter(company=self.company).prefetch_related("machines")

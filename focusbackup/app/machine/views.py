@@ -101,7 +101,7 @@ def install_instructions_linux(request):
 @login_required()
 def view_backups(request, id):
     machine = request.user.profile.get_machine_or_change_company(id=id)
-    #backups = machine.backups.all().prefetch_related("schedules")
+    backups = machine.backups.all().prefetch_related("schedules")
 
     return render(request, 'machine/view_backups.html', {'machine': machine,
                                                          'backups': backups,

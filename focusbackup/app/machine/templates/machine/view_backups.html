@@ -5,28 +5,27 @@
 
     {% for schedule in machine.schedules.all %}
 
-        <h3>{{ schedule }}</h3>
+        <h3>{{ schedule.name }}</h3>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Date</th>
+                <th>Datetime started</th>
+                <th>Datetime ended</th>
                 <th>Time used to backup</th>
-                <th>Schedule</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
 
             {% for backup in schedule.backups.all %}
+                {% if backup.is_recoverable %}
                 <tr>
                     <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
-                    <td>{{ backup.time_started|timesince:backup.time_ended }}
-                        - {{ backup.time_ended|date:"d.m.Y H:i" }}</td>
-                    <td>{{ backup.schedule.name }}</td>
-                    <td>
-
-                    </td>
+                    <td>{{ backup.time_ended|date:"d.m.Y H:i" }}</td>
+                    <td>{{ backup.time_started|timesince:backup.time_ended }}</td>
+                    <td><a href="{{ backup.recover_link}}">Download</a></td>
                 </tr>
+                {% endif %}
             {% endfor %}
 
             </tbody>
