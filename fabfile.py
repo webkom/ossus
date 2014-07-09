@@ -22,8 +22,8 @@ site = App(
     test_settings='focusbackup.settings.test',
     restart_command='/etc/init.d/supervisord restart',
     local_tables_to_flush=[],
-    dumpdata_command="dumpdata --exclude machine.MachineStats --exclude machine.MachineProcessStats "
-                     "--exclude machine.MachineLog --exclude backup.Backup",
+    #dumpdata_command="dumpdata --exclude machine.MachineStats --exclude machine.MachineProcessStats "
+    #                 "--exclude machine.MachineLog --exclude backup.Backup",
     requirements={
         'prod': 'requirements.txt',
     }

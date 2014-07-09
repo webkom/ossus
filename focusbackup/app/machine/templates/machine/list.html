@@ -5,44 +5,43 @@
 
     {% for customer in customers %}
         {% if customer.machines.all %}
-
             <div class="row">
                 <div class="col-md-3">
                     <h3>{{ customer.name }}</h3>
                 </div>
-
                 <div class="col-md-9">
-
-                    {% for machine in customer.get_machines %}
+                    {% for machine in customer.machines.all %}
                         <a href='{% url 'machines.view' machine.id %}'>
                             {% if not machine.active %}
                                 <div class="machine-round">
-                                    <div class="title notactive"><i class="fa fa-warning"></i> {{ machine.name }}</div>
+                                    <div class="title notactive">
+                                        <i class="fa fa-warning"></i> {{ machine.name }}
+                                    </div>
                                 </div>
                             {% elif machine.lost_connection_to_client %}
                                 <div class="machine-round">
-                                    <div class="title error"><i class="fa fa-warning"></i> {{ machine.name }}</div>
+                                    <div class="title error">
+                                        <i class="fa fa-warning"></i> {{ machine.name }}
+                                    </div>
                                 </div>
                             {% elif not machine.is_up_to_date %}
                                 <div class="machine-round">
-                                    <div class="title warning"><i class="fa fa-adjust"></i> {{ machine.name }}</div>
+                                    <div class="title warning">
+                                        <i class="fa fa-adjust"></i> {{ machine.name }}
+                                    </div>
                                 </div>
                             {% else %}
                                 <div class="machine-round">
-                                    <div class="title ok"><i class="fa fa-check"></i> {{ machine.name }}</div>
+                                    <div class="title ok">
+                                        <i class="fa fa-check"></i> {{ machine.name }}
+                                    </div>
                                 </div>
                             {% endif %}
                         </a>
-
-
                     {% endfor %}
-
                 </div>
-
             </div>
-
             <hr>
-
         {% endif %}
     {% endfor %}
 {% endblock %}

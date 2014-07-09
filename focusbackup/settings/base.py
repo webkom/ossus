@@ -54,7 +54,6 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = False
 
-
 MEDIA_ROOT = os.path.join(PROJECT_ROOT_DIRECTORY, 'uploads')
 MEDIA_URL = '/uploads/'
 
@@ -147,13 +146,22 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'null': {
+            'level': 'DEBUG',
+            'class':'django.utils.log.NullHandler',
+            },
     },
     'loggers': {
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
+        },
+        'django.db.backends': {
+            'handlers': ['null'], # Quiet by default!
+            'propagate': False,
+            'level': 'DEBUG',
         },
     }
 }

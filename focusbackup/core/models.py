@@ -20,11 +20,13 @@ class UserProfile(models.Model):
 
     def get_companies(self):
         company_ids = []
-        for company in Company.objects.all().prefetch_related("users"):
-            if self.user in company.users.all():
+        for company in Company.objects.all().prefetch_related("users", "users__profile"):
+
+            if self.user in company.users.all().values_list("id", flat=True):
                 company_ids.append(company.id)
 
-        return Company.objects.filter(id__in=company_ids)
+        return list(Company.objects.filter(id__in=company_ids).prefetch_related("users",
+                                                                                "users__profile"))
 
     def get_customers(self):
         return Customer.objects.filter(company=self.company).prefetch_related("machines")
@@ -48,10 +50,10 @@ class UserProfile(models.Model):
         machine_ids = []
 
         for customer in self.get_customers():
-            for machine in customer.machines.all():
-                machine_ids.append(machine.id)
+            for machine_id in customer.machines.all().values_list("id", flat=True).distinct():
+                machine_ids.append(machine_id)
 
-        return Machine.objects.filter(id__in=machine_ids)
+        return Machine.objects.filter(id__in=machine_ids).select_related("current_agent_version", "current_updater_version")
 
     def get_all_active_machines(self):
         return self.get_all_machines().filter(active=True)
@@ -77,4 +79,10 @@ class UserProfile(models.Model):
 
         return Schedule.objects.filter(id__in=schedule_ids)
 
-User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
+
+try:
+    User.profile = property(
+        lambda u: UserProfile.objects.select_related("user", "company").get(user=u))
+
+except UserProfile.DoesNotExist:
+    User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])

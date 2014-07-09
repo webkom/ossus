@@ -17,7 +17,8 @@ class Machine(models.Model):
     template = models.BooleanField(default=False)
 
     #Info from the client
-    last_connection_to_client = models.DateTimeField(blank=True, null=True, default=datetime.datetime.now())
+    last_connection_to_client = models.DateTimeField(blank=True, null=True,
+                                                     default=datetime.datetime.now())
     external_ip = models.IPAddressField(default="")
 
     #For generating settings-file
@@ -30,12 +31,16 @@ class Machine(models.Model):
     updating_client = models.BooleanField(default=False)
 
     #Current version running on client
-    current_agent_version = models.ForeignKey(ClientVersion, related_name="agent_versions", null=True)
-    current_updater_version = models.ForeignKey(ClientVersion, related_name="updater_versions", null=True)
+    current_agent_version = models.ForeignKey(ClientVersion, related_name="agent_versions",
+                                              null=True)
+    current_updater_version = models.ForeignKey(ClientVersion, related_name="updater_versions",
+                                                null=True)
 
     #If not auto_version
-    selected_agent_version = models.ForeignKey(ClientVersion, related_name="agent_selected", null=True, blank=True)
-    selected_updater_version = models.ForeignKey(ClientVersion, related_name="updater_selected", null=True, blank=True)
+    selected_agent_version = models.ForeignKey(ClientVersion, related_name="agent_selected",
+                                               null=True, blank=True)
+    selected_updater_version = models.ForeignKey(ClientVersion, related_name="updater_selected",
+                                                 null=True, blank=True)
 
     def __unicode__(self):
         return "Machine: %s, id: %s" % (self.name, self.id)
@@ -67,11 +72,11 @@ class Machine(models.Model):
         return copy
 
     def is_up_to_date(self):
-        return self.current_agent_version == ClientVersion.objects.get(current_agent=True) and \
-               self.current_updater_version == ClientVersion.objects.get(current_updater=True)
+        return self.current_agent_version.current_agent and self.current_updater_version.current_updater
 
     def lost_connection_to_client(self):
-        return datetime.datetime.now() - self.last_connection_to_client > datetime.timedelta(minutes=20)
+        return datetime.datetime.now() - self.last_connection_to_client > datetime.timedelta(
+            minutes=20)
 
     def set_last_connection_to_client(self):
         self.last_connection_to_client = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")

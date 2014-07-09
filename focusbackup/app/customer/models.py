@@ -16,4 +16,5 @@ class Customer(models.Model):
         return self.name
 
     def get_machines(self):
-        return self.machines.filter(template=False)
+        return self.machines.filter(template=False).select_related("current_agent_version",
+                                                                   "current_updater_version")

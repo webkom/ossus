@@ -76,10 +76,13 @@ set_machine_external_ip = csrf_exempt(set_machine_external_ip)
 def set_busy_updating(request, id, busy):
 
     machine = Machine.objects.get(id=id)
+    old_updating_client = machine.updating_client
     machine.updating_client = True if busy == '1' else False
     machine.save()
 
-    return render_data("machine", build_machine_fields(machine))
+    changed_status = old_updating_client != machine.updating_client
+
+    return render_data("changed_status", changed_status)
 
 
 set_busy_updating = csrf_exempt(set_busy_updating)

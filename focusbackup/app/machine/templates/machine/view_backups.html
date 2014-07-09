@@ -3,33 +3,35 @@
 
 {% block main %}
 
-    <h3>Backups</h3>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th>Time used to backup</th>
-            <th>Schedule</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
+    {% for schedule in machine.schedules.all %}
 
-        {% for backup in machine.get_recoverable_backups %}
+        <h3>{{ schedule }}</h3>
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
-                <td>{{ backup.time_started|timesince:backup.time_ended }}
-                    - {{ backup.time_ended|date:"d.m.Y H:i" }}</td>
-                <td>{{ backup.schedule.name }}</td>
-                <td>
-                    {% if backup.recover_link %}
-                        <a href="{{ backup.recover_link }}">Download backup</a>
-                    {% endif %}
-                </td>
+                <th>Date</th>
+                <th>Time used to backup</th>
+                <th>Schedule</th>
+                <th>Actions</th>
             </tr>
-        {% endfor %}
+            </thead>
+            <tbody>
 
-        </tbody>
-    </table>
+            {% for backup in schedule.backups.all %}
+                <tr>
+                    <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
+                    <td>{{ backup.time_started|timesince:backup.time_ended }}
+                        - {{ backup.time_ended|date:"d.m.Y H:i" }}</td>
+                    <td>{{ backup.schedule.name }}</td>
+                    <td>
+
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    {% endfor %}
 
 {% endblock %}
