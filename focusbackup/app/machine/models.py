@@ -42,6 +42,9 @@ class Machine(models.Model):
     selected_updater_version = models.ForeignKey(ClientVersion, related_name="updater_selected",
                                                  null=True, blank=True)
 
+    class Meta:
+        ordering = ["-active", "name", "id"]
+
     def __unicode__(self):
         return "Machine: %s, id: %s" % (self.name, self.id)
 
@@ -173,7 +176,7 @@ class MachineStats(models.Model):
     mem_free = models.DecimalField(decimal_places=3, max_digits=50, default=0)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['-id']
 
 
 class MachineProcessStats(models.Model):
@@ -187,6 +190,8 @@ class MachineProcessStats(models.Model):
     cpu_usage = models.DecimalField(decimal_places=3, max_digits=10)
     mem_usage = models.DecimalField(decimal_places=3, max_digits=10)
 
+    class Meta:
+        ordering = ['-id']
 
 log_types = (
     ('info', 'INFO'),
@@ -201,6 +206,8 @@ class MachineLog(models.Model):
     text = models.TextField()
     type = models.CharField(max_length=10, choices=log_types)
 
+    class Meta:
+        ordering = ["-id"]
+
     def __unicode__(self):
         return "%s %s %s" % (self.machine, self.datetime, self.text)
-

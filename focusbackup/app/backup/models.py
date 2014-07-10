@@ -47,6 +47,9 @@ class Schedule(models.Model):
     run_now = models.BooleanField(default=False, blank=True)
     active = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ["name", "id"]
+
     def __unicode__(self):
         return u"Machine: %s, name: %s" % (self.machine, self.name)
 
@@ -128,6 +131,9 @@ class Folder(models.Model):
     local_folder_path = models.TextField()
     skip_hidden_folders = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ["id"]
+
     def __unicode__(self):
         return u"Folder %s, schedule %s, machine %s" % (self.local_folder_path, self.schedule, self.schedule.machine)
 
@@ -149,6 +155,8 @@ class SQL(models.Model):
     username = models.TextField()
     password = models.TextField()
 
+    class Meta:
+        ordering = ["id"]
+
     def __unicode__(self):
         return "SQLBackup: %s" % self.host
-

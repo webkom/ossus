@@ -14,6 +14,9 @@ class ClientVersion(models.Model):
     current_updater = models.BooleanField(default=False)
     current_installer = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ["id"]
+
     def __unicode__(self):
         return self.name
 

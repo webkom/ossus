@@ -12,6 +12,9 @@ class Customer(models.Model):
 
     company = models.ForeignKey(Company, related_name="customers")
 
+    class Meta:
+        ordering = ["name"]
+
     def __unicode__(self):
         return self.name
 

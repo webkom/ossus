@@ -23,5 +23,8 @@ class Storage(models.Model):
     #FTP folder or S3 bucket
     folder = models.CharField(max_length=255)
 
+    class Meta:
+        ordering = ["name"]
+
     def __unicode__(self):
         return "Storage: %s %s, Company %s" % (self.type, self.host, self.company)

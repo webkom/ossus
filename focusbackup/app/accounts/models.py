@@ -9,3 +9,6 @@ class Company(models.Model):
 
     def __unicode__(self):
         return "Company: %s" % self.name
+
+    class Meta:
+        ordering = ["name", "id"]

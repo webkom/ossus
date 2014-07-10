@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 
 from django.views.decorators.csrf import csrf_exempt
@@ -15,16 +16,18 @@ from focusbackup.app.machine.models import Machine, MachineLog
 
 @require_valid_api_token()
 def get_machines(request, id=False):
-    if id:
-        return render_data("machine", build_machine_fields(Machine.objects.get(id=id)))
+    try:
+        if id:
+            return render_data("machine", build_machine_fields(Machine.objects.get(id=id)))
 
-    else:
-        send_object = []
-        for event in Machine.objects.all():
-            send_object.append(build_machine_fields(event))
+        else:
+            send_object = []
+            for event in Machine.objects.all():
+                send_object.append(build_machine_fields(event))
 
-        return render_data("machines", send_object)
-
+            return render_data("machines", send_object)
+    except Machine.DoesNotExist:
+        raise Http404
 
 get_machines = csrf_exempt(get_machines)
 

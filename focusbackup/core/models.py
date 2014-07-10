@@ -14,6 +14,9 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
     company = models.ForeignKey(Company, blank=True, null=True)
 
+    class Meta:
+        ordering = ["id"]
+
     def set_company(self, company):
         self.company = company
         self.save()
