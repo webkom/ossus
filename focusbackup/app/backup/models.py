@@ -44,6 +44,7 @@ class Schedule(models.Model):
     running_backup = models.BooleanField(default=False, blank=True)
     running_restore = models.BooleanField(default=False, blank=True)
 
+    run_now = models.BooleanField(default=False, blank=True)
     active = models.BooleanField(default=True)
 
     def __unicode__(self):
@@ -66,6 +67,9 @@ class Schedule(models.Model):
         return self.from_date
 
     def get_next_run_time(self):
+
+        if self.run_now:
+            return datetime.datetime.now() - datetime.timedelta(days=2)
 
         if self.repeat_every_minute == 0:
             return datetime.datetime.now() - datetime.timedelta(days=2)

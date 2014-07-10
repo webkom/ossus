@@ -12,7 +12,8 @@
             <th>Name</th>
             <th>Last runtime</th>
             <th>Next runtime</th>
-            <th>Busy</th>
+            <th>Status</th>
+            <th></th>
             <th>Time until text runtime</th>
             <th></th>
         </tr>
@@ -28,19 +29,36 @@
                 <td>
                     {{ schedule.get_next_run_time|date:"d.m.Y H:i" }}
                 </td>
-
                 <td>
                     {% if schedule.running_backup %}
-                        <span class="label label-warning">Running backup</span> <a href="{% url 'focusbackup.app.backup.views.stop_schedule' schedule.machine.id schedule.id %}">stop</a>
+                        <span class="btn btn-label btn-warning">Running backup</span>
                     {% else %}
-                        <span class="label label-success">Stand by</span>
+                        <span class="btn btn-label">Stand by</span>
                     {% endif %}
                 </td>
-
+                <td style="width: 210px;">
+                    {% if schedule.running_backup %}
+                        <a class="btn btn-danger"
+                           href="{% url 'machines.stop_schedule' machine.id schedule.id %}">
+                            Cancel current run
+                        </a>
+                    {% else %}
+                        {% if not schedule.run_now %}
+                            <a class="btn btn-success"
+                               href="{% url 'machines.toggle_run_schedule_now' machine.id schedule.id %}">
+                                Running as scheduled
+                            </a>
+                        {% else %}
+                            <a class="btn btn-warning"
+                               href="{% url 'machines.toggle_run_schedule_now' machine.id schedule.id %}">
+                                Running continuously
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                </td>
                 <td>
                     {{ schedule.get_next_run_time|timeuntil }}
                 </td>
-
                 <td>
                     {% if schedule.is_delayed %}
                         <div class="title warning"><i class="fa fa-warning"></i> delayed</div>
