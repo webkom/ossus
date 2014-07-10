@@ -89,6 +89,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+
+
 ROOT_URLCONF = 'focusbackup.urls'
 
 TEMPLATE_DIRS = (
@@ -121,6 +123,8 @@ INSTALLED_APPS = (
     'south'
 
 )
+
+
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',

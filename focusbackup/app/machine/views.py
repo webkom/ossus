@@ -123,6 +123,16 @@ def toggle_busy(request, id):
 
 
 @login_required()
+def stop_schedule(request, id, schedule_id):
+    machine = request.user.profile.get_machine_or_change_company(id=id)
+    schedule = machine.schedules.get(id=schedule_id)
+    schedule.running_backup = False
+    schedule.save()
+
+    return redirect(view_schedules, id)
+
+
+@login_required()
 def toggle_active(request, id):
     machine = request.user.profile.get_machine_or_change_company(id=id)
     machine.active = not machine.active

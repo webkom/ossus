@@ -31,7 +31,7 @@
 
                 <td>
                     {% if schedule.running_backup %}
-                        <span class="label label-warning">Running backup</span>
+                        <span class="label label-warning">Running backup</span> <a href="{% url 'focusbackup.app.backup.views.stop_schedule' schedule.machine.id schedule.id %}">stop</a>
                     {% else %}
                         <span class="label label-success">Stand by</span>
                     {% endif %}

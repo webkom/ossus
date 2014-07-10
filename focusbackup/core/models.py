@@ -52,7 +52,8 @@ class UserProfile(models.Model):
             for machine_id in customer.machines.all().values_list("id", flat=True).distinct():
                 machine_ids.append(machine_id)
 
-        return Machine.objects.filter(id__in=machine_ids).select_related("current_agent_version", "current_updater_version")
+        return Machine.objects.filter(id__in=machine_ids).select_related("current_agent_version",
+                                                                         "current_updater_version")
 
     def get_all_active_machines(self):
         return self.get_all_machines().filter(active=True)

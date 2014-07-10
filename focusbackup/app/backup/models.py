@@ -104,9 +104,7 @@ class Backup(models.Model):
         return self.schedule.backups.filter(id__gt=self.id).count() < self.schedule.versions_count
 
     def recover_link(self):
-
         file_name = ""
-
         if self.schedule:
             if self.schedule.folders.all().count() + self.schedule.sql_backups.all().count() == 1:
                 if len(self.file_name) > 0:

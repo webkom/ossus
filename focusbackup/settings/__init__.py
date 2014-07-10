@@ -6,7 +6,4 @@ from focusbackup.settings.base import *
 try:
     from focusbackup.settings.local import *
 except ImportError, e:
-    raise ImportError("Couldn't load local settings uno.settings.local")
-
-if 'debug_toolbar' in INSTALLED_APPS:
-    from focusbackup.settings.debug_toolbar import *
+    raise ImportError("Couldn't load local settings focusbackup.settings.local")

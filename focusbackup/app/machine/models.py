@@ -96,10 +96,7 @@ class Machine(models.Model):
             return self.selected_updater_version
 
     def get_latest_stats(self):
-        if self.stats.all().count() > 20:
-            return self.stats.all().order_by("id")[self.stats.all().count() - 20:]
-
-        return self.stats.all().order_by("id")
+        return self.stats.all()[0:20]
 
     def get_latest_logs(self):
         return self.logs.all().order_by("-id")[0:8]
@@ -120,9 +117,9 @@ class Machine(models.Model):
         backups = self.backups.all().select_related("schedule").order_by("-id")[0:300]
         res = []
 
-        for b in backups:
-            if b.is_recoverable():
-                res.append(b)
+        for backup in backups:
+            if backup.is_recoverable():
+                res.append(backup)
 
         return res
 
@@ -174,6 +171,9 @@ class MachineStats(models.Model):
 
     mem_used = models.DecimalField(decimal_places=3, max_digits=50, default=0)
     mem_free = models.DecimalField(decimal_places=3, max_digits=50, default=0)
+
+    class Meta:
+        ordering = ['id']
 
 
 class MachineProcessStats(models.Model):
