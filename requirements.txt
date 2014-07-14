@@ -9,4 +9,4 @@ python-dateutil
 pyes
 gunicorn
 MySQL-python
-memcache
+python-memcached
