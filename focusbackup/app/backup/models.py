@@ -24,7 +24,6 @@ schedule_every_minute_choices = (
 
 
 class Schedule(models.Model):
-
     name = models.CharField(max_length=150)
 
     machine = models.ForeignKey(Machine, related_name="schedules")
@@ -54,18 +53,43 @@ class Schedule(models.Model):
         return u"Machine: %s, name: %s" % (self.machine, self.name)
 
     def current_day_folder_path(self):
-        return str(self.machine.id) + "/" + "schedules/" + str(self.id) + "/" + str(self.current_version_in_loop) + "/"
+        return str(self.machine.id) + "/" + "schedules/" + str(self.id) + "/" + str(
+            self.current_version_in_loop) + "/"
 
     def set_last_run_time(self):
         self.last_run_time = datetime.datetime.now()
         self.save()
 
     def is_delayed(self):
-        return self.calculate_next_run_time() < (datetime.datetime.now() - datetime.timedelta(hours=3))
+        delay_limit = datetime.datetime.now() - datetime.timedelta(minutes=30)
+        return self.calculate_next_run_time() < delay_limit
+
+    def get_recoverable_backups(self, limit=15):
+        return self.backups.all() \
+                   .select_related("schedule") \
+                   .prefetch_related("schedule__folders", "schedule__sql_backups") \
+                   .order_by("-id")[0:min(limit, self.versions_count)]
 
     def calculate_next_run_time(self):
+
         if self.last_run_time:
-            return self.last_run_time + relativedelta(minutes=self.repeat_every_minute)
+            start_date = self.from_date
+
+            if self.repeat_every_minute < 9000:
+                one_week_ago = datetime.datetime.now() - relativedelta(weeks=1)
+                start_date = start_date.replace(one_week_ago.year,
+                                                one_week_ago.month,
+                                                one_week_ago.day)
+
+            runs = list(rrule(MINUTELY,
+                              cache=True,
+                              interval=self.repeat_every_minute,
+                              until=datetime.date.today() + relativedelta(weeks=3, weekday=FR(-1)),
+                              dtstart=start_date))
+
+            for run in runs:
+                if run > self.last_run_time:
+                    return run
 
         return self.from_date
 
@@ -81,6 +105,12 @@ class Schedule(models.Model):
             return datetime.datetime.now() - datetime.timedelta(days=2)
 
         return self.calculate_next_run_time()
+
+    def get_next_run_time_text(self):
+        if self.get_next_run_time() < datetime.datetime.now():
+            return "now"
+
+        return self.get_next_run_time()
 
     def get_last_backup(self):
         if self.backups.all().count() > 0:
@@ -107,9 +137,6 @@ class Backup(models.Model):
     def __unicode__(self):
         return u"Backup machine: %s, schedule: %s" % (self.machine, self.schedule)
 
-    def is_recoverable(self):
-        return self.schedule.backups.filter(id__gt=self.id).count() < self.schedule.versions_count
-
     def recover_link(self):
         file_name = ""
         if self.schedule:
@@ -117,10 +144,12 @@ class Backup(models.Model):
                 if len(self.file_name) > 0:
                     file_name = self.file_name.replace("C:", "")
 
-        if self.is_recoverable() and self.day_folder_path:
+        if self.day_folder_path:
             url = "ftp://%s:%s@%s/%s" % (
-                self.schedule.storage.username, self.schedule.storage.password, self.schedule.storage.host,
+                self.schedule.storage.username, self.schedule.storage.password,
+                self.schedule.storage.host,
                 self.day_folder_path)
+
             return url + file_name
         return ""
 
@@ -135,7 +164,8 @@ class Folder(models.Model):
         ordering = ["id"]
 
     def __unicode__(self):
-        return u"Folder %s, schedule %s, machine %s" % (self.local_folder_path, self.schedule, self.schedule.machine)
+        return u"Folder %s, schedule %s, machine %s" % (
+            self.local_folder_path, self.schedule, self.schedule.machine)
 
 
 sql_types = (

@@ -48,4 +48,14 @@ def upload_client():
 
 @task
 def clone_prod_data():
+
+    #Empty local database before doing anything
+    from django.db import connection
+    cursor = connection.cursor()
+    cursor.execute("DROP DATABASE focus24;")
+    cursor.execute("CREATE DATABASE focus24;")
+
+    from django import db
+    db.close_connection()
+
     site.clone_data('prod')

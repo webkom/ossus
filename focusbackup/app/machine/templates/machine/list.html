@@ -10,7 +10,7 @@
                     <h3>{{ customer.name }}</h3>
                 </div>
                 <div class="col-md-9">
-                    {% for machine in customer.machines.all %}
+                    {% for machine in customer.get_machines %}
                         <a href='{% url 'machines.view' machine.id %}'>
                             {% if not machine.active %}
                                 <div class="machine-round">

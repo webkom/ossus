@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.db import models
 
 from focusbackup.api.models import Token
@@ -22,13 +23,22 @@ class UserProfile(models.Model):
         self.save()
 
     def get_companies(self):
+        cache_key = "user_%s_companies" % self.user.id
+        companies = cache.get(cache_key)
+
+        if companies:
+            return companies
+
         company_ids = set([])
 
         for company in Company.objects.all().prefetch_related("users").select_related("users__profile"):
             if self.user.id in company.users.all().values_list("id", flat=True):
                 company_ids.add(int(company.id))
 
-        return Company.objects.filter(id__in=company_ids).prefetch_related("users").select_related("users__profile")
+        companies = list(Company.objects.filter(id__in=company_ids).prefetch_related("users").select_related("users__profile"))
+        cache.set(cache_key, companies)
+
+        return companies
 
     def get_customers(self):
         return Customer.objects.filter(company=self.company).prefetch_related("machines")
@@ -83,9 +93,20 @@ class UserProfile(models.Model):
         return Schedule.objects.filter(id__in=schedule_ids)
 
 
+def _get_user_profile(u):
+    cache_key = "user_profile_for_%s" % u.id
+    profile = cache.get(cache_key)
+
+    if profile:
+        return profile
+
+    profile = UserProfile.objects.select_related("user", "company").get(user=u)
+    cache.set(cache_key, profile)
+
+    return profile
+
 try:
-    User.profile = property(
-        lambda u: UserProfile.objects.select_related("user", "company").get(user=u))
+    User.profile = property(lambda u: _get_user_profile(u))
 
 except UserProfile.DoesNotExist:
     User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])

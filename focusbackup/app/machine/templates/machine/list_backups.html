@@ -2,10 +2,7 @@
 {% load i18n %}
 
 {% block main %}
-
-    {% for schedule in machine.schedules.all %}
-
-        <h3>{{ schedule.name }} </h3> <a href="{% url 'machines.all_recoverable_backups_schedule' machine.id schedule.id %}">See all backups</a>
+        <h3>{{ schedule.name }}</h3>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -16,8 +13,7 @@
             </tr>
             </thead>
             <tbody>
-
-            {% for backup in schedule.get_recoverable_backups %}
+            {% for backup in backups %}
                 <tr>
                     <td>{{ backup.time_started|date:"d.m.Y H:i" }}</td>
                     <td>{{ backup.time_ended|date:"d.m.Y H:i" }}</td>
@@ -27,6 +23,4 @@
             {% endfor %}
             </tbody>
         </table>
-    {% endfor %}
-
 {% endblock %}

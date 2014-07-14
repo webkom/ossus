@@ -114,17 +114,7 @@ class Machine(models.Model):
         return self.schedules.filter(id__in=schedules)
 
     def get_latest_backups(self):
-        return self.backups.all().order_by("-id")[0:8]
-
-    def get_recoverable_backups(self):
-        backups = self.backups.all().select_related("schedule").order_by("-id")[0:300]
-        res = []
-
-        for backup in backups:
-            if backup.is_recoverable():
-                res.append(backup)
-
-        return res
+        return self.backups.select_related("schedule").prefetch_related("schedule__folders", "schedule__sql_backups").order_by("-id")[0:8]
 
     def running_backup(self):
         for schedule in self.schedules.all():

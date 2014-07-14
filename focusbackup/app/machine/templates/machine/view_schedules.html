@@ -15,6 +15,7 @@
             <th>Status</th>
             <th></th>
             <th>Time until text runtime</th>
+            <th>Delayed</th>
             <th></th>
         </tr>
         </thead>
@@ -57,7 +58,11 @@
                     {% endif %}
                 </td>
                 <td>
-                    {{ schedule.get_next_run_time|timeuntil }}
+                    {% if schedule.get_next_run_time_text == "now" %}
+                        now
+                    {% else %}
+                        {{ schedule.get_next_run_time|timeuntil }}
+                    {% endif %}
                 </td>
                 <td>
                     {% if schedule.is_delayed %}
@@ -66,6 +71,7 @@
                         <div class="title ok"><i class="fa fa-check"></i></div>
                     {% endif %}
                 </td>
+            <td><a href="{% url 'machines.all_recoverable_backups_schedule' machine.id schedule.id %}">See backups</a> </td>
             </tr>
         {% endfor %}
         </tbody>

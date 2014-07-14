@@ -109,6 +109,17 @@ def view_backups(request, id):
 
 
 @login_required()
+def all_recoverable_backups_schedule(request, id, schedule_id):
+    machine = request.user.profile.get_machine_or_change_company(id=id)
+    schedule = machine.schedules.get(id=schedule_id)
+    backups = schedule.get_recoverable_backups(schedule.versions_count)
+
+    return render(request, 'machine/list_backups.html', {'machine': machine,
+                                                         'schedule': schedule,
+                                                         'backups': backups,
+                                                         'title': machine.name})
+
+@login_required()
 def settings(request, id):
     return render_data("", build_machine_settings(request, Machine.objects.get(id=id)))
 
