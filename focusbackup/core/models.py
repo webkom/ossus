@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import random
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db import models
@@ -19,6 +20,8 @@ class UserProfile(models.Model):
         ordering = ["id"]
 
     def set_company(self, company):
+        cache.set("user_profile_for_%s" % self.user.id, None)
+
         self.company = company
         self.save()
 
@@ -44,7 +47,6 @@ class UserProfile(models.Model):
         return Customer.objects.filter(company=self.company).prefetch_related("machines")
 
     def get_machine_or_change_company(self, id):
-
         try:
             return self.get_all_machines().get(id=id)
         except Machine.DoesNotExist:
