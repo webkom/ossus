@@ -53,6 +53,8 @@ class UserProfile(models.Model):
             machine = Machine.objects.get(id=id)
 
             if machine.customer.company in self.get_companies():
+                cache.set("user_profile_for_%s" % self.user.id, None)
+
                 self.company = machine.customer.company
                 self.save()
 
