@@ -96,7 +96,7 @@ def set_busy_updating(request, id, busy, client_session=None):
 
     #is the current session the current locker
     elif client_session and machine.lock_session and client_session == machine.lock_session:
-        
+
         if busy == '0':
             change_status = True
             machine.lock_session = None
@@ -142,15 +142,21 @@ def set_busy_updating(request, id, busy, client_session=None):
             machine.lock = None
             machine.lock_session = None
             machine.save()
+            machine.log("warning", "unspecified session unlocks the machine")
 
         elif not machine.lock and busy == '1':
             change_status = True
             machine.lock = datetime.datetime.now()
             machine.lock_session = None
             machine.save()
+            machine.log("warning", "unspecified session locks the machine")
 
         else:
             change_status = False
+            machine.log("warning", "unspecified session tried to set "
+                                   "lock, but it did not "
+                                   "change, current lock status is: %s "
+                                   % "locked" if busy == '1' else 'unlocked')
 
     else:
         #do nothing..
