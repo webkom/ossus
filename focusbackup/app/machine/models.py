@@ -19,6 +19,7 @@ class Machine(models.Model):
     #Info from the client
     last_connection_to_client = models.DateTimeField(blank=True, null=True,
                                                      default=datetime.datetime.now())
+
     external_ip = models.IPAddressField(default="")
 
     #For generating settings-file
@@ -83,7 +84,7 @@ class Machine(models.Model):
             minutes=20)
 
     def set_last_connection_to_client(self):
-        self.last_connection_to_client = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.last_connection_to_client = datetime.datetime.now()
         self.active = True
         self.save()
 

@@ -11,7 +11,6 @@ from focusbackup.api.views.common import render_data
 from focusbackup.api.views.helpers import build_schedule_fields, build_machine_fields, \
     build_machine_log, build_client_version, build_machine_log_fields, build_machine_settings
 from focusbackup.app.client.models import ClientVersion
-from focusbackup.app.machine.forms import MachineForm
 from focusbackup.app.machine.models import Machine, MachineLog
 
 
