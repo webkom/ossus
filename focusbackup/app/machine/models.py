@@ -138,7 +138,7 @@ class Machine(models.Model):
         return False
 
     def is_busy(self):
-        return self.running_restore() or self.running_backup() or self.updating_client is not None
+        return self.running_restore() or self.running_backup() or self.lock is not None
 
     def get_last_backup_time(self):
         next_backup_time = None

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
@@ -127,7 +128,14 @@ def settings(request, id):
 @login_required()
 def toggle_busy(request, id):
     machine = request.user.profile.get_machine_or_change_company(id=id)
-    machine.updating_client = not machine.updating_client
+
+    if machine.lock:
+        machine.lock = None
+        machine.lock_session = None
+    else:
+        machine.lock = datetime.datetime.now()
+        machine.lock_session = None
+
     machine.save()
 
     return redirect(view, id)

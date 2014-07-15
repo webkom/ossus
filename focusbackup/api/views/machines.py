@@ -122,6 +122,19 @@ def set_busy_updating(request, id, busy, client_session=None):
             machine.log("warning",
                         "%s tried to unlock, but the machine is already unlocked.." % client_session)
 
+    elif client_session and machine.lock:
+
+        if busy == '0':
+            change_status = True
+            machine.lock_session = None
+            machine.lock = None
+            machine.save()
+            machine.log("info", "%s Release lock" % client_session)
+        else:
+            change_status = False
+            machine.log("warning",
+                        "%s tried to lock, but the machine is already locked.." % client_session)
+
     elif not client_session:
         machine.log("error", "the client did not provide a client session, will try my best..")
 
@@ -137,7 +150,7 @@ def set_busy_updating(request, id, busy, client_session=None):
 
         else:
             change_status = False
-    
+
     else:
         #do nothing..
         change_status = False
