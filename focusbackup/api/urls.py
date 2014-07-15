@@ -23,6 +23,7 @@ urlpatterns = patterns('focusbackup.api.views',
                         'machines.set_machine_external_ip'),
 
                        (r'^machines/(?P<id>\w+)/set_busy_updating/(?P<busy>\d)/session/(?P<session>\w+)/$', 'machines.set_busy_updating'),
+                       (r'^machines/(?P<id>\w+)/set_busy_updating/$', 'machines.set_busy_updating'),
 
                        #MachineStats
                        (r'^machines/(?P<id>\w+)/create_stats/$', 'machinestats.create_stats_for_machine'),

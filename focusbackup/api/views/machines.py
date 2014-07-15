@@ -76,12 +76,12 @@ set_machine_external_ip = csrf_exempt(set_machine_external_ip)
 
 
 @require_valid_api_token()
-def set_busy_updating(request, id, busy, session):
+def set_busy_updating(request, id, busy, session=None):
 
     machine = Machine.objects.get(id=id)
     machine.set_last_connection_to_client()
 
-    if machine.lock_session and session != machine.lock_session:
+    if machine.lock_session and session and session != machine.lock_session:
         machine.log("info", "Attempt to lock or unlock machine, "
                             "but the lock is set by another session. "
                             "Lock set by %s, while this session is %s" % (machine.lock_session, session))
