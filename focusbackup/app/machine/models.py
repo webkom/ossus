@@ -28,7 +28,7 @@ class Machine(models.Model):
 
     auto_version = models.BooleanField(default=True)
 
-    updating_client = models.BooleanField(default=False)
+    lock = models.DateTimeField(default=None, null=True, blank=True)
     lock_session = models.CharField(max_length=255, null=True, default=None)
 
     #Current version running on client
@@ -138,7 +138,7 @@ class Machine(models.Model):
         return False
 
     def is_busy(self):
-        return self.running_restore() or self.running_backup() or self.updating_client
+        return self.running_restore() or self.running_backup() or self.updating_client is not None
 
     def get_last_backup_time(self):
         next_backup_time = None

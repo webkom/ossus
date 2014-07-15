@@ -8,7 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from focusbackup.api.auth import require_valid_api_token
 from focusbackup.api.forms import LogAPIForm
 from focusbackup.api.views.common import render_data
-from focusbackup.api.views.helpers import build_schedule_fields, build_machine_fields, build_machine_log, build_client_version, build_machine_log_fields, build_machine_settings
+from focusbackup.api.views.helpers import build_schedule_fields, build_machine_fields, \
+    build_machine_log, build_client_version, build_machine_log_fields, build_machine_settings
 from focusbackup.app.client.models import ClientVersion
 from focusbackup.app.machine.forms import MachineForm
 from focusbackup.app.machine.models import Machine, MachineLog
@@ -29,12 +30,14 @@ def get_machines(request, id=False):
     except Machine.DoesNotExist:
         raise Http404
 
+
 get_machines = csrf_exempt(get_machines)
 
 
 @require_valid_api_token()
 def get_log_for_machine(request, id):
-    return render_data("machine_log", build_machine_log(Machine.objects.get(id=id).logs.all().order_by("-id")))
+    return render_data("machine_log",
+                       build_machine_log(Machine.objects.get(id=id).logs.all().order_by("-id")))
 
 
 get_log_for_machine = csrf_exempt(get_log_for_machine)
@@ -76,51 +79,94 @@ set_machine_external_ip = csrf_exempt(set_machine_external_ip)
 
 
 @require_valid_api_token()
-def set_busy_updating(request, id, busy, session=None):
-
+def set_busy_updating(request, id, busy, client_session=None):
     machine = Machine.objects.get(id=id)
     machine.set_last_connection_to_client()
 
-    if machine.lock_session and session and session != machine.lock_session:
-        machine.log("info", "Attempt to lock or unlock machine, "
-                            "but the lock is set by another session. "
-                            "Lock set by %s, while this session is %s" % (machine.lock_session, session))
+    if client_session and machine.lock_session and client_session != machine.lock_session:
+        machine.log(
+            "warning",
+            "%s Attempt to %s machine, "
+            "but the lock is set by another session, have to wait until the lock is released."
+            "Lock set by %s." % (client_session,
+                                 "lock" if busy == '1' else 'unlock',
+                                 machine.lock_session)
+        )
 
-        changed_status = False
-    else:
-        old_updating_client = machine.updating_client
-        machine.updating_client = True if busy == '1' else False
-        changed_status = old_updating_client != machine.updating_client
+        change_status = False
 
-        if machine.updating_client:
-            machine.lock_session = session
-            machine.log("info", "Locked by session %s" % session)
-        else:
+    #is the current session the current locker
+    elif client_session and machine.lock_session and client_session == machine.lock_session:
+
+        if busy == '0':
+            change_status = True
             machine.lock_session = None
-            machine.log("info", "Release lock by session %s " % session)
+            machine.lock = None
+            machine.save()
+            machine.log("info", "%s Release lock" % client_session)
+        else:
+            change_status = False
+            machine.log("warning",
+                        "%s did not change the current lock, we did you try this?" % client_session)
 
-        machine.save()
+    elif client_session and not machine.lock:
 
-    return render_data("changed_status", changed_status)
+        if busy == '1':
+            change_status = True
+            machine.lock_session = client_session
+            machine.lock = datetime.datetime.now()
+            machine.save()
+            machine.log("info", "%s Lock set" % client_session)
+        else:
+            change_status = False
+            machine.log("warning",
+                        "%s tried to unlock, but the machine is already unlocked.." % client_session)
+
+    elif not client_session:
+        machine.log("error", "the client did not provide a client session, will try my best..")
+
+        if machine.lock and busy == '0':
+            change_status = True
+            machine.lock = False
+            machine.save()
+
+        elif not machine.lock and busy == '1':
+            change_status = True
+            machine.lock = datetime.datetime.now()
+            machine.save()
+
+        else:
+            change_status = False
+    
+    else:
+        #do nothing..
+        change_status = False
+        machine.log("warning",
+                    "no idea what to do.. this is what I know: lock: %s, "
+                    "lock_session: %s, client_session: %s" % (machine.lock,
+                                                              machine.lock_session,
+                                                              client_session))
+
+    return render_data("changed_status", change_status)
 
 
 set_busy_updating = csrf_exempt(set_busy_updating)
 
+
 @require_valid_api_token()
 def deactivate(request, id):
-
     machine = Machine.objects.get(id=id)
     machine.active = False
     machine.save()
 
     return render_data("machine", build_machine_fields(machine))
 
+
 deactivate = csrf_exempt(deactivate)
 
 
 @require_valid_api_token()
 def create_new_machine_from_template(request, id, name):
-
     template = get_object_or_404(Machine, id=id, template=True)
     machine = template.clone()
 
@@ -129,6 +175,7 @@ def create_new_machine_from_template(request, id, name):
     machine.save()
 
     return render_data("machine", build_machine_fields(machine))
+
 
 create_new_machine_from_template = csrf_exempt(create_new_machine_from_template)
 
@@ -159,7 +206,8 @@ def create_log_for_machine(request, id):
             machine.set_last_connection_to_client()
 
             if form.is_valid():
-                machine_log = MachineLog(machine=machine, datetime=datetime.datetime.now(), type=request.POST['type'],
+                machine_log = MachineLog(machine=machine, datetime=datetime.datetime.now(),
+                                         type=request.POST['type'],
                                          text=request.POST['text'])
 
                 machine_log.save()
