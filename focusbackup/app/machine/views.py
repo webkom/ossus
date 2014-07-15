@@ -132,9 +132,11 @@ def toggle_busy(request, id):
     if machine.lock:
         machine.lock = None
         machine.lock_session = None
+        machine.log("info", "%s release lock trough interface" % request.user.get_full_name())
     else:
         machine.lock = datetime.datetime.now()
         machine.lock_session = None
+        machine.log("info", "%s put lock trough web interface" % request.user.get_full_name())
 
     machine.save()
 
