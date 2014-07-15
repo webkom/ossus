@@ -76,14 +76,30 @@ set_machine_external_ip = csrf_exempt(set_machine_external_ip)
 
 
 @require_valid_api_token()
-def set_busy_updating(request, id, busy):
+def set_busy_updating(request, id, busy, session):
 
     machine = Machine.objects.get(id=id)
-    old_updating_client = machine.updating_client
-    machine.updating_client = True if busy == '1' else False
-    machine.save()
+    machine.set_last_connection_to_client()
 
-    changed_status = old_updating_client != machine.updating_client
+    if machine.lock_session and session != machine.lock_session:
+        machine.log("info", "Attempt to lock or unlock machine, "
+                            "but the lock is set by another session. "
+                            "Lock set by %s, while this session is %s" % (machine.lock_session, session))
+
+        changed_status = False
+    else:
+        old_updating_client = machine.updating_client
+        machine.updating_client = True if busy == '1' else False
+        changed_status = old_updating_client != machine.updating_client
+
+        if machine.updating_client:
+            machine.lock_session = session
+            machine.log("info", "Locked by session %s" % session)
+        else:
+            machine.lock_session = None
+            machine.log("info", "Release lock by session %s " % session)
+
+        machine.save()
 
     return render_data("changed_status", changed_status)
 

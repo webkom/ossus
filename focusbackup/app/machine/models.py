@@ -29,6 +29,7 @@ class Machine(models.Model):
     auto_version = models.BooleanField(default=True)
 
     updating_client = models.BooleanField(default=False)
+    lock_session = models.CharField(max_length=255, null=True, default=None)
 
     #Current version running on client
     current_agent_version = models.ForeignKey(ClientVersion, related_name="agent_versions",
@@ -103,6 +104,14 @@ class Machine(models.Model):
 
     def get_latest_logs(self):
         return self.logs.all().order_by("-id")[0:8]
+
+    def log(self, log_type, text):
+        machine_log = MachineLog(machine=self,
+                                 datetime=datetime.datetime.now(),
+                                 type=log_type,
+                                 text=text)
+
+        machine_log.save()
 
     def delayed_schedules(self):
         schedules = []
