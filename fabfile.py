@@ -22,8 +22,8 @@ site = App(
     test_settings='focusbackup.settings.test',
     restart_command='/etc/init.d/supervisord restart',
     local_tables_to_flush=[],
-    #dumpdata_command="dumpdata --exclude machine.MachineStats --exclude machine.MachineProcessStats "
-    #                 "--exclude machine.MachineLog --exclude backup.Backup",
+    dumpdata_command="dumpdata --exclude machine.MachineStats --exclude machine.MachineProcessStats "
+                     "--exclude machine.MachineLog --exclude backup.Backup",
     requirements={
         'prod': 'requirements.txt',
     }
@@ -56,6 +56,7 @@ def clone_prod_data():
     cursor.execute("CREATE DATABASE focus24;")
 
     from django import db
-    db.close_connection()
+    #db.close_connection()
+    cursor.execute("USE focus24;")
 
     site.clone_data('prod')

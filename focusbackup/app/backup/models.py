@@ -81,10 +81,12 @@ class Schedule(models.Model):
                                                 one_week_ago.month,
                                                 one_week_ago.day)
 
+            extra_days = (self.repeat_every_minute / 1400) + 10
+
             runs = list(rrule(MINUTELY,
                               cache=True,
                               interval=self.repeat_every_minute,
-                              until=datetime.date.today() + relativedelta(weeks=3, weekday=FR(-1)),
+                              until=datetime.date.today() + relativedelta(days=extra_days, weekday=FR(-1)),
                               dtstart=start_date))
 
             for run in runs:
