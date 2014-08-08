@@ -86,10 +86,10 @@ def set_busy_updating(request, id, busy, client_session=None):
         machine.log(
             "warning",
             "%s Attempt to %s machine, "
-            "but the lock is set by another session, have to wait until the lock is released."
-            "Lock set by %s." % (client_session,
-                                 "lock" if busy == '1' else 'unlock',
-                                 machine.lock_session)
+            "but the lock is set by another session, "
+            "have to wait until the lock is released by %s" % (client_session,
+                                                               "lock" if busy == '1' else 'unlock',
+                                                               machine.lock_session)
         )
 
         change_status = False

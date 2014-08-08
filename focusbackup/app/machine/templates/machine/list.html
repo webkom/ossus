@@ -30,6 +30,12 @@
                                         <i class="fa fa-adjust"></i> {{ machine.name }}
                                     </div>
                                 </div>
+                            {% elif machine.delayed_schedules %}
+                                <div class="machine-round">
+                                    <div class="title delayed">
+                                        <i class="fa fa-bookmark"></i> {{ machine.name }}
+                                    </div>
+                                </div>
                             {% else %}
                                 <div class="machine-round">
                                     <div class="title ok">
