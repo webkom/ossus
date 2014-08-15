@@ -99,23 +99,17 @@ def set_busy_updating(request, id, busy, client_session=None):
 
         if busy == '0':
             change_status = True
-            machine.lock_session = None
-            machine.lock = None
-            machine.save()
-            machine.log("info", "%s Release lock" % client_session)
+            machine.release_lock(client_session)
         else:
             change_status = False
             machine.log("warning",
-                        "%s did not change the current lock, we did you try this?" % client_session)
+                        "%s did not change the current lock, why did you try this?" % client_session)
 
     elif client_session and not machine.lock:
 
         if busy == '1':
             change_status = True
-            machine.lock_session = client_session
-            machine.lock = datetime.datetime.now()
-            machine.save()
-            machine.log("info", "%s Lock set" % client_session)
+            machine.set_lock(client_session)
         else:
             change_status = False
             machine.log("warning",
@@ -125,10 +119,7 @@ def set_busy_updating(request, id, busy, client_session=None):
 
         if busy == '0':
             change_status = True
-            machine.lock_session = None
-            machine.lock = None
-            machine.save()
-            machine.log("info", "%s Release lock" % client_session)
+            machine.release_lock(client_session)
         else:
             change_status = False
             machine.log("warning",
@@ -139,17 +130,11 @@ def set_busy_updating(request, id, busy, client_session=None):
 
         if machine.lock and busy == '0':
             change_status = True
-            machine.lock = None
-            machine.lock_session = None
-            machine.save()
-            machine.log("warning", "unspecified session unlocks the machine")
+            machine.release_lock()
 
         elif not machine.lock and busy == '1':
             change_status = True
-            machine.lock = datetime.datetime.now()
-            machine.lock_session = None
-            machine.save()
-            machine.log("warning", "unspecified session locks the machine")
+            machine.set_lock()
 
         else:
             change_status = False
