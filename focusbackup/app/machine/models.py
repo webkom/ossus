@@ -2,7 +2,7 @@
 from copy import deepcopy
 import datetime
 
-from django.db import models
+from django.db import models, transaction, IntegrityError
 
 from focusbackup.app.client.models import ClientVersion
 from focusbackup.app.customer.models import Customer
@@ -52,17 +52,25 @@ class Machine(models.Model):
         return "Machine: %s, id: %s" % (self.name, self.id)
 
     def set_lock(self, session=None):
-        self.lock = datetime.datetime.now()
-        self.lock_session = session
-        self.save()
-        self.log("info", "lock set by %s" % session)
+        try:
+            with transaction.atomic():
+                self.lock = datetime.datetime.now()
+                self.lock_session = session
+                self.save()
+                self.log("info", "lock set by %s" % session)
+        except IntegrityError:
+            self.log("error", "error locking..")
 
     def release_lock(self, session=None):
-        last_locked_date = self.lock
-        self.lock = None
-        self.lock_session = None
-        self.save()
-        self.log("info", "lock (from %s) released by %s" % (last_locked_date, session))
+        try:
+            with transaction.atomic():
+                last_locked_date = self.lock
+                self.lock = None
+                self.lock_session = None
+                self.save()
+                self.log("info", "lock (from %s) released by %s" % (last_locked_date, session))
+        except IntegrityError:
+            self.log("error", "error unlocking..")
 
     def clone(self):
         copy = deepcopy(self)

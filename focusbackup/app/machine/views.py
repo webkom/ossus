@@ -94,7 +94,7 @@ def list_logs_all_machines(request):
     machine_ids = []
     for m in request.user.profile.get_all_machines():
         machine_ids.append(m.id)
-        
+
     logs = MachineLog.objects.filter(machine_id__in=machine_ids)[0:1000]
     return render(request, 'machine/list_logs_all_machines.html', {'logs': logs})
 
