@@ -1,0 +1,36 @@
+{% extends "machine/base.html" %}
+{% load i18n %}
+
+{% block main %}
+
+    <h3>Log</h3>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Machine</th>
+            <th>Date</th>
+            <th>Text</th>
+            <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for log in logs %}
+            <tr>
+                <td class="center">{{ log.machine }}</td>
+                <td class="center">{{ log.datetime|date:"d.m.Y H:i" }}</td>
+                <td class="center">{{ log.text }}</td>
+                <td class="center">
+                    {% if log.type == "warning" %}
+                        <span class="label label-warning">{{ log.type }}</span>
+                    {% elif log.type == "error" %}
+                        <span class="label label-danger">{{ log.type }}</span>
+                    {% else %}
+                        <span class="label label-success">{{ log.type }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

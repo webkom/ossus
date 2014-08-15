@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url
 
 urlpatterns = patterns('focusbackup.app.machine.views',
                        url(r'^$', 'overview', name="machine_overview"),
+                       url(r'^logs/$', 'list_logs_all_machines', name="machine_list_all_logs"),
                        url(r'^new/$', 'new', name="machines.new"),
                        url(r'^install-instructions/$', 'install_instructions',
                            name="machines.install_instructions"),

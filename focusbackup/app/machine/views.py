@@ -9,6 +9,7 @@ from focusbackup.api.views.helpers import build_machine_settings
 from focusbackup.app.backup.models import Machine
 from focusbackup.app.client.models import ClientVersion
 from focusbackup.app.machine.forms import MachineForm
+from focusbackup.app.machine.models import MachineLog
 
 
 @login_required()
@@ -88,6 +89,10 @@ def view_schedules(request, id):
                                                            'schedules': schedules,
                                                            'title': machine.name})
 
+@login_required()
+def list_logs_all_machines(request):
+    logs = MachineLog.objects.all()[0:1000]
+    return render(request, 'machine/list_logs_all_machines.html', {'logs': logs})
 
 @login_required()
 def install_instructions(request):

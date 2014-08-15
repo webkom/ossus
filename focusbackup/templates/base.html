@@ -137,10 +137,16 @@
                     </a>
                 </li>
 
+                <li class="{% active request "storages" %}">
+                    <a href="{% url 'focusbackup.app.machine.views.list_logs_all_machines' %}">
+                        <i class="fa fa-list fa-fw"></i>
+                        Logs
+                    </a>
+                </li>
+
             </ul>
         </aside>
         <!-- END: SIDEBAR -->
-
 
         <section class="content">
             {% block content %}
