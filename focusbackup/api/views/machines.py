@@ -83,7 +83,7 @@ set_machine_external_ip = csrf_exempt(set_machine_external_ip)
 def set_busy_updating(request, id, busy, client_session=None):
 
     machine = Machine.objects.get(id=id)
-    machine.log("info", "session %s connecting...")
+    machine.log("info", "session %s connecting..." % client_session)
     machine.set_last_connection_to_client()
 
     if client_session and machine.lock_session and client_session != machine.lock_session:
