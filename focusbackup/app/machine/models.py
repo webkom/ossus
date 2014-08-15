@@ -46,6 +46,7 @@ class Machine(models.Model):
                                                  null=True, blank=True)
 
     manager = LockingManager()
+    objects = LockingManager()
 
     class Meta:
         ordering = ["-active", "name", "id"]
