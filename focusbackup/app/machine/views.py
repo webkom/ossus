@@ -91,7 +91,11 @@ def view_schedules(request, id):
 
 @login_required()
 def list_logs_all_machines(request):
-    logs = MachineLog.objects.all()[0:1000]
+    machine_ids = []
+    for m in request.user.profile.get_all_machines():
+        machine_ids.append(m.id)
+        
+    logs = MachineLog.objects.filter(machine_id__in=machine_ids)[0:1000]
     return render(request, 'machine/list_logs_all_machines.html', {'logs': logs})
 
 @login_required()
