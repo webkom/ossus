@@ -45,9 +45,6 @@ class Machine(models.Model):
     selected_updater_version = models.ForeignKey(ClientVersion, related_name="updater_selected",
                                                  null=True, blank=True)
 
-    manager = LockingManager()
-    objects = LockingManager()
-
     class Meta:
         ordering = ["-active", "name", "id"]
 

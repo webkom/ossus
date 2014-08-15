@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+from django.db import transaction
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 
@@ -78,9 +79,9 @@ set_machine_external_ip = csrf_exempt(set_machine_external_ip)
 
 
 @require_valid_api_token()
+@transaction.atomic
 def set_busy_updating(request, id, busy, client_session=None):
 
-    Machine.objects.lock()
     machine = Machine.objects.get(id=id)
     machine.log("info", "Locking database database")
 
@@ -157,7 +158,6 @@ def set_busy_updating(request, id, busy, client_session=None):
                                                               client_session))
 
     machine.log("info", "Unlocking database")
-    Machine.objects.unlock()
 
     return render_data("changed_status", change_status)
 
