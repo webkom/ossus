@@ -23,7 +23,7 @@ def create_stats_for_machine(request, id):
                 log.datetime = datetime.datetime.now()
                 log.save()
 
-                machine.set_last_connection_to_client()
+                #machine.set_last_connection_to_client()
 
                 return render_data("stats", {'id': log.id})
 

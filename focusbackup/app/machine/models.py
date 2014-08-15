@@ -18,8 +18,8 @@ class Machine(models.Model):
     template = models.BooleanField(default=False)
 
     #Info from the client
-    last_connection_to_client = models.DateTimeField(blank=True, null=True,
-                                                     default=datetime.datetime.now())
+    #last_connection_to_client = models.DateTimeField(blank=True, null=True,
+    #                                                 default=datetime.datetime.now())
 
     external_ip = models.IPAddressField(default="")
 
@@ -47,6 +47,13 @@ class Machine(models.Model):
 
     class Meta:
         ordering = ["-active", "name", "id"]
+
+    @property
+    def last_connection_to_client(self):
+        try:
+            return self.logs.all()[0].datetime
+        except IndexError:
+            return None
 
     def __unicode__(self):
         return "Machine: %s, id: %s" % (self.name, self.id)
@@ -105,10 +112,6 @@ class Machine(models.Model):
         return datetime.datetime.now() - self.last_connection_to_client > datetime.timedelta(
             minutes=20)
 
-    def set_last_connection_to_client(self):
-        self.last_connection_to_client = datetime.datetime.now()
-        self.active = True
-        self.save()
 
     def get_selected_agent_version(self):
         if self.auto_version:

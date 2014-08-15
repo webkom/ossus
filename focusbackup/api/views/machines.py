@@ -84,7 +84,6 @@ def set_busy_updating(request, id, busy, client_session=None):
 
     machine = Machine.objects.get(id=id)
     machine.log("info", "session %s connecting..." % client_session)
-    machine.set_last_connection_to_client()
 
     if client_session and machine.lock_session and client_session != machine.lock_session:
         machine.log(
@@ -211,7 +210,7 @@ def create_log_for_machine(request, id):
         if request.method == "POST":
             form = LogAPIForm(request.POST)
 
-            machine.set_last_connection_to_client()
+            #machine.set_last_connection_to_client()
 
             if form.is_valid():
                 machine_log = MachineLog(machine=machine, datetime=datetime.datetime.now(),
