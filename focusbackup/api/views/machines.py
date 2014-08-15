@@ -67,10 +67,12 @@ set_machine_agent_version = csrf_exempt(set_machine_agent_version)
 
 
 @require_valid_api_token()
+@transaction.atomic
 def set_machine_external_ip(request, id, ip_address):
     machine = Machine.objects.get(id=id)
-    machine.external_ip = ip_address
-    machine.save()
+    if machine.external_ip != ip_address:
+        machine.external_ip = ip_address
+        machine.save()
 
     return render_data("machine", build_machine_fields(machine))
 
