@@ -79,7 +79,11 @@ set_machine_external_ip = csrf_exempt(set_machine_external_ip)
 
 @require_valid_api_token()
 def set_busy_updating(request, id, busy, client_session=None):
+
+    Machine.objects.lock()
     machine = Machine.objects.get(id=id)
+    machine.log("info", "Locking database database")
+
     machine.set_last_connection_to_client()
 
     if client_session and machine.lock_session and client_session != machine.lock_session:
@@ -152,8 +156,10 @@ def set_busy_updating(request, id, busy, client_session=None):
                                                               machine.lock_session,
                                                               client_session))
 
-    return render_data("changed_status", change_status)
+    machine.log("info", "Unlocking database")
+    Machine.objects.unlock()
 
+    return render_data("changed_status", change_status)
 
 set_busy_updating = csrf_exempt(set_busy_updating)
 

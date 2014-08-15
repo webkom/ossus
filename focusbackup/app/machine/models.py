@@ -6,6 +6,7 @@ from django.db import models
 
 from focusbackup.app.client.models import ClientVersion
 from focusbackup.app.customer.models import Customer
+from focusbackup.app.machine.managers import LockingManager
 
 
 class Machine(models.Model):
@@ -43,6 +44,8 @@ class Machine(models.Model):
                                                null=True, blank=True)
     selected_updater_version = models.ForeignKey(ClientVersion, related_name="updater_selected",
                                                  null=True, blank=True)
+
+    manager = LockingManager()
 
     class Meta:
         ordering = ["-active", "name", "id"]
