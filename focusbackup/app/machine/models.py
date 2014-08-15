@@ -54,13 +54,14 @@ class Machine(models.Model):
     def set_lock(self, session=None):
         self.lock = datetime.datetime.now()
         self.lock_session = session
-        self.log("info", "lock set by %s" % session)
         self.save()
+        self.log("info", "lock set by %s" % session)
 
     def release_lock(self, session=None):
         last_locked_date = self.lock
         self.lock = None
         self.lock_session = None
+        self.save()
         self.log("info", "lock (from %s) released by %s" % (last_locked_date, session))
 
     def clone(self):
