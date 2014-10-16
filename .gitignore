@@ -5,6 +5,7 @@
 *.json
 local.py
 .swp
+.tox
 *.egg-info
 project.db
 pickle*.txt

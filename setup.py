@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = "testcore", 
-    version = "1.0",
-    url = 'http://hg.abakus.no/testapp',
-    license = 'Proprietary',
-    description = "A test application",
-    author = 'Frederik M.J.V',
-    requires = [],
-    install_requires = ['setuptools'],
+    name="focusbackup",
+    version="1.0",
+    url='https://github.com/focussecurity/focusbackup.git',
+    license='Proprietary',
+    description="Backup Service",
+    author='Frederik Carlsen',
+    requires=[],
+    install_requires=['setuptools'],
 )

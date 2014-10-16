@@ -10,3 +10,5 @@ pyes
 gunicorn
 MySQL-python
 python-memcached
+flake8
+tox
