@@ -89,6 +89,7 @@ def view_schedules(request, id):
                                                            'schedules': schedules,
                                                            'title': machine.name})
 
+
 @login_required()
 def list_logs_all_machines(request):
     machine_ids = []
@@ -97,6 +98,7 @@ def list_logs_all_machines(request):
 
     logs = MachineLog.objects.filter(machine_id__in=machine_ids)[0:1000]
     return render(request, 'machine/list_logs_all_machines.html', {'logs': logs})
+
 
 @login_required()
 def install_instructions(request):
@@ -129,6 +131,7 @@ def all_recoverable_backups_schedule(request, id, schedule_id):
                                                          'backups': backups,
                                                          'title': machine.name})
 
+
 @login_required()
 def settings(request, id):
     return render_data("", build_machine_settings(request, Machine.objects.get(id=id)))
@@ -139,16 +142,12 @@ def toggle_busy(request, id):
     machine = request.user.profile.get_machine_or_change_company(id=id)
 
     if machine.lock:
-        machine.lock = None
-        machine.lock_session = None
+        machine.release_lock()
         machine.log("info", "%s release lock through web interface" % request.user.get_full_name())
 
     else:
-        machine.lock = datetime.datetime.now()
-        machine.lock_session = None
+        machine.set_lock()
         machine.log("info", "%s put lock through web interface" % request.user.get_full_name())
-
-    machine.save()
 
     return redirect(view, id)
 
@@ -158,7 +157,7 @@ def toggle_run_schedule_now(request, id, schedule_id):
     machine = request.user.profile.get_machine_or_change_company(id=id)
     schedule = machine.schedules.get(id=schedule_id)
     schedule.run_now = not schedule.run_now
-    schedule.save()
+    schedule.save(update_fields=["run_now"])
 
     return redirect(view_schedules, id)
 
@@ -168,7 +167,7 @@ def stop_schedule(request, id, schedule_id):
     machine = request.user.profile.get_machine_or_change_company(id=id)
     schedule = machine.schedules.get(id=schedule_id)
     schedule.running_backup = False
-    schedule.save()
+    schedule.save(update_fields=["running_backup"])
 
     return redirect(view_schedules, id)
 
@@ -176,8 +175,7 @@ def stop_schedule(request, id, schedule_id):
 @login_required()
 def toggle_active(request, id):
     machine = request.user.profile.get_machine_or_change_company(id=id)
-    machine.active = not machine.active
-    machine.save()
+    machine.set_active(not machine.active)
 
     return redirect(view, id)
 

@@ -6,7 +6,6 @@ from django.db import models, transaction, IntegrityError
 
 from focusbackup.app.client.models import ClientVersion
 from focusbackup.app.customer.models import Customer
-from focusbackup.app.machine.managers import LockingManager
 
 
 class Machine(models.Model):
@@ -58,12 +57,16 @@ class Machine(models.Model):
     def __unicode__(self):
         return "Machine: %s, id: %s" % (self.name, self.id)
 
+    def set_active(self, active):
+        self.active = active
+        self.save(update_fields=["active"])
+
     def set_lock(self, session=None):
         try:
             with transaction.atomic():
                 self.lock = datetime.datetime.now()
                 self.lock_session = session
-                self.save()
+                self.save(update_fields=["lock", "lock_session"])
                 self.log("info", "lock set by %s" % session)
         except IntegrityError:
             self.log("error", "error locking..")
@@ -74,7 +77,7 @@ class Machine(models.Model):
                 last_locked_date = self.lock
                 self.lock = None
                 self.lock_session = None
-                self.save()
+                self.save(update_fields=["lock", "lock_session"])
                 self.log("info", "lock (from %s) released by %s" % (last_locked_date, session))
         except IntegrityError:
             self.log("error", "error unlocking..")
@@ -83,25 +86,25 @@ class Machine(models.Model):
         copy = deepcopy(self)
         copy.pk = None
         copy.template = False
-        copy.save()
+        copy.save(update_fields=["pk", "template"])
 
         for schedule in self.schedules.all():
             schedule_copy = deepcopy(schedule)
             schedule_copy.pk = None
             schedule_copy.machine = copy
-            schedule_copy.save()
+            schedule_copy.save(update_fields=["pk", "template"])
 
             for folder in schedule.folders.all():
                 folder_copy = deepcopy(folder)
                 folder_copy.pk = None
                 folder_copy.schedule = schedule_copy
-                folder_copy.save()
+                folder_copy.save(update_fields=["pk", "template"])
 
             for sql in schedule.sql_backups.all():
                 sql_copy = deepcopy(sql)
                 sql_copy.pk = None
                 sql_copy.schedule = schedule_copy
-                sql_copy.save()
+                sql_copy.save(update_fields=["pk", "template"])
 
         return copy
 
@@ -111,7 +114,6 @@ class Machine(models.Model):
     def lost_connection_to_client(self):
         return datetime.datetime.now() - self.last_connection_to_client > datetime.timedelta(
             minutes=20)
-
 
     def get_selected_agent_version(self):
         if self.auto_version:
@@ -139,6 +141,9 @@ class Machine(models.Model):
 
         machine_log.save()
 
+        if not self.active:
+            self.set_active(True)
+
     def delayed_schedules(self):
         schedules = []
 
@@ -149,7 +154,9 @@ class Machine(models.Model):
         return self.schedules.filter(id__in=schedules)
 
     def get_latest_backups(self):
-        return self.backups.select_related("schedule").prefetch_related("schedule__folders", "schedule__sql_backups").order_by("-id")[0:8]
+        return self.backups.select_related("schedule").prefetch_related("schedule__folders",
+                                                                        "schedule__sql_backups").order_by(
+            "-id")[0:8]
 
     def running_backup(self):
         for schedule in self.schedules.all():
@@ -217,6 +224,7 @@ class MachineProcessStats(models.Model):
 
     class Meta:
         ordering = ['-id']
+
 
 log_types = (
     ('info', 'INFO'),

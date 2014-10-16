@@ -43,23 +43,23 @@ class ClientVersion(models.Model):
     def set_current_agent(self):
         for v in ClientVersion.objects.all():
             v.current_agent = False
-            v.save()
+            v.save(update_fields=["current_agent"])
 
         self.current_agent = True
-        self.save()
+        self.save(update_fields=["current_agent"])
 
     def set_current_updater(self):
         for v in ClientVersion.objects.all():
             v.current_updater = False
-            v.save()
+            v.save(update_fields=["current_updater"])
 
         self.current_updater = True
-        self.save()
+        self.save(update_fields=["current_updater"])
 
     def set_current_installer(self):
         for v in ClientVersion.objects.all():
             v.current_installer = False
-            v.save()
+            v.save(update_fields=["current_installer"])
 
         self.current_installer = True
-        self.save()
+        self.save(update_fields=["current_installer"])

@@ -13,35 +13,33 @@ from focusbackup.app.backup.models import Schedule
 def get_schedules(request, id=False):
     send_object = []
 
-    if id:
+    if id and request.method == "POST":
 
         schedule = Schedule.objects.get(id=id)
+        form = ScheduleAPIForm(request.POST)
 
-        if request.method == "POST":
+        if form.is_valid():
 
-            form = ScheduleAPIForm(request.POST)
+            schedule.name = form.cleaned_data['name']
 
-            if form.is_valid():
+            if form.cleaned_data['running_backup'] == "true":
+                schedule.running_backup = True
+            else:
+                schedule.running_backup = False
 
-                schedule.name = form.cleaned_data['name']
+            if form.cleaned_data['running_restore'] == "true":
+                schedule.running_restore = True
+            else:
+                schedule.running_restore = False
 
-                if form.cleaned_data['running_backup'] == "true":
-                    schedule.running_backup = True
-                else:
-                    schedule.running_backup = False
+            schedule.current_version_in_loop = int(form.cleaned_data['current_version_in_loop'])
 
-                if form.cleaned_data['running_restore'] == "true":
-                    schedule.running_restore = True
-                else:
-                    schedule.running_restore = False
+            # Only set last_run when running_backup is true
+            if schedule.running_backup:
+                schedule.set_last_run_time()
 
-                schedule.current_version_in_loop = int(form.cleaned_data['current_version_in_loop'])
-
-                #Only set last_run when running_backup is true
-                if schedule.running_backup:
-                    schedule.set_last_run_time()
-
-                schedule.save()
+            schedule.save(update_fields=["name", "running_backup",
+                                         "running_restore", "current_version_in_loop"])
 
         return render_data("schedule", build_schedule_fields(schedule))
 

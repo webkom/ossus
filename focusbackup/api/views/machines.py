@@ -58,7 +58,7 @@ def set_machine_agent_version(request, id, version):
     if id:
         machine = Machine.objects.get(id=id)
         machine.current_agent_version = client_version
-        machine.save()
+        machine.save(update_fields=["current_agent_version"])
 
     return render_data("client_version", build_client_version(client_version))
 
@@ -72,7 +72,7 @@ def set_machine_external_ip(request, id, ip_address):
     machine = Machine.objects.get(id=id)
     if machine.external_ip != ip_address:
         machine.external_ip = ip_address
-        machine.save()
+        machine.save(update_fields=["external_ip"])
 
     return render_data("machine", build_machine_fields(machine))
 
@@ -166,7 +166,7 @@ set_busy_updating = csrf_exempt(set_busy_updating)
 def deactivate(request, id):
     machine = Machine.objects.get(id=id)
     machine.active = False
-    machine.save()
+    machine.save(update_fields=["active"])
 
     return render_data("machine", build_machine_fields(machine))
 
@@ -181,7 +181,7 @@ def create_new_machine_from_template(request, id, name):
 
     machine.name = name
     machine.template = False
-    machine.save()
+    machine.save(update_fields=["name", "template"])
 
     return render_data("machine", build_machine_fields(machine))
 
@@ -196,7 +196,7 @@ def set_machine_updater_version(request, id, version):
     if id:
         machine = Machine.objects.get(id=id)
         machine.current_updater_version = client_version
-        machine.save()
+        machine.save(update_fields=["current_updater_version"])
 
     return render_data("client_version", build_client_version(client_version))
 
@@ -212,15 +212,10 @@ def create_log_for_machine(request, id):
         if request.method == "POST":
             form = LogAPIForm(request.POST)
 
-            #machine.set_last_connection_to_client()
+            machine.set_last_connection_to_client()
 
             if form.is_valid():
-                machine_log = MachineLog(machine=machine, datetime=datetime.datetime.now(),
-                                         type=request.POST['type'],
-                                         text=request.POST['text'])
-
-                machine_log.save()
-
+                machine.log(request.POST['type'], request.POST['text'])
                 return render_data("log", {'log': build_machine_log_fields(machine_log)})
 
     return render_data("ERROR", {'error': 'No machine or not a valid form'})

@@ -12,22 +12,19 @@ from focusbackup.app.machine.models import MachineStats
 
 @require_valid_api_token()
 def create_stats_for_machine(request, id):
-    if id:
+    if id and request.method == "POST":
         machine = Machine.objects.get(id=id)
 
-        if request.method == "POST":
-            form = MachineStatsForm(request.POST, instance=MachineStats())
-            if form.is_valid():
-                log = form.save(commit=False)
-                log.machine = machine
-                log.datetime = datetime.datetime.now()
-                log.save()
+        form = MachineStatsForm(request.POST, instance=MachineStats())
 
-                #machine.set_last_connection_to_client()
+        if form.is_valid():
+            stats = form.save(commit=False)
+            stats.machine = machine
+            stats.datetime = datetime.datetime.now()
+            stats.save()
 
-                return render_data("stats", {'id': log.id})
+            return render_data("stats", {'id': stats.id})
 
     return render_data("error", {'error': 'invalid form'})
-
 
 create_stats_for_machine = csrf_exempt(create_stats_for_machine)
