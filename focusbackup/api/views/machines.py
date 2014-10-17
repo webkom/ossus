@@ -215,8 +215,6 @@ def create_log_for_machine(request, id):
         if request.method == "POST":
             form = LogAPIForm(request.POST)
 
-            machine.set_last_connection_to_client()
-
             if form.is_valid():
                 machine_log = machine.log(request.POST['type'], request.POST['text'])
                 return render_data("log", {'log': build_machine_log_fields(machine_log)})
