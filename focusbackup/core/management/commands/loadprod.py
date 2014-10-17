@@ -5,7 +5,7 @@ from django.db import connection, transaction
 
 
 class Command(loaddata):
-    def handle (self, *args, **kwargs):
+    def handle(self, *args, **kwargs):
         cursor = connection.cursor()
 
         cursor.execute("delete from auth_group_permissions;")

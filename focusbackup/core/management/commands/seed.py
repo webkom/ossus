@@ -12,6 +12,7 @@ from focusbackup.app.storage.models import Storage
 
 example_date = datetime.now()
 
+
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         admin_user = User.objects.get_or_create(username="admin")[0]
@@ -23,7 +24,7 @@ class Command(BaseCommand):
         storage = None
         versions = []
 
-        #Create client versions
+        # Create client versions
         for j in range(0, 4):
             version = ClientVersion.objects.get_or_create(
                 name="Version %s" % j,
@@ -33,11 +34,11 @@ class Command(BaseCommand):
             version.set_current_updater()
             versions.append(version)
 
-        #Create companies, with storage, customers and machines
+        # Create companies, with storage, customers and machines
         for j in range(0, 4):
             company = Company.objects.get_or_create(name="Company %s" % j)[0]
 
-            #Create test user for each company
+            # Create test user for each company
             user = User.objects.get_or_create(username="test%s" % j)[0]
             user.set_password("test%s" % j)
             user.save()
@@ -48,13 +49,16 @@ class Command(BaseCommand):
             user.profile.set_company(company)
 
             for i in range(0, 1):
-                storage = Storage.objects.get_or_create(type="Storage %s" % i, host="81.167.228.94", username="backup", password="backup", folder="backup/", company=company)[0]
+                storage = Storage.objects.get_or_create(type="Storage %s" % i, host="81.167.228.94",
+                                                        username="backup", password="backup",
+                                                        folder="backup/", company=company)[0]
 
-            #Customers
+            # Customers
             for i in range(0, 3):
-                customer = Customer.objects.get_or_create(name="Customer %s" % i, company=company)[0]
+                customer = Customer.objects.get_or_create(name="Customer %s" % i,
+                                                          company=company)[0]
 
-                #Machines
+                # Machines
                 for k in range(0, 3):
                     machine = Machine.objects.get_or_create(
                         name="Machine %s " % i,
@@ -67,7 +71,7 @@ class Command(BaseCommand):
                         selected_updater_version=versions[0],
                     )[0]
 
-                    #MachineStats data
+                    # MachineStats data
                     for msi in range(0, 30):
                         cpu_system = randint(40, 50)
 
@@ -81,7 +85,7 @@ class Command(BaseCommand):
                             mem_free=randint(20, 40),
                         )
 
-                    #Schedules
+                    # Schedules
                     for l in range(0, 3):
                         scheduleBackup = Schedule.objects.get_or_create(
                             name="Schedule %s " % l,
@@ -91,7 +95,7 @@ class Command(BaseCommand):
                             last_run_time=example_date,
                         )[0]
 
-                        #Backups
+                        # Backups
                         for o in range(0, 3):
                             Backup.objects.get_or_create(
                                 machine=machine,
@@ -100,7 +104,7 @@ class Command(BaseCommand):
                                 day_folder_path=scheduleBackup.current_day_folder_path()
                             )
 
-                        #Logs
+                        # Logs
                         for o in range(0, 3):
                             MachineLog.objects.get_or_create(
                                 machine=machine,
@@ -109,14 +113,14 @@ class Command(BaseCommand):
                                 type="INFO",
                             )
 
-                        #FolderBackups
+                        # FolderBackups
                         for o in range(0, 3):
                             Folder.objects.get_or_create(
                                 schedule=scheduleBackup,
                                 local_folder_path="/%s" % o
                             )
 
-                        #SQLBackups
+                        # SQLBackups
                         for o in range(0, 3):
                             SQL.objects.get_or_create(
                                 schedule=scheduleBackup,

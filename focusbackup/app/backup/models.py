@@ -2,7 +2,6 @@
 import datetime
 from dateutil.relativedelta import relativedelta, FR
 from dateutil.rrule import rrule, MINUTELY
-
 from django.db import models
 
 from focusbackup.app.machine.models import Machine
@@ -32,14 +31,14 @@ class Schedule(models.Model):
     from_date = models.DateTimeField()
     last_run_time = models.DateTimeField(null=True, default=None)
 
-    #Used to choose folder to save file
+    # Used to choose folder to save file
     current_version_in_loop = models.IntegerField(blank=True, default=1)
     versions_count = models.IntegerField(default=10, verbose_name="Number of copies")
 
-    #Perform backup every x minute
+    # Perform backup every x minute
     repeat_every_minute = models.IntegerField(default=360, choices=schedule_every_minute_choices)
 
-    #Status messages for client
+    # Status messages for client
     running_backup = models.BooleanField(default=False, blank=True)
     running_restore = models.BooleanField(default=False, blank=True)
 
@@ -86,7 +85,9 @@ class Schedule(models.Model):
             runs = list(rrule(MINUTELY,
                               cache=True,
                               interval=self.repeat_every_minute,
-                              until=datetime.date.today() + relativedelta(days=extra_days, weekday=FR(-1)),
+                              until=datetime.date.today() + relativedelta(days=extra_days,
+                                                                          weekday=FR(-1)),
+
                               dtstart=start_date))
 
             for run in runs:

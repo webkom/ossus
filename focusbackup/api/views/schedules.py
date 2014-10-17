@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-
 from django.views.decorators.csrf import csrf_exempt
 
-from focusbackup.api.auth import require_valid_api_token
+from focusbackup.api.auth import RequireValidToken
 from focusbackup.api.forms import ScheduleAPIForm
 from focusbackup.api.views.common import render_data
 from focusbackup.api.views.helpers import build_schedule_fields
 from focusbackup.app.backup.models import Schedule
 
 
-@require_valid_api_token()
+@RequireValidToken()
 def get_schedules(request, id=False):
     send_object = []
 

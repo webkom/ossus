@@ -16,13 +16,13 @@ class Machine(models.Model):
     active = models.BooleanField(default=True)
     template = models.BooleanField(default=False)
 
-    #Info from the client
-    #last_connection_to_client = models.DateTimeField(blank=True, null=True,
+    # Info from the client
+    # last_connection_to_client = models.DateTimeField(blank=True, null=True,
     #                                                 default=datetime.datetime.now())
 
     external_ip = models.IPAddressField(default="")
 
-    #For generating settings-file
+    # For generating settings-file
     local_temp_folder = models.CharField(max_length=255, default="C:\\focus24\\temp\\")
     agent_folder = models.CharField(max_length=255, default="C:\\focus24\\")
     mysql_dump = models.CharField(max_length=255, default="mysqldump")
@@ -32,13 +32,13 @@ class Machine(models.Model):
     lock = models.DateTimeField(default=None, null=True, blank=True)
     lock_session = models.CharField(max_length=255, null=True, default=None)
 
-    #Current version running on client
+    # Current version running on client
     current_agent_version = models.ForeignKey(ClientVersion, related_name="agent_versions",
                                               null=True)
     current_updater_version = models.ForeignKey(ClientVersion, related_name="updater_versions",
                                                 null=True)
 
-    #If not auto_version
+    # If not auto_version
     selected_agent_version = models.ForeignKey(ClientVersion, related_name="agent_selected",
                                                null=True, blank=True)
     selected_updater_version = models.ForeignKey(ClientVersion, related_name="updater_selected",
@@ -109,7 +109,8 @@ class Machine(models.Model):
         return copy
 
     def is_up_to_date(self):
-        return self.current_agent_version.current_agent and self.current_updater_version.current_updater
+        return self.current_agent_version.current_agent \
+            and self.current_updater_version.current_updater
 
     def lost_connection_to_client(self):
         return datetime.datetime.now() - self.last_connection_to_client > datetime.timedelta(
@@ -144,6 +145,8 @@ class Machine(models.Model):
         if not self.active:
             self.set_active(True)
 
+        return machine_log
+
     def delayed_schedules(self):
         schedules = []
 
@@ -154,9 +157,9 @@ class Machine(models.Model):
         return self.schedules.filter(id__in=schedules)
 
     def get_latest_backups(self):
-        return self.backups.select_related("schedule").prefetch_related("schedule__folders",
-                                                                        "schedule__sql_backups").order_by(
-            "-id")[0:8]
+        return self.backups.select_related("schedule") \
+                   .prefetch_related("schedule__folders", "schedule__sql_backups") \
+                   .order_by("-id")[0:8]
 
     def running_backup(self):
         for schedule in self.schedules.all():

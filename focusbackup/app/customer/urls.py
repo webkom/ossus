@@ -6,4 +6,4 @@ urlpatterns = patterns('focusbackup.app.customer.views',
                        url(r'^new/$', 'new', name="customer.new"),
                        url(r'^(?P<id>\w+)/view/$', 'view'),
                        url(r'^(?P<id>\w+)/edit/$', 'edit'),
-                    )
+)

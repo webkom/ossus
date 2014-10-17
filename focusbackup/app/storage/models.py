@@ -3,7 +3,6 @@ from django.db import models
 
 from focusbackup.app.accounts.models import Company
 
-
 storage_types = (
     ('ftp', 'FTP'),
 )
@@ -20,7 +19,7 @@ class Storage(models.Model):
     username = models.CharField(max_length=80)
     password = models.CharField(max_length=80)
 
-    #FTP folder or S3 bucket
+    # FTP folder or S3 bucket
     folder = models.CharField(max_length=255)
 
     class Meta:

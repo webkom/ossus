@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
+
 from focusbackup.app.accounts.models import Company
 
 

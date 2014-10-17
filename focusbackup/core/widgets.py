@@ -36,4 +36,4 @@ class OptionsRadio(RadioSelect):
 class AppendedText(TextInput):
     def render(self, name, value, attrs=None):
         return '%s<span class="add-on">%s</span>' % (
-        super(AppendedText, self).render(name, value, attrs), self.attrs['append_text'])
+            super(AppendedText, self).render(name, value, attrs), self.attrs['append_text'])

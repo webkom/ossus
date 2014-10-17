@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import random
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db import models
@@ -34,11 +33,14 @@ class UserProfile(models.Model):
 
         company_ids = set([])
 
-        for company in Company.objects.all().prefetch_related("users").select_related("users__profile"):
+        for company in Company.objects.all().prefetch_related("users").select_related(
+                "users__profile"):
             if self.user.id in company.users.all().values_list("id", flat=True):
                 company_ids.add(int(company.id))
 
-        companies = list(Company.objects.filter(id__in=company_ids).prefetch_related("users").select_related("users__profile"))
+        companies = list(
+            Company.objects.filter(id__in=company_ids).prefetch_related("users").select_related(
+                "users__profile"))
         cache.set(cache_key, companies)
 
         return companies
@@ -108,6 +110,7 @@ def _get_user_profile(u):
     cache.set(cache_key, profile)
 
     return profile
+
 
 try:
     User.profile = property(lambda u: _get_user_profile(u))

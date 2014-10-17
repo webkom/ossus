@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from django.core.mail import EmailMultiAlternatives
 from django.core.management.base import BaseCommand
 from django.template import loader, Context

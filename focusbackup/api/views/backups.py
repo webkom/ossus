@@ -1,14 +1,14 @@
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from focusbackup.api.auth import require_valid_api_token
+from focusbackup.api.auth import RequireValidToken
 from focusbackup.api.views.common import render_data
 from focusbackup.api.views.helpers import build_backup_fields
 from focusbackup.app.backup.models import Machine, Backup, Schedule
 from focusbackup.api.forms import BackupAPIForm
 
 
-@require_valid_api_token()
+@RequireValidToken()
 def get_backups(request, id=False):
     if id:
         return render_data("backups", build_backup_fields(Backup.objects.get(id=id)))
@@ -24,9 +24,8 @@ def get_backups(request, id=False):
 get_backups = csrf_exempt(get_backups)
 
 
-@require_valid_api_token()
+@RequireValidToken()
 def create_backup_for_machine(request, id):
-
     if id:
         machine = Machine.objects.get(id=id)
 

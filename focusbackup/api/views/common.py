@@ -9,7 +9,6 @@ from focusbackup.api.models import Token
 
 
 class HandleQuerySets(json.JSONEncoder):
-
     def default(self, obj):
         if isinstance(obj, QuerySet):
             return serializers.serialize("python", obj, ensure_ascii=False)
@@ -18,10 +17,6 @@ class HandleQuerySets(json.JSONEncoder):
 
 
 def render_data(name, data):
-    """
-    Returns a httpResponse with json where name is the outer scope and data is a python array with objects as dicts
-    """
-
     output_data = {name: data}
 
     if not name:

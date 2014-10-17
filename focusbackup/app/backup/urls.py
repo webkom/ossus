@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 
 urlpatterns = patterns('focusbackup.app.backup.views',
                        url(r'^new/(?P<machine_id>\w+)/$', 'new', name="backups.new"),

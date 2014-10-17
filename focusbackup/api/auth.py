@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 import functools
-from django.conf import settings
 
-from django.http import Http404, HttpResponse
-from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
+from django.conf import settings
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
 from focusbackup.api.models import Token
 
 
-class require_valid_api_token:
+class RequireValidToken(object):
     api_token = None
     api_user = None
 
@@ -55,4 +55,3 @@ class require_valid_api_token:
         functools.update_wrapper(validate_api_token, func)
 
         return validate_api_token
-

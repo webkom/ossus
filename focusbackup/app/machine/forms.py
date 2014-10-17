@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from django.forms.models import ModelForm
 from focusbackup.app.backup.models import Machine
 from focusbackup.core.forms import BootstrapModelForm
 

@@ -6,8 +6,7 @@ from focusbackup.app.client.models import ClientVersion
 
 
 class Command(loaddata):
-    def handle (self, *args, **kwargs):
-
+    def handle(self, *args, **kwargs):
         client_version = ClientVersion()
         client_version.name = "Client"
 

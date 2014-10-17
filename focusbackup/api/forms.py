@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.forms.models import ModelForm
+
 from focusbackup.app.machine.models import MachineStats
 
 
@@ -26,4 +27,5 @@ class ScheduleAPIForm(forms.Form):
 class MachineStatsForm(ModelForm):
     class Meta:
         model = MachineStats
-        fields = ('datetime', 'load_average', 'cpu_stolen', 'cpu_user', 'cpu_system', 'mem_free', 'mem_used')
+        fields = ('datetime', 'load_average', 'cpu_stolen',
+                  'cpu_user', 'cpu_system', 'mem_free', 'mem_used')

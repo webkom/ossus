@@ -4,9 +4,9 @@ import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
-from focusbackup.app.backup.forms import ScheduleForm, ScheduleFoldersForm, ScheduleSQLsForm
 
 from focusbackup.app.backup.models import Schedule
+from focusbackup.app.backup.forms import ScheduleForm, ScheduleFoldersForm, ScheduleSQLsForm
 
 
 @login_required()
@@ -42,7 +42,8 @@ def form(request, machine_id, id=False):
     form_sql = ScheduleSQLsForm(instance=schedule, prefix="sql")
 
     if request.method == "POST":
-        form = ScheduleForm(request.POST, instance=schedule, initial=initial_data, user=request.user)
+        form = ScheduleForm(request.POST, instance=schedule, initial=initial_data,
+                            user=request.user)
         form_folders = ScheduleFoldersForm(request.POST, prefix="folders", instance=schedule)
         form_sql = ScheduleSQLsForm(request.POST, prefix="sql", instance=schedule)
 

@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
-from focusbackup.api.views.common import render_data
-from focusbackup.api.views.helpers import build_machine_settings
 
 from focusbackup.app.backup.models import Machine
 from focusbackup.app.client.models import ClientVersion
 from focusbackup.app.machine.forms import MachineForm
 from focusbackup.app.machine.models import MachineLog
+from focusbackup.api.views.common import render_data
+from focusbackup.api.views.helpers import build_machine_settings
 
 
 @login_required()
@@ -221,4 +220,3 @@ def form(request, id=False):
             return redirect(view, instance.id)
 
     return render(request, 'machine/form.html', {'form': form, "title": _("Server")})
-
