@@ -22,7 +22,7 @@ class UserProfile(models.Model):
         cache.set("user_profile_for_%s" % self.user.id, None)
 
         self.company = company
-        self.save(update_fields="company")
+        self.save(update_fields=["company"])
 
     def get_companies(self):
         cache_key = "user_%s_companies" % self.user.id

@@ -57,7 +57,7 @@ class Schedule(models.Model):
 
     def set_last_run_time(self):
         self.last_run_time = datetime.datetime.now()
-        self.save(update_fields="last_run_time")
+        self.save(update_fields=["last_run_time"])
 
     def is_delayed(self):
         delay_limit = datetime.datetime.now() - datetime.timedelta(minutes=30)
