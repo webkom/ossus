@@ -129,7 +129,7 @@ class Machine(models.Model):
             return self.selected_updater_version
 
     def get_latest_stats(self):
-        return self.stats.all()[0:20][-1]
+        return self.stats.all()[0:20].reverse()
 
     def get_latest_logs(self):
         return self.logs.all().order_by("-id")[0:8]
