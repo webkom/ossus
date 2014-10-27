@@ -86,25 +86,25 @@ class Machine(models.Model):
         copy = deepcopy(self)
         copy.pk = None
         copy.template = False
-        copy.save(update_fields=["pk", "template"])
+        copy.save()
 
         for schedule in self.schedules.all():
             schedule_copy = deepcopy(schedule)
             schedule_copy.pk = None
             schedule_copy.machine = copy
-            schedule_copy.save(update_fields=["pk", "template"])
+            schedule_copy.save()
 
             for folder in schedule.folders.all():
                 folder_copy = deepcopy(folder)
                 folder_copy.pk = None
                 folder_copy.schedule = schedule_copy
-                folder_copy.save(update_fields=["pk", "template"])
+                folder_copy.save()
 
             for sql in schedule.sql_backups.all():
                 sql_copy = deepcopy(sql)
                 sql_copy.pk = None
                 sql_copy.schedule = schedule_copy
-                sql_copy.save(update_fields=["pk", "template"])
+                sql_copy.save()
 
         return copy
 
