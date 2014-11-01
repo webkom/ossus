@@ -120,8 +120,6 @@ INSTALLED_APPS = (
     'focusbackup.api',
 
     'django_extensions',
-    'south'
-
 )
 
 
