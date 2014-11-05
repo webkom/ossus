@@ -106,14 +106,14 @@ def _get_user_profile(u):
     if profile:
         return profile
 
-    profile = UserProfile.objects.select_related("user", "company").get(user=u)
+    try:
+        profile = UserProfile.objects.select_related("user", "company").get(user=u)
+    except UserProfile.DoesNotExist:
+        User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
+
     cache.set(cache_key, profile)
 
     return profile
 
 
-try:
-    User.profile = property(lambda u: _get_user_profile(u))
-
-except UserProfile.DoesNotExist:
-    User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
+User.profile = property(lambda u: _get_user_profile(u))
