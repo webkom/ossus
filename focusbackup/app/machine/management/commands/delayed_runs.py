@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.core.management.base import BaseCommand
 from django.template import loader, Context
@@ -18,7 +19,8 @@ class Command(BaseCommand):
         if delayed_machines:
             template = loader.get_template("machine/templates/delayed_machines.html")
 
-            subject, from_email, to = 'Focus24 - delays', 'focus24@focus24.no', 'me@frecar.no'
+            subject, from_email = '%s - delays' % settings.BRAND, settings.DEFAULT_FROM_EMAIL
+            to = [admin[0] for admin in settings.ADMINS]
 
             html_content = template.render(Context({
                 'machines': delayed_machines

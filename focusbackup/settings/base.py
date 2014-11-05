@@ -24,6 +24,7 @@ AUTH_PROFILE_MODULE = 'core.UserProfile'
 
 URL_TO_SITE = "http://localhost:8000/"
 
+BRAND = "Focus24"
 #Used to script upload of new client files
 PATH_LOCAL_FOCUSBACKUPCLIENT = "/Users/frecar/code/focusbackupclient/out/artifacts/"
 
@@ -128,6 +129,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.static',
     'django.contrib.auth.context_processors.auth',
+    'focusbackup.core.context_processors.settings'
 )
 
 # A sample logging configuration. The only tangible logging
