@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.core.management.base import BaseCommand
 from django.template import loader, Context
@@ -18,13 +18,13 @@ class Command(BaseCommand):
 
         if lost_machines:
             template = loader.get_template("machine/templates/lost_machines.html")
-            subject = 'Focus24 - lost machines'
-            from_email, to = 'focus24@focus24.no', 'me@frecar.no'
+            subject = '%s - lost machines' % settings.BRAND
+            to = [admin[0] for admin in settings.ADMINS]
 
             html_content = template.render(Context({
                 'machines': lost_machines
             }))
 
-            msg = EmailMultiAlternatives(subject, "", from_email, [to])
+            msg = EmailMultiAlternatives(subject, "", settings.DEFAULT_FROM_EMAIL, to)
             msg.attach_alternative(html_content, "text/html")
             msg.send()
